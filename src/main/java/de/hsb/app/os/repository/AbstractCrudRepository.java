@@ -47,7 +47,7 @@ public abstract class AbstractCrudRepository<T> implements CrudRepository<T> {
     @Override
     
     public List<T> findAll() {
-        return this.uncheckedSolver(this.em.createQuery(this.getQueryCommand()).getResultList());
+        return this.em.createQuery(this.getQueryCommand()).getResultList();
     }
 
     /**
