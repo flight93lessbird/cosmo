@@ -1,0 +1,12 @@
+de\hsb\app\os\converter\KreditkartenConverter.class
+de\hsb\app\os\enumuration\Kreditkartentyp.class
+de\hsb\app\os\controller\ProduktHandler.class
+de\hsb\app\os\enumuration\Mengentyp.class
+de\hsb\app\os\controller\LoginHandler.class
+de\hsb\app\os\enumuration\Anrede.class
+de\hsb\app\os\model\Adresse_.class
+de\hsb\app\os\model\Warenkorb.class
+de\hsb\app\os\enumuration\Kategorie.class
+de\hsb\app\os\model\Adresse.class
+de\hsb\app\os\enumuration\Rolle.class
+de\hsb\app\os\controller\KundenHandler.class
