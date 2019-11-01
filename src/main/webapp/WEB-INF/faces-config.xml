@@ -59,7 +59,7 @@
 			<supported-locale>en</supported-locale>
 		</locale-config>
 		<resource-bundle>
-			<base-name>resource.i18n.messages</base-name>
+			<base-name>i18n.messages</base-name>
 			<var>msg</var>
 		</resource-bundle>
 	</application>
