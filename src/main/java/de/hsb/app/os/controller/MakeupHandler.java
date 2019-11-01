@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
@@ -15,16 +16,8 @@ import de.hsb.app.os.enumuration.Waehrungtyp;
 import de.hsb.app.os.model.Produkt;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
-@ApplicationScoped
+@SessionScoped
 public class MakeupHandler extends AbstractCrudRepository<Produkt>{
-	
-	@PostConstruct
-	public void init() {
-			save(new Produkt("L'oreal", "Blush Sculpt 201", "Natürliche Akt-Shades. Verwenden Sie es allein oder mischen Sie die Farbtöne", "...", "5,99",Waehrungtyp.EURO, "30", Mengentyp.GRAMM));
-			save(new Produkt("Maybelline", "The Graffiti Nudes", "Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "...", "11,99",Waehrungtyp.EURO, "50", Mengentyp.GRAMM));
-			save(new Produkt("Maybelline","Vivid Matte Liquid","Mittlere Deckkraft. Schimmernd/Glänzend. Zaubert einen frischen Teint.","blumig", "6,99",Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER));
-			save(new Produkt("Essence", "Künstliche Wimpern", "Lassen sich einfach und schnell aufkleben. Lässt die Augen strahlen", "...", "2,99",Waehrungtyp.EURO, "3", Mengentyp.MILLILITER));
-	}
 
 	public String neu() {
 		selectedEntity = new Produkt();
