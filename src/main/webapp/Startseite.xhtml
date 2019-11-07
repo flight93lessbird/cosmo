@@ -19,24 +19,22 @@
 				<div class="logo">
 					<a class="" href="/os/Startseite.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a>
-						<a class="account" href="konto.xhtml"><h:graphicImage
-									value="resources/images/user.png"
-									height="50px" width="50px" /></a>
+					</a> <a class="account" href="konto.xhtml"><h:graphicImage
+							value="resources/images/user.png" height="50px" width="50px" /></a>
 
-						<a class="account" href="warenkorb.xhtml"><h:graphicImage
-									value="resources/images/shopping-cart-of-checkered-design.png"
-									height="50px" width="50px" /></a>
+					<a class="account" href="warenkorb.xhtml"><h:graphicImage
+							value="resources/images/shopping-cart-of-checkered-design.png"
+							height="50px" width="50px" /></a>
 				</div>
-				
-				
+
+
 
 				<div class="topnav">
 					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
 					<a href="pflege.xhtml">Pflege</a>
 					<div class="search-container">
 						<input type="text" name="placeHolder" value="Suche.." />
-						<!-- 					<h:commandButton action ="" value="Suche" /> -->
+						<h:commandButton action ="#{duftHandler.suche}" value="Suche" />
 					</div>
 				</div>
 			</ui:insert>
@@ -45,27 +43,30 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h1>Unsere Empfehlungen für Sie!</h1>
-				<div class="bildreihe1">
-					<a class="bild1" href="/os/duefte.xhtml"><h:graphicImage
-							value="resources/images/BOSS.PNG" height="200px" width="200px" />
-					</a> <a class="bild2" href="/os/makeup.xhtml"><h:graphicImage
-							value="resources/images/ESSENCE.PNG" height="200px" width="200px" /></a>
-					<a class="bild3" href="/os/pflege.xhtml"><h:graphicImage
-							value="resources/images/i+m.PNG" height="200px" width="200px" /></a>
-				</div>
-				<h1>Unsere Neuheiten</h1>
-				<div class="bildreihe2">
-					<a class="bild4" href="/os/duefte.xhtml"> <h:graphicImage
-							value="resources/images/Valentino.PNG" height="200px"
-							width="200px" />
-					</a> <a class="bild5" href="/os/makeup.xhtml"> <h:graphicImage
-							value="resources/images/L'OREAL BLUSH.PNG" height="200px"
-							width="200px" />
-					</a> <a class="bild6" href="/os/pflege.xhtml"> <h:graphicImage
-							value="resources/images/GARNIER.PNG" height="200px" width="200px" />
-					</a>
-				</div>
+				<center>
+					<h1>Unsere Empfehlungen für Sie!</h1>
+					<div class="bildreihe1">
+						<a class="bild1" href="/os/duefte.xhtml"><h:graphicImage
+								value="resources/images/BOSS.PNG" height="200px" width="200px" />
+						</a> <a class="bild2" href="/os/makeup.xhtml"><h:graphicImage
+								value="resources/images/ESSENCE.PNG" height="200px"
+								width="200px" /></a> <a class="bild3" href="/os/pflege.xhtml"><h:graphicImage
+								value="resources/images/i+m.PNG" height="200px" width="200px" /></a>
+					</div>
+					<h1>Unsere Neuheiten</h1>
+					<div class="bildreihe2">
+						<a class="bild4" href="/os/duefte.xhtml"> <h:graphicImage
+								value="resources/images/Valentino.PNG" height="200px"
+								width="200px" />
+						</a> <a class="bild5" href="/os/makeup.xhtml"> <h:graphicImage
+								value="resources/images/L'OREAL BLUSH.PNG" height="200px"
+								width="200px" />
+						</a> <a class="bild6" href="/os/pflege.xhtml"> <h:graphicImage
+								value="resources/images/GARNIER.PNG" height="200px"
+								width="200px" />
+						</a>
+					</div>
+				</center>
 			</ui:insert>
 		</div>
 
