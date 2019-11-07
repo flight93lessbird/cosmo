@@ -1,75 +1,95 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <link rel="stylesheet" href="resources/style.css" type="text/css" />
-    <title><ui:insert name="title">   CosMo - Kaufbestätigt      </ui:insert></title>
+	<link rel="stylesheet" href="resources/style.css" type="text/css" />
+	<title><ui:insert name="title">   CosMo - Kaufbestätigt      </ui:insert></title>
 </h:head>
 
 <h:body>
-    <h:form>
+	<h:form>
 
-        <div id="header">
-            <ui:insert name="header">
-                <div class="logo">
-                    <a class="" href="/os/Startseite.xhtml"> <h:graphicImage
-                            value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-                    </a> <a class="account" href="konto.xhtml"><h:graphicImage
-                        value="resources/images/user.png" height="50px" width="50px" /></a>
+		<div id="header">
+			<ui:insert name="header">
+				<div class="logo">
+					<a class="" href="/os/Startseite.xhtml"> <h:graphicImage
+							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
+					</a> <a class="account" href="konto.xhtml"><h:graphicImage
+							value="resources/images/user.png" height="50px" width="50px" /></a>
 
-                    <a class="account" href="warenkorb.xhtml"><h:graphicImage
-                            value="resources/images/shopping-cart-of-checkered-design.png"
-                            height="50px" width="50px" /></a>
-                </div>
+					<a class="account" href="warenkorb.xhtml"><h:graphicImage
+							value="resources/images/shopping-cart-of-checkered-design.png"
+							height="50px" width="50px" /></a>
+				</div>
 
-                <div class="topnav">
-                    <a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
-                    <a href="pflege.xhtml">Pflege</a>
-                    <div class="search-container">
-                        <input type="text" placeholder="Suche" name="search" />
-                    </div>
-                </div>
-            </ui:insert>
-        </div>
+				<div class="topnav">
+					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
+					<a href="pflege.xhtml">Pflege</a>
+					<div class="search-container">
+						<input type="text" placeholder="Suche" name="search" />
+					</div>
+				</div>
+			</ui:insert>
+		</div>
 
-        <div id="content">
-            <ui:insert name="content">
-                <div class="ware">
-                    <h1> Bestätigung </h1>
-                </div>
-                <p>
-                    Vielen Dank für Ihre Bestellung. <br /> Hiermit bestätigen wir
-                    Ihren Kauf.
-                </p>
+		<div id="content">
+			<ui:insert name="content">
+				<div class="ware">
+					<h1>
+						Vielen Dank für Ihre Bestellung! <br /> 
+					</h1>
+					<h3>Hiermit bestätigen wir Ihren Kauf.</h3>
+					<br></br> <br></br>
 
-                <div class="shoppenKaufen">
-                    <div class="kaufen">
-                        <a href="Startseite.xhtml">weiter Einkaufen</a>
-                    </div>
-                </div>
-            </ui:insert>
-        </div>
 
-        <div class="footer">
-            <ul class="footermenu">
-                <li><a href="datenschutz.xhtml">Datenschutz</a></li>
-                <li><a href="impressum.xhtml">Impressum</a></li>
-                <li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
-            </ul>
-            <div class="custom">
-                Cosmostrasse 10<br /> 27472 Cosmostadt
-            </div>
-            <div class="row copyright">
-                <div class="col-lg-12">
-                    Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
-                    | #{msg.title}
-                </div>
-            </div>
-        </div>
-    </h:form>
+					<h:outputLabel value="Artikel: " />
+					<h:outputLabel value="#{mbHS.merkeArtikel.artikel}" />
+					<br></br>
+
+
+					<h:outputLabel value="Bestellmenge: " />
+					<br></br>
+					<h:outputLabel value="#{mbHS.merkeArtikel.bestellmenge}" />
+					<h:outputLabel value="Verkaufspreis inkl. MwSt (19 %): " />
+					<h:outputText id="a" value="#{mbHS.merkeArtikel.verkaufspreis} €"
+						required="true" />
+					<br></br>
+					<h:outputText value="Bestellungsdatum: " />
+					<h:outputText value="#{mbHS.merkeArtikel.date}">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:outputText>
+					<br></br>
+					<br></br>
+					<h:commandButton id="auswählen" value="Quittung drucken"
+						onclick="javascript:window.print()" icon="ui-icon-search" />
+					<h:commandButton id="kaufen" value="weiter Einkaufen" />
+				</div>
+			</ui:insert>
+		</div>
+		
+		<br></br>
+		<br></br>
+
+		<div class="footer">
+			<ul class="footermenu">
+				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
+				<li><a href="impressum.xhtml">Impressum</a></li>
+				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
+			</ul>
+			<div class="custom">
+				Cosmostrasse 10<br /> 27472 Cosmostadt
+			</div>
+			<div class="row copyright">
+				<div class="col-lg-12">
+					Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+					| #{msg.title}
+				</div>
+			</div>
+		</div>
+	</h:form>
 </h:body>
 </html>
