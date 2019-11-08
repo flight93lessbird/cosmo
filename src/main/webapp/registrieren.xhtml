@@ -21,14 +21,14 @@
 					</a> <a class="account" href="konto.xhtml"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
 
-					<a class="account" href="warenkorb.xhtml"><h:graphicImage
+					<a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
 							value="resources/images/shopping-cart-of-checkered-design.png"
 							height="50px" width="50px" /></a>
 				</div>
 
 				<div class="topnav">
-					<a href="duefte.xhtml">Düfte</a> <a
-						href="makeup.xhtml">Make-Up</a> <a href="pflege.xhtml">Pflege</a>
+					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
+					<a href="pflege.xhtml">Pflege</a>
 					<div class="search-container">
 						<input type="text" placeholder="Suche" name="search" />
 					</div>
@@ -39,11 +39,34 @@
 
 		<div id="content">
 			<ui:insert name="content">
-			<h1>Registrieren</h1>
-			
-
+				<h1>Registrieren</h1>
+				<h:form >   
+    		<p:messages id="messages" showDetail="true" autoUpdate="true" />		    
+		    <p:growl id="growl" showDetail="true"/>  
+			<center>
+    	    	<p:panelGrid id="grid" columns="2">
+		    		<f:facet name="header">Registrierung</f:facet>
+				    		
+		    		<p:outputLabel value="Username:" for="username" />
+		    		<p:inputText id="username" required="true"
+			   		   value="#{mbOS.merkeBenutzer.username}" />
+			            
+			        <p:outputLabel value="Passwort:" for="pw1" />
+			           <p:password id="pw1" value="#{mbOS.merkeBenutzer.passwort}" match="pw2" label="Password 1" required="true"/>
+				  
+				    <p:outputLabel value="Passwort wiederholen:" for="pw2" />
+				       <p:password id="pw2" value="#{mbOS.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
+				      <!--  <f:validator validatorId="PasswordValidation" />  -->
+				    </p:password>  
+				             
+				   	<p:commandButton value="Zurück" icon="ui-icon-carat-1-w" action="#{mbOS.toLogin}" immediate="true" /> 
+				    <p:commandButton id="registrieren" update="grid" value="Registrieren" action="#{mbOS.benutzerRegistrieren}"/>    	
+				</p:panelGrid>
+			</center>
+			</h:form>
 			</ui:insert>
 		</div>
+
 
 		<div class="footer">
 			<ul class="footermenu">
