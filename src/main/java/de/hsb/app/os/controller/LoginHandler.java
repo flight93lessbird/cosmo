@@ -35,8 +35,7 @@ public class LoginHandler implements Serializable {
 	private UserTransaction utx;
 
 //	public String login() {
-//		Query query = em
-//				.createQuery("select k from Kunde k " + "where k.username = :username and k.passwort = :passwort "
+//		Query query = em.createQuery("select k from Kunde k " + "where k.username = :username and k.passwort = :passwort "
 //						+ "and k.rolle = " + Rolle.ADMIN.ordinal());
 //		query.setParameter("username", username);
 //		query.setParameter("passwort", passwort);
@@ -46,10 +45,28 @@ public class LoginHandler implements Serializable {
 //		List<Kunde> kunden = query.getResultList();
 //		if (kunden.size() == 1) {
 //			kunde = kunden.get(0);
-//			return "alleKunden?faces-redirect=true";
+//			/*return "alleKunden?faces-redirect=true";
 //		} else {
 //			return null;
-//		}
+//		}*/
+
+
+//					if(kunde.getRolle() == Rolle.ADMIN){
+//						return "/admin.xhtml";}
+//					else {
+//						return "/Startseite.xhtml?faces-redirect=true";
+//					}
+//				} else {
+//					 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Du hast einen falschen Benutzernamen "
+//	    	        		+ "oder ein falsches Kennwort eingegeben. Gehe bitte zurück und gib die richtigen Daten ein. "
+//	    	        		+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)", passwort));
+//
+////					throw new ValidatorException(message);
+//
+//				}
+//				return null;
+
+
 //	}
 //
 //	public void checkLoggedIn(ComponentSystemEvent cse) {
