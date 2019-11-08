@@ -15,22 +15,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 	<managed-bean>
-		<managed-bean-name>duftHandler</managed-bean-name>
-		<managed-bean-class>de.hsb.app.os.controller.DuftHandler</managed-bean-class>
+		<managed-bean-name>produktHandler</managed-bean-name>
+		<managed-bean-class>de.hsb.app.os.controller.ProduktHandler</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
-	<managed-bean>
-		<managed-bean-name>pflegeHandler</managed-bean-name>
-		<managed-bean-class>de.hsb.app.os.controller.PflegeHandler</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-	<managed-bean>
-		<managed-bean-name>makeupHandler</managed-bean-name>
-		<managed-bean-class>de.hsb.app.os.controller.MakeupHandler</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
 
 	<navigation-rule>
 
