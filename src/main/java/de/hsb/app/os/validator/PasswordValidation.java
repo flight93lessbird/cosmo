@@ -10,7 +10,6 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-/**Eigener Validator**/
 @FacesValidator(value= "PasswordValidation")
 public class PasswordValidation implements Validator {
 	private static final String Passwort_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{3,20})";
@@ -21,10 +20,7 @@ public class PasswordValidation implements Validator {
 	public PasswordValidation(){
 		  pattern = Pattern.compile(Passwort_PATTERN);
 	}
-	/**Hier Prüfen wir, ob das eingegebene Passwort bei der Registrierung, den Anforderungen der 
-	 * Passwortvoraussetzungen entspricht. Wenn Ja, dann wird das Passwort zurueckgeliefert. Wenn nicht,
-	 * wird demsprechend eine Fehlermeldung ausgegeben und der Benutzer muss sein Passwort, den angeforderten 
-	 * Voraussetzungen Ã¤ndern.**/
+
 	@Override
 	public void validate(FacesContext context, UIComponent component,
 			Object value) throws ValidatorException {

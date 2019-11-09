@@ -1,15 +1,13 @@
 package de.hsb.app.os.controller;
 
-
-//import javax.annotation.PostConstruct;
-//import java.util.GregorianCalendar;
-//import de.hsb.app.kv.model.Anrede;
-
 import java.io.Serializable;
-
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.persistence.EntityManager;
@@ -17,91 +15,100 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 
-//import de.hsb.app.os.model.Kunde;
 import de.hsb.app.os.enumuration.Rolle;
+import de.hsb.app.os.model.Benutzer;
 
-public class LoginHandler implements Serializable {
-	
-	private static final long serialVersionUID = -5073567478492831094L;
+@ManagedBean
+@SessionScoped 
+public class LoginHandler implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	private String username;
 	private String passwort;
-//	private Kunde kunde;
+	private Benutzer benutzer;
 	
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Resource
 	private UserTransaction utx;
-
-//	public String login() {
-//		Query query = em
-//				.createQuery("select k from Kunde k " + "where k.username = :username and k.passwort = :passwort "
-//						+ "and k.rolle = " + Rolle.ADMIN.ordinal());
-//		query.setParameter("username", username);
-//		query.setParameter("passwort", passwort);
-//		System.out.println(username + " " + passwort);
-//		
-//		@SuppressWarnings("unchecked")
-//		List<Kunde> kunden = query.getResultList();
-//		if (kunden.size() == 1) {
-//			kunde = kunden.get(0);
-//			return "alleKunden?faces-redirect=true";
-//		} else {
-//			return null;
-//		}
-//	}
-//
-//	public void checkLoggedIn(ComponentSystemEvent cse) {
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		if (kunde == null) {
-//			context.getApplication().getNavigationHandler().handleNavigation(context, null,
-//					"login?faces-redirect=true");
-//		}
-//	}
 	
-	public String logout() {
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "login?faces-redirect=true";
+	@PostConstruct
+	public void init(){
+		try{
+			utx.begin();
+			em.persist(new Benutzer("kunde",   "kunde", Rolle.KUNDE));
+			em.persist(new Benutzer("admin",  "admin", Rolle.ADMIN));
+			utx.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			}	
 	}
+	
+	
+	public String login() {	
+			Query query = em.createQuery("Select u from Benutzer u " +
+				"where u.username = :username and u.passwort = :passwort ");
+			query.setParameter("username", username);
+			query.setParameter("passwort", passwort);
+		
+				@SuppressWarnings("unchecked")
+				List<Benutzer> user = query.getResultList();
+				if (user.size() == 1) {
+					benutzer = user.get(0); 
+					if(benutzer.getRolle() == Rolle.ADMIN){
+						return "/benutzer.xhtml";}
+					else {
+						return "/Startseite.xhtml?faces-redirect=true";	
+					}					
+				} else {
+					 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Du hast einen falschen Benutzernamen "
+	    	        		+ "oder ein falsches Kennwort eingegeben. Gehe bitte zurück und gib die richtigen Daten ein. "
+	    	        		+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)", passwort));
+					 
+
+				}
+				return null;
+		} 
+
+		
+	public void checkLoggedIn(ComponentSystemEvent cse) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		if (benutzer == null) {
+			context.getApplication().getNavigationHandler().
+			handleNavigation(context, null,
+					"/konto.xhtml?faces-redirect=true");
+		}
+	}
+	
+	
+	public String logout () {
+		benutzer = null;
+	return "/konto.xhtml?faces -redirect=true";
+	}
+	
 
 	public String getUsername() {
 		return username;
 	}
-
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	public String getPasswort() {
 		return passwort;
 	}
-
+	
 	public void setPasswort(String passwort) {
 		this.passwort = passwort;
 	}
-
-//	public Kunde getKunde() {
-//		return kunde;
-//	}
-//
-//	public void setKunde(Kunde kunde) {
-//		this.kunde = kunde;
-//	}
-
-	public EntityManager getEm() {
-		return em;
+	
+	public Benutzer getBenutzer() {
+		return benutzer;
 	}
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
-	public UserTransaction getUtx() {
-		return utx;
-	}
-
-	public void setUtx(UserTransaction utx) {
-		this.utx = utx;
-	}
+	
+	public void setBenutzer(Benutzer benutzer) {
+		this.benutzer = benutzer;
+	}	
 }

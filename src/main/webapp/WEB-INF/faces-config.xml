@@ -14,44 +14,6 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-	<managed-bean>
-		<managed-bean-name>duftHandler</managed-bean-name>
-		<managed-bean-class>de.hsb.app.os.controller.DuftHandler</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-	<managed-bean>
-		<managed-bean-name>pflegeHandler</managed-bean-name>
-		<managed-bean-class>de.hsb.app.os.controller.PflegeHandler</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-	<managed-bean>
-		<managed-bean-name>makeupHandler</managed-bean-name>
-		<managed-bean-class>de.hsb.app.os.controller.MakeupHandler</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-	<navigation-rule>
-
-		<display-name>duefte</display-name>
-		<from-view-id>/duefte.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{duftHandler.neu}</from-action>
-			<from-outcome>neuesProdukt</from-outcome>
-			<to-view-id>/neuesProdukt.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-
-		<navigation-case>
-			<from-action>#{duftHandler.edit}</from-action>
-			<from-outcome>neuesProdukt</from-outcome>
-			<to-view-id>/neuesProdukt.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-
-	</navigation-rule>
-
 	<application>
 		<locale-config>
 			<default-locale>de</default-locale>

@@ -1,5 +1,6 @@
 package de.hsb.app.os.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -7,26 +8,26 @@ import javax.persistence.NamedQuery;
 
 import de.hsb.app.os.enumuration.Rolle;
 
-@NamedQuery(name = "SelectUser", query = "Select b from Benutzer b")
 
+@NamedQuery(name="SelectUser", query="Select b from Benutzer b")
+@Entity
 public class Benutzer {
+	
 	private static final long serialVersionUID = 2615809714551834760L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	private String username;
 	private String passwort;
 	private Rolle rolle;
-
-	public Benutzer() {
-	}
-
-
-	public Benutzer(String username, String passwort, Rolle rolle) {
+	
+	public Benutzer(){}
+	
+	public Benutzer(String username, String passwort, Rolle rolle){
 		this.username = username;
 		this.passwort = passwort;
 		this.rolle = rolle;
 	}
+	
 
 	public Integer getId() {
 		return id;
@@ -63,6 +64,4 @@ public class Benutzer {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 }

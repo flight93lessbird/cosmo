@@ -1,21 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#neuesProdukt.xhtml"
-  PATH="/neuesProdukt.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#duefte.xhtml" PATH="/duefte.xhtml"
-  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#duefte.xhtml:0" NAME="item"
-   PATH="/duefte.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="neuesProdukt:#{duftHandler.neu}:#neuesProdukt.xhtml"
-    NAME="output" PATH="/neuesProdukt.xhtml"
-    TARGET="rules:#neuesProdukt.xhtml"
-    TITLE="#{duftHandler.neu}:neuesProdukt" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="neuesProdukt:#{duftHandler.edit}:#neuesProdukt.xhtml"
-    NAME="output1" PATH="/neuesProdukt.xhtml"
-    TARGET="rules:#neuesProdukt.xhtml"
-    TITLE="#{duftHandler.edit}:neuesProdukt" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
-</PROCESS>
+<PROCESS model-entity="JSFProcess"/>
