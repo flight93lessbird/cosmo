@@ -24,7 +24,7 @@ import de.hsb.app.os.model.Produkt;
 
 @ManagedBean(name = "mbOS")
 @SessionScoped
-public class cosmoHandler {
+public class OSHandler {
 
 	private DataModel<Produkt> os = new ListDataModel<Produkt>();
 	private DataModel<Benutzer> user = new ListDataModel<Benutzer>();
