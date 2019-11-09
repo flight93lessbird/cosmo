@@ -34,7 +34,7 @@
 					<a href="pflege.xhtml">Pflege</a>
 					<div class="search-container">
 						<input type="text" name="placeHolder" value="Suche.." />
-						<h:commandButton action ="#{duftHandler.suche}" value="Suche" />
+						<h:commandButton action="#{duftHandler.suche}" value="Suche" />
 					</div>
 				</div>
 			</ui:insert>
@@ -50,7 +50,8 @@
 								value="resources/images/BOSS.PNG" height="200px" width="200px" />
 						</a> <a class="bild2" href="/os/makeup.xhtml"><h:graphicImage
 								value="resources/images/ESSENCE.PNG" height="200px"
-								width="200px" /></a> <a class="bild3" href="/os/pflege.xhtml"><h:graphicImage
+								width="200px" /> 
+						</a> <a class="bild3" href="/os/pflege.xhtml"><h:graphicImage
 								value="resources/images/i+m.PNG" height="200px" width="200px" /></a>
 					</div>
 					<h1>Unsere Neuheiten</h1>
@@ -70,23 +71,28 @@
 			</ui:insert>
 		</div>
 
-		<div class="footer-menu">
+		<div class="footer">
 			<ul class="footermenu">
 				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
 				<li><a href="impressum.xhtml">Impressum</a></li>
 				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
 			</ul>
-			<div class="contact">
-				<div class="custom">
-					Cosmostrasse 10<br /> 27472 Cosmostadt
+			
+			<center>
+				<div class="contact">
+					<div class="custom">
+						Cosmostrasse 10<br /> 27472 Cosmostadt
+					</div>
 				</div>
-			</div>
-			<div class="row copyright">
-				<div class="col-lg-12">
-					Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
-					| #{msg.title}
+
+				<div class="row copyright">
+					<div class="col-lg-12">
+						Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+						| #{msg.title}
+					</div>
 				</div>
-			</div>
+			</center>
+			
 		</div>
 	</h:form>
 </h:body>

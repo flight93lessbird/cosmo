@@ -90,8 +90,8 @@ nav.logo {
   .topnav input[type=text] {
     border: 1px solid #ea8998;  
   }
+	
 }
-
 .footermenu{
 	overflow:hidden;
 	background-color: #f8d8dd;
@@ -102,7 +102,7 @@ nav.logo {
 	float: left;
 	display:block;
 	color:black;
-	text-align: left;
+	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size:17px;
