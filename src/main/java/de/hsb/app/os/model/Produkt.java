@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Size;
 
+import de.hsb.app.os.enumuration.Kategorie;
 import de.hsb.app.os.enumuration.Mengentyp;
 import de.hsb.app.os.enumuration.Waehrungtyp;
 
@@ -38,9 +39,11 @@ public class Produkt {
 	
 	private Waehrungtyp waehrungtyp;
 	
+	private Kategorie kategorie;
+	
 	public Produkt () {}
 
-	public Produkt(String marke, String titel, String beschreibung, String duftnote, String preis, Waehrungtyp waehrungtyp, String menge, Mengentyp mengentyp)
+	public Produkt(String marke, String titel, String beschreibung, String duftnote, String preis, Waehrungtyp waehrungtyp, String menge, Mengentyp mengentyp, Kategorie kategorie)
 	{
 		super();
 		this.marke = marke;
@@ -51,6 +54,7 @@ public class Produkt {
 		this.waehrungtyp = waehrungtyp;
 		this.menge = menge;
 		this.mengentyp = mengentyp;
+		this.kategorie = kategorie;
 	
 	}
 
@@ -126,6 +130,12 @@ public class Produkt {
 		this.waehrungtyp = waehrungtyp;
 	}
 
-		
+	public Kategorie getKategorie() {
+		return kategorie;
+	}
+
+	public void setKategorie(Kategorie kategorie) {
+		this.kategorie = kategorie;
+	}
 
 }

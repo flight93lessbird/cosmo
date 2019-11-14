@@ -41,9 +41,9 @@
 			</ui:insert>
 		</div>
 
-		<h:dataTable var="produkt" value="#{duftHandler.entityList}"
+		<h:dataTable var="produkt" value="#{duftHandler.findAllByKategorie(enumController.getDuefte())}"
 			rowClasses="odd,even" headerClass="header">
-			<f:facet name="header">Make-Up</f:facet>
+			<f:facet name="header">Düfte</f:facet>
 
 
 			<h:column>
