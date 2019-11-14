@@ -36,8 +36,6 @@ public class OSHandler {
 
 	private Benutzer merkeBenutzer = new Benutzer();
 
-	private Produkt merkeProdukt = new Produkt();
-
 	public String toRegistrieren() {
 		merkeBenutzer = new Benutzer();
 		return "registrieren?faces-redirect=true";
@@ -139,12 +137,7 @@ public class OSHandler {
 		this.merkeBenutzer = merkeBenutzer;
 	}
 
-	public Produkt getMerkeProdukt() {
-		return merkeProdukt;
-	}
 
-	public void setMerkeProdukt(Produkt merkeProdukt) {
-		this.merkeProdukt = merkeProdukt;
-	}
+
 
 }

@@ -39,10 +39,43 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h1>Warenkorb</h1>
+		<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+					 rowClasses="odd,even" headerClass="header">
+			<f:facet name="header">Warenkorb</f:facet>
 
+
+			<h:column>
+				<f:facet name="header">Produkt</f:facet>
+				<h:outputText value="#{produktHandler.merkeProdukt.marke}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Titel</f:facet>
+				<h:outputText value="#{produktHandler.merkeProdukt.titel}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Preis</f:facet>
+				<h:outputText value="#{produktHandler.merkeProdukt.preis}" />
+				<h:outputText value="#{produkt.waehrungtyp.label}" />
+
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Menge</f:facet>
+				<h:outputText value="#{produktHandler.merkeProdukt.menge}" />
+				<h:outputText value="#{produkt.mengentyp.label}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Löschen</f:facet>
+				<h:commandButton action="#{produktHandler.delete}"
+								 value="Löschen" />
+			</h:column>
+		</h:dataTable>
 			</ui:insert>
 		</div>
+
 
 		<div class="footer">
 			<ul class="footermenu">
@@ -57,6 +90,7 @@
 						Cosmostrasse 10<br /> 27472 Cosmostadt
 					</div>
 				</div>
+				
 
 				<div class="row copyright">
 					<div class="col-lg-12">

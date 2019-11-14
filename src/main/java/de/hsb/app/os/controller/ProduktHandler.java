@@ -23,6 +23,8 @@ import de.hsb.app.os.repository.AbstractCrudRepository;
 @ApplicationScoped
 public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
+	private Produkt merkeProdukt = new Produkt();
+
 	@PostConstruct
 	public void init() {
 		if (this.findAll().isEmpty()) {
@@ -145,5 +147,18 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			}
 		}
 		return result;
+	}
+
+	public String indenWarenkorb() {
+		merkeProdukt = new Produkt();
+		return "warenkorb?faces-redirect=true";
+	}
+
+	public Produkt getMerkeProdukt() {
+		return merkeProdukt;
+	}
+
+	public void setMerkeProdukt(Produkt merkeProdukt) {
+		this.merkeProdukt = merkeProdukt;
 	}
 }
