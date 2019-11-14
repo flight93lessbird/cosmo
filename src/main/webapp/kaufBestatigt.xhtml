@@ -66,7 +66,8 @@
 					<br></br>
 					<h:commandButton id="auswählen" value="Quittung drucken"
 						onclick="javascript:window.print()" icon="ui-icon-search" />
-					<h:commandButton id="kaufen" value="weiter Einkaufen" />
+					<h:commandButton action="#{mbos.weiterShoppen}"
+									 value="weiter Shoppen" update="messages" />
 				</div>
 			</ui:insert>
 		</div>

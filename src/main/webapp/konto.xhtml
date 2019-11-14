@@ -38,40 +38,47 @@
 				</div>
 			</ui:insert>
 		</div>
-	
-	
-	<div id="content">
-		<ui:insert name="content">
-				<h:form>
-					<p:messages id="messages" showDetail="true" autoUpdate="true" />
-					<p:growl id="growl" showDetail="true" />
-					<center>
-						<p:panelGrid id="grid" columns="2">
-							<f:facet name="header">Registrierung</f:facet>
 
-							<p:outputLabel value="Username:" for="username" />
-							<p:inputText id="username" required="true"
-								value="#{mbos.merkeBenutzer.username}" />
 
-							<p:outputLabel value="Passwort:" for="pw1" />
-							<p:password id="pw1" value="#{mbos.merkeBenutzer.passwort}"
-								match="pw2" label="Password 1" required="true" />
+		<div id="content">
+			<ui:insert name="content">
+				<h:form class="box" action="konto.xhtml" method="post">
+					<h1>Login</h1>
+					<h:form id="form">
 
-							<p:outputLabel value="Passwort wiederholen:" for="pw2" />
-							<p:password id="pw2" value="#{mbos.merkeBenutzer.passwort}"
-								label="Password 2" required="true" requiredMessage="true">
-								<f:validator validatorId="PasswordValidation" />
+						<p:messages autoUpdate="true" />
+
+						<p:panelGrid id="grid" columns="2" cellpadding="5">
+							<f:facet name="header">Login</f:facet>
+
+							<p:outputLabel value="Username:" />
+							<p:inputText id="username" value="#{loginHandler.username}"
+										 required="true" label="Username">
+								<f:validateLength minimum="2" />
+							</p:inputText>
+
+							<p:outputLabel value="Password:" for="password" />
+							<p:password id="password" value="#{loginHandler.passwort}"
+										required="true" label="Password">
 							</p:password>
-
-							<p:commandButton value="Zurück" icon="ui-icon-carat-1-w"
-								action="#{mbos.toLogin}" immediate="true" />
-							<p:commandButton id="registrieren" update="grid"
-								value="Registrieren" action="#{mbos.benutzerRegistrieren}" />
+							<p:commandButton action="#{loginHandler.login}" value="Login"
+											 update="grid" />
 						</p:panelGrid>
-					</center>
+
+						<br></br>
+						<h2>Noch kein Kunde?</h2>
+						<p:commandButton action="#{mbos.toRegistrieren}"
+										 value="Registrieren" immediate="true" />
+					</h:form>
+
+					<p:ajaxStatus onstart="PF('statusDialog').show();"
+								  onsuccess="PF('statusDialog').hide();" />
+					<p:dialog modal="true" widgetVar="statusDialog" header="Status"
+							  draggable="false" closable="false">
+					</p:dialog>
 				</h:form>
-		</ui:insert>
-	</div>
+			</ui:insert>
+		</div>
 	
 	<div class="footer">
 			<ul class="footermenu">

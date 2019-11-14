@@ -279,3 +279,6 @@ buildNumber.properties
 /.classpath
 /.settings/org.eclipse.jdt.core.prefs
 /.settings/org.eclipse.wst.common.project.facet.core.xml
+/.classpath
+/.settings/org.eclipse.jdt.core.prefs
+/.settings/org.eclipse.wst.common.project.facet.core.xml

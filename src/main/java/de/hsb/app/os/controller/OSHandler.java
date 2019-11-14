@@ -18,51 +18,64 @@ import javax.transaction.UserTransaction;
 
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Benutzer;
+import de.hsb.app.os.model.Produkt;
 
 @ManagedBean(name = "mbos")
 @SessionScoped
 public class OSHandler {
-	public OSHandler() {}
-	
+	public OSHandler() {
+	}
 
 	private DataModel<Benutzer> user = new ListDataModel<Benutzer>();
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Resource
 	private UserTransaction utx;
-		
+
 	private Benutzer merkeBenutzer = new Benutzer();
-	
-	
-    public String toRegistrieren(){
-    	merkeBenutzer = new Benutzer();
-    	return "registrieren?faces-redirect=true";
-    }
-    
-    public String toLogin(){
-		return "konto?faces-redirect=true";
+
+	private Produkt merkeProdukt = new Produkt();
+
+	public String toRegistrieren() {
+		merkeBenutzer = new Benutzer();
+		return "registrieren?faces-redirect=true";
 	}
 
-   
-	public String benutzerRegistrieren(){
-    	for(Benutzer b : user){
-    		if(b.getUsername().equals(merkeBenutzer.getUsername())){
-    	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Dieser Benutzername "
-    	        		+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.", null));  ;  
-    	         
-    	        return null;
-    		}
-    	}
-    	try {				
-    		merkeBenutzer.setRolle(Rolle.KUNDE);
-			utx.begin();			
+	public String toLogin() {
+		return "konto?faces-redirect=true";
+	}
+	
+	public String indenWarenkorb() {
+		return "warenkorb?faces-redirect=true";
+	}
+
+	public String weiterShoppen() {
+		return "Startseite?faces-redirect=true";
+	}
+
+	public String benutzerRegistrieren() {
+		for (Benutzer b : user) {
+			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+
+				return null;
+			}
+		}
+		try {
+			merkeBenutzer.setRolle(Rolle.KUNDE);
+			utx.begin();
 			merkeBenutzer = em.merge(merkeBenutzer);
 			em.persist(merkeBenutzer);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());		
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));  
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
@@ -70,21 +83,24 @@ public class OSHandler {
 		return "konto?faces-redirect=true";
 	}
 
+	public String benutzerAnlegen() {
+		for (Benutzer b : user) {
+			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
 
-	public String benutzerAnlegen(){
-    	for(Benutzer b : user){
-    		if(b.getUsername().equals(merkeBenutzer.getUsername())){
- 
-    	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Dieser Benutzername ist bereits vergeben "
-    	        		+ "oder erfüllt nicht die vom Administrator festgelegten Richtlinien", null));  
-    	        return null;
-    		}
-    	}
-    	try {				
-			utx.begin();			
+				FacesContext.getCurrentInstance()
+						.addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_ERROR,
+										"Dieser Benutzername ist bereits vergeben "
+												+ "oder erfüllt nicht die vom Administrator festgelegten Richtlinien",
+										null));
+				return null;
+			}
+		}
+		try {
+			utx.begin();
 			merkeBenutzer = em.merge(merkeBenutzer);
 			em.persist(merkeBenutzer);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());		
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -92,7 +108,7 @@ public class OSHandler {
 		}
 		return "benutzer?faces-redirect=true";
 	}
-	
+
 	public String deleteUser() {
 		merkeBenutzer = user.getRowData();
 		try {
@@ -122,7 +138,13 @@ public class OSHandler {
 	public void setMerkeBenutzer(Benutzer merkeBenutzer) {
 		this.merkeBenutzer = merkeBenutzer;
 	}
-	
-	
-	
+
+	public Produkt getMerkeProdukt() {
+		return merkeProdukt;
+	}
+
+	public void setMerkeProdukt(Produkt merkeProdukt) {
+		this.merkeProdukt = merkeProdukt;
+	}
+
 }
