@@ -41,7 +41,7 @@
 			</ui:insert>
 		</div>
 
-		<h:dataTable var="produkt" value="#{pflegeHandler.entityList}"
+		<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
 			rowClasses="odd,even" headerClass="header">
 			<f:facet name="header">Pflege</f:facet>
 
