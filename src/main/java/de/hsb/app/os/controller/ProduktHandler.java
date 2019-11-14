@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
@@ -18,6 +19,7 @@ import de.hsb.app.os.enumuration.Waehrungtyp;
 import de.hsb.app.os.model.Produkt;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
+@ManagedBean(name = "produktHandler")
 @ApplicationScoped
 public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
@@ -80,7 +82,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
     }
     
     public List<Produkt> findAllByKategorie(Kategorie kategorie){
-    	Query query = this.em.createQuery("select pr from Produkt where pr.kategorie = :kategorie");
+    	Query query = this.em.createQuery("select pr from Produkt pr where pr.kategorie = :kategorie");
     	query.setParameter("kategorie", kategorie);
     	return this.uncheckedSolver(query.getResultList());
     }
@@ -102,9 +104,24 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
         return "SelectProdukt";
     }
 
+
+    /**
+     * Soll die Warnung "Unchecked cast" loesen.
+     *
+     * @param var Object
+     * @return List<Projekt>
+     */
     @Override
-    protected List<Produkt> uncheckedSolver(Object var) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Produkt> uncheckedSolver( Object var) {
+        final List<Produkt> result = new ArrayList<>();
+        if (var instanceof List) {
+            for (int i = 0; i < ((List<?>) var).size(); i++) {
+                final Object item = ((List<?>) var).get(i);
+                if (item instanceof Produkt) {
+                    result.add((Produkt) item);
+                }
+            }
+        }
+        return result;
     }
 }
