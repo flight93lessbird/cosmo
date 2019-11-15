@@ -62,6 +62,12 @@
 								label="Password 2" required="true" requiredMessage="true">
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
+							
+							<p:outputLabel value="Adresse:" for="adresse" />
+							<p:inputText id="adresse" required="true" value="#{kdhandler.neuAdresse}" />
+							
+							<p:outputLabel value="Kreditkarte:" for="kreditkarte" />
+							<p:inputText id="kreditkarte" required="true" value="#{kdhandler.neuKreditkarte}" />
 
 							<p:commandButton value="Zurück" icon="ui-icon-carat-1-w"
 								action="#{mbos.toLogin}" immediate="true" />
