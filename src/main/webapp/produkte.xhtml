@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -12,7 +12,6 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
@@ -38,8 +37,9 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
-							 rowClasses="odd,even" headerClass="header">
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
+					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">Düfte</f:facet>
 
 
@@ -74,27 +74,97 @@
 
 					<h:column>
 						<f:facet name="header">Menge</f:facet>
-						<h:outputText value="#{produkt.menge}"/>
+						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
 
+				</h:dataTable>
+
+				<br />
+				<br />
+
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getMakeUp())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">Make-Up</f:facet>
+
 					<h:column>
-						<f:facet name="header">Kaufen</f:facet>
-						<h:commandButton action="#{mbos.indenWarenkorb}"
-										 value="in den Warenkorb" />
+						<f:facet name="header">Produkt</f:facet>
+						<h:outputText value="#{produkt.marke}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Titel</f:facet>
+						<h:outputText value="#{produkt.titel}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Beschreibung</f:facet>
+						<h:outputText value="#{produkt.beschreibung}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Preis</f:facet>
+						<h:outputText value="#{produkt.preis}" />
+						<h:outputText value="#{produkt.waehrungtyp.label}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Menge</f:facet>
+						<h:outputText value="#{produkt.menge}" />
+						<h:outputText value="#{produkt.mengentyp.label}" />
+					</h:column>
+				</h:dataTable>
+
+				<br />
+				<br />
+
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">Pflege</f:facet>
+
+
+					<h:column>
+						<f:facet name="header">Produkt</f:facet>
+						<h:outputText value="#{produkt.marke}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Titel</f:facet>
+						<h:outputText value="#{produkt.titel}" />
+					</h:column>
+
+
+					<h:column>
+						<f:facet name="header">Beschreibung</f:facet>
+						<h:outputText value="#{produkt.beschreibung}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Preis</f:facet>
+						<h:outputText value="#{produkt.preis}" />
+						<h:outputText value="#{produkt.waehrungtyp.label}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Menge</f:facet>
+						<h:outputText value="#{produkt.menge}" />
+						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
 
 				</h:dataTable>
 			</ui:insert>
 		</div>
-		
+
+
 		<div class="footer">
 			<ul class="footermenu">
 				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
 				<li><a href="impressum.xhtml">Impressum</a></li>
 				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
 			</ul>
-			
+
 			<center>
 				<div class="contact">
 					<div class="custom">
@@ -109,7 +179,6 @@
 					</div>
 				</div>
 			</center>
-			
 		</div>
 	</h:form>
 </h:body>
