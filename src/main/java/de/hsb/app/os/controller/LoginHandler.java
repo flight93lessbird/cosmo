@@ -63,7 +63,7 @@ public class LoginHandler implements Serializable{
 					}					
 				} else {
 					 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Du hast einen falschen Benutzernamen "
-	    	        		+ "oder ein falsches Kennwort eingegeben. Gehe bitte zurück und gib die richtigen Daten ein. "
+	    	        		+ "oder ein falsches Kennwort eingegeben."
 	    	        		+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)", passwort));
 					 
 
