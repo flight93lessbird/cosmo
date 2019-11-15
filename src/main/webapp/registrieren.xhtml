@@ -63,11 +63,11 @@
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
 							
-							<p:outputLabel value="Adresse:" for="adresse" />
-							<p:inputText id="adresse" required="true" value="#{kdhandler.neuAdresse}" />
+							<p:outputLabel value="Strasse und Hausnummer:" for="strasse" />
+							<p:inputText id="strasse" required="true"  />
 							
-							<p:outputLabel value="Kreditkarte:" for="kreditkarte" />
-							<p:inputText id="kreditkarte" required="true" value="#{kdhandler.neuKreditkarte}" />
+							<p:outputLabel value="Postleitzahl:" for="plz" />
+							<p:inputText id="plz" required="true"  />
 
 							<p:commandButton value="Zurück" icon="ui-icon-carat-1-w"
 								action="#{mbos.toLogin}" immediate="true" />

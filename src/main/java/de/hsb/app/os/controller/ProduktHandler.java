@@ -31,13 +31,13 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			List<Produkt> produkte = new ArrayList<>();
 			// Create Duefte
 			produkte.add(new Produkt("Valentino", "Valentina",
-					"Das Valentina Parfüm vereint moderne mit klassischem. In der Kopfnote wird Bergamotte",
+					"Das Valentina Parfüm vereint moderne mit klassischem.",
 					"blumig – orientalisch", "49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			produkte.add(new Produkt("Guess", "1981",
-					"In der Kopfnote wird Veilchen und Abrette verbunden. In der Herznote entfalten sich", "blumig",
+					"In der Kopfnote wird Veilchen und Abrette verbunden.", "blumig",
 					"27,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			produkte.add(new Produkt("Boss", " Ma Vie Pour Femme",
-					"In der Kopfnote befindet sich Kaktusblüten. In der Herznote entfalten sich Pinke", "blumig",
+					"In der Kopfnote befindet sich Kaktusblüten.", "blumig",
 					"35,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			produkte.add(new Produkt("Michael Kors", "Wonderlust",
 					"In der Kopfnote wird Bergamotte, rosa Pfeffer und feiner Mandelmilch verbunden.",
