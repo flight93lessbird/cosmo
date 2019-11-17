@@ -78,7 +78,7 @@ public class OSHandler {
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "konto?faces-redirect=true";
+		return "meinKonto?faces-redirect=true";
 	}
 
 	public String benutzerAnlegen() {
@@ -119,6 +119,10 @@ public class OSHandler {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public String abbrechen() {
+		return "konto?faces-redirect=true";
 	}
 
 	public DataModel<Benutzer> getUser() {
