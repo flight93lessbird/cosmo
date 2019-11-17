@@ -62,12 +62,6 @@
 								label="Password 2" required="true" requiredMessage="true">
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
-							
-							<p:outputLabel value="Strasse und Hausnummer:" for="strasse" />
-							<p:inputText id="strasse" required="true"  />
-							
-							<p:outputLabel value="Postleitzahl:" for="plz" />
-							<p:inputText id="plz" required="true"  />
 
 							<p:commandButton value="Zurück" icon="ui-icon-carat-1-w"
 								action="#{mbos.toLogin}" immediate="true" />
