@@ -38,75 +38,68 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
-							 rowClasses="odd,even" headerClass="header">
-					<f:facet name="header">Düfte</f:facet>
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">#{msg.duefte}</f:facet>
 
 		<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
 			rowClasses="odd,even" headerClass="header">
 			<f:facet name="header">#{msg.duefte}</f:facet>
 
 					<h:column>
-						<f:facet name="header">Produkt</f:facet>
+						<f:facet name="header">#{msg.artkllabel}</f:facet>
 						<h:outputText value="#{produkt.marke}" />
 					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artkllabel}</f:facet>
-				<h:outputText value="#{produkt.marke}" />
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklname}</f:facet>
+						<h:outputText value="#{produkt.titel}" />
+					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artklname}</f:facet>
-				<h:outputText value="#{produkt.titel}" />
-			</h:column>
 
 					<h:column>
-						<f:facet name="header">Beschreibung</f:facet>
+						<f:facet name="header">#{msg.artklbesch}</f:facet>
 						<h:outputText value="#{produkt.beschreibung}" />
 					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artklbesch}</f:facet>
-				<h:outputText value="#{produkt.beschreibung}" />
-			</h:column>
+					<h:column>
+						<div align="center">
+							<f:facet name="header">#{msg.artklduftnte}</f:facet>
+							<h:outputText value="#{produkt.duftnote}" />
+						</div>
+					</h:column>
 
-			<h:column>
-				<div align="center">
-					<f:facet name="header">#{msg.artklduftnte}</f:facet>
-					<h:outputText value="#{produkt.duftnote}" />
-				</div>
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklpreis}</f:facet>
+						<h:outputText value="#{produkt.preis}" />
+						<h:outputText value="#{produkt.waehrungtyp.label}" />
+					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artklpreis}</f:facet>
-				<h:outputText value="#{produkt.preis}" />
-				<h:outputText value="#{produkt.waehrungtyp.label}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">#{msg.artklanzl}</f:facet>
-				<h:outputText value="#{produkt.menge}"/>
-				<h:outputText value="#{produkt.mengentyp.label}" />
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<h:outputText value="#{produkt.menge}" />
+						<h:outputText value="#{produkt.mengentyp.label}" />
+					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.kaufen}</f:facet>
-				<h:commandButton action="#{mbos.indenWarenkorb}"
-					value="in den Warenkorb" />
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.kaufen}</f:facet>
+						<h:commandButton action="#{mbos.indenWarenkorb}"
+							value="in den Warenkorb" />
+					</h:column>
 
 				</h:dataTable>
 			</ui:insert>
 		</div>
-		
+
+
 		<div class="footer">
 			<ul class="footermenu">
 				<li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
 				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
 				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
 			</ul>
-			
+
 			<center>
 				<div class="contact">
 					<div class="custom">
@@ -121,7 +114,7 @@
 					</div>
 				</div>
 			</center>
-			
+
 		</div>
 	</h:form>
 </h:body>
