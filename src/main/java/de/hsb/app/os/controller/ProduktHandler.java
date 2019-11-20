@@ -47,25 +47,25 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.", "blumig", "5,99",
 					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			produkte.add(new Produkt("i+m", "Hytro Perform Reinigungsmilch",
-					"Für normale bis trockene Haut. Reinigend ung Pflegend. Klärend bis porenverfeinernd.", "frisch",
+					"Für normale bis trockene Haut.", "frisch",
 					"9,99", Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "blumig", "9,99", Waehrungtyp.EURO,
 					"200", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasswe",
-					"Reinigt empfindliche Haut. Legt sich wie ein Magnet auf der Haut und reinigt schonend und wirksam die Haut.",
+					"Reinigt empfindliche Haut.",
 					"blumig - orientalisch", "4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			// Create Make-Up
 			produkte.add(new Produkt("L'oreal", "Blush Sculpt 201",
-					"Natürliche Akt-Shades. Verwenden Sie es allein oder mischen Sie die Farbtöne", "...", "5,99",
+					"Natürliche Akt-Shades.", "...", "5,99",
 					Waehrungtyp.EURO, "30", Mengentyp.GRAMM, Kategorie.MAKEUP));
 			produkte.add(new Produkt("Maybelline", "The Graffiti Nudes",
 					"Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "...", "11,99",
 					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP));
 			produkte.add(new Produkt("Maybelline", "Vivid Matte Liquid",
-					"Mittlere Deckkraft. Schimmernd/Glänzend. Zaubert einen frischen Teint.", "blumig", "6,99",
+					"Mittlere Deckkraft. Schimmernd/Glänzend.", "blumig", "6,99",
 					Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP));
 			produkte.add(new Produkt("Essence", "Künstliche Wimpern",
-					"Lassen sich einfach und schnell aufkleben. Lässt die Augen strahlen", "...", "2,99",
+					"Lassen sich einfach und schnell aufkleben.", "...", "2,99",
 					Waehrungtyp.EURO, "3", Mengentyp.MILLILITER, Kategorie.MAKEUP));
 
 			int id = 1;
