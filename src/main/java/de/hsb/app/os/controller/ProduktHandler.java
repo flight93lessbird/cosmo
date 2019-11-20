@@ -83,6 +83,10 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return "produkt";
 	}
 
+	public String senden() {
+		return "kaufBestatigt?faces-redirect=true";
+	}
+
 	public String speichern() {
 		try {
 			utx.begin();

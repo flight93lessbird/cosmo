@@ -45,11 +45,19 @@
 					<h3>#{msg.kaufbestaetig}</h3>
 					<br></br> <br></br>
 
-
+					<h:outputLabel value="#{msg.vorname}:" />
+					<h:outputLabel value="#{kdhandler.merkeKunde.vorname}" />
+					<br></br>
+					<h:outputLabel value="#{msg.nachname}:" />
+					<h:outputLabel value="#{kdhandler.merkeKunde.nachname}" />
+					<br></br>
+					<h:outputLabel value="#{msg.strasse}:" />
+					<h:outputLabel value="#{kdhandler.merkeKunde.adresse}" />
+					<br></br>
+					<br></br>
 					<h:outputLabel value="Artikel: " />
 					<h:outputLabel value="#{mbHS.merkeArtikel.artikel}" />
 					<br></br>
-
 
 					<h:outputLabel value="Bestellmenge: " />
 					<br></br>
