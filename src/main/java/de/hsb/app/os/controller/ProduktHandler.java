@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIData;
 import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
@@ -118,7 +119,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	@Override
 	protected Class<Produkt> getRepositoryClass() {
-		// TODO Auto-generated method stub
 		return Produkt.class;
 	}
 
@@ -129,7 +129,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	@Override
 	protected String getSelect() {
-		// TODO Auto-generated method stub
 		return "SelectProdukt";
 	}
 
@@ -154,9 +153,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	}
 
 	public String indenWarenkorb() {
-		merkeProdukt = new Produkt();
 		return "warenkorb?faces-redirect=true";
 	}
+
 
 	public Produkt getMerkeProdukt() {
 		return merkeProdukt;

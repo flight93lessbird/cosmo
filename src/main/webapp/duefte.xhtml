@@ -43,11 +43,6 @@
 					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.duefte}</f:facet>
 
-					<h:dataTable var="produkt"
-						value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
-						rowClasses="odd,even" headerClass="header">
-						<f:facet name="header">#{msg.duefte}</f:facet>
-
 						<h:column>
 							<f:facet name="header">#{msg.artkllabel}</f:facet>
 							<h:outputText value="#{produkt.marke}" />
@@ -90,7 +85,6 @@
 						</h:column>
 
 					</h:dataTable>
-				</h:dataTable>
 			</ui:insert>
 		</div>
 
