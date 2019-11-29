@@ -72,7 +72,8 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			int id = 1;
 			for (Produkt produkt : produkte) {
 				// Setze die Id des Produktes ...
-				produkt.setId(id++);
+				// Unnötig, da die ID automatisch generiert wird.
+				// produkt.setId(id++);
 				// ... und speichere das Produkt
 				save(produkt);
 			}

@@ -1,35 +1,46 @@
 package de.hsb.app.os.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @ManagedBean("warenkorb")
-@SessionScoped
+@Entity
 public class Warenkorb {
+	@Id
+	@GeneratedValue
+	private Integer ID;
 	private String artikel;
-	private List<Produkt> article;
+	private Set<WarenkorbItem> articles;
 	
 	public Warenkorb() {
-		article = new ArrayList<>();
+		articles = new HashSet<>();
 	}
 	
-	public void addProdukt(Produkt p) {
-		article.add(new Produkt(p.getMarke(), p.getTitel(), p.getBeschreibung(),
-									p.getDuftnote(), p.getPreis(), p.getWaehrungtyp(),
-									p.getMenge(),p.getMengentyp(),p.getKategorie()));
+	public void addProdukt(Produkt p, int stkZahl) {
+		articles.add(new WarenkorbItem(p, stkZahl));
 	}
 	public void deleteProdukt(int index) {
-		article.remove(index);
-	}
-	public List<Produkt> getArticle() {
-		return article;
+		articles.remove(index);
 	}
 
-	public void setArticle(List<Produkt> article) {
-		this.article = article;
+	public Set<WarenkorbItem> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(Set<WarenkorbItem> articles) {
+		this.articles = articles;
+	}
+
+	public Integer getID() {
+		return ID;
 	}
 
 	public String getArtikel() {
