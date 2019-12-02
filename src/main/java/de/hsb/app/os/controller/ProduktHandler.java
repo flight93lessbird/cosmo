@@ -82,7 +82,11 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	public String neu() {
 		selectedEntity = new Produkt();
-		return "produkt";
+		return "neuProdukt?faces-redirect=true";
+	}
+	
+	public String abbrechen() {
+		return "produkte?faces-redirect=true";
 	}
 
 	public String senden() {
@@ -100,12 +104,12 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "produkt";
+		return "produkte?faces-redirect=true";
 	}
 
 	public String edit() {
 		selectedEntity = entityList.getRowData();
-		return "neuesProdukt";
+		return "neuProdukt?faces-redirect=true";
 	}
 
 	public String getProduktFullName() {

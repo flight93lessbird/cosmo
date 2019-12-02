@@ -15,7 +15,7 @@ import de.hsb.app.os.enumuration.Waehrungtyp;
 
 @NamedQuery(name = "SelectProdukt", query = "Select p from Produkt p")
 @Entity
-@ManagedBean(name = "produkt")
+//@ManagedBean(name = "produkt")
 public class Produkt {
 
 	@Id
