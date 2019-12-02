@@ -44,7 +44,7 @@
 
 
 					<h:column>
-						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<f:facet name="header">Marke</f:facet>
 						<h:outputText value="#{produkt.marke}" />
 					</h:column>
 
@@ -73,13 +73,20 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<f:facet name="header">Menge</f:facet>
 						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
 
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton action="#{produktHandler.edit}"
+							value="#{msg.bearbeiten}" />
+					</h:column>
+					
 				</h:dataTable>
-
+				<h:commandButton action="#{produktHandler.neu}"
+					value="Produkt anlegen" />
 				<br />
 				<br />
 
@@ -89,7 +96,7 @@
 					<f:facet name="header">#{msg.MU}</f:facet>
 
 					<h:column>
-						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<f:facet name="header">Marke</f:facet>
 						<h:outputText value="#{produkt.marke}" />
 					</h:column>
 
@@ -110,11 +117,21 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<f:facet name="header">Menge</f:facet>
 						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
+					
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton action="#{produktHandler.edit}"
+							value="#{msg.bearbeiten}" />
+					</h:column>
+					
 				</h:dataTable>
+
+				<h:commandButton action="#{produktHandler.neu}"
+					value="Produkt anlegen" />
 
 				<br />
 				<br />
@@ -126,7 +143,7 @@
 
 
 					<h:column>
-						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<f:facet name="header">Marke</f:facet>
 						<h:outputText value="#{produkt.marke}" />
 					</h:column>
 
@@ -148,12 +165,21 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<f:facet name="header">Menge</f:facet>
 						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
+					
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton action="#{produktHandler.edit}"
+							value="#{msg.bearbeiten}" />
+					</h:column>
 
 				</h:dataTable>
+
+				<h:commandButton action="#{produktHandler.neu}"
+					value="Produkt anlegen" />
 			</ui:insert>
 		</div>
 
