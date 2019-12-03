@@ -38,8 +38,9 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
-							 rowClasses="odd,even" headerClass="header">
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.Pf}</f:facet>
 
 
@@ -66,15 +67,16 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<f:facet name="header">Menge</f:facet>
 						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.kaufen}</f:facet>
+						<p:spinner id="basic" value="#{spinnerView.number1}" />
 						<h:commandButton action="#{mbos.indenWarenkorb}"
-										 value="in den Warenkorb" />
+							value="in den Warenkorb" />
 					</h:column>
 				</h:dataTable>
 			</ui:insert>
@@ -88,7 +90,7 @@
 				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
 				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
 			</ul>
-			
+
 			<center>
 				<div class="contact">
 					<div class="custom">
@@ -103,7 +105,7 @@
 					</div>
 				</div>
 			</center>
-			
+
 		</div>
 	</h:form>
 </h:body>

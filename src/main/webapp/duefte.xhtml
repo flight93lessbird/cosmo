@@ -66,13 +66,14 @@
 						</h:column>
 
 						<h:column>
-							<f:facet name="header">#{msg.artklanzl}</f:facet>
+							<f:facet name="header">Menge</f:facet>
 							<h:outputText value="#{produkt.menge}" />
 							<h:outputText value="#{produkt.mengentyp.label}" />
 						</h:column>
 
 						<h:column>
 							<f:facet name="header">#{msg.kaufen}</f:facet>
+							<p:spinner id="basic" value="#{spinnerView.number1}" />
 							<h:commandButton action="#{mbos.indenWarenkorb}"
 								value="in den Warenkorb" />
 						</h:column>
