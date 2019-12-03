@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.component.UIData;
 import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
@@ -26,59 +25,64 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	private Produkt merkeProdukt = new Produkt();
 
+	List<Produkt> produkte = new ArrayList<>();
+	
+
 	@PostConstruct
 	public void init() {
 		if (this.findAll().isEmpty()) {
 			List<Produkt> produkte = new ArrayList<>();
+						
 			// Create Duefte
 			produkte.add(new Produkt("Valentino", "Valentina",
-					"Das Valentina Parfüm vereint moderne mit klassischem.",
-					"blumig – orientalisch", "49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
+					"Das Valentina Parfüm vereint moderne mit klassischem.", "49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			produkte.add(new Produkt("Guess", "1981",
-					"In der Kopfnote wird Veilchen und Abrette verbunden.", "blumig",
+					"In der Kopfnote wird Veilchen und Abrette verbunden.",
 					"27,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			produkte.add(new Produkt("Boss", " Ma Vie Pour Femme",
-					"In der Kopfnote befindet sich Kaktusblüten.", "blumig",
+					"In der Kopfnote befindet sich Kaktusblüten.",
 					"35,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			produkte.add(new Produkt("Michael Kors", "Wonderlust",
 					"In der Kopfnote wird Bergamotte, rosa Pfeffer und feiner Mandelmilch verbunden.",
-					"blumig - orientalisch", "49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
+					"49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
 			// Create Pflege
 			produkte.add(new Produkt("Treaclemoon", "Körpermilch Pretty Rose Hearts",
-					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.", "blumig", "5,99",
+					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.","5,99",
 					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			produkte.add(new Produkt("i+m", "Hytro Perform Reinigungsmilch",
-					"Für normale bis trockene Haut.", "frisch",
+					"Für normale bis trockene Haut.",
 					"9,99", Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE));
-			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "blumig", "9,99", Waehrungtyp.EURO,
+			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO,
 					"200", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasswe",
 					"Reinigt empfindliche Haut.",
-					"blumig - orientalisch", "4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE));
+					"4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE));
 			// Create Make-Up
 			produkte.add(new Produkt("L'oreal", "Blush Sculpt 201",
-					"Natürliche Akt-Shades.", "...", "5,99",
+					"Natürliche Akt-Shades.", "5,99",
 					Waehrungtyp.EURO, "30", Mengentyp.GRAMM, Kategorie.MAKEUP));
 			produkte.add(new Produkt("Maybelline", "The Graffiti Nudes",
-					"Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "...", "11,99",
+					"Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "11,99",
 					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP));
 			produkte.add(new Produkt("Maybelline", "Vivid Matte Liquid",
-					"Mittlere Deckkraft. Schimmernd/Glänzend.", "blumig", "6,99",
+					"Mittlere Deckkraft. Schimmernd/Glänzend.", "6,99",
 					Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP));
 			produkte.add(new Produkt("Essence", "Künstliche Wimpern",
-					"Lassen sich einfach und schnell aufkleben.", "...", "2,99",
+					"Lassen sich einfach und schnell aufkleben.", "2,99",
 					Waehrungtyp.EURO, "3", Mengentyp.MILLILITER, Kategorie.MAKEUP));
 
-			int id = 1;
-			for (Produkt produkt : produkte) {
-				// Setze die Id des Produktes ...
-				// Unnötig, da die ID automatisch generiert wird.
-				// produkt.setId(id++);
-				// ... und speichere das Produkt
-				save(produkt);
-			}
+			
+//			int id = 1;
+//			for (Produkt produkt : produkte) {
+//				// Setze die Id des Produktes ...
+//				// Unnötig, da die ID automatisch generiert wird.
+//				// produkt.setId(id++);
+//				// ... und speichere das Produkt
+//				save(produkt);
+//			}
 		}
 	}
+
 
 	public String neu() {
 		selectedEntity = new Produkt();
@@ -93,24 +97,24 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return "kaufBestatigt?faces-redirect=true";
 	}
 
-	public String speichern() {
-		try {
-			utx.begin();
-			selectedEntity = em.merge(selectedEntity);
-			em.persist(selectedEntity);
-			entityList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "produkte?faces-redirect=true";
-	}
+//	public String speichern() {
+//		try {
+//			utx.begin();
+//			entityList = em.merge(entityList);
+//			em.persist(entityList);
+//			entityList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+//			utx.commit();
+//		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+//				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+//			e.printStackTrace();
+//		}
+//		return "produkte?faces-redirect=true";
+//	}
 
-	public String edit() {
-		selectedEntity = entityList.getRowData();
-		return "neuProdukt?faces-redirect=true";
-	}
+//	public String edit() {
+//		merkeProdukt = entityList.getRowData();
+//		return "neuProdukt?faces-redirect=true";
+//	}
 
 	public String getProduktFullName() {
 		return selectedEntity.getMarke() + " " + selectedEntity.getTitel();

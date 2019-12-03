@@ -31,7 +31,7 @@
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
-						<p:inputText type="text" placeholder="Suche" name="search"  />
+						<p:inputText type="text" placeholder="Suche" name="search" />
 					</div>
 				</div>
 			</ui:insert>
@@ -39,42 +39,39 @@
 
 		<div id="content">
 			<ui:insert name="content">
-		<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
-					 rowClasses="odd,even" headerClass="header">
-			<f:facet name="header">#{msg.warenk}</f:facet>
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">#{msg.warenk}</f:facet>
 
 
-			<h:column>
-				<f:facet name="header">#{msg.artkllabel}</f:facet>
-				<h:outputText value="#{produktHandler.merkeProdukt.marke}" />
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<h:outputText value="#{produktHandler.merkeProdukt.marke}" />
+					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artklname}</f:facet>
-				<h:outputText value="#{produktHandler.merkeProdukt.titel}" />
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklname}</f:facet>
+						<h:outputText value="#{produktHandler.merkeProdukt.titel}" />
+					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artklpreis}</f:facet>
-				<h:outputText value="#{produktHandler.merkeProdukt.preis}" />
-				<h:outputText value="#{produkt.waehrungtyp.label}" />
+					<h:column>
+						<f:facet name="header">#{msg.artklpreis}</f:facet>
+						<h:outputText value="#{produktHandler.merkeProdukt.preis}" />
+					</h:column>
 
-			</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<h:outputText value="#{produktHandler.merkeProdukt.menge}" />
+					</h:column>
 
-			<h:column>
-				<f:facet name="header">#{msg.artklanzl}</f:facet>
-				<h:outputText value="#{produktHandler.merkeProdukt.menge}" />
-				<h:outputText value="#{produkt.mengentyp.label}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">#{msg.loeschen}</f:facet>
-				<h:commandButton action="#{produktHandler.delete}"
-								 value="Löschen" />
-			</h:column>
-		</h:dataTable>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{produktHandler.delete}" value="Löschen" />
+					</h:column>
+				</h:dataTable>
 				<h:commandButton action="#{produktHandler.senden}"
-								 value="Bestellung abschließen" />
+					value="Bestellung abschließen" />
 
 			</ui:insert>
 		</div>
@@ -93,7 +90,7 @@
 						Cosmostrasse 10<br /> 27472 Cosmostadt
 					</div>
 				</div>
-				
+
 
 				<div class="row copyright">
 					<div class="col-lg-12">

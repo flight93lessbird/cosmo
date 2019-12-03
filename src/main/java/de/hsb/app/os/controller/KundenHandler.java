@@ -72,12 +72,16 @@ public class KundenHandler {
 			e.printStackTrace();
 		}
 	}
+	
+	public Anrede[] getAnredeValues() {
+		return Anrede.values();
+	}
 
 	public String neu() {
 		merkeKunde = new Kunde();
 		return "konto?faces-redirect=true";
 	}
-	public String abrrechen() {
+	public String abbrechen() {
 		return "konto?faces-redirect=true";
 	}
 

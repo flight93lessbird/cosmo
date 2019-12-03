@@ -29,8 +29,6 @@ public class Produkt {
 	
 	private String beschreibung;
 	
-	private String duftnote;
-	
 	private String menge;
 	
 	private Mengentyp mengentyp;
@@ -43,13 +41,12 @@ public class Produkt {
 	
 	public Produkt () {}
 
-	public Produkt(String marke, String titel, String beschreibung, String duftnote, String preis, Waehrungtyp waehrungtyp, String menge, Mengentyp mengentyp, Kategorie kategorie)
+	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge, Mengentyp mengentyp, Kategorie kategorie)
 	{
 		super();
 		this.marke = marke;
 		this.titel = titel;
 		this.beschreibung = beschreibung;
-		this.duftnote = duftnote;
 		this.preis = preis;
 		this.waehrungtyp = waehrungtyp;
 		this.menge = menge;
@@ -88,14 +85,6 @@ public class Produkt {
 
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
-	}
-
-	public String getDuftnote() {
-		return duftnote;
-	}
-
-	public void setDuftnote(String duftnote) {
-		this.duftnote = duftnote;
 	}
 	
 	public String getMenge() {

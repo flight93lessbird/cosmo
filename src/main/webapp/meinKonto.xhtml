@@ -40,98 +40,73 @@
 		</div>
 
 
-
 		<div id="content">
 			<ui:insert name="content">
 				<h:form>
-					<h1>Mein Konto</h1>
+				<h1>Mein Konto</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" />
-					<h:panelGrid var="kunde" value="#{kdHandler.merkeKunde}"
-						columns="2" headerClass="header" footerClass="footer">
-						<h:outputLabel value="#{msg.anrede}:" for="anrede" />
-						<h:panelGroup>
-							<h:selectOneMenu id="anrede"
-								value="#{kdHandler.merkeKunde.anrede}">
-								<f:selectItems var="form" value="#{kdHandler.anredeValues}"
-									itemValue="#{form}" itemLabel="#{form.label}" />
-							</h:selectOneMenu>
+				<h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}" columns="2" headerClass="header" footerClass="footer">
+					<h:outputLabel value="#{msg.anrede}:" for="anrede" />
+					<h:panelGroup>
+						<h:selectOneMenu id="anrede" value="#{kdhandler.merkeKunde.anrede}">
+						<f:selectItems var="form" value="#{kdhandler.anredeValues}" itemValue="#{form}" itemLabel="#{form.label}" />
+						</h:selectOneMenu>
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.vorname}:" for="vorname" />
 						<h:panelGroup>
 							<h:inputText id="vorname"
-								value="#{kdHandler.merkeKunde.vorname}" required="true"
+								value="#{kdhandler.merkeKunde.vorname}" required="true"
 								requiredMessage="Eingabe fehlt." />
 							<h:message for="vorname" styleClass="message" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 						<h:panelGroup>
 							<h:inputText id="nachname"
-								value="#{kdHandler.merkeKunde.nachname}" required="true"
+								value="#{kdhandler.merkeKunde.nachname}" required="true"
 								requiredMessage="Eingabe fehlt." />
 							<h:message for="nachname" styleClass="message" />
 						</h:panelGroup>
-						<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
-						<h:panelGroup>
-							<p:calendar id="geburtsdatum"
-								value="#{kdHandler.merkeKunde.geburtsdatum}" mode="popup"
-								navigator="true" showOn="button" pattern="dd.MM.yyy"
-								required="true" requiredMessage="Gültigkeitsdatum wir benötigt." />
-							<h:message styleClass="message" for="geburtsdatum" />
-						</h:panelGroup>
-						<h:outputLabel value="Straße und Hausnummer:" for="strasse" />
+
+						<h:outputLabel value="#{msg.strasse}:" for="strasse" />
 						<h:panelGroup>
 							<h:inputText id="strasse"
-								value="#{kdHandler.merkeKunde.anschrift}" required="true"
+								value="#{kdhandler.merkeKunde.adresse}" required="true"
 								requiredMessage="Eingabe fehlt." />
-							<h:message for="vorname" styleClass="message" />
-						</h:panelGroup>
-						<h:outputLabel value="#{msg.plz}:" for="plz" />
-						<h:panelGroup>
-							<h:inputText id="plz" value="#{kdHandler.merkeKunde.plz}"
-								required="true" requiredMessage="Eingabe fehlt." />
-							<h:message for="vorname" styleClass="message" />
-						</h:panelGroup>
-						<h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
-						<h:panelGroup>
-							<h:selectOneMenu id="kreditkarten"
-								value="#{kdHandler.merkeKreditkarte.typ}">
-								<f:selectItems var="form"
-									value="#{kdHandler.kreditkartentypValues}"
-									itemValue="#{form}" itemLabel="#{form.label}" />
-							</h:selectOneMenu>
-						</h:panelGroup>
-						<h:outputLabel value="#{msg.kknummer}" for="nummer">
-						</h:outputLabel>
-						<h:inputText id="nummer"
-							value="#{kdHandler.merkeKreditkarte.nummer}">
-							<f:converter converterId="kreditkartenConverter" />
-							<f:validator validatorId="kreditkartenValidator" />
-						</h:inputText>
-						<h:outputLabel value="#{msg.gueltigBis}: (z.B. 10/13)"
-							for="gueltigBis" />
-						<h:panelGroup>
-							<p:calendar id="gueltigBis"
-								value="#{kdHandler.merkeKreditkarte.gueltigBis}"
-								mode="popup" navigator="true" showOn="button" pattern="MM.yy"
-								required="true" requiredMessage="Gültigkeitsdatum wir benötigt." />
-							<h:message for="gueltigBis" styleClass="message" />
-						</h:panelGroup>
-						<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
-						<h:panelGroup>
-							<h:inputText id="inhaber"
-								value="#{kdHandler.merkeKreditkarte.inhaber}"
-								required="true" requiredMessage="Eingabe fehlt." />
-							<h:message for="inhaber" styleClass="message" />
+							<h:message for="strasse" styleClass="message" />
 						</h:panelGroup>
 
-						<h:commandButton action="#{kdHandler.speichern}"
-							value="#{msg.speichern}" update="messages" />
-						<h:commandButton action="#{kdhandler.abrrechen}"
-							value="#{msg.abbrechen}" immediate="true" />
+						<h:outputLabel for="plz" value="#{msg.plz}:" />
+						<h:panelGroup>
+							<h:inputText id="plz" required="true"
+								value="#{kdhandler.merkeAdresse.plz}">
+								<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
+							</h:inputText>
+						</h:panelGroup>
+
+						<h:outputLabel for="ort" value="#{msg.ort}:" />
+						<h:panelGroup>
+							<h:inputText id="ort" required="true"
+								value="#{kdhandler.merkeAdresse.ort}" />
+						</h:panelGroup>
+
+					<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
+					<h:panelGroup>
+						<p:calendar id="geburtsdatum"
+							value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
+							navigator="true" showOn="button" pattern="dd.MM.yyy"
+							required="true" requiredMessage="Gültigkeitsdatum wir benötigt." />
+						<h:message styleClass="message" for="geburtsdatum" />
+					</h:panelGroup>
+
+					<h:commandButton action="#{kdhandler.speichern}"
+						value="#{msg.speichern}" update="messages" />
+					<h:commandButton action="#{kdhandler.abbrechen}"
+						value="#{msg.abbrechen}" immediate="true" />
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>
 		</div>
+
 
 		<div class="footer">
 			<ul class="footermenu">
