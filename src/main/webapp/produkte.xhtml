@@ -76,6 +76,12 @@
 						<h:commandButton action="#{produktHandler.edit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
+					
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{produktHandler.delete}"
+							value="#{msg.loeschen}" />
+					</h:column>
 
 				</h:dataTable>
 				<h:commandButton action="#{produktHandler.neu}"
@@ -119,6 +125,12 @@
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
 						<h:commandButton action="#{produktHandler.edit}"
 							value="#{msg.bearbeiten}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{produktHandler.delete}"
+							value="#{msg.loeschen}" />
 					</h:column>
 
 				</h:dataTable>
@@ -167,6 +179,12 @@
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
 						<h:commandButton action="#{produktHandler.edit}"
 							value="#{msg.bearbeiten}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{produktHandler.delete}"
+							value="#{msg.loeschen}" />
 					</h:column>
 
 				</h:dataTable>

@@ -22,6 +22,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import de.hsb.app.os.enumuration.Anrede;
+import de.hsb.app.os.enumuration.Kreditkartentyp;
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Adresse;
 import de.hsb.app.os.model.Kreditkarte;
@@ -76,28 +77,53 @@ public class KundenHandler {
 	public Anrede[] getAnredeValues() {
 		return Anrede.values();
 	}
-
+	
 	public String neu() {
 		merkeKunde = new Kunde();
-		return "konto?faces-redirect=true";
+		return "neuerKunde?faces-redirect=true";
 	}
 	public String abbrechen() {
-		return "konto?faces-redirect=true";
+		return "kunde?faces-redirect=true";
 	}
 
 	public String formatDateDDMMYYYY(Date date) {
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
 	}
 
-
 	public String neuAdresse() {
 		merkeAdresse = new Adresse();
-		return "konto?faces-redirect=true";
+		return "neueAnschrift?faces-redirect=true";
+	}
+	
+	public String editAdresse() {
+		merkeKunde = getKunden().getRowData();
+		merkeAdresse = kunden.getRowData().getAdresse();
+		if (merkeAdresse == null) {
+			merkeAdresse = new Adresse();
+		}
+		return "anschrift?faces-redirect=true";
+	}
+
+	public String adresseSpeichern() {
+		merkeKunde.setKreditkarte(merkeKreditkarte);
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			merkeAdresse = em.merge(merkeAdresse);
+			em.persist(merkeKunde);
+			em.persist(merkeAdresse);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
+			e.printStackTrace();
+		}
+		return "kunde?faces-redirect=true";
 	}
 
 	public String neuKreditkarte() {
 		merkeKreditkarte = new Kreditkarte();
-		return "konto?faces-redirect=true";
+		return "kreditkarte?faces-redirect=true";
 	}
 	
 	public String speichern() {
@@ -111,12 +137,12 @@ public class KundenHandler {
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "meinkonto?faces-redirect=true";
+		return "kunde?faces-redirect=true";
 	}
 
 	public String edit() {
 		merkeKunde = kunden.getRowData();
-		return "meinKonto?faces-redirect=true";
+		return "neuerKunde?faces-redirect=true";
 	}
 	
 	public String editKreditkarte() {
@@ -125,9 +151,45 @@ public class KundenHandler {
 		if (merkeKreditkarte == null) {
 			merkeKreditkarte = new Kreditkarte();
 		}
-		return "meinKonto?faces-redirect=true";
+		return "kreditkarte?faces-redirect=true";
+	}
+	
+	public String kreditkarteSpeichern() {
+		merkeKunde.setKreditkarte(merkeKreditkarte);
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			merkeKreditkarte = em.merge(merkeKreditkarte);
+			em.persist(merkeKunde);
+			em.persist(merkeKreditkarte);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
+			e.printStackTrace();
+		}
+		return "kunde?faces-redirect=true";
+	}
+	
+	public Kreditkartentyp[] getKreditkartentypValues() {
+		return Kreditkartentyp.values();
 	}
 
+	public String delete() {
+
+		merkeKunde = kunden.getRowData();
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.remove(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "benutzer?faces-redirect=true";
+	}
 
 	/* Getter und Setter */
 

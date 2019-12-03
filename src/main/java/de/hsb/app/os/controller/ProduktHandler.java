@@ -110,7 +110,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 //		}
 //		return "produkte?faces-redirect=true";
 //	}
-
+	
 //	public String edit() {
 //		merkeProdukt = entityList.getRowData();
 //		return "neuProdukt?faces-redirect=true";

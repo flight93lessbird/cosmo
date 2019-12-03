@@ -1,6 +1,5 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -8,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.titlebenutz}    </ui:insert></title>
+	<title><ui:insert name="title">   #{msg.warenktitel}     </ui:insert></title>
 </h:head>
 
 <h:body>
@@ -28,24 +27,56 @@
 				</div>
 
 
-
 				<div class="topnav">
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
-						<input type="text" name="placeHolder" value="Suche.." />
-						<p:inputText type="text" placeholder="Suche" name="search"  />
+						<p:inputText type="text" placeholder="Suche" name="search" />
 					</div>
 				</div>
 			</ui:insert>
 		</div>
 
-
 		<div id="content">
 			<ui:insert name="content">
-			<h1>#{msg.kunde}</h1>
+				<h:form>
+					<h1>Anschrift anlegen/bearbeiten</h1>
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+						columns="2" headerClass="header" footerClass="footer">
+						<h:outputLabel value="#{msg.kunde}:" for="kunden" />
+						<h:panelGroup>
+							<h:outputLabel id="kunden"
+								value="#{kdhandler.merkeKunde.vorname.concat(' ').concat(kdhandler.merkeKunde.nachname)}" />
+						</h:panelGroup>
+						<h:outputLabel for="strasse" value="#{msg.strasse}:" />
+						<h:panelGroup>
+							<h:inputText id="strasse" required="true"
+								value="#{kdhandler.merkeAdresse.strasse}" />
+						</h:panelGroup>
+						<h:outputLabel for="plz" value="#{msg.plz}:" />
+						<h:panelGroup>
+							<h:inputText id="plz" required="true"
+								value="#{kdhandler.merkeAdresse.plz}">
+								<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
+							</h:inputText>
+						</h:panelGroup>
+						<h:outputLabel for="ort" value="#{msg.ort}:" />
+						<h:panelGroup>
+							<h:inputText id="ort" required="true"
+								value="#{kdhandler.merkeAdresse.ort}" />
+						</h:panelGroup>
+
+						<h:commandButton action="#{kdhandler.speichern}"
+							value="#{msg.speichern}" update="messages" />
+						<h:commandButton action="#{kdhandler.abbrechen}"
+							value="#{msg.abbrechen}" immediate="true" />
+					</h:panelGrid>
+				</h:form>
 			</ui:insert>
 		</div>
+
+
 
 		<div class="footer">
 			<ul class="footermenu">
@@ -68,7 +99,6 @@
 					</div>
 				</div>
 			</center>
-
 		</div>
 	</h:form>
 </h:body>
