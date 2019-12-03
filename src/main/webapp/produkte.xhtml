@@ -15,7 +15,7 @@
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="" href="/os/Startseite.xhtml"> <h:graphicImage
+					<a class="startseite" href="/os/Startseite.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
 					</a> <a class="account" href="konto.xhtml"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
@@ -26,8 +26,8 @@
 				</div>
 
 				<div class="topnav">
-					<a class="active" href="duefte.xhtml">#{msg.duefte}</a> <a
-						href="makeup.xhtml">#{msg.MU}</a> <a href="pflege.xhtml">#{msg.Pf}</a>
+					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
 						<p:inputText type="text" placeholder="Suche" name="search" />
 					</div>
@@ -76,7 +76,7 @@
 						<h:commandButton action="#{produktHandler.edit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
-					
+
 				</h:dataTable>
 				<h:commandButton action="#{produktHandler.neu}"
 					value="Produkt anlegen" />
@@ -114,13 +114,13 @@
 						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
 						<h:commandButton action="#{produktHandler.edit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
-					
+
 				</h:dataTable>
 
 				<h:commandButton action="#{produktHandler.neu}"
@@ -162,7 +162,7 @@
 						<h:outputText value="#{produkt.menge}" />
 						<h:outputText value="#{produkt.mengentyp.label}" />
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
 						<h:commandButton action="#{produktHandler.edit}"
