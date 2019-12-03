@@ -41,56 +41,40 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:form>
-				<h1>Produkt anlegen</h1>
-					<h:panelGrid var="produkt" value="#{produktHandler.selectedEntity}"
-						columns="2" headerClass="header" footerClass="footer">
-						
-						<h:outputLabel value="Marke:" for="marke" />
-						<h:panelGroup>
-							<h:inputText id="marke"
-								value="#{produktHandler.selectedEntity.marke}" required="true"
-								requiredMessage="Eingabe fehlt." />
-							<h:message for="marke" styleClass="message" />
-						</h:panelGroup>
-						
-						<h:outputLabel value="Artikel:" for="artikel" />
-						<h:panelGroup>
-							<h:inputText id="artikel"
-								value="#{produktHandler.selectedEntity.titel}" required="true"
-								requiredMessage="Eingabe fehlt." />
-							<h:message for="artikel" styleClass="message" />
-						</h:panelGroup>
-						
-						<h:outputLabel value="Beschreibung:" for="beschreibung" />
-						<h:panelGroup>
-							<h:inputText id="beschreibung"
-								value="#{produktHandler.selectedEntity.beschreibung}" required="true"
-								requiredMessage="Eingabe fehlt." />
-							<h:message for="beschreibung" styleClass="message" />
-						</h:panelGroup>
-						
-						<h:outputLabel value="Preis:" for="preis" />
-						<h:panelGroup>
-							<h:inputText id="preis"
-								value="#{produktHandler.selectedEntity.preis}" required="true"
-								requiredMessage="Eingabe fehlt." />
-							<h:message for="preis" styleClass="message" />
-						</h:panelGroup>
-						
-						<h:outputLabel value="Menge:" for="menge" />
-						<h:panelGroup>
-							<h:inputText id="menge"
-								value="#{produktHandler.selectedEntity.menge}" required="true"
-								requiredMessage="Eingabe fehlt." />
-							<h:message for="menge" styleClass="message" />
-						</h:panelGroup>
 
-						<h:commandButton action="#{produktHandler.speichern}"
-							value="#{msg.speichern}" update="messages" />
-						<h:commandButton action="#{produktHandler.abbrechen}"
-							value="#{msg.abbrechen}" immediate="true" />
-					</h:panelGrid>
+				<h1>Produkt anlegen/bearbeiten</h1>
+				<h:form id="produkte">
+					<p:panel>
+						<p:panelGrid columns="2">
+							<p:outputLabel for="marke" value="Marke:" />
+							<p:inputText id="marke" value="#{produktHandler.entityList}"
+								required="true" requiredMessage="Bitte Titel angeben." />
+
+							<p:outputLabel for="titel" value="Titel:" />
+							<p:inputText id="titel" value="#{produktHandler.entityList}"
+								required="true" requiredMessage="Bitte Marke angeben." />
+
+							<p:outputLabel for="beschreibung" value="Beschreibung:" />
+							<p:inputTextarea id="beschreibung"
+								value="#{produktHandler.entityList}" required="true"
+								requiredMessage="Bitte eine Beschreibung angeben." />
+
+
+							<p:outputLabel for="preis" value="Preis:" />
+							<p:inputText id="preis" value="#{produktHandler.entityList}"
+								required="true" requiredMessage="Bitte Marke angeben." />
+
+							<p:outputLabel for="menge" value="Menge:" />
+							<p:inputText id="menge" value="#{produktHandler.entityList}"
+								required="true" requiredMessage="Bitte Marke angeben." />
+						</p:panelGrid>
+						
+						<p:commandButton id="speichern" value="Speichern"
+							icon="ui-icon-save" action="#{produktHandler.speichern}" />
+
+						<p:commandButton id="abbrechen" value="Abbrechen"
+							action="#{produktHandler.abbrechen}" />
+					</p:panel>
 				</h:form>
 			</ui:insert>
 

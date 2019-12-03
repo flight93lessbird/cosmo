@@ -71,15 +71,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 					"Lassen sich einfach und schnell aufkleben.", "2,99",
 					Waehrungtyp.EURO, "3", Mengentyp.MILLILITER, Kategorie.MAKEUP));
 
-			
-//			int id = 1;
-//			for (Produkt produkt : produkte) {
-//				// Setze die Id des Produktes ...
-//				// Unnötig, da die ID automatisch generiert wird.
-//				// produkt.setId(id++);
-//				// ... und speichere das Produkt
-//				save(produkt);
-//			}
 		}
 	}
 
@@ -96,6 +87,12 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public String senden() {
 		return "kaufBestatigt?faces-redirect=true";
 	}
+	
+//dient lediglich als platzhalter
+	public String aktualisieren() {
+		return "warenkorb?faces-redirect=true";
+	}
+	
 
 //	public String speichern() {
 //		try {

@@ -1,7 +1,7 @@
 package de.hsb.app.os.model;
 
 
-import javax.faces.bean.ManagedBean;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +15,7 @@ import de.hsb.app.os.enumuration.Waehrungtyp;
 
 @NamedQuery(name = "SelectProdukt", query = "Select p from Produkt p")
 @Entity
-//@ManagedBean(name = "produkt")
+
 public class Produkt {
 
 	@Id

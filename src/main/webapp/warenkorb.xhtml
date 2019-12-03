@@ -61,17 +61,34 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">#{msg.artklanzl}</f:facet>
+						<f:facet name="header">Menge</f:facet>
 						<h:outputText value="#{produktHandler.merkeProdukt.menge}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Anzahl</f:facet>
+						<p:spinner id="basic" value="#{spinnerView.number1}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Gesamt</f:facet>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
 						<h:commandButton action="#{produktHandler.delete}" value="Löschen" />
 					</h:column>
+
 				</h:dataTable>
+				
+				<h3>Zwischensumme:</h3>
+				<h:commandButton action="#{produktHandler.aktualisieren}"
+					value="Aktualisieren" />
+
 				<h:commandButton action="#{produktHandler.senden}"
 					value="Bestellung abschließen" />
+
+
 
 			</ui:insert>
 		</div>
