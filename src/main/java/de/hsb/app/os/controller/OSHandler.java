@@ -52,6 +52,18 @@ public class OSHandler {
 	public String weiterShoppen() {
 		return "Startseite?faces-redirect=true";
 	}
+	
+	public String abbrechen() {
+		return "konto?faces-redirect=true";
+	}
+	
+	public String toKunden() {
+		return "kunde?faces-redirect=true";
+	}
+
+	public String toProdukt() {
+		return "produke?faces-redirect=true";
+	}
 
 	public String benutzerRegistrieren() {
 		for (Benutzer b : user) {
@@ -121,10 +133,7 @@ public class OSHandler {
 		return null;
 	}
 
-	public String abbrechen() {
-		return "konto?faces-redirect=true";
-	}
-
+	
 	public DataModel<Benutzer> getUser() {
 		return user;
 	}

@@ -57,7 +57,7 @@ public class LoginHandler implements Serializable{
 				if (user.size() == 1) {
 					benutzer = user.get(0); 
 					if(benutzer.getRolle() == Rolle.ADMIN){
-						return "/produkte.xhtml";}
+						return "/admin.xhtml";}
 					else {
 						return "/Startseite.xhtml?faces-redirect=true";	
 					}					
