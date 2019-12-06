@@ -42,12 +42,14 @@ public class WarenkorbHandler implements Serializable {
 	public List<Produkt> getWarenkorb() {
 		return warenkorb;
 	}
+	
+	//visuell anzeigen, dass ein Artikel hinzugefügt wurde
 	public void addProdukte(Produkt produkt) {
 		this.warenkorb.add(produkt);
 		addMessage(produkt.getTitel() + "wurde in den Warenkorb hinzugefügt");
 		
 	}
-	
+	//visuell anzeigen, dass ein Artikel entfernt wurde
 	public void Produktentfernen(Produkt produkt) {
 		this.warenkorb.remove(produkt);
 		addMessage(produkt.getTitel() + "wurde aus dem Warenkorb entfern");
