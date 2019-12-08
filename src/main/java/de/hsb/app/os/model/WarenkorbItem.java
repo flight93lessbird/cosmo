@@ -4,7 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /*
- * habe es nochmal hingefügt falls du damit weiter arbeiten möchtest.
+ * @Emma: habe es nochmal hingefügt falls du damit weiter arbeiten möchtest.
  * @Pascal
  */
 public class WarenkorbItem {
