@@ -35,83 +35,93 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 						
 			// Create Duefte
 			produkte.add(new Produkt("Valentino", "Valentina",
-					"Das Valentina Parfüm vereint moderne mit klassischem.", "49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
+					"Das Valentina Parfüm vereint moderne mit klassischem.", "49,99", Waehrungtyp.EURO, "30",
+					Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
 			produkte.add(new Produkt("Guess", "1981",
 					"In der Kopfnote wird Veilchen und Abrette verbunden.",
-					"27,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
+					"27,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
 			produkte.add(new Produkt("Boss", " Ma Vie Pour Femme",
 					"In der Kopfnote befindet sich Kaktusblüten.",
-					"35,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
+					"35,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
 			produkte.add(new Produkt("Michael Kors", "Wonderlust",
 					"In der Kopfnote wird Bergamotte, rosa Pfeffer und feiner Mandelmilch verbunden.",
-					"49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE));
+					"49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
 			// Create Pflege
 			produkte.add(new Produkt("Treaclemoon", "Körpermilch Pretty Rose Hearts",
 					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.","5,99",
-					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE));
+					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			produkte.add(new Produkt("i+m", "Hytro Perform Reinigungsmilch",
 					"Für normale bis trockene Haut.",
-					"9,99", Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE));
+					"9,99", Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO,
-					"200", Mengentyp.MILLILITER, Kategorie.PFLEGE));
+					"200", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasswe",
 					"Reinigt empfindliche Haut.",
-					"4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE));
+					"4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			// Create Make-Up
 			produkte.add(new Produkt("L'oreal", "Blush Sculpt 201",
 					"Natürliche Akt-Shades.", "5,99",
-					Waehrungtyp.EURO, "30", Mengentyp.GRAMM, Kategorie.MAKEUP));
+					Waehrungtyp.EURO, "30", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>()));
 			produkte.add(new Produkt("Maybelline", "The Graffiti Nudes",
 					"Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "11,99",
-					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP));
+					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>()));
 			produkte.add(new Produkt("Maybelline", "Vivid Matte Liquid",
 					"Mittlere Deckkraft. Schimmernd/Glänzend.", "6,99",
-					Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP));
+					Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>()));
 			produkte.add(new Produkt("Essence", "Künstliche Wimpern",
 					"Lassen sich einfach und schnell aufkleben.", "2,99",
-					Waehrungtyp.EURO, "3", Mengentyp.MILLILITER, Kategorie.MAKEUP));
+					Waehrungtyp.EURO, "3", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>()));
+
+			for (Produkt produkt : produkte){
+				this.save(produkt);
+			}
 
 		}
 	}
 
-
-	public String neu() {
-		selectedEntity = new Produkt();
-		return "neuProdukt?faces-redirect=true";
-	}
-	
+	/**Hier wird der Vorgang abgebrochen*/
 	public String abbrechen() {
 		return "produkte?faces-redirect=true";
 	}
 
-	public String senden() {
-		return "kaufBestatigt?faces-redirect=true";
-	}
+
 	
 //dient lediglich als platzhalter
 	public String aktualisieren() {
 		return "warenkorb?faces-redirect=true";
 	}
 	
-
-//	public String speichern() {
-//		try {
-//			utx.begin();
-//			entityList = em.merge(entityList);
-//			em.persist(entityList);
-//			entityList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
-//			utx.commit();
-//		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-//				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-//			e.printStackTrace();
-//		}
-//		return "produkte?faces-redirect=true";
-//	}
+	/**Hier legen wir neue Artikel an*/
+	public String ProduktAnlegen() {
+		try {
+//			produkte.setRowIndex(0);
+			merkeProdukt = new Produkt();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "neuProdukt?faces-redirect=true";
+	}
 	
-//	public String edit() {
-//		merkeProdukt = entityList.getRowData();
-//		return "neuProdukt?faces-redirect=true";
-//	}
+
+	public String speichern() {
+		try {
+			utx.begin();
+			entityList = em.merge(entityList);
+			em.persist(entityList);
+			entityList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "produkte?faces-redirect=true";
+	}
+	
+	public String edit() {
+		merkeProdukt = entityList.getRowData();
+		return "neuProdukt?faces-redirect=true";
+	}
 
 	public String getProduktFullName() {
 		return selectedEntity.getMarke() + " " + selectedEntity.getTitel();

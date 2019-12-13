@@ -19,6 +19,7 @@ import javax.transaction.UserTransaction;
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Benutzer;
 import de.hsb.app.os.model.Produkt;
+import de.hsb.app.os.model.Warenkorb;
 
 @ManagedBean(name = "mbos")
 @SessionScoped
@@ -93,7 +94,7 @@ public class OSHandler {
 		return "meinKonto?faces-redirect=true";
 	}
 
-	public String benutzerAnlegen() {
+	public String benutzerAnlegen(Warenkorb warenkorb) {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
 
@@ -108,6 +109,8 @@ public class OSHandler {
 		}
 		try {
 			utx.begin();
+			warenkorb = em.merge(warenkorb);
+			merkeBenutzer.setWarenkorb(warenkorb);
 			merkeBenutzer = em.merge(merkeBenutzer);
 			em.persist(merkeBenutzer);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());

@@ -1,12 +1,13 @@
 package de.hsb.app.os.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /*
  * @Emma: habe es nochmal hingefügt falls du damit weiter arbeiten möchtest.
  * @Pascal
  */
+@NamedQuery(name = "SelectWarenkorbItem", query = "Select w from WarenkorbItem w")
+@Entity
 public class WarenkorbItem {
 	@Id
 	@GeneratedValue
@@ -14,7 +15,11 @@ public class WarenkorbItem {
 
 	private int stkZahl;
 
+	@ManyToOne
 	private Produkt p;
+
+	@ManyToOne
+	private Warenkorb warenkorb;
 
 	public WarenkorbItem() {
 	}
@@ -50,4 +55,11 @@ public class WarenkorbItem {
 		this.p = p;
 	}
 
+	public Warenkorb getWarenkorb() {
+		return warenkorb;
+	}
+
+	public void setWarenkorb(Warenkorb warenkorb) {
+		this.warenkorb = warenkorb;
+	}
 }

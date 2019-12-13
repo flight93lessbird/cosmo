@@ -2,15 +2,15 @@ package de.hsb.app.os.model;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import de.hsb.app.os.enumuration.Kategorie;
 import de.hsb.app.os.enumuration.Mengentyp;
 import de.hsb.app.os.enumuration.Waehrungtyp;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NamedQuery(name = "SelectProdukt", query = "Select p from Produkt p")
@@ -38,10 +38,17 @@ public class Produkt {
 	private Waehrungtyp waehrungtyp;
 	
 	private Kategorie kategorie;
-	
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+			mappedBy = "warenkorb", orphanRemoval = true)
+	private List<WarenkorbItem> warenkorbItemList = new ArrayList<>();
+
+
+
 	public Produkt () {}
 
-	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge, Mengentyp mengentyp, Kategorie kategorie)
+	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge,
+				   Mengentyp mengentyp, Kategorie kategorie, List<WarenkorbItem> warenkorbItemList)
 	{
 		super();
 		this.marke = marke;
@@ -52,6 +59,7 @@ public class Produkt {
 		this.menge = menge;
 		this.mengentyp = mengentyp;
 		this.kategorie = kategorie;
+		this.warenkorbItemList = warenkorbItemList;
 	
 	}
 
@@ -127,4 +135,11 @@ public class Produkt {
 		this.kategorie = kategorie;
 	}
 
+	public List<WarenkorbItem> getWarenkorbItemList() {
+		return warenkorbItemList;
+	}
+
+	public void setWarenkorbItemList(List<WarenkorbItem> warenkorbItemList) {
+		this.warenkorbItemList = warenkorbItemList;
+	}
 }

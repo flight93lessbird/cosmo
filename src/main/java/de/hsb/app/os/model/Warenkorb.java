@@ -1,14 +1,16 @@
 package de.hsb.app.os.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @NamedQuery(name = "SelectWarenkorb", query = "Select w from Warenkorb w")
 @Entity
-
 public class Warenkorb {
 
 	@Id
@@ -16,7 +18,10 @@ public class Warenkorb {
 	private Integer Id;
 			
 	private String artikel;
-//	private Set<WarenkorbItem> articles;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+			mappedBy = "warenkorb", orphanRemoval = true)
+	private List<WarenkorbItem> warenkorbItems = new ArrayList<>();
 	
 	public Warenkorb () {}
 
@@ -44,7 +49,15 @@ public class Warenkorb {
 		this.artikel = artikel;
 	}
 
-//	public Set<WarenkorbItem> getArticles() {
+	public List<WarenkorbItem> getWarenkorbItems() {
+		return warenkorbItems;
+	}
+
+	public void setWarenkorbItems(List<WarenkorbItem> warenkorbItems) {
+		this.warenkorbItems = warenkorbItems;
+	}
+
+	//	public Set<WarenkorbItem> getArticles() {
 //		return articles;
 //	}
 //

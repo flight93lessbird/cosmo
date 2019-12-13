@@ -1,10 +1,6 @@
 package de.hsb.app.os.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 import de.hsb.app.os.enumuration.Rolle;
 
@@ -19,13 +15,17 @@ public class Benutzer {
 	private String username;
 	private String passwort;
 	private Rolle rolle;
+
+	@OneToOne
+	private Warenkorb warenkorb = new Warenkorb();
 	
 	public Benutzer(){}
 	
-	public Benutzer(String username, String passwort, Rolle rolle){
+	public Benutzer(String username, String passwort, Rolle rolle, Warenkorb warenkorb){
 		this.username = username;
 		this.passwort = passwort;
 		this.rolle = rolle;
+		this.warenkorb = warenkorb;
 	}
 	
 
@@ -63,5 +63,13 @@ public class Benutzer {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Warenkorb getWarenkorb() {
+		return warenkorb;
+	}
+
+	public void setWarenkorb(Warenkorb warenkorb) {
+		this.warenkorb = warenkorb;
 	}
 }
