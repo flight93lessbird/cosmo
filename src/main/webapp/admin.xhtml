@@ -50,14 +50,14 @@
 						headerClass="header" footerClass="footer">
 
 
-						<h:outputLabel for="kunden" value="Kunden bearbeiten:" />
+						<h:outputLabel for="kunden" value="#{msg.admkdnbear}:" />
 						<h:panelGroup>
 							<h:commandButton action="#{mbos.toKunden}" value="#{msg.kunden}" />
 						</h:panelGroup>
 
-						<h:outputLabel for="produkte" value="Produkte bearbeiten:" />
+						<h:outputLabel for="produkte" value="#{msg.admpdkbear}:" />
 						<h:panelGroup>
-							<h:commandButton action="#{mbos.toProdukt}" value="Produkte" />
+							<h:commandButton action="#{mbos.toProdukt}" value="#{msg.produkte}" />
 						</h:panelGroup>
 					</h:panelGrid>
 				</h:form>
