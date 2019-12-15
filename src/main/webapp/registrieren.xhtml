@@ -32,8 +32,8 @@
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
-						<input type="text" name="placeHolder" value="Suche.." />
-						<h:commandButton action="#{duftHandler.suche}" value="Suche" />
+						<input type="text" name="placeHolder" value="#{msg.suchen}" />
+						<h:commandButton action="#{duftHandler.suche}" value="#{msg.suche}" />
 					</div>
 				</div>
 			</ui:insert>
@@ -49,24 +49,24 @@
 						<p:panelGrid id="grid" columns="2">
 							<f:facet name="header">#{msg.registrierung}</f:facet>
 
-							<p:outputLabel value="Username:" for="username" />
+							<p:outputLabel value="#{msg.username}:" for="username" />
 							<p:inputText id="username" required="true"
 								value="#{mbos.merkeBenutzer.username}" />
 
-							<p:outputLabel value="Passwort:" for="pw1" />
+							<p:outputLabel value="#{msg.passwort}:" for="pw1" />
 							<p:password id="pw1" value="#{mbos.merkeBenutzer.passwort}"
 								match="pw2" label="Password 1" required="true" />
 
-							<p:outputLabel value="Passwort wiederholen:" for="pw2" />
+							<p:outputLabel value="#{msg.passwortwdh}:" for="pw2" />
 							<p:password id="pw2" value="#{mbos.merkeBenutzer.passwort}"
 								label="Password 2" required="true" requiredMessage="true">
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
 
-							<p:commandButton value="Zurück" icon="ui-icon-carat-1-w"
+							<p:commandButton value="#{msg.zuruck}" icon="ui-icon-carat-1-w"
 								action="#{mbos.toLogin}" immediate="true" />
 							<p:commandButton id="registrieren" update="grid"
-								value="Registrieren" action="#{mbos.benutzerRegistrieren}" />
+								value="#{msg.registrieren}" action="#{mbos.benutzerRegistrieren}" />
 						</p:panelGrid>
 					</center>
 				</h:form>
