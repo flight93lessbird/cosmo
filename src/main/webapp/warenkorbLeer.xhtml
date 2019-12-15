@@ -31,7 +31,7 @@
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
-						<p:inputText type="text" placeholder="Suche" name="search" />
+						<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" />
 					</div>
 				</div>
 			</ui:insert>
@@ -41,7 +41,7 @@
 			<ui:insert name="content">
 				<h1>#{msg.warenkinfoleer}</h1>
 				<h:commandButton action="#{mbos.weiterShoppen}"
-					value="weiter Shoppen" update="messages" />
+					value="#{msg.weitershoppen}" update="messages" />
 			</ui:insert>
 
 

@@ -39,7 +39,7 @@
 
 		<div id="content">
 			<h:form>
-			<h1>Kreditkarte hinzufügen/bearbeiten</h1>
+			<h1>#{msg.kkhinzbear}</h1>
 				<h:panelGrid var="kreditkarte" value="#{kdhandler.kunden}"
 					columns="2" headerclass="header" footerClass="footer">
 					<h:outputLabel value="#{msg.kunde}:" for="kunden" />
@@ -60,7 +60,7 @@
 					</h:outputLabel>
 					<h:inputText id="nummer"
 						value="#{kdhandler.merkeKreditkarte.nummer}" required="true"
-						requiredMessage="Eingabe fehlt.">
+						requiredMessage="#{msg.eingabefehlt}.">
 						<f:converter converterId="kreditkartenConverter" />
 						<f:validator validatorId="kreditkartenValidator" />
 					</h:inputText>
@@ -70,14 +70,14 @@
 						<p:calendar id="gueltigBis"
 							value="#{kdhandler.merkeKreditkarte.gueltigBis}" mode="popup"
 							navigator="true" showOn="button" pattern="MM.yy" required="true"
-							requiredMessage="Gültigkeitsdatum wird benötigt." />
+							requiredMessage="#{msg.gueltigkdatumfehlt}." />
 						<h:message for="gueltigBis" styleClass="message" />
 					</h:panelGroup>
 					<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
 					<h:panelGroup>
 						<h:inputText id="inhaber"
 							value="#{kdhandler.merkeKreditkarte.inhaber}" required="true"
-							requiredMessage="Eingabe fehlt." />
+							requiredMessage="#{msg.eingabefehlt}." />
 						<h:message for="inhaber" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>

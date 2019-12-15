@@ -31,7 +31,7 @@
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
-						<p:inputText type="text" placeholder="Suche" name="search" />
+						<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" />
 					</div>
 				</div>
 			</ui:insert>
@@ -76,17 +76,17 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton action="#{produktHandler.delete}" value="Löschen" />
+						<h:commandButton action="#{produktHandler.delete}" value="#{msg.loeschen}" />
 					</h:column>
 
 				</h:dataTable>
 				
 				<h3>#{msg.artzwschsum}:</h3>
 				<h:commandButton action="#{produktHandler.aktualisieren}"
-					value="Aktualisieren" />
+					value="#{msg.aktualisieren}" />
 
 				<h:commandButton action="#{produktHandler.senden}"
-					value="Bestellung abschließen" />
+					value="#{msg.bestellaschl}" />
 
 
 

@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   CosMo       </ui:insert></title>
+	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
 </h:head>
 
 <h:body>
@@ -28,8 +28,8 @@
 				</div>
 
 				<div class="topnav">
-					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
-					<a href="pflege.xhtml">Pflege</a>
+					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
 
 						<p:inputText type="text" placeholder="Suche" name="search" />
@@ -44,7 +44,7 @@
 		<div id="content">
 			<ui:insert name="content">
 				<h:form>
-				<h1>Neuen Kunden anlegen/bearbeiten</h1>
+				<h1>#{msg.admneukndanlbear}</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" />
 					<h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
 						columns="2" headerClass="header" footerClass="footer">
@@ -60,14 +60,14 @@
 						<h:panelGroup>
 							<h:inputText id="vorname"
 								value="#{kdhandler.merkeKunde.vorname}" required="true"
-								requiredMessage="Eingabe fehlt." />
+								requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="vorname" styleClass="message" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 						<h:panelGroup>
 							<h:inputText id="nachname"
 								value="#{kdhandler.merkeKunde.nachname}" required="true"
-								requiredMessage="Eingabe fehlt." />
+								requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="nachname" styleClass="message" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
@@ -75,7 +75,7 @@
 							<p:calendar id="geburtsdatum"
 								value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
 								navigator="true" showOn="button" pattern="dd.MM.yyy"
-								required="true" requiredMessage="Gültigkeitsdatum wir benötigt." />
+								required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
 							<h:message styleClass="message" for="geburtsdatum" />
 						</h:panelGroup>
 
@@ -90,9 +90,9 @@
 
 		<div class="footer">
 			<ul class="footermenu">
-				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
-				<li><a href="impressum.xhtml">Impressum</a></li>
-				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
+				<li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
+				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
+				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
 			</ul>
 
 			<center>
