@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   CosMo - Neues Produkt anlegen       </ui:insert></title>
+	<title><ui:insert name="title">   #{msg.titelneuprodktanl}       </ui:insert></title>
 </h:head>
 
 <h:body>
@@ -28,8 +28,8 @@
 				</div>
 
 				<div class="topnav">
-					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
-					<a href="pflege.xhtml">Pflege</a>
+					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
 
 						<p:inputText type="text" placeholder="Suche" name="search" />
@@ -42,37 +42,37 @@
 		<div id="content">
 			<ui:insert name="content">
 
-				<h1>Produkt anlegen/bearbeiten</h1>
+				<h1>#{msg.admneuprodanlbear}</h1>
 				<h:form id="produkte">
 					<p:panel>
 						<p:panelGrid columns="2">
-							<p:outputLabel for="marke" value="Marke:" />
+							<p:outputLabel for="marke" value="#{msg.artkllabel}:" />
 							<p:inputText id="marke" value="#{produktHandler}"
-								required="true" requiredMessage="Bitte Titel angeben." />
+								required="true" requiredMessage="#{msg.titelangeben}." />
 
-							<p:outputLabel for="titel" value="Titel:" />
+							<p:outputLabel for="titel" value="#{msg.artklname}:" />
 							<p:inputText id="titel" value="#{produktHandler}"
-								required="true" requiredMessage="Bitte Marke angeben." />
+								required="true" requiredMessage="#{msg.markeangeben}." />
 
-							<p:outputLabel for="beschreibung" value="Beschreibung:" />
+							<p:outputLabel for="beschreibung" value="#{msg.artklbesch}:" />
 							<p:inputTextarea id="beschreibung"
 								value="#{produktHandler}" required="true"
-								requiredMessage="Bitte eine Beschreibung angeben." />
+								requiredMessage="#{msg.beschreibangeben}." />
 
 
-							<p:outputLabel for="preis" value="Preis:" />
+							<p:outputLabel for="preis" value="#{msg.artklpreis}:" />
 							<p:inputText id="preis" value="#{produktHandler}"
-								required="true" requiredMessage="Bitte Marke angeben." />
+								required="true" requiredMessage="#{msg.markeangeben}." />
 
-							<p:outputLabel for="menge" value="Menge:" />
+							<p:outputLabel for="menge" value="#{msg.artmenge}:" />
 							<p:inputText id="menge" value="#{produktHandler}"
-								required="true" requiredMessage="Bitte Marke angeben." />
+								required="true" requiredMessage="#{msg.markeangeben}." />
 						</p:panelGrid>
 						
-						<p:commandButton id="speichern" value="Speichern"
+						<p:commandButton id="speichern" value="#{msg.speichern}"
 							icon="ui-icon-save" action="#{produktHandler.speichern}" />
 
-						<p:commandButton id="abbrechen" value="Abbrechen"
+						<p:commandButton id="abbrechen" value="#{msg.abbrechen}"
 							action="#{produktHandler.abbrechen}" />
 					</p:panel>
 				</h:form>
@@ -82,9 +82,9 @@
 
 		<div class="footer">
 			<ul class="footermenu">
-				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
-				<li><a href="impressum.xhtml">Impressum</a></li>
-				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
+				<li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
+				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
+				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
 			</ul>
 
 			<center>
