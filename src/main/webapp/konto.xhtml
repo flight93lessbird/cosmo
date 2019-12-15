@@ -50,24 +50,24 @@
 						<p:panelGrid id="grid" columns="2" cellpadding="5">
 							<f:facet name="header">#{msg.login}</f:facet>
 
-							<p:outputLabel value="Username:" />
+							<p:outputLabel value="#{msg.username}:" />
 							<p:inputText id="username" value="#{loginHandler.username}"
 										 required="true" label="Username">
 								<f:validateLength minimum="2" />
 							</p:inputText>
 
-							<p:outputLabel value="Password:" for="password" />
+							<p:outputLabel value="#{msg.passwort}:" for="password" />
 							<p:password id="password" value="#{loginHandler.passwort}"
 										required="true" label="Password">
 							</p:password>
-							<p:commandButton action="#{loginHandler.login}" value="Login"
+							<p:commandButton action="#{loginHandler.login}" value="#{msg.login}"
 											 update="grid" />
 						</p:panelGrid>
 
 						<br></br>
 						<h2>#{msg.nochknkd}</h2>
 						<p:commandButton action="#{mbos.toRegistrieren}"
-										 value="Registrieren" immediate="true" />
+										 value="#{msg.registrieren}" immediate="true" />
 					</h:form>
 
 					<p:ajaxStatus onstart="PF('statusDialog').show();"
