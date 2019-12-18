@@ -6,7 +6,7 @@ import javax.persistence.*;
  * @Emma: habe es nochmal hingefügt falls du damit weiter arbeiten möchtest.
  * @Pascal
  */
-@NamedQuery(name = "SelectWarenkorbItem", query = "Select w from WarenkorbItem w")
+@NamedQuery(name = "SelectWarenkorbItem", query = "Select wki from WarenkorbItem wki")
 @Entity
 public class WarenkorbItem {
 	@Id

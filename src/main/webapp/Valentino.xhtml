@@ -1,0 +1,88 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" href="resources/style.css" type="text/css" />
+	<title><ui:insert name="title">   CosMo       </ui:insert></title>
+</h:head>
+
+<h:body>
+	<h:form>
+
+		<div id="header">
+			<ui:insert name="header">
+				<div class="logo">
+					<a class="logo" href="/os/Startseite.xhtml"> <h:graphicImage
+							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
+					</a> <a class="account" href="konto.xhtml"><h:graphicImage
+							value="resources/images/user.png" height="50px" width="50px" /></a>
+
+					<a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
+							value="resources/images/shopping-cart-of-checkered-design.png"
+							height="50px" width="50px" /></a>
+				</div>
+
+				<div class="topnav">
+					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
+					<a href="pflege.xhtml">Pflege</a>
+					<div class="search-container">
+
+						<p:inputText type="text" placeholder="Suche" name="search" />
+
+					</div>
+				</div>
+			</ui:insert>
+		</div>
+
+
+
+		<div id="content">
+			<ui:insert name="content">
+			</ui:insert>
+
+			<H1>Valentino - Valentina</H1>
+
+			<h:graphicImage value="resources/images/Valentino.PNG"
+				style="height:200px; width:200px;" />
+			<h2>Hier die Produkt Beschreibung</h2>
+
+			<f:facet name="header">#{msg.kaufen}</f:facet>
+							<p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
+								<p:ajax process="@this" />
+							</p:spinner>
+							<p:commandButton
+									action="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, produktHandler.merkeProdukt)}"
+									value="#{msg.indenwarnkorb}">
+							</p:commandButton>
+		</div>
+		<div class="footer">
+			<ul class="footermenu">
+				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
+				<li><a href="impressum.xhtml">Impressum</a></li>
+				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
+			</ul>
+
+			<center>
+				<div class="contact">
+					<div class="custom">
+						Cosmostrasse 10<br /> 27472 Cosmostadt
+					</div>
+				</div>
+
+				<div class="row copyright">
+					<div class="col-lg-12">
+						Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+						| #{msg.title}
+					</div>
+				</div>
+			</center>
+
+		</div>
+	</h:form>
+</h:body>
+</html>

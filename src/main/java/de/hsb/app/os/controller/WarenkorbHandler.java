@@ -1,6 +1,7 @@
 package de.hsb.app.os.controller;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.faces.model.DataModelListener;
+import javax.persistence.Query;
 import javax.transaction.*;
 
 import de.hsb.app.os.model.Benutzer;
@@ -15,7 +18,6 @@ import de.hsb.app.os.model.Produkt;
 import de.hsb.app.os.model.Warenkorb;
 import de.hsb.app.os.model.WarenkorbItem;
 import de.hsb.app.os.repository.AbstractCrudRepository;
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 
 @ManagedBean(name = "warenkorbhd")
 @SessionScoped
@@ -47,7 +49,10 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	 * Den gesamten Warenkorb ausgeben
 	 * @return
 	 */
-	public Warenkorb getWarenkorb() {
+	public Warenkorb getWarenkorb(Benutzer benutzer) {
+		if (benutzer != null){
+			return benutzer.getWarenkorb();
+		}
 		return warenkorb;
 	}
 	
@@ -76,6 +81,57 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 					"Produkt konnte dem Warenkorb nicht hinzugefuegt werden",
 					"Es wurde keine Produkt ausgewaehlt."));
 		}
+	}
+
+	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(Benutzer loggedBenutzer){
+		if (loggedBenutzer != null) {
+			Query query = this.em.createQuery(
+					"select b.warenkorb.warenkorbItems from Benutzer b where b.id = :benutzerId");
+			query.setParameter("benutzerId", loggedBenutzer.getId());
+			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
+			if (warenkorbItems != null) {
+				return warenkorbItems;
+			}else {
+				return new ArrayList<>();
+			}
+		}
+		return new ArrayList<>();
+	}
+
+	public String computeTotalPrice(String preisString, Integer stkZahl){
+		DecimalFormat f = new DecimalFormat("#0.00");
+		double preis = Double.parseDouble(preisString.replace(",", "."));
+		double stkueckZahl = Double.valueOf(stkZahl);
+		return String.valueOf(f.format(preis*stkueckZahl)).replace(".", ",");
+	}
+
+	public String deleteWarenkorbItem(Benutzer loggedBenutzer, WarenkorbItem warenkorbItem){
+		if (warenkorbItem != null) {
+			if (loggedBenutzer != null) {
+				this.warenkorb = loggedBenutzer.getWarenkorb();
+			}
+			try{
+				this.utx.begin();
+				Produkt produkt = this.em.merge(warenkorbItem.getP());
+				warenkorbItem = this.em.merge(warenkorbItem);
+				warenkorb = this.em.merge(warenkorb);
+				produkt.getWarenkorbItemList().remove(warenkorbItem);
+				warenkorb.getWarenkorbItems().remove(warenkorbItem);
+				warenkorbItem.setP(null);
+				warenkorbItem.setWarenkorb(null);
+//				this.em.persist(produkt);
+//				this.em.persist(warenkorb);
+				this.em.remove(warenkorbItem);
+				this.em.flush();
+				this.utx.commit();
+				return "warenkorb?faces-redirect=true";
+			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
+					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+				return "Startseite?faces-redirect=true";
+			}
+
+		}
+		return "Startseite?faces-redirect=true";
 	}
 
 	private void addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt){
@@ -151,6 +207,19 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				final Object item = ((List<?>) var).get(i);
 				if (item instanceof Warenkorb) {
 					result.add((Warenkorb) item);
+				}
+			}
+		}
+		return result;
+	}
+
+	private List<WarenkorbItem> uncheckedSolverForWarenkorbItems(Object var) {
+		final List<WarenkorbItem> result = new ArrayList<>();
+		if (var instanceof List) {
+			for (int i = 0; i < ((List<?>) var).size(); i++) {
+				final Object item = ((List<?>) var).get(i);
+				if (item instanceof WarenkorbItem) {
+					result.add((WarenkorbItem) item);
 				}
 			}
 		}

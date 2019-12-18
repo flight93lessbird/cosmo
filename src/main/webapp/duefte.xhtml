@@ -72,14 +72,12 @@
 						</h:column>
 
 						<h:column>
-							<f:facet name="header">#{msg.kaufen}</f:facet>
-							<p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
-								<p:ajax process="@this" />
-							</p:spinner>
-							<p:commandButton
-									action="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, produkt)}"
-									value="#{msg.indenwarnkorb}">
-							</p:commandButton>
+							<f:facet name="header">Ansicht</f:facet>
+						
+							<h:commandButton
+									action="#{produktHandler.ansicht(produkt)}"
+									value="Ansicht">
+							</h:commandButton>
 						</h:column>
 
 					</h:dataTable>

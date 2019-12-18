@@ -167,6 +167,14 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return result;
 	}
+	
+	public String ansicht(Produkt produkt) {
+		if (produkt != null){
+			merkeProdukt = produkt;
+			return "Valentino?faces-redirect=true";
+		}
+		return "Startseite?faces-redirect=true";
+	}
 
 	public String indenWarenkorb() {
 		return "warenkorb?faces-redirect=true";

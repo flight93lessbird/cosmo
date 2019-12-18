@@ -39,44 +39,50 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="produkt"
-					value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+				<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
+					value="#{warenkorbhd.findWarenkorbItemsByBenutzer(loginHandler.benutzer)}"
 					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.warenk}</f:facet>
 
 
 					<h:column>
 						<f:facet name="header">#{msg.artkllabel}</f:facet>
-						<h:outputText value="#{produktHandler.merkeProdukt.marke}" />
+						<h:outputText value="#{warenkorbItem.p.marke}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.artklname}</f:facet>
-						<h:outputText value="#{produktHandler.merkeProdukt.titel}" />
+						<h:outputText value="#{warenkorbItem.p.titel}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.artklpreis}</f:facet>
-						<h:outputText value="#{produktHandler.merkeProdukt.preis}" />
+						<h:outputText value="#{warenkorbItem.p.preis}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.artmenge}</f:facet>
-						<h:outputText value="#{produktHandler.merkeProdukt.menge}" />
+						<h:outputText value="#{warenkorbItem.p.menge.concat(msg[warenkorbItem.p.mengentyp])}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.artklanzl}</f:facet>
-						<p:spinner id="basic" value="#{spinnerView.number1}" />
+						<p:spinner id="basic" value="#{warenkorbItem.stkZahl}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.artgesamt}</f:facet>
+						<h:outputText
+								value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}"/>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton action="#{produktHandler.delete}" value="#{msg.loeschen}" />
+						<p:commandButton
+								action="#{warenkorbhd.deleteWarenkorbItem(loginHandler.benutzer, warenkorbItem)}"
+								value="#{msg.loeschen}">
+							<p:ajax event="click" update="warenkorbTabelle"/>
+						</p:commandButton>
 					</h:column>
 
 				</h:dataTable>

@@ -1,6 +1,7 @@
 package de.hsb.app.os.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,10 +26,11 @@ import javax.transaction.UserTransaction;
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Benutzer;
 import de.hsb.app.os.model.Warenkorb;
+import de.hsb.app.os.repository.AbstractCrudRepository;
 
 @ManagedBean
 @SessionScoped 
-public class LoginHandler implements Serializable{
+public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String username;
@@ -49,14 +51,20 @@ public class LoginHandler implements Serializable{
 	
 	@PostConstruct
 	public void init(){
-		try{
-			utx.begin();
-			em.persist(new Benutzer("kunde",   "kunde", Rolle.KUNDE, new Warenkorb()));
-			em.persist(new Benutzer("admin",  "admin", Rolle.ADMIN, new Warenkorb()));
-			utx.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			}	
+		if (this.findAll().isEmpty()) {
+			try {
+				utx.begin();
+				Warenkorb warenkorb1 = new Warenkorb();
+				Warenkorb warenkorb2 = new Warenkorb();
+				em.persist(warenkorb1);
+				em.persist(warenkorb2);
+				em.persist(new Benutzer("kunde", "kunde", Rolle.KUNDE, warenkorb1));
+				em.persist(new Benutzer("admin", "admin", Rolle.ADMIN, warenkorb2));
+				utx.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 
@@ -155,5 +163,34 @@ public class LoginHandler implements Serializable{
 	
 	public void setBenutzer(Benutzer benutzer) {
 		this.benutzer = benutzer;
-	}	
+	}
+
+	@Override
+	protected Class<Benutzer> getRepositoryClass() {
+		return Benutzer.class;
+	}
+
+	@Override
+	protected String getQueryCommand() {
+		return "select b from Benutzer b";
+	}
+
+	@Override
+	protected String getSelect() {
+		return "SelectBenutzer";
+	}
+
+	@Override
+	protected List<Benutzer> uncheckedSolver(Object var) {
+		final List<Benutzer> result = new ArrayList<>();
+		if (var instanceof List) {
+			for (int i = 0; i < ((List<?>) var).size(); i++) {
+				final Object item = ((List<?>) var).get(i);
+				if (item instanceof Benutzer) {
+					result.add((Benutzer) item);
+				}
+			}
+		}
+		return result;
+	}
 }
