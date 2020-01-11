@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   CosMo       </ui:insert></title>
+	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
 </h:head>
 
 <h:body>
@@ -28,8 +28,8 @@
 				</div>
 
 				<div class="topnav">
-					<a href="duefte.xhtml">Düfte</a> <a href="makeup.xhtml">Make-Up</a>
-					<a href="pflege.xhtml">Pflege</a>
+					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
 
 						<p:inputText type="text" placeholder="Suche" name="search" />
@@ -45,11 +45,11 @@
 			<ui:insert name="content">
 			</ui:insert>
 
-			<H1>Valentino - Valentina</H1>
+			<H1>#{msg.valentin}</H1>
 
 			<h:graphicImage value="resources/images/Valentino.PNG"
 				style="height:200px; width:200px;" />
-			<h2>Hier die Produkt Beschreibung</h2>
+			<h2>#{msg.hierdieprodbessch}</h2>
 
 			<f:facet name="header">#{msg.kaufen}</f:facet>
 							<p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
@@ -62,9 +62,9 @@
 		</div>
 		<div class="footer">
 			<ul class="footermenu">
-				<li><a href="datenschutz.xhtml">Datenschutz</a></li>
-				<li><a href="impressum.xhtml">Impressum</a></li>
-				<li><a href="urheberrecht.xhtml">Urheberrecht</a></li>
+				<li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
+				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
+				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
 			</ul>
 
 			<center>
