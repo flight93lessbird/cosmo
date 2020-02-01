@@ -70,7 +70,7 @@
 						<h:outputLabel value="#{msg.strasse}:" for="strasse" />
 						<h:panelGroup>
 							<h:inputText id="strasse"
-								value="#{kdhandler.merkeKunde.adresse}" required="true"
+								value="#{kdhandler.merkeAdresse.strasse}" required="true"
 								requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="strasse" styleClass="message" />
 						</h:panelGroup>
@@ -98,7 +98,7 @@
 						<h:message styleClass="message" for="geburtsdatum" />
 					</h:panelGroup>
 
-					<h:commandButton action="#{kdhandler.speichern}"
+					<h:commandButton action="#{kdhandler.speichernReg}"
 						value="#{msg.speichern}" update="messages" />
 					<h:commandButton action="#{kdhandler.abbrechen}"
 						value="#{msg.abbrechen}" immediate="true" />

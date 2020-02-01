@@ -139,6 +139,19 @@ public class KundenHandler {
 		}
 		return "kunde?faces-redirect=true";
 	}
+	public String speichernReg() {
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.persist(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "Startseite?faces-redirect=true";
+	}
 
 	public String edit() {
 		merkeKunde = kunden.getRowData();
