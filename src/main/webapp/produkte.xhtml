@@ -26,6 +26,7 @@
 				</div>
 
 				<div class="topnav">
+					<a href="admin.xhtml">#{msg.admseite}</a>
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
@@ -36,12 +37,13 @@
 		</div>
 
 		<div id="content">
-			<ui:insert name="content">
-				<h:dataTable var="produkt"
-					value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
-					rowClasses="odd,even" headerClass="header">
-					<f:facet name="header">#{msg.duefte}</f:facet>
+		<ui:insert name="content">
+			<h:form>
+			<h1>#{msg.produkte}</h1>
 
+		<h:dataTable var="produkt" value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
+					 rowClasses="odd,even" headerClass="header">
+		<f:facet name="header">#{msg.duefte}</f:facet>
 
 					<h:column>
 						<f:facet name="header">#{msg.artkllabel}</f:facet>
@@ -191,6 +193,7 @@
 
 				<h:commandButton action="#{produktHandler.neu}"
 					value="#{msg.admprodanl}" />
+			</h:form>
 			</ui:insert>
 		</div>
 
