@@ -68,7 +68,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 //		addMessage(produkt.getTitel() + "wurde aus dem Warenkorb entfernt");
 //	}
 
-	public void addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt){
+	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt){
 		if (produkt != null){
 			if (loggedBenutzer != null){
 				addWarenkorbItemToWarenkorb(loggedBenutzer.getWarenkorb(), produkt);
@@ -81,6 +81,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 					"Produkt konnte dem Warenkorb nicht hinzugefuegt werden",
 					"Es wurde keine Produkt ausgewaehlt."));
 		}
+		return "warenkorb?faces-redirect=true";
 	}
 
 	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(Benutzer loggedBenutzer){
@@ -134,7 +135,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return "Startseite?faces-redirect=true";
 	}
 
-	private void addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt){
+	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt){
 		if (stkZahl > 0) {
 			try {
 				this.utx.begin();
@@ -162,6 +163,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 			}
 		}
+		return "warenkorb?faces-redirect=true";
 	}
 
 
