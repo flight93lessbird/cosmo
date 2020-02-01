@@ -63,7 +63,7 @@ public class OSHandler {
 	}
 
 	public String toProdukt() {
-		return "produke?faces-redirect=true";
+		return "produkte?faces-redirect=true";
 	}
 
 	public String benutzerRegistrieren() {
