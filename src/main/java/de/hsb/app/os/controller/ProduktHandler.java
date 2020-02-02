@@ -74,7 +74,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 					Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>()));
 			produkte.add(new Produkt("Essence", "Künstliche Wimpern",
 					"Lassen sich einfach und schnell aufkleben.", "2,99",
-					Waehrungtyp.EURO, "3", Mengentyp.STUECK, Kategorie.MAKEUP, new ArrayList<>()));
+					Waehrungtyp.EURO, "1", Mengentyp.STUECK, Kategorie.MAKEUP, new ArrayList<>()));
 
 			for (Produkt produkt : produkte){
 				this.save(produkt);
