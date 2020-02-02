@@ -45,18 +45,18 @@
             <ui:insert name="content">
             </ui:insert>
 
-            <H1>#{produkt.marke}</H1>
-            <H2>#{produkt.titel}</H2>
+            <H1>#{produktHandler.merkeProdukt.marke}</H1>
+            <H2>#{produktHandler.merkeProdukt.titel}</H2>
 
        <!--   Bild
         <h:graphicImage value= "resources/images/#{msg.marke}.PNG"
                             style="height:200px; width:200px;" />  -->
 
             <H3>Menge:</H3>
-            <H4>#{merkeProdukt.menge}</H4>
+            <H4>#{produktHandler.merkeProdukt.menge} #{produktHandler.merkeProdukt.mengentyp.label}</H4>
 
             <H3>Preis:</H3>
-            <H4>#{merkeProdukt.preis} #{merkeProdukt.waehrungtyp.label}</H4>
+            <H4>#{produktHandler.merkeProdukt.preis} #{produktHandler.merkeProdukt.waehrungtyp.label}</H4>
 
             <f:facet name="header">#{msg.kaufen}</f:facet>
             <p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
@@ -68,7 +68,7 @@
             </p:commandButton>
 
             <H3>Produktbeschreibung:</H3>
-            <H4>#{msg.beschreibung}</H4>
+            <a>#{produktHandler.merkeProdukt.beschreibung}</a>
         </div>
         <div class="footer">
             <ul class="footermenu">
