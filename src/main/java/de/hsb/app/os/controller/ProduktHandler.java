@@ -2,6 +2,7 @@ package de.hsb.app.os.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
@@ -12,6 +13,7 @@ import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
+import javax.faces.model.DataModel;
 
 import de.hsb.app.os.enumuration.Kategorie;
 import de.hsb.app.os.enumuration.Mengentyp;
@@ -26,13 +28,15 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	private Produkt merkeProdukt = new Produkt();
 
 	List<Produkt> produkte = new ArrayList<>();
+
+	private DataModel<Produkt> pdList;
 	
 
 	@PostConstruct
 	public void init() {
 		if (this.findAll().isEmpty()) {
 			List<Produkt> produkte = new ArrayList<>();
-						
+
 			// Create Duefte
 			produkte.add(new Produkt("Valentino", "Valentina",
 					"Das Valentina Parfüm vereint moderne mit klassischem.", "49,99", Waehrungtyp.EURO, "30",
@@ -85,7 +89,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	}
 
 
-	
 //dient lediglich als platzhalter
 	public String aktualisieren() {
 		return "warenkorb?faces-redirect=true";
@@ -94,10 +97,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	/**Hier legen wir neue Artikel an*/
 	public String ProduktAnlegen() {
 		try {
-//			produkte.setRowIndex(0);
+//			pdList.setRowIndex(0);
 			merkeProdukt = new Produkt();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "neuProdukt?faces-redirect=true";
@@ -107,9 +109,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public String speichern() {
 		try {
 			utx.begin();
-			entityList = em.merge(entityList);
-			em.persist(entityList);
-			entityList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+			pdList = em.merge(pdList);
+			em.persist(pdList);
+			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -119,7 +121,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	}
 	
 	public String edit() {
-		merkeProdukt = entityList.getRowData();
+		merkeProdukt = pdList.getRowData();
 		return "neuProdukt?faces-redirect=true";
 	}
 
@@ -171,13 +173,32 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public String ansicht(Produkt produkt) {
 		if (produkt != null){
 			merkeProdukt = produkt;
-			return "Valentino?faces-redirect=true";
+			return "Produkt?faces-redirect=true";
 		}
 		return "Startseite?faces-redirect=true";
 	}
 
 	public String indenWarenkorb() {
 		return "warenkorb?faces-redirect=true";
+	}
+
+
+	/**
+	 * Loescht einen Eintrag in der Produkt-Liste.
+	 */
+	public String pddelete() {
+		merkeProdukt = pdList.getRowData();
+		try {
+			utx.begin();
+			merkeProdukt = em.merge(merkeProdukt);
+			em.remove(merkeProdukt);
+			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "produkte?faces-redirect=true";
 	}
 
 

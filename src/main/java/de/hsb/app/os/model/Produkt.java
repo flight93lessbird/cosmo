@@ -1,7 +1,6 @@
 package de.hsb.app.os.model;
 
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 

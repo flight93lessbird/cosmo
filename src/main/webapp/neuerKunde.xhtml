@@ -28,6 +28,7 @@
 				</div>
 
 				<div class="topnav">
+					<a href="admin.xhtml">#{msg.admseite}</a>
 					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
 					<a href="pflege.xhtml">#{msg.Pf}</a>
 					<div class="search-container">
@@ -74,7 +75,7 @@
 						<h:panelGroup>
 							<p:calendar id="geburtsdatum"
 								value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
-								navigator="true" showOn="button" pattern="dd.MM.yyy"
+								navigator="true" showOn="button" pattern="dd.MM.yyyy"
 								required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
 							<h:message styleClass="message" for="geburtsdatum" />
 						</h:panelGroup>
