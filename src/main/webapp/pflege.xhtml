@@ -73,10 +73,12 @@
 					</h:column>
 
 					<h:column>
-						<f:facet name="header">#{msg.kaufen}</f:facet>
-						<p:spinner id="basic" value="#{spinnerView.number1}" />
-						<h:commandButton action="#{mbos.indenWarenkorb}"
-							value="#{msg.indenwarnkorb}" />
+						<f:facet name="header">Ansicht</f:facet>
+
+						<h:commandButton
+								action="#{produktHandler.ansicht(produkt)}"
+								value="Ansicht">
+						</h:commandButton>
 					</h:column>
 				</h:dataTable>
 			</ui:insert>
