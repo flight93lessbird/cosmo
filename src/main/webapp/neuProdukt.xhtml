@@ -17,65 +17,78 @@
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="logo" href="/os/Startseite.xhtml"> <h:graphicImage
+					<a class="logo" href="/os/admin.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a> <a class="account" href="konto.xhtml"><h:graphicImage
+					</a> <a class="account" href="logout.xhtml"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
 
-					<a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
-							value="resources/images/shopping-cart-of-checkered-design.png"
-							height="50px" width="50px" /></a>
 				</div>
 
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
-					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
-					<a href="pflege.xhtml">#{msg.Pf}</a>
-					<div class="search-container">
 
-						<p:inputText type="text" placeholder="Suche" name="search" />
-
-					</div>
 				</div>
 			</ui:insert>
 		</div>
 
 		<div id="content">
 			<ui:insert name="content">
-
+				<h:form >
 				<h1>#{msg.admneuprodanlbear}</h1>
-				<h:form id="produkte">
-					<p:panel>
-						<p:panelGrid columns="2">
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<h:panelGrid var="produkt" value="#{produktHandler.merkeProdukt}"
+								 columns="2" headerClass="header" footerClass="footer">
 							<p:outputLabel for="marke" value="#{msg.artkllabel}:" />
-							<p:inputText id="marke" value="#{produktHandler}"
+						<h:panelGroup>
+							<p:inputText id="marke" value="#{produktHandler.merkeProdukt.marke}"
 								required="true" requiredMessage="#{msg.titelangeben}." />
-
+						</h:panelGroup>
 							<p:outputLabel for="titel" value="#{msg.artklname}:" />
-							<p:inputText id="titel" value="#{produktHandler}"
+						<h:panelGroup>
+							<p:inputText id="titel" value="#{produktHandler.merkeProdukt.titel}"
 								required="true" requiredMessage="#{msg.markeangeben}." />
-
+						</h:panelGroup>
 							<p:outputLabel for="beschreibung" value="#{msg.artklbesch}:" />
-							<p:inputTextarea id="beschreibung"
-								value="#{produktHandler}" required="true"
+					<h:panelGroup>
+						<p:inputTextarea id="beschreibung"
+								value="#{produktHandler.merkeProdukt.beschreibung}" required="true"
 								requiredMessage="#{msg.beschreibangeben}." />
-
-
+					</h:panelGroup>
 							<p:outputLabel for="preis" value="#{msg.artklpreis}:" />
-							<p:inputText id="preis" value="#{produktHandler}"
+					<h:panelGroup>
+							<p:inputText id="preis" value="#{produktHandler.merkeProdukt.preis}"
 								required="true" requiredMessage="#{msg.markeangeben}." />
-
+					</h:panelGroup>
 							<p:outputLabel for="menge" value="#{msg.artmenge}:" />
-							<p:inputText id="menge" value="#{produktHandler}"
+					<h:panelGroup>
+							<p:inputText id="menge" value="#{produktHandler.merkeProdukt.menge}"
 								required="true" requiredMessage="#{msg.markeangeben}." />
-						</p:panelGrid>
-						
-						<p:commandButton id="speichern" value="#{msg.speichern}"
-							icon="ui-icon-save" action="#{produktHandler.speichern}" />
+					</h:panelGroup>
 
-						<p:commandButton id="abbrechen" value="#{msg.abbrechen}"
-							action="#{produktHandler.abbrechen}" />
-					</p:panel>
+
+						<h:outputLabel value="#{msg.artwtyp}:" for="mengentyp" />
+						<h:panelGroup>
+							<h:selectOneMenu id="mengentyp"
+											 value="#{produktHandler.merkeProdukt.mengentyp}">
+								<f:selectItems var="form" value="#{produktHandler.mengentypValues}"
+											   itemValue="#{form}" itemLabel="#{form.label}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+
+						<h:outputLabel value="#{msg.kategorie}:" for="kategorie" />
+						<h:panelGroup>
+							<h:selectOneMenu id="kategorie"
+											 value="#{produktHandler.merkeProdukt.kategorie}">
+								<f:selectItems var="form" value="#{produktHandler.kategorieValues}"
+											   itemValue="#{form}" itemLabel="#{form.label}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+
+						<h:commandButton action="#{produktHandler.pdabbrechen}"
+										 value="#{msg.abbrechen}" immediate="true" />
+						<h:commandButton action="#{produktHandler.pdspeichern}"
+										 value="#{msg.speichern}" update="messages" />
+					</h:panelGrid>
 				</h:form>
 			</ui:insert>
 

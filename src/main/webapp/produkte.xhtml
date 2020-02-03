@@ -15,23 +15,15 @@
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="startseite" href="/os/Startseite.xhtml"> <h:graphicImage
+					<a class="startseite" href="/os/admin.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a> <a class="account" href="konto.xhtml"><h:graphicImage
+					</a> <a class="account" href="logout.xhtml"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
 
-					<a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
-							value="resources/images/shopping-cart-of-checkered-design.png"
-							height="50px" width="50px" /></a>
 				</div>
 
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
-					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
-					<a href="pflege.xhtml">#{msg.Pf}</a>
-					<div class="search-container">
-						<p:inputText type="text" placeholder="Suche" name="search" />
-					</div>
 				</div>
 			</ui:insert>
 		</div>
@@ -75,7 +67,7 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton action="#{produktHandler.edit}"
+						<h:commandButton action="#{produktHandler.pdedit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
 					
@@ -125,7 +117,7 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton action="#{produktHandler.edit}"
+						<h:commandButton action="#{produktHandler.pdedit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
 					
@@ -137,7 +129,7 @@
 
 				</h:dataTable>
 
-				<h:commandButton action="#{produktHandler.neu}"
+				<h:commandButton action="#{produktHandler.ProduktAnlegen}"
 					value="#{msg.admprodanl}" />
 
 				<br />
@@ -179,10 +171,10 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton action="#{produktHandler.edit}"
+						<h:commandButton action="#{produktHandler.pdedit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
-					
+
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
 						<h:commandButton action="#{produktHandler.pddelete}"
@@ -191,7 +183,7 @@
 
 				</h:dataTable>
 
-				<h:commandButton action="#{produktHandler.neu}"
+				<h:commandButton action="#{produktHandler.ProduktAnlegen}"
 					value="#{msg.admprodanl}" />
 			</h:form>
 			</ui:insert>

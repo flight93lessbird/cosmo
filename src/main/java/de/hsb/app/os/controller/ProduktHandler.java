@@ -15,6 +15,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.faces.model.DataModel;
 
+import de.hsb.app.os.enumuration.Anrede;
 import de.hsb.app.os.enumuration.Kategorie;
 import de.hsb.app.os.enumuration.Mengentyp;
 import de.hsb.app.os.enumuration.Waehrungtyp;
@@ -83,6 +84,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 	}
 
+
 	/**Hier wird der Vorgang abgebrochen*/
 	public String abbrechen() {
 		return "produkte?faces-redirect=true";
@@ -120,10 +122,48 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return "produkte?faces-redirect=true";
 	}
 	
-	public String edit() {
+	public String pdedit() {
 		merkeProdukt = pdList.getRowData();
 		return "neuProdukt?faces-redirect=true";
 	}
+
+	public String pdabbrechen() {
+		return "produkte?faces-redirect=true";
+	}
+
+	public String pdspeichern() {
+		try {
+			utx.begin();
+			merkeProdukt = em.merge(merkeProdukt);
+			em.persist(merkeProdukt);
+			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "produkte?faces-redirect=true";
+	}
+
+	/**
+	 * Loescht einen Eintrag in der Produkt-Liste.
+	 */
+	// pddelete(Produkt produkt)
+	public String pddelete() {
+		merkeProdukt = pdList.getRowData();
+		try {
+			utx.begin();
+			merkeProdukt = em.merge(merkeProdukt);
+			em.remove(merkeProdukt);
+			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "produkte?faces-redirect=true";
+	}
+
 
 	public String getProduktFullName() {
 		return selectedEntity.getMarke() + " " + selectedEntity.getTitel();
@@ -183,28 +223,17 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	}
 
 
-	/**
-	 * Loescht einen Eintrag in der Produkt-Liste.
-	 */
-	// pddelete(Produkt produkt)
-	public String pddelete() {
-		merkeProdukt = pdList.getRowData();
-		try {
-			utx.begin();
-			merkeProdukt = em.merge(merkeProdukt);
-			em.remove(merkeProdukt);
-			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "produkte?faces-redirect=true";
-	}
-
 
 	public Produkt getMerkeProdukt() {
 		return merkeProdukt;
+	}
+
+	public Kategorie[] getKategorieValues() {
+		return Kategorie.values();
+	}
+
+	public Mengentyp[] getMengentypValues() {
+		return Mengentyp.values();
 	}
 
 	public void setMerkeProdukt(Produkt merkeProdukt) {

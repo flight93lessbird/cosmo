@@ -73,10 +73,7 @@ public class KundenHandler {
 			e.printStackTrace();
 		}
 	}
-	
-	public Anrede[] getAnredeValues() {
-		return Anrede.values();
-	}
+
 	
 	public String neu() {
 		merkeKunde = new Kunde();
@@ -139,6 +136,7 @@ public class KundenHandler {
 		}
 		return "kunde?faces-redirect=true";
 	}
+
 	public String speichernReg() {
 		try {
 			utx.begin();
@@ -208,6 +206,10 @@ public class KundenHandler {
 
 	public DataModel<Kunde> getKunden() {
 		return kunden;
+	}
+
+	public Anrede[] getAnredeValues() {
+		return Anrede.values();
 	}
 
 	public void setKunden(DataModel<Kunde> kunden) {

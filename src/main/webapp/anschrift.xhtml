@@ -16,24 +16,17 @@
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="" href="/os/Startseite.xhtml"> <h:graphicImage
+					<a class="" href="/os/admin.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a> <a class="account" href="konto.xhtml"><h:graphicImage
+					</a> <a class="account" href="logout.xhtml"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
-
-					<a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
-							value="resources/images/shopping-cart-of-checkered-design.png"
-							height="50px" width="50px" /></a>
 				</div>
 
 
-				<div class="topnav">
-					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
-					<a href="pflege.xhtml">#{msg.Pf}</a>
-					<div class="search-container">
-						<p:inputText type="text" placeholder="Suche" name="search" />
-					</div>
-				</div>
+			<div class="topnav">
+				<a href="admin.xhtml">#{msg.admseite}</a>
+			</div>
+
 			</ui:insert>
 		</div>
 
@@ -66,11 +59,10 @@
 							<h:inputText id="ort" required="true"
 								value="#{kdhandler.merkeAdresse.ort}" />
 						</h:panelGroup>
-
+						<h:commandButton action="#{kdhandler.abbrechen}"
+										 value="#{msg.abbrechen}" immediate="true" />
 						<h:commandButton action="#{kdhandler.speichern}"
 							value="#{msg.speichern}" update="messages" />
-						<h:commandButton action="#{kdhandler.abbrechen}"
-							value="#{msg.abbrechen}" immediate="true" />
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>
