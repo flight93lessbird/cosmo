@@ -42,6 +42,13 @@ public class OSHandler {
 		return "registrieren?faces-redirect=true";
 	}
 
+
+
+	public String toKaufBestatigt() {
+		merkeBenutzer = new Benutzer();
+		return "kaufBestatigt?faces-redirect=true";
+	}
+
 	public String toLogin() {
 		return "konto?faces-redirect=true";
 	}

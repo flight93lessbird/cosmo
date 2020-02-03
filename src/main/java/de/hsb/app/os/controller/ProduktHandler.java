@@ -44,7 +44,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			produkte.add(new Produkt("Guess", "1981",
 					"In der Kopfnote wird Veilchen und Abrette verbunden.",
 					"27,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
-			produkte.add(new Produkt("Boss", "Ma Vie Pour Femme",
+			produkte.add(new Produkt("Boss", "Ma Vie",
 					"In der Kopfnote befindet sich Kaktusblüten.",
 					"35,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
 			produkte.add(new Produkt("Michael Kors", "Wonderlust",
@@ -59,7 +59,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 					"9,99", Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO,
 					"200", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
-			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasswe",
+			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasser",
 					"Reinigt empfindliche Haut.",
 					"4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			// Create Make-Up

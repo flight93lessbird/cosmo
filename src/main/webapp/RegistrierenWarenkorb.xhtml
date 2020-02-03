@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <link rel="stylesheet" href="resources/style.css" type="text/css" />
+    <title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <div id="header">
+            <ui:insert name="header">
+                <div class="logo">
+                    <a class="" href="/os/Startseite.xhtml"> <h:graphicImage
+                            value="resources/images/COS'MO.PNG" height="150px" width="150px" />
+                    </a> <a class="account" href="konto.xhtml"><h:graphicImage
+                        value="resources/images/user.png" height="50px" width="50px" /></a>
+
+                    <a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
+                            value="resources/images/shopping-cart-of-checkered-design.png"
+                            height="50px" width="50px" /></a>
+                </div>
+
+
+
+                <div class="topnav">
+                    <a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+                    <a href="pflege.xhtml">#{msg.Pf}</a>
+                    <div class="search-container">
+                        <input type="text" name="placeHolder" value="#{msg.suchen}" />
+                        <h:commandButton action="#{duftHandler.suche}" value="#{msg.suche}" />
+                    </div>
+                </div>
+            </ui:insert>
+        </div>
+
+
+        <div id="content">
+            <ui:insert name="content">
+                <h:form>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    <p:growl id="growl" showDetail="true" />
+                    <center>
+                        <p:panelGrid id="grid" columns="2">
+                            <f:facet name="header">#{msg.registrierung}</f:facet>
+
+                            <p:outputLabel value="#{msg.username}:" for="username" />
+                            <p:inputText id="username" required="true"
+                                         value="#{mbos.merkeBenutzer.username}" />
+
+                            <p:outputLabel value="#{msg.passwort}:" for="pw1" />
+                            <p:password id="pw1" value="#{mbos.merkeBenutzer.passwort}"
+                                        match="pw2" label="Password 1" required="true" />
+
+                            <p:outputLabel value="#{msg.passwortwdh}:" for="pw2" />
+                            <p:password id="pw2" value="#{mbos.merkeBenutzer.passwort}"
+                                        label="Password 2" required="true" requiredMessage="true">
+                                <f:validator validatorId="PasswordValidation" />
+                            </p:password>
+                        </p:panelGrid>
+                    </center>
+
+                    <h1>#{msg.meinkonto}</h1>
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}" columns="2" headerClass="header" footerClass="footer">
+                        <h:outputLabel value="#{msg.anrede}:" for="anrede" />
+                        <h:panelGroup>
+                            <h:selectOneMenu id="anrede" value="#{kdhandler.merkeKunde.anrede}">
+                                <f:selectItems var="form" value="#{kdhandler.anredeValues}" itemValue="#{form}" itemLabel="#{form.label}" />
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+                        <h:outputLabel value="#{msg.vorname}:" for="vorname" />
+                        <h:panelGroup>
+                            <h:inputText id="vorname"
+                                         value="#{kdhandler.merkeKunde.vorname}" required="true"
+                                         requiredMessage="#{msg.eingabefehlt}." />
+                            <h:message for="vorname" styleClass="message" />
+                        </h:panelGroup>
+                        <h:outputLabel value="#{msg.nachname}:" for="nachname" />
+                        <h:panelGroup>
+                            <h:inputText id="nachname"
+                                         value="#{kdhandler.merkeKunde.nachname}" required="true"
+                                         requiredMessage="#{msg.eingabefehlt}." />
+                            <h:message for="nachname" styleClass="message" />
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msg.strasse}:" for="strasse" />
+                        <h:panelGroup>
+                            <h:inputText id="strasse"
+                                         value="#{kdhandler.merkeAdresse.strasse}" required="true"
+                                         requiredMessage="#{msg.eingabefehlt}." />
+                            <h:message for="strasse" styleClass="message" />
+                        </h:panelGroup>
+
+                        <h:outputLabel for="plz" value="#{msg.plz}:" />
+                        <h:panelGroup>
+                            <h:inputText id="plz" required="true"
+                                         value="#{kdhandler.merkeAdresse.plz}">
+                                <f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
+                            </h:inputText>
+                        </h:panelGroup>
+
+                        <h:outputLabel for="ort" value="#{msg.ort}:" />
+                        <h:panelGroup>
+                            <h:inputText id="ort" required="true"
+                                         value="#{kdhandler.merkeAdresse.ort}" />
+                        </h:panelGroup>
+
+                        <h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
+                        <h:panelGroup>
+                            <p:calendar id="geburtsdatum"
+                                        value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
+                                        navigator="true" showOn="button" pattern="dd.MM.yyyy" yearRange="c-70:c+50"
+                                        required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
+                            <h:message styleClass="message" for="geburtsdatum" />
+                        </h:panelGroup>
+
+                        <h:commandButton action="#{warenkorbhd.speichernRegWar}"
+                                         value="#{msg.speichern}" update="messages" />
+                        <h:commandButton action="#{warenkorbhd.abbrechenReg}"
+                                         value="#{msg.abbrechen}" immediate="true" />
+
+                    </h:panelGrid>
+
+                </h:form>
+            </ui:insert>
+        </div>
+
+        <div class="footer">
+            <ul class="footermenu">
+                <li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
+                <li><a href="impressum.xhtml">#{msg.impressum}</a></li>
+                <li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
+            </ul>
+
+            <center>
+                <div class="contact">
+                    <div class="custom">
+                        Cosmostrasse 10<br /> 27472 Cosmostadt
+                    </div>
+                </div>
+
+                <div class="row copyright">
+                    <div class="col-lg-12">
+                        Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+                        | #{msg.title}
+                    </div>
+                </div>
+            </center>
+
+        </div>
+    </h:form>
+</h:body>
+</html>
