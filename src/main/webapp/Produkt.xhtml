@@ -61,7 +61,7 @@
                 <p:ajax process="@this" />
             </p:spinner>
             <p:commandButton
-                    action="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, produktHandler.merkeProdukt)}"
+                    action="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, produktHandler.merkeProdukt, warenkorbhd.stkZahl)}"
                     value="#{msg.indenwarnkorb}">
             </p:commandButton>
 

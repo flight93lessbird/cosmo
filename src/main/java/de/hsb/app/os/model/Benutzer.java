@@ -19,7 +19,7 @@ public class Benutzer {
 	@OneToOne
 	private Warenkorb warenkorb = new Warenkorb();
 	
-	public Benutzer(){}
+	public Benutzer(){	}
 	
 	public Benutzer(String username, String passwort, Rolle rolle, Warenkorb warenkorb){
 		this.username = username;

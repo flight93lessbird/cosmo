@@ -67,13 +67,32 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 //		this.warenkorb.remove(produkt);
 //		addMessage(produkt.getTitel() + "wurde aus dem Warenkorb entfernt");
 //	}
-
-	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt){
+	public void changeStkZahl(Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
+		if (stkZahl > 0) {
+			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());
+			try {
+				this.utx.begin();
+				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
+					if (warenkorbItem.getP().getId().equals(item.getP().getId())) {
+						warenkorbItem.setStkZahl(stkZahl);
+						break;
+					}
+				}
+				warenkorb = this.em.merge(this.warenkorb);
+				this.em.persist(warenkorb);
+				this.utx.commit();
+			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
+					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+			}
+		}
+	}
+	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt, int stkZahl){
 		if (produkt != null){
 			if (loggedBenutzer != null){
-				addWarenkorbItemToWarenkorb(loggedBenutzer.getWarenkorb(), produkt);
+				addWarenkorbItemToWarenkorb(loggedBenutzer.getWarenkorb(), produkt, stkZahl);
 			}else if (warenkorb != null){
-				addWarenkorbItemToWarenkorb(warenkorb, produkt);
+				System.out.println("Kein Benutzer Warenkorb");
+				addWarenkorbItemToWarenkorb(warenkorb, produkt, stkZahl);
 			}
 		}else {
 			FacesContext context = FacesContext.getCurrentInstance();
@@ -83,6 +102,39 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 		return "warenkorb?faces-redirect=true";
 	}
+	
+	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt, int stkZahl){
+		if (stkZahl > 0) {
+			try {
+				this.utx.begin();
+				boolean isNewItem = true;
+				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
+					if (warenkorbItem.getP().getId().equals(produkt.getId())) {
+						stkZahl += warenkorbItem.getStkZahl();
+						warenkorbItem.setStkZahl(stkZahl);
+						isNewItem = false;
+						break;
+					}
+				}
+				
+				if (isNewItem) {
+					produkt = this.em.merge(produkt);
+					WarenkorbItem warenkorbItem = this.em.merge(new WarenkorbItem(stkZahl, produkt));
+					produkt.getWarenkorbItemList().add(warenkorbItem);
+					warenkorb.getWarenkorbItems().add(warenkorbItem);
+					warenkorbItem.setWarenkorb(warenkorb);
+					this.em.persist(produkt);
+				}
+				warenkorb = this.em.merge(this.warenkorb);
+				this.em.persist(warenkorb);
+				this.utx.commit();
+			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
+					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+			}
+		}
+		return "warenkorb?faces-redirect=true";
+	}
+
 
 	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(Benutzer loggedBenutzer){
 		if (loggedBenutzer != null) {
@@ -115,7 +167,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				this.utx.begin();
 				Produkt produkt = this.em.merge(warenkorbItem.getP());
 				warenkorbItem = this.em.merge(warenkorbItem);
-				warenkorb = this.em.merge(warenkorb);
+				warenkorb = this.em.merge(this.warenkorb);
 				produkt.getWarenkorbItemList().remove(warenkorbItem);
 				warenkorb.getWarenkorbItems().remove(warenkorbItem);
 				warenkorbItem.setP(null);
@@ -125,6 +177,10 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				this.em.remove(warenkorbItem);
 				this.em.flush();
 				this.utx.commit();
+				if (loggedBenutzer != null) {
+					loggedBenutzer.setWarenkorb(this.warenkorb);
+					System.out.println("WK zugeordnet: "+loggedBenutzer.getUsername());
+				}
 				return "warenkorb?faces-redirect=true";
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
 					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
@@ -134,81 +190,6 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 		return "Startseite?faces-redirect=true";
 	}
-
-	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt){
-		if (stkZahl > 0) {
-			try {
-				this.utx.begin();
-				boolean isNewItem = true;
-				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
-					if (warenkorbItem.getP().getId().equals(produkt.getId())) {
-						stkZahl = warenkorbItem.getStkZahl() + 1;
-						warenkorbItem.setStkZahl(stkZahl);
-						isNewItem = false;
-						break;
-					}
-				}
-				warenkorb = this.em.merge(warenkorb);
-				if (isNewItem) {
-					produkt = this.em.merge(produkt);
-					WarenkorbItem warenkorbItem = this.em.merge(new WarenkorbItem(stkZahl, produkt));
-					produkt.getWarenkorbItemList().add(warenkorbItem);
-					warenkorb.getWarenkorbItems().add(warenkorbItem);
-					warenkorbItem.setWarenkorb(warenkorb);
-					this.em.persist(produkt);
-				}
-				this.em.persist(warenkorb);
-				this.utx.commit();
-			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
-					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
-			}
-		}
-		return "warenkorb?faces-redirect=true";
-	}
-
-	public String toKundendatenOrZahlungsart(Benutzer loggedBenutzer, Produkt produkt){
-		if (loggedBenutzer != null) {
-			return "Kundendaten?faces-redirect=true";
-		}else{
-			return "Zahlungsart?faces-redirect=true";
-		}
-	}
-
-	public String toRegistrierenWarenkorb() {
-		warenkorb = new Warenkorb();
-		return "registrierenWarenkorb?faces-redirect=true";
-	}
-
-	public String toZahlungsart() {
-		warenkorb = new Warenkorb();
-		return "Zahlungsart?faces-redirect=true";
-	}
-
-	public String speichernRegWar() {
-		warenkorb = new Warenkorb();
-		return "Zahlungsart?faces-redirect=true";
-	}
-
-	public String abbrechenReg() {
-		warenkorb = new Warenkorb();
-		return "Kundendaten?faces-redirect=true";
-	}
-
-	public String abbrechenLog() {
-		warenkorb = new Warenkorb();
-		return "warenkorb?faces-redirect=true";
-	}
-
-	public String toKaufBestatigt() {
-		warenkorb = new Warenkorb();
-		return "kaufBestatigt?faces-redirect=true";
-	}
-
-	public String abbrechenZahl() {
-		warenkorb = new Warenkorb();
-		return "warenkorb?faces-redirect=true";
-	}
-
 	
 	/**Hier wird der Warenkorb versendet*/
 	public String senden() {

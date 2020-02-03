@@ -56,10 +56,13 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 				utx.begin();
 				Warenkorb warenkorb1 = new Warenkorb();
 				Warenkorb warenkorb2 = new Warenkorb();
+				Warenkorb warenkorb3 = new Warenkorb();
 				em.persist(warenkorb1);
 				em.persist(warenkorb2);
+				em.persist(warenkorb3);
 				em.persist(new Benutzer("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 				em.persist(new Benutzer("admin", "admin", Rolle.ADMIN, warenkorb2));
+				em.persist(new Benutzer("lena", "schoko", Rolle.KUNDE, warenkorb3));
 				utx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
