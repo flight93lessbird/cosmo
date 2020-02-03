@@ -186,6 +186,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	/**
 	 * Loescht einen Eintrag in der Produkt-Liste.
 	 */
+	// pddelete(Produkt produkt)
 	public String pddelete() {
 		merkeProdukt = pdList.getRowData();
 		try {
