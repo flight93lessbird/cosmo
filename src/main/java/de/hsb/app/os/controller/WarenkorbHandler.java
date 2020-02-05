@@ -13,6 +13,7 @@ import javax.faces.model.DataModelListener;
 import javax.persistence.Query;
 import javax.transaction.*;
 
+import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Benutzer;
 import de.hsb.app.os.model.Produkt;
 import de.hsb.app.os.model.Warenkorb;
@@ -67,6 +68,16 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 //		this.warenkorb.remove(produkt);
 //		addMessage(produkt.getTitel() + "wurde aus dem Warenkorb entfernt");
 //	}
+	public String checkWarenkorb(Benutzer benutzer) {
+		System.out.println("Checked WK");
+		if(benutzer != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()){
+			return "/os/warenkorb.xhtml";
+		} else if(!warenkorb.getWarenkorbItems().isEmpty()){
+			return "/os/warenkorb.xhtml";	
+		} else {
+			return "/os/warenkorbLeer.xhtml";
+		}
+	}
 	public void changeStkZahl(Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
 		if (stkZahl > 0) {
 			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());

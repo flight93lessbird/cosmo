@@ -67,7 +67,9 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.artklanzl}</f:facet>
-						<p:spinner id="basic" value="#{warenkorbItem.stkZahl}"/>
+						<h:outputLabel for="@next"/>
+						<p:spinner id="basic" min= "1" max = "99" size="1" 
+									value="#{warenkorbhd.getWarenkorb(loginHandler.benutzer).warenkorbItems.get(warenkorbItem.id).stkZahl}"/>
 					</h:column>
 
 					<h:column>
@@ -78,7 +80,6 @@
 					<h:column>
 						<f:facet name="header">#{msg.aktualisieren}</f:facet>
 						<p:commandButton
-								action="#{warenkorbhd.changeStkZahl(warenkorbhd.getWarenkorb(loginHandler.benutzer),warenkorbItem,warenkorbItem.stkZahl)}"
 								value="#{msg.aktualisieren}">
 							<p:ajax event="click" update="warenkorbTabelle"/>
 						</p:commandButton>
