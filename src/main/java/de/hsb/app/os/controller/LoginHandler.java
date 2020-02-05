@@ -63,7 +63,7 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 				em.persist(warenkorb3);
 				em.persist(new Benutzer("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 				em.persist(new Benutzer("admin", "admin", Rolle.ADMIN, warenkorb2));
-				em.persist(new Benutzer("lena", "schoko", Rolle.KUNDE, warenkorb3));
+				em.persist(new Benutzer("lena", "lena", Rolle.KUNDE, warenkorb3));
 				utx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
