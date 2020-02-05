@@ -1,11 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <link rel="stylesheet" href="resources/style.css" type="text/css" />
+    <title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <div id="header">
+            <ui:insert name="header">
+                <div class="logo">
+                    <a class="" href="/os/Startseite.xhtml"> <h:graphicImage
+                            value="resources/images/COS'MO.PNG" height="150px" width="150px" />
+                    </a> <a class="account" href="Logout.xhtml"><h:graphicImage
+                        value="resources/images/user.png" height="50px" width="50px" /></a>
+
+                    <a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
+                            value="resources/images/shopping-cart-of-checkered-design.png"
+                            height="50px" width="50px" /></a>
+                </div>
+
+
+
+                <div class="topnav">
+                    <a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+                    <a href="pflege.xhtml">#{msg.Pf}</a>
+                    <div class="search-container">
+                        <p:inputText type="text" placeholder="Suche" name="search"  />
+                    </div>
+                </div>
+            </ui:insert>
+        </div>
+
+
+        <div id="content">
+            <ui:insert name="content">
+                <h:form>
+                    <h1>#{msg.logout}</h1>
+                    <h:form id="form">
+
+                            <p:commandButton action="#{loginHandler.logout}" value="#{msg.logout}"
+                                             update="grid" />
+
+                        <br></br>
+                        <h2>#{msg.kdbearbeiten}</h2>
+                        <p:commandButton action="#{kdhandler.kundeBearbeiten}"
+                                         value="#{msg.bearbeiten}" immediate="true" />
+                        <br></br>
+                        <h2>#{msg.kdpwbearbeiten}</h2>
+                        <p:commandButton action="#{kdhandler.kundePwBearbeiten}"
+                                         value="#{msg.bearbeiten}" immediate="true" />
+                    </h:form>
+                </h:form>
+            </ui:insert>
+        </div>
+
+        <div class="footer">
+            <ul class="footermenu">
+                <li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
+                <li><a href="impressum.xhtml">#{msg.impressum}</a></li>
+                <li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
+            </ul>
+
+            <center>
+                <div class="contact">
+                    <div class="custom">
+                        Cosmostrasse 10<br /> 27472 Cosmostadt
+                    </div>
+                </div>
+
+                <div class="row copyright">
+                    <div class="col-lg-12">
+                        Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+                        | #{msg.title}
+                    </div>
+                </div>
+            </center>
+
+        </div>
+    </h:form>
+</h:body>
 </html>

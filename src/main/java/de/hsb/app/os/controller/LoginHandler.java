@@ -97,9 +97,9 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 
 				}
 				return null;
-		} 
+		}
 
-		
+
 	public void checkLoggedIn(ComponentSystemEvent cse) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (benutzer == null) {

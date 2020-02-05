@@ -202,6 +202,14 @@ public class KundenHandler {
 		return "benutzer?faces-redirect=true";
 	}
 
+    public String kundeBearbeiten() {
+        return "kundendatenBearbeiten?faces-redirect=true";
+    }
+
+    public String kundePwBearbeiten() {
+        return "passwortAendern?faces-redirect=true";
+    }
+
 	/* Getter und Setter */
 
 	public DataModel<Kunde> getKunden() {

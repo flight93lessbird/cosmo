@@ -7,6 +7,7 @@ import java.lang.String;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.model.ListDataModel;
 import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
@@ -28,15 +29,15 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	private Produkt merkeProdukt = new Produkt();
 
-	List<Produkt> produkte = new ArrayList<>();
+	private List<Produkt> produkte;
 
-	private DataModel<Produkt> pdList;
-	
+	private ListDataModel<Produkt> pdList;
+
 
 	@PostConstruct
 	public void init() {
 		if (this.findAll().isEmpty()) {
-			List<Produkt> produkte = new ArrayList<>();
+			produkte = new ArrayList<>();
 
 			// Create Duefte
 			produkte.add(new Produkt("Valentino", "Valentina",
@@ -81,6 +82,8 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 				this.save(produkt);
 			}
 
+            pdList = new ListDataModel<Produkt>();
+            pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
 		}
 	}
 
