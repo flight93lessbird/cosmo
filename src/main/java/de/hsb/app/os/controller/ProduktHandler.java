@@ -33,6 +33,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	private ListDataModel<Produkt> pdList;
 
+	/**Erstellung eines Datamodels aus der Klasse Produkt*/
+//	private DataModel<Produkt> pdlist = new ListDataModel<Produkt>();
+
 
 	@PostConstruct
 	public void init() {

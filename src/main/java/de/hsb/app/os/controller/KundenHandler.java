@@ -83,6 +83,18 @@ public class KundenHandler {
 		return "kunde?faces-redirect=true";
 	}
 
+    public String kdabbrechen() {
+        return "logout?faces-redirect=true";
+    }
+
+    public String kundeBearbeiten() {
+        return "kundendatenBearbeiten?faces-redirect=true";
+    }
+
+    public String kundePwBearbeiten() {
+        return "passwortAendern?faces-redirect=true";
+    }
+
 	public String formatDateDDMMYYYY(Date date) {
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
 	}
@@ -151,6 +163,20 @@ public class KundenHandler {
 		return "Startseite?faces-redirect=true";
 	}
 
+    public String kdspeichern() {
+        try {
+            utx.begin();
+            merkeKunde = em.merge(merkeKunde);
+            em.persist(merkeKunde);
+            kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+            utx.commit();
+        } catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+                | HeuristicRollbackException | SystemException | NotSupportedException e) {
+            e.printStackTrace();
+        }
+        return "logout?faces-redirect=true";
+    }
+
 	public String edit() {
 		merkeKunde = kunden.getRowData();
 		return "neuerKunde?faces-redirect=true";
@@ -202,13 +228,6 @@ public class KundenHandler {
 		return "benutzer?faces-redirect=true";
 	}
 
-    public String kundeBearbeiten() {
-        return "kundendatenBearbeiten?faces-redirect=true";
-    }
-
-    public String kundePwBearbeiten() {
-        return "passwortAendern?faces-redirect=true";
-    }
 
 	/* Getter und Setter */
 

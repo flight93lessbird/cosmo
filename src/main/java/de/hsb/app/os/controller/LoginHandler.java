@@ -69,7 +69,22 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 			}
 		}
 	}
-	
+
+
+	public String pwspeichern() {
+		try {
+			utx.begin();
+			user = em.merge(user);
+			em.persist(passwort);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "logout?faces-redirect=true";
+	}
+
 
 	/**Unsere Methode überprüft, ob die eingegebende Daten vorhanden sind oder nicht. 
 	 * Haben wir eine Übereinstimmung so werden wir eingeloggt, ansonsten erhalten wir eine Fehlermeldung.**/	
