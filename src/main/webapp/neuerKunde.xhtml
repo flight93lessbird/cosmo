@@ -63,7 +63,7 @@
 						<h:panelGroup>
 							<p:calendar id="geburtsdatum"
 								value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
-								navigator="true" showOn="button" pattern="dd.MM.yyyy"
+								navigator="true" showOn="button" pattern="dd.MM.yyyy" yearRange="c-70:c+50"
 								required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
 							<h:message styleClass="message" for="geburtsdatum" />
 						</h:panelGroup>

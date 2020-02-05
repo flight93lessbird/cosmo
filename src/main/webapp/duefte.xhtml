@@ -18,12 +18,15 @@
 				<div class="logo">
 					<a class="" href="/os/Startseite.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a> <a class="account" href="konto.xhtml"><h:graphicImage
-							value="resources/images/user.png" height="50px" width="50px" /></a>
+					</a>
 
-					<a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
-							value="resources/images/shopping-cart-of-checkered-design.png"
-							height="50px" width="50px" /></a>
+					<a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.kunde)}"><h:graphicImage
+					value="resources/images/user.png" height="50px" width="50px" /></a>
+
+					<a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+					value="resources/images/shopping-cart-of-checkered-design.png"
+					height="50px" width="50px" /></a>
+
 				</div>
 
 				<div class="topnav">

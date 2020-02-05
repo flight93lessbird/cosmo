@@ -87,6 +87,10 @@ public class KundenHandler {
         return "logout?faces-redirect=true";
     }
 
+	public String kreditbearbeiten() {
+		return "kreditkartendatenAendern?faces-redirect=true";
+	}
+
     public String kundeBearbeiten() {
         return "kundendatenBearbeiten?faces-redirect=true";
     }
