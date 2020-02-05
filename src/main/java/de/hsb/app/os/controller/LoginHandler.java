@@ -125,8 +125,8 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 		}
 	}
 
-	public String checkLoggedUser(Kunde kunde) {
-		if(kunde != null){
+	public String checkLoggedUser(Benutzer benutzer) {
+		if(benutzer != null){
 			return "/os/Logout.xhtml";
 		} else {
 			return "/os/konto.xhtml";
