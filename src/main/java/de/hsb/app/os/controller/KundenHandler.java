@@ -84,7 +84,7 @@ public class KundenHandler {
 	}
 
     public String kdabbrechen() {
-        return "logout?faces-redirect=true";
+        return "Logout?faces-redirect=true";
     }
 
     public String kundeBearbeiten() {
@@ -174,7 +174,7 @@ public class KundenHandler {
                 | HeuristicRollbackException | SystemException | NotSupportedException e) {
             e.printStackTrace();
         }
-        return "logout?faces-redirect=true";
+        return "Logout?faces-redirect=true";
     }
 
 	public String edit() {

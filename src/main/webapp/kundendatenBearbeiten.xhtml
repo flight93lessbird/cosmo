@@ -134,9 +134,9 @@
                     <h:message for="inhaber" styleClass="message" />
                 </h:panelGroup>
 
-                <h:commandButton action="#{kdhandler.kdabbrechen}"
+                <h:commandButton action="#{kdhandler.kdabbrechen()}"
                                  value="#{msg.abbrechen}" immediate="true" />
-                <h:commandButton action="#{kdhandler.kdspeichern}"
+                <h:commandButton action="#{kdhandler.kdspeichern()}"
                                  value="#{msg.speichern}" update="messages" />
 
             </h:panelGrid>
