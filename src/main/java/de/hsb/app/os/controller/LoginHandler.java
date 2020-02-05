@@ -123,6 +123,14 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 					"/konto.xhtml?faces-redirect=true");
 		}
 	}
+
+	public String checkLoggedUser(Benutzer benutzer) {
+		if(benutzer != null){
+			return "/os/Logout.xhtml";
+		} else {
+			return "/os/konto.xhtml";
+		}
+	}
 	
 	/**Lougout = der Benutzer wird von der Webanwendung abgemeldet und wird auf das konto.xhtml Seite weitergeleitet.**/
 	public String logout () {

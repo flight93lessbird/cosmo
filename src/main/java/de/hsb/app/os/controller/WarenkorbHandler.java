@@ -78,6 +78,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 			return "/os/warenkorbLeer.xhtml";
 		}
 	}
+
 	public void changeStkZahl(Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
 		if (stkZahl > 0) {
 			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());

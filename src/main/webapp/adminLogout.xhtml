@@ -16,9 +16,9 @@
         <div id="header">
             <ui:insert name="header">
                 <div class="logo">
-                    <a class="" href="/os/Startseite.xhtml"> <h:graphicImage
+                    <a class="" href="/os/admin.xhtml"> <h:graphicImage
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-                    </a> <a class="account" href="Logout.xhtml"><h:graphicImage
+                    </a> <a class="account" href="AdminLogout.xhtml"><h:graphicImage
                         value="resources/images/user.png" height="50px" width="50px" /></a>
 
                     <a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
@@ -29,14 +29,12 @@
 
 
                 <div class="topnav">
-                    <a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
-                    <a href="pflege.xhtml">#{msg.Pf}</a>
-                    <div class="search-container">
-                        <p:inputText type="text" placeholder="Suche" name="search"  />
-                    </div>
+                    <a href="admin.xhtml">#{msg.admseite}</a>
                 </div>
             </ui:insert>
         </div>
+
+
 
 
         <div id="content">
@@ -45,8 +43,7 @@
                     <h1>#{msg.logout}</h1>
                     <h:form id="form">
 
-                        <p:commandButton action="#{loginHandler.logout}" value="#{msg.logout}"
-                                         update="grid" />
+                        <p:commandButton action="#{loginHandler.logout}" value="#{msg.logout}" />
 
                     </h:form>
                 </h:form>
@@ -55,9 +52,7 @@
 
         <div class="footer">
             <ul class="footermenu">
-                <li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
-                <li><a href="impressum.xhtml">#{msg.impressum}</a></li>
-                <li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
+                <li><a></a></li>
             </ul>
 
             <center>
