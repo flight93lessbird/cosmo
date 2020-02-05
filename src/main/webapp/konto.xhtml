@@ -40,35 +40,38 @@
 			</ui:insert>
 		</div>
 
+	<div id="content">
+	<ui:insert name="content">
+	<h:form>
+		<h1>#{msg.login}</h1>
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+					 columns="2" headerClass="header" footerClass="footer">
 
-		<div id="content">
-			<ui:insert name="content">
-				<h:form class="box" action="konto.xhtml" method="post">
-					<h1>#{msg.login}</h1>
-					<h:form id="form">
+		<h:outputLabel for="username" value="#{msg.username}" />
+		<h:panelGroup>
+		<h:inputText id="username"
+					 value="#{kdhandler.merkeKunde.vorname}" required="true"
+					 requiredMessage="#{msg.eingabefehlt}">
+			<f:validateLength minimum="2" />
+		</h:inputText>
+		</h:panelGroup>
+		<h:outputLabel for="passwort" value="#{msg.passwort}" />
+		<h:panelGroup>
+			<p:password id="passwort"
+						 value="#{loginHandler.passwort}" required="true"
+						 requiredMessage="#{msg.eingabefehlt}" label="Password">
+			</p:password>
+		</h:panelGroup>
 
-						<p:messages autoUpdate="true" />
+			<h:commandButton action="#{loginHandler.login}"
+							 value="#{msg.login}" update="grid" />
 
-						<p:panelGrid id="grid" columns="2" cellpadding="5">
-							<f:facet name="header">#{msg.login}</f:facet>
-
-							<p:outputLabel value="#{msg.username}:" />
-							<p:inputText id="username" value="#{loginHandler.username}"
-										 required="true" label="Username">
-								<f:validateLength minimum="2" />
-							</p:inputText>
-
-							<p:outputLabel value="#{msg.passwort}:" for="password" />
-							<p:password id="password" value="#{loginHandler.passwort}"
-										required="true" label="Password">
-							</p:password>
-							<p:commandButton action="#{loginHandler.login}" value="#{msg.login}"
-											 update="grid" />
-						</p:panelGrid>
+		</h:panelGrid>
 
 						<br></br>
 						<h2>#{msg.nochknkd}</h2>
-						<p:commandButton action="#{mbos.toRegistrieren}"
+						<h:commandButton action="#{mbos.toRegistrieren}"
 										 value="#{msg.registrieren}" immediate="true" />
 					</h:form>
 
@@ -77,9 +80,10 @@
 					<p:dialog modal="true" widgetVar="statusDialog" header="Status"
 							  draggable="false" closable="false">
 					</p:dialog>
-				</h:form>
 			</ui:insert>
 		</div>
+	</h:form>
+
 	
 	<div class="footer">
 			<ul class="footermenu">
@@ -104,6 +108,5 @@
 			</center>
 			
 		</div>
-	</h:form>
 </h:body>
 </html>

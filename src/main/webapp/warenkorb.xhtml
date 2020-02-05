@@ -64,7 +64,8 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.artmenge}</f:facet>
-						<h:outputText value="#{warenkorbItem.p.menge.concat(msg[warenkorbItem.p.mengentyp])}" />
+						<h:outputText value="#{warenkorbItem.p.menge} #{warenkorbItem.p.mengentyp.label}" />
+<!--						<h:outputText value="#{warenkorbItem.p.menge.concat(msg[warenkorbItem.p.mengentyp])}"/> -->
 					</h:column>
 
 					<h:column>

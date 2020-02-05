@@ -40,40 +40,53 @@
 				</div>
 			</ui:insert>
 		</div>
-	
-	
-	<div id="content">
-		<ui:insert name="content">
+
+
+		<div id="content">
+			<ui:insert name="content">
 				<h:form>
-					<p:messages id="messages" showDetail="true" autoUpdate="true" />
-					<p:growl id="growl" showDetail="true" />
-					<center>
-						<p:panelGrid id="grid" columns="2">
-							<f:facet name="header">#{msg.registrierung}</f:facet>
+					<h1>#{msg.registrierung}</h1>
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+								 columns="2" headerClass="header" footerClass="footer">
 
-							<p:outputLabel value="#{msg.username}:" for="username" />
-							<p:inputText id="username" required="true"
-								value="#{mbos.merkeBenutzer.username}" />
+						<h:outputLabel for="username" value="#{msg.username}" />
+						<h:panelGroup>
+							<h:inputText id="username"
+										 value="#{mbos.merkeBenutzer.username}" required="true"
+										 requiredMessage="#{msg.eingabefehlt}" />
+						</h:panelGroup>
 
-							<p:outputLabel value="#{msg.passwort}:" for="pw1" />
-							<p:password id="pw1" value="#{mbos.merkeBenutzer.passwort}"
-								match="pw2" label="Password 1" required="true" />
+						<h:outputLabel for="passwort1" value="#{msg.passwort}" />
+						<h:panelGroup>
+							<p:password id="passwort1"
+										 value="#{mbos.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
+										 requiredMessage="#{msg.eingabefehlt}">
+							</p:password>
+						</h:panelGroup>
 
-							<p:outputLabel value="#{msg.passwortwdh}:" for="pw2" />
-							<p:password id="pw2" value="#{mbos.merkeBenutzer.passwort}"
-								label="Password 2" required="true" requiredMessage="true">
+						<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
+						<h:panelGroup>
+							<p:password id="passwort2"
+										 value="#{mbos.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
+						</h:panelGroup>
 
-							<p:commandButton value="#{msg.zuruck}" icon="ui-icon-carat-1-w"
-								action="#{mbos.toLogin}" immediate="true" />
-							<p:commandButton id="registrieren" update="grid"
-								value="#{msg.registrieren}" action="#{mbos.benutzerRegistrieren}" />
-						</p:panelGrid>
-					</center>
+						<h:commandButton value="#{msg.zuruck}" icon="ui-icon-carat-1-w"
+										 action="#{mbos.toLogin}" immediate="true" />
+						<h:commandButton id="registrieren" update="grid"
+										 value="#{msg.registrieren}" action="#{mbos.benutzerRegistrieren}" />
+
+					</h:panelGrid>
+
 				</h:form>
-		</ui:insert>
-	</div>
+
+			</ui:insert>
+		</div>
+	</h:form>
+
+
 	
 	<div class="footer">
 			<ul class="footermenu">
@@ -98,6 +111,5 @@
 			</center>
 			
 		</div>
-	</h:form>
 </h:body>
 </html>
