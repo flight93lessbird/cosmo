@@ -99,6 +99,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 	}
 	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt, int stkZahl){
+		System.out.println("Produkt: " + produkt.getTitel() + " Stückzahl: " + stkZahl);
 		if (produkt != null){
 			if (loggedBenutzer != null){
 				addWarenkorbItemToWarenkorb(loggedBenutzer.getWarenkorb(), produkt, stkZahl);
@@ -122,7 +123,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				boolean isNewItem = true;
 				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
 					if (warenkorbItem.getP().getId().equals(produkt.getId())) {
-						stkZahl += warenkorbItem.getStkZahl();
+						stkZahl = warenkorbItem.getStkZahl();
 						warenkorbItem.setStkZahl(stkZahl);
 						isNewItem = false;
 						break;

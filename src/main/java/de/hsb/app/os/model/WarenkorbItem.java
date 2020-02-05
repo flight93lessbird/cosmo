@@ -1,5 +1,7 @@
 package de.hsb.app.os.model;
 
+import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.*;
 
 /*
@@ -8,6 +10,7 @@ import javax.persistence.*;
  */
 @NamedQuery(name = "SelectWarenkorbItem", query = "Select wki from WarenkorbItem wki")
 @Entity
+
 public class WarenkorbItem {
 	@Id
 	@GeneratedValue
@@ -38,11 +41,17 @@ public class WarenkorbItem {
 	public void setId(Integer id) {
 		Id = id;
 	}
-
+	/**
+	 * get stkZahl value
+	 * @return int
+	 */
 	public int getStkZahl() {
 		return stkZahl;
 	}
-
+	/**
+	 * set stkZahl value
+	 * @param spinnerValue
+	 */
 	public void setStkZahl(int stkZahl) {
 		this.stkZahl = stkZahl;
 	}

@@ -69,20 +69,17 @@
 						<f:facet name="header">#{msg.artklanzl}</f:facet>
 						<h:outputLabel for="@next"/>
 						<p:spinner id="basic" min= "1" max = "99" size="1" 
-									value="#{warenkorbhd.getWarenkorb(loginHandler.benutzer).warenkorbItems.get(warenkorbItem.id).stkZahl}"/>
+									value="#{warenkorbItem.stkZahl}">
+							<p:ajax listener="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, warenkorbItem.p, this.val())}" 
+            						update="ajaxSpinnerValue" process="@this" />
+						</p:spinner>
+						<h:outputText id="ajaxSpinnerValue" value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.artgesamt}</f:facet>
 						<h:outputText
 								value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}"/>
-					</h:column>
-					<h:column>
-						<f:facet name="header">#{msg.aktualisieren}</f:facet>
-						<p:commandButton
-								value="#{msg.aktualisieren}">
-							<p:ajax event="click" update="warenkorbTabelle"/>
-						</p:commandButton>
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
