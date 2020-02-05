@@ -19,10 +19,12 @@
                 <div class="logo">
                     <a class="" href="/os/Startseite.xhtml"> <h:graphicImage
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-                    </a> <a class="account" href="Logout.xhtml"><h:graphicImage
-                        value="resources/images/user.png" height="50px" width="50px" /></a>
+                    </a>
 
-                    <a class="account" href="warenkorbLeer.xhtml"><h:graphicImage
+                    <a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.kunde)}"><h:graphicImage
+                            value="resources/images/user.png" height="50px" width="50px" /></a>
+
+                    <a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
                             value="resources/images/shopping-cart-of-checkered-design.png"
                             height="50px" width="50px" /></a>
                 </div>
@@ -73,7 +75,7 @@
                 <h:panelGroup>
                     <p:calendar id="geburtsdatum"
                                 value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
-                                navigator="true" showOn="button" pattern="dd.MM.yyyy"
+                                navigator="true" showOn="button" pattern="dd.MM.yyyy" yearRange="c-70:c+50"
                                 required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
                     <h:message styleClass="message" for="geburtsdatum" />
                 </h:panelGroup>
@@ -98,6 +100,7 @@
                 </h:panelGroup>
 
 
+<<<<<<< HEAD
                 <h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
                 <h:panelGroup>
                     <h:selectOneMenu id="kreditkarten"
@@ -135,6 +138,9 @@
                 </h:panelGroup>
 
                 <h:commandButton action="#{kdhandler.kdabbrechen()}"
+=======
+                <h:commandButton action="#{kdhandler.kdabbrechen}"
+>>>>>>> Login-Logout
                                  value="#{msg.abbrechen}" immediate="true" />
                 <h:commandButton action="#{kdhandler.kdspeichern()}"
                                  value="#{msg.speichern}" update="messages" />

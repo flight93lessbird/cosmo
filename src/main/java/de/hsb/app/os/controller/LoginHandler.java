@@ -25,6 +25,7 @@ import javax.transaction.UserTransaction;
 
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Benutzer;
+import de.hsb.app.os.model.Kunde;
 import de.hsb.app.os.model.Warenkorb;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
@@ -124,8 +125,8 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 		}
 	}
 
-	public String checkLoggedUser(Benutzer benutzer) {
-		if(benutzer != null){
+	public String checkLoggedUser(Kunde kunde) {
+		if(kunde != null){
 			return "/os/Logout.xhtml";
 		} else {
 			return "/os/konto.xhtml";
