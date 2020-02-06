@@ -51,7 +51,7 @@
 		<h:outputLabel for="username" value="#{msg.username}" />
 		<h:panelGroup>
 		<h:inputText id="username"
-					 value="#{kdhandler.merkeKunde.vorname}" required="true"
+					 value="#{loginHandler.username}" required="true"
 					 requiredMessage="#{msg.eingabefehlt}">
 			<f:validateLength minimum="2" />
 		</h:inputText>
