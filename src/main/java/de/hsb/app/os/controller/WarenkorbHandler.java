@@ -139,7 +139,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 					produkt.getWarenkorbItemList().add(warenkorbItem);
 					warenkorb.getWarenkorbItems().add(warenkorbItem);
 					warenkorbItem.setWarenkorb(warenkorb);
-					this.em.persist(produkt);
+//					this.em.persist(produkt);
 				}
 				warenkorb = this.em.merge(this.warenkorb);
 				this.em.persist(warenkorb);
@@ -164,7 +164,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				return new ArrayList<>();
 			}
 		}
-		return new ArrayList<>();
+		return warenkorb.getWarenkorbItems();
 	}
 
 	public String computeTotalPrice(String preisString, Integer stkZahl){
