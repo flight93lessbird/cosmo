@@ -16,15 +16,16 @@
 
 		<div id="header">
 			<ui:insert name="header">
+			<ui:include src="/kunden.xhtml" />
 				<div class="logo">
-					<a class="logo" href="/os/Startseite.xhtml"> <h:graphicImage
+					<a class="logo" href="/os/startseite.xhtml"> <h:graphicImage
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
 
 					</a> <a class="account"
-						href="#{loginHandler.checkLoggedUser(loginHandler.benutzer)}"><h:graphicImage
+						href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" />
-					</a> <a>#{loginHandler.userLoginText()}</a> <a class="account"
-						href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+					</a> <a>#{userHandler.userLoginText()}</a> <a class="account"
+						href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
 							value="resources/images/shopping-cart-of-checkered-design.png"
 							height="50px" width="50px" /></a>
 
@@ -105,7 +106,7 @@
 
 				<div class="row copyright">
 					<div class="col-lg-12">
-						Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+						Copyright &#169; 2019 | <a href="startseite.xhtml">www.Cosmo.de</a>
 						| #{msg.title}
 					</div>
 				</div>

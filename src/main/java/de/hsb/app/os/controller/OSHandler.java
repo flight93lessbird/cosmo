@@ -49,30 +49,6 @@ public class OSHandler {
 		return "kaufBestatigt?faces-redirect=true";
 	}
 
-	public String toLogin() {
-		return "konto?faces-redirect=true";
-	}
-	
-	public String indenWarenkorb() {
-		return "warenkorb?faces-redirect=true";
-	}
-
-	public String weiterShoppen() {
-		return "Startseite?faces-redirect=true";
-	}
-	
-	public String abbrechen() {
-		return "konto?faces-redirect=true";
-	}
-	
-	public String toKunden() {
-		return "kunde?faces-redirect=true";
-	}
-
-	public String toProdukt() {
-		return "produkte?faces-redirect=true";
-	}
-
 	public String benutzerRegistrieren() {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
