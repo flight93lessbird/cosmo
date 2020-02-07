@@ -42,7 +42,7 @@
                 <p:ajax process="@this" />
             </p:spinner>
             <p:commandButton
-                    action="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, produktHandler.merkeProdukt, warenkorbhd.stkZahl)}"
+                    action="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.benutzer, produktHandler.merkeProdukt, warenkorbhd.stkZahl)}"
                     value="#{msg.indenwarnkorb}">
             </p:commandButton>
 

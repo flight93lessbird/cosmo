@@ -35,7 +35,7 @@
 		<div id="content">
 			<ui:insert name="content">
 			
-				<h:dataTable var="kunde" value="#{kdhandler.kunden}"
+				<h:dataTable var="kunde" value="#{userHandler.kunden}"
 					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.kunden}</f:facet>
 
@@ -58,37 +58,37 @@
 						<div align="center">
 							<f:facet name="header">#{msg.geburtsdatum}</f:facet>
 							<h:outputText
-								value="#{kdhandler.formatDateDDMMYYYY(kunde.geburtsdatum)}" />
+								value="#{userHandler.formatDateDDMMYYYY(kunde.geburtsdatum)}" />
 						</div>
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.anschrift}</f:facet>
-						<h:commandButton action="#{kdhandler.editAdresse}"
+						<h:commandButton action="#{userHandler.editAdresse}"
 							value="#{msg.anschrift}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.kreditkarte}</f:facet>
-						<h:commandButton action="#{kdhandler.editKreditkarte}"
+						<h:commandButton action="#{userHandler.editKreditkarte}"
 							value="#{msg.kreditkarte}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton action="#{kdhandler.delete}"
+						<h:commandButton action="#{userHandler.delete}"
 							value="#{msg.loeschen}" />
 					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton action="#{kdhandler.edit}"
+						<h:commandButton action="#{userHandler.edit}"
 							value="#{msg.bearbeiten}" />
 					</h:column>
 
 				</h:dataTable>
 
-				<h:commandButton action="#{kdhandler.neu}"
+				<h:commandButton action="#{userHandler.neu}"
 					value="#{msg.neu} #{msg.kunde}" />
 			</ui:insert>
 		</div>

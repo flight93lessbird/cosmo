@@ -350,7 +350,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		@SuppressWarnings("unchecked")
 		List<Benutzer> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
-		if (user.size() == 1) {
+		if (user.size() > 0) {
 			benutzer = user.get(0);
 			if (benutzer.getRolle() == Rolle.ADMIN) {
 				return "/admin.xhtml";

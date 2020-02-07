@@ -35,19 +35,19 @@
 				<h:form>
 					<h1>#{msg.kkhinzbear}</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" />
-					<h:panelGrid var="kreditkarte" value="#{kdhandler.kunden}"
+					<h:panelGrid var="kreditkarte" value="#{userHandler.kunden}"
 								 columns="2" headerclass="header" footerClass="footer">
 						<h:outputLabel value="#{msg.kunde}:" for="kunden" />
 						<h:panelGroup>
 							<h:outputLabel id="kunden"
-										   value="#{kdhandler.merkeKunde.vorname.concat(' ').concat(kdhandler.merkeKunde.nachname)}" />
+										   value="#{userHandler.merkeKunde.vorname.concat(' ').concat(userHandler.merkeKunde.nachname)}" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
 						<h:panelGroup>
 							<h:selectOneMenu id="kreditkarten"
-											 value="#{kdhandler.merkeKreditkarte.typ}">
+											 value="#{userHandler.merkeKreditkarte.typ}">
 								<f:selectItems var="form"
-											   value="#{kdhandler.kreditkartentypValues}" itemValue="#{form}"
+											   value="#{userHandler.kreditkartentypValues}" itemValue="#{form}"
 											   itemLabel="#{form.label}" />
 							</h:selectOneMenu>
 						</h:panelGroup>
@@ -55,7 +55,7 @@
 						</h:outputLabel>
 						<h:panelGroup>
 							<h:inputText id="nummer"
-										 value="#{kdhandler.merkeKreditkarte.nummer}" required="true"
+										 value="#{userHandler.merkeKreditkarte.nummer}" required="true"
 										 requiredMessage="#{msg.eingabefehlt}.">
 								<f:converter converterId="kreditkartenConverter" />
 								<f:validator validatorId="kreditkartenValidator" />
@@ -65,7 +65,7 @@
 									   for="gueltigBis" />
 						<h:panelGroup>
 							<p:calendar id="gueltigBis"
-										value="#{kdhandler.merkeKreditkarte.gueltigBis}" mode="popup"
+										value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
 										navigator="true" showOn="button" pattern="MM.yy" required="true"
 										requiredMessage="#{msg.gueltigkdatumfehlt}." />
 							<h:message for="gueltigBis" styleClass="message" />
@@ -73,13 +73,13 @@
 						<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
 						<h:panelGroup>
 							<h:inputText id="inhaber"
-										 value="#{kdhandler.merkeKreditkarte.inhaber}" required="true"
+										 value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
 										 requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="inhaber" styleClass="message" />
 						</h:panelGroup>
-						<h:commandButton action="#{kdhandler.abbrechen}"
+						<h:commandButton action="#{userHandler.abbrechen}"
 										 value="#{msg.abbrechen}" immediate="true" />
-						<h:commandButton action="#{kdhandler.kreditkarteSpeichern}"
+						<h:commandButton action="#{userHandler.kreditkarteSpeichern}"
 										 value="#{msg.speichern}" update="messages" />
 
 					</h:panelGrid>
