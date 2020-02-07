@@ -12,6 +12,7 @@ import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -28,6 +29,8 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
+import org.primefaces.push.annotation.Singleton;
+
 import de.hsb.app.os.enumuration.Anrede;
 import de.hsb.app.os.enumuration.Kreditkartentyp;
 import de.hsb.app.os.enumuration.Rolle;
@@ -39,7 +42,7 @@ import de.hsb.app.os.model.Warenkorb;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
 @ManagedBean(name = "userHandler")
-@SessionScoped
+@ApplicationScoped
 public class UserHandler extends AbstractCrudRepository<Benutzer> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -73,11 +76,12 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	 */
 
 	@PostConstruct
+	@javax.inject.Singleton
 	public void init() {
 
 		try {
 			utx.begin();
-
+			em.clear();
 			/*
 			 * init aus LoginHandler
 			 */
@@ -90,7 +94,8 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			em.persist(new Benutzer("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 			em.persist(new Benutzer("admin", "admin", Rolle.ADMIN, warenkorb2));
 			em.persist(new Benutzer("lena", "lena", Rolle.KUNDE, warenkorb3));
-
+			user = new ListDataModel<Benutzer>();
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			/*
 			 * init aus KundenHAndler
 			 */
@@ -350,7 +355,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			if (benutzer.getRolle() == Rolle.ADMIN) {
 				return "/admin.xhtml";
 			} else {
-				return "/Startseite.xhtml?faces-redirect=true";
+				return "/startseite.xhtml?faces-redirect=true";
 			}
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -394,15 +399,15 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (benutzer == null) {
 			context.getApplication().getNavigationHandler().handleNavigation(context, null,
-					"/konto.xhtml?faces-redirect=true");
+					"/login.xhtml?faces-redirect=true");
 		}
 	}
 
 	public String checkLoggedUser(Benutzer benutzer) {
 		if (benutzer != null) {
-			return "/os/Logout.xhtml";
+			return "/os/logout.xhtml";
 		} else {
-			return "/os/konto.xhtml";
+			return "/os/login.xhtml";
 		}
 	}
 
