@@ -72,7 +72,7 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 	}
 	public String userLoginText() {
 		if(benutzer == null)
-			return "Bitte melde dich an oder log dich ein.";
+			return " ";
 		else
 			return "Hallo " + benutzer.getUsername();
 	}
