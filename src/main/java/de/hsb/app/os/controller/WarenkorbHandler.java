@@ -200,11 +200,11 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				return "warenkorb?faces-redirect=true";
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
 					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
-				return "startseite?faces-redirect=true";
+				return "Startseite?faces-redirect=true";
 			}
 
 		}
-		return "startseite?faces-redirect=true";
+		return "Startseite?faces-redirect=true";
 	}
 
 

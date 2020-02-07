@@ -51,16 +51,16 @@
 
                         <br/>
                         <h2>#{msg.nochknkdWarenkorb}</h2>
-                        <h:commandButton action="#{warenkorbhd.toRegWarenkorb}"
+                        <h:commandButton action="#{pageHandler.toRegistrierenWarenkorb()}"
                                          value="#{msg.registrieren}" immediate="true" />
 
                         <br/><br/>
                         <h2>#{msg.gast}</h2>
-                        <h:commandButton action="#{warenkorbhd.toUeberpruefung}"
+                        <h:commandButton action="#{pageHandler.toKundendatenUeberpruefung()}"
                                  value="#{msg.gastBn}" immediate="true" />
 
                          <br/><br/><br/>
-                        <h:commandButton action="#{warenkorbhd.abbrechenLog}" value="#{msg.abbrechen}"/>
+                        <h:commandButton action="#{pageHandler.toStartseite()}" value="#{msg.abbrechen}"/>
 
                 </h:form>
             </ui:insert>

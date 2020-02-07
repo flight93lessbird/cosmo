@@ -30,17 +30,17 @@
 
                         <br></br>
                         <h2>#{msg.kdbearbeiten}</h2>
-                        <p:commandButton action="#{userHandler.kundeBearbeiten}"
+                        <p:commandButton action="#{pageHandler.toKundendatenBearbeiten()}"
                                          value="#{msg.bearbeiten}" immediate="true" />
 
                         <br></br>
                         <h2>#{msg.kdpwbearbeiten}</h2>
-                        <p:commandButton action="#{userHandler.kundePwBearbeiten}"
+                        <p:commandButton action="#{pageHandler.toPasswortAendern()}"
                                          value="#{msg.bearbeiten}" immediate="true" />
 
                         <br></br>
                         <h2>#{msg.kreditbearbeiten}</h2>
-                        <p:commandButton action="#{userHandler.kreditbearbeiten}"
+                        <p:commandButton action="#{pageHandler.toKreditkartendatenAendern()}"
                                          value="#{msg.bearbeiten}" immediate="true" />
                     </h:form>
                 </h:form>

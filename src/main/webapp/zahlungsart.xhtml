@@ -29,7 +29,7 @@
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:outputText
                                     value="Hier kann man auch Rechnug bezahlen" />
-                            <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
+                            <h:commandButton action="#{pageHandler.toKaufBestatigt()}"
                                              value="#{msg.speichern}" />
                         </h:panelGrid>
                     </p:tab>
@@ -85,9 +85,9 @@
                                         <h:message for="inhaber" styleClass="message" />
                                     </h:panelGroup>
                                     <div>
-                                        <h:commandButton action="#{warenkorbhd.abbrechenZahl}"
+                                        <h:commandButton action="#{pageHandler.toStartseite()}"
                                                          value="#{msg.abbrechen}" />
-                                        <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
+                                        <h:commandButton action="#{pageHandler.toKaufBestatigt()}"
                                                          value="#{msg.speichern}" />
                                     </div>
                                 </h:panelGrid>

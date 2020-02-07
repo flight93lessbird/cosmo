@@ -57,7 +57,7 @@
 					<br></br>
 					<h:commandButton id="auswählen" value="#{msg.quitdruck}"
 						onclick="javascript:window.print()" icon="ui-icon-search" />
-					<h:commandButton action="#{mbos.weiterShoppen}"
+					<h:commandButton action="#{pageHandler.toStartseite()}"
 									 value="#{msg.weitershoppen}" update="messages" />
 				</div>
 			</ui:insert>

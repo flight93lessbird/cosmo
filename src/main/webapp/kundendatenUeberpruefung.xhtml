@@ -85,9 +85,9 @@
                                          value="#{userHandler.merkeAdresse.ort}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}."/>
                         </h:panelGroup>
-                        <h:commandButton action="#{warenkorbhd.abbrechenkdue}"
+                        <h:commandButton action="#{pageHandler.toStartseite()}"
                                          value="#{msg.abbrechen}" immediate="true" />
-                        <h:commandButton action="#{warenkorbhd.speichernwk}"
+                        <h:commandButton action="#{pageHandler.toStartseite()}"
                                          value="#{msg.speichern}" update="messages" />
                     </h:panelGrid>
                 </h:form>

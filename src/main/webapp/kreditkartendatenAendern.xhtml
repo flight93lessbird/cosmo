@@ -65,7 +65,7 @@
                             <h:message for="inhaber" styleClass="message" />
                         </h:panelGroup>
 
-                        <h:commandButton action="#{userHandler.kdabbrechen}"
+                        <h:commandButton action="#{pageHandler.toStartseite()}"
                                          value="#{msg.abbrechen}" immediate="true" />
                         <h:commandButton action="#{userHandler.kdspeichern}"
                                          value="#{msg.speichern}" update="messages" />

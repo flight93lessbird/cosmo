@@ -59,7 +59,7 @@
 							<h:inputText id="ort" required="true"
 								value="#{userHandler.merkeAdresse.ort}" />
 						</h:panelGroup>
-						<h:commandButton action="#{userHandler.abbrechen}"
+						<h:commandButton action="#{pageHandler.toKundendatenBearbeiten()}"
 										 value="#{msg.abbrechen}" immediate="true" />
 						<h:commandButton action="#{userHandler.speichern}"
 							value="#{msg.speichern}" update="messages" />

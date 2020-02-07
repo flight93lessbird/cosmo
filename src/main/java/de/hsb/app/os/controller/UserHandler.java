@@ -42,7 +42,7 @@ import de.hsb.app.os.model.Warenkorb;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
 @ManagedBean(name = "userHandler")
-@ApplicationScoped
+@SessionScoped
 public class UserHandler extends AbstractCrudRepository<Benutzer> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -191,7 +191,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "startseite?faces-redirect=true";
+		return "Startseite?faces-redirect=true";
 	}
 
 	public String speichernWk() {
@@ -351,12 +351,12 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		@SuppressWarnings("unchecked")
 		List<Benutzer> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
-		if (user.size() > 0) {
+		if (user.size() > 0 && user != null) {
 			benutzer = user.get(0);
 			if (benutzer.getRolle() == Rolle.ADMIN) {
 				return "/admin.xhtml";
 			} else {
-				return "/startseite.xhtml?faces-redirect=true";
+				return "/Startseite.xhtml?faces-redirect=true";
 			}
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,

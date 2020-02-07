@@ -19,53 +19,50 @@
 			</ui:insert>
 		</div>
 
-	<div id="content">
-	<ui:insert name="content">
-	<h:form>
-		<h1>#{msg.login}</h1>
-		<p:growl id="growl" showDetail="true" sticky="true" />
-		<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
-					 columns="2" headerClass="header" footerClass="footer">
+		<div id="content">
+			<ui:insert name="content">
+				<h:form>
+					<h1>#{msg.login}</h1>
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<h:panelGrid var="benutzer" value="#{userHandler.benutzer}"
+						columns="2" headerClass="header" footerClass="footer">
 
-		<h:outputLabel for="username" value="#{msg.username}" />
-		<h:panelGroup>
-		<h:inputText id="username"
-					 value="#{userHandler.username}" required="true"
-					 requiredMessage="#{msg.eingabefehlt}">
-			<f:validateLength minimum="2" />
-		</h:inputText>
-		</h:panelGroup>
-		<h:outputLabel for="passwort" value="#{msg.passwort}" />
-		<h:panelGroup>
-			<p:password id="passwort"
-						 value="#{userHandler.passwort}" required="true"
-						 requiredMessage="#{msg.eingabefehlt}" label="Password">
-			</p:password>
-		</h:panelGroup>
+						<h:outputLabel for="username" value="#{msg.username}" />
+						<h:panelGroup>
+							<h:inputText id="username" value="#{userHandler.username}"
+								required="true" requiredMessage="#{msg.eingabefehlt}">
+								<f:validateLength minimum="2" />
+							</h:inputText>
+						</h:panelGroup>
+						<h:outputLabel for="passwort" value="#{msg.passwort}" />
+						<h:panelGroup>
+							<p:password id="passwort" value="#{userHandler.passwort}"
+								required="true" requiredMessage="#{msg.eingabefehlt}"
+								label="Password">
+							</p:password>
+						</h:panelGroup>
 
-			<h:commandButton action="#{userHandler.login}"
-							 value="#{msg.login}" update="grid" />
+						<h:commandButton action="#{userHandler.login}"
+							value="#{msg.login}" update="grid" />
 
-		</h:panelGrid>
+					</h:panelGrid>
 
-						<br></br>
-						<h2>#{msg.nochknkd}</h2>
-						<h:commandButton action="#{userHandler.toRegistrieren}"
-										 value="#{msg.registrieren}" immediate="true" />
-					</h:form>
+					<br></br>
+					<h2>#{msg.nochknkd}</h2>
+					<h:commandButton action="#{userHandler.toRegistrieren}"
+						value="#{msg.registrieren}" immediate="true" />
+				</h:form>
 
-					<p:ajaxStatus onstart="PF('statusDialog').show();"
-								  onsuccess="PF('statusDialog').hide();" />
-					<p:dialog modal="true" widgetVar="statusDialog" header="Status"
-							  draggable="false" closable="false">
-					</p:dialog>
+				<p:ajaxStatus onstart="PF('statusDialog').show();"
+					onsuccess="PF('statusDialog').hide();" />
+				<p:dialog modal="true" widgetVar="statusDialog" header="Status"
+					draggable="false" closable="false">
+				</p:dialog>
 			</ui:insert>
 		</div>
+		<div class="footer">
+			<ui:include src="/footer.xhtml" />
+		</div>
 	</h:form>
-
-	
-	<div class="footer">
-		<ui:include src="/footer.xhtml" />
-	</div>
 </h:body>
 </html>

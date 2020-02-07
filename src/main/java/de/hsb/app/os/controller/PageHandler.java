@@ -15,7 +15,7 @@ public class PageHandler {
 	}
 
 	public String toStartseite() {
-		return "startseite?faces-redirect=true";
+		return "Startseite?faces-redirect=true";
 	}
 
 	public String toLogin() {

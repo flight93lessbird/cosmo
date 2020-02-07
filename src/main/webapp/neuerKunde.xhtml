@@ -68,7 +68,7 @@
 							<h:message styleClass="message" for="geburtsdatum" />
 						</h:panelGroup>
 
-						<h:commandButton action="#{userHandler.abbrechen}"
+						<h:commandButton action="#{pageHandler.toKunden()}"
 										 value="#{msg.abbrechen}" immediate="true" />
 						<h:commandButton action="#{userHandler.speichern}"
 							value="#{msg.speichern}" update="messages" />

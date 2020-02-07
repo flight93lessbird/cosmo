@@ -77,7 +77,7 @@
 										 requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="inhaber" styleClass="message" />
 						</h:panelGroup>
-						<h:commandButton action="#{userHandler.abbrechen}"
+						<h:commandButton action="#{pageHandler.toKundendatenBearbeiten()}"
 										 value="#{msg.abbrechen}" immediate="true" />
 						<h:commandButton action="#{userHandler.kreditkarteSpeichern}"
 										 value="#{msg.speichern}" update="messages" />
