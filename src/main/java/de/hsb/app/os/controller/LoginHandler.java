@@ -103,7 +103,7 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 					if(benutzer.getRolle() == Rolle.ADMIN){
 						return "/admin.xhtml";}
 					else {
-						return "/startseiteKunde.xhtml?faces-redirect=true";
+						return "/Startseite.xhtml?faces-redirect=true";
 					}					
 				} else {
 					 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Du hast einen falschen Benutzernamen "
