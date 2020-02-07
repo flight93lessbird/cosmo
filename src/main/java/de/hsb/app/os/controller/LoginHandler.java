@@ -115,6 +115,30 @@ public class LoginHandler extends AbstractCrudRepository<Benutzer> implements Se
 				return null;
 		}
 
+// Warenkorb
+	public String WkLogin() {
+		Query query = em.createQuery("Select u from Benutzer u " +
+				"where u.username = :username and u.passwort = :passwort ");
+		query.setParameter("username", username);
+		query.setParameter("passwort", passwort);
+
+		@SuppressWarnings("unchecked")
+		List<Benutzer> user = query.getResultList();
+		System.out.println("Größe von userList: " + user.size());
+		if (user.size() == 1) {
+			benutzer = user.get(0);
+			if(benutzer.getRolle() == Rolle.ADMIN){
+				return "/admin?faces-redirect=true";}
+			else {
+				return "/kundendatenUeberpruefung?faces-redirect=true";
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Du hast einen falschen Benutzernamen "
+					+ "oder ein falsches Kennwort eingegeben."
+					+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)", passwort));
+		}
+		return null;
+	}
 
 	public void checkLoggedIn(ComponentSystemEvent cse) {
 		FacesContext context = FacesContext.getCurrentInstance();

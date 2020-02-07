@@ -41,44 +41,48 @@
         </div>
 
 
-        <div id="content">
-            <ui:insert name="content">
-                <h:form class="box" action="konto.xhtml" method="post">
-                    <h1>#{msg.loginWarenkorb}</h1>
-                    <h:form id="form">
+    <div id="content">
+        <ui:insert name="content">
+            <h:form>
+             <h1>#{msg.loginWarenkorb}</h1>
+                <p:growl id="growl" showDetail="true" sticky="true" />
+                <h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+                     columns="2" headerClass="header" footerClass="footer">
 
-                        <p:messages autoUpdate="true" />
-
-                        <p:panelGrid id="grid" columns="2" cellpadding="5">
-                            <f:facet name="header">#{msg.login}</f:facet>
-
-                            <p:outputLabel value="#{msg.username}:" />
-                            <p:inputText id="username" value="#{loginHandler.username}"
-                                         required="true" label="Username">
+                 <h:outputLabel for="username" value="#{msg.username}" />
+                    <h:panelGroup>
+                          <h:inputText id="username"
+                             value="#{kdhandler.merkeKunde.vorname}" required="true"
+                             requiredMessage="#{msg.eingabefehlt}">
                                 <f:validateLength minimum="2" />
-                            </p:inputText>
+                         </h:inputText>
+                    </h:panelGroup>
+                <h:outputLabel for="passwort" value="#{msg.passwort}" />
+            <h:panelGroup>
+                <p:password id="passwort"
+                            value="#{loginHandler.passwort}" required="true"
+                            requiredMessage="#{msg.eingabefehlt}" label="Password">
+                </p:password>
+            </h:panelGroup>
 
-                            <p:outputLabel value="#{msg.passwort}:" for="password" />
-                            <p:password id="password" value="#{loginHandler.passwort}"
-                                        required="true" label="Password">
-                            </p:password>
-                            <p:commandButton action="#{warenkorbhd.toZahlungsart}" value="#{msg.login}"
-                                             update="grid" />
-                        </p:panelGrid>
+            <h:commandButton action="#{loginHandler.WkLogin}"
+                             value="#{msg.login}"  />
 
-                        <br></br>
+        </h:panelGrid>
+
+                        <br/>
                         <h2>#{msg.nochknkdWarenkorb}</h2>
-                        <p:commandButton action="#{warenkorbhd.toRegistrierenWarenkorb}"
+                        <h:commandButton action="#{warenkorbhd.toRegWarenkorb}"
                                          value="#{msg.registrieren}" immediate="true" />
-                        <p:commandButton action="#{warenkorbhd.abbrechenLog}" value="#{msg.abbrechen}"
-                                         update="grid" />
-                    </h:form>
 
-                    <p:ajaxStatus onstart="PF('statusDialog').show();"
-                                  onsuccess="PF('statusDialog').hide();" />
-                    <p:dialog modal="true" widgetVar="statusDialog" header="Status"
-                              draggable="false" closable="false">
-                    </p:dialog>
+                        <br/><br/>
+                        <h2>#{msg.gast}</h2>
+                        <h:commandButton action="#{warenkorbhd.toUeberpruefung}"
+                                 value="#{msg.gastBn}" immediate="true" />
+
+                         <br/><br/><br/>
+                        <h:commandButton action="#{warenkorbhd.abbrechenLog}" value="#{msg.abbrechen}"/>
+
                 </h:form>
             </ui:insert>
         </div>

@@ -154,3 +154,8 @@ tr.even {
 .ui-grid td {
 	white-space: nowrap;
 }
+
+fieldset {
+	border: none;
+}
+
