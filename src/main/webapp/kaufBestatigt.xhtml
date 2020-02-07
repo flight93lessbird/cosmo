@@ -15,26 +15,7 @@
 
 		<div id="header">
 			<ui:insert name="header">
-				<div class="logo">
-					<a class="" href="/os/Startseite.xhtml"> <h:graphicImage
-							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a>
-
-					<a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
-							value="resources/images/user.png" height="50px" width="50px" /></a>
-
-					<a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
-							value="resources/images/shopping-cart-of-checkered-design.png"
-							height="50px" width="50px" /></a>
-				</div>
-
-				<div class="topnav">
-					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
-					<a href="pflege.xhtml">#{msg.Pf}</a>
-					<div class="search-container">
-						<p:inputText type="text" placeholder="Suche" name="search"  />
-					</div>
-				</div>
+				<ui:include src="/header.xhtml" />
 			</ui:insert>
 		</div>
 
@@ -86,27 +67,7 @@
 		<br></br>
 
 		<div class="footer">
-			<ul class="footermenu">
-				<li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
-				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
-				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
-			</ul>
-			
-			<center>
-				<div class="contact">
-					<div class="custom">
-						Cosmostrasse 10<br /> 27472 Cosmostadt
-					</div>
-				</div>
-
-				<div class="row copyright">
-					<div class="col-lg-12">
-						Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
-						| #{msg.title}
-					</div>
-				</div>
-			</center>
-			
+			<ui:include src="/footer.xhtml" />
 		</div>
 	</h:form>
 </h:body>
