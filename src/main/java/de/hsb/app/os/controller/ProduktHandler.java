@@ -90,17 +90,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 	}
 
-
-	/**Hier wird der Vorgang abgebrochen*/
-	public String abbrechen() {
-		return "produkte?faces-redirect=true";
-	}
-
-
-//dient lediglich als platzhalter
-	public String aktualisieren() {
-		return "warenkorb?faces-redirect=true";
-	}
 	
 	/**Hier legen wir neue Artikel an*/
 	public String ProduktAnlegen() {
@@ -131,10 +120,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public String pdedit() {
 		merkeProdukt = pdList.getRowData();
 		return "neuProdukt?faces-redirect=true";
-	}
-
-	public String pdabbrechen() {
-		return "produkte?faces-redirect=true";
 	}
 
 	public String pdspeichern() {
@@ -223,12 +208,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return "Startseite?faces-redirect=true";
 	}
-
-	public String indenWarenkorb() {
-		return "warenkorb?faces-redirect=true";
-	}
-
-
 
 	public Produkt getMerkeProdukt() {
 		return merkeProdukt;

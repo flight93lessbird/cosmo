@@ -79,25 +79,6 @@ public class KundenHandler {
 		merkeKunde = new Kunde();
 		return "neuerKunde?faces-redirect=true";
 	}
-	public String abbrechen() {
-		return "kunde?faces-redirect=true";
-	}
-
-    public String kdabbrechen() {
-        return "Logout?faces-redirect=true";
-    }
-
-	public String kreditbearbeiten() {
-		return "kreditkartendatenAendern?faces-redirect=true";
-	}
-
-    public String kundeBearbeiten() {
-        return "kundendatenBearbeiten?faces-redirect=true";
-    }
-
-    public String kundePwBearbeiten() {
-        return "passwortAendern?faces-redirect=true";
-    }
 
 	public String formatDateDDMMYYYY(Date date) {
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);

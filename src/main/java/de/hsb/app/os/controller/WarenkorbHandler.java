@@ -216,32 +216,6 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 	}
 
-	public String speichernWk() {
-		return "Zahlungsart?faces-redirect=true";
-	}
-
-	public String toRegWarenkorb() {
-		return "RegistrierenWarenkorb?faces-redirect=true";
-	}
-
-	public String toUeberpruefung() {
-			return "kundendatenUeberpruefung?faces-redirect=true";
-	}
-
-	public String abbrechenReg() {
-		return "Kundendaten?faces-redirect=true";
-	}
-
-	public String abbrechenkdue() {
-		return "warenkorb?faces-redirect=true";
-	}
-
-	
-	/**Hier wird der Warenkorb versendet*/
-	public String senden() {
-		return "kaufBestatigt?faces-redirect=true";
-	}
-
 	public void setWarenkorb(Warenkorb warenkorb) {
 		this.warenkorb = warenkorb;
 	}

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -17,7 +16,7 @@
         <div id="header">
             <ui:insert name="header">
                 <div class="logo">
-                    <a class="logo" href="/os/Startseite.xhtml"> <h:graphicImage
+                    <a class="" href="/os/Startseite.xhtml"> <h:graphicImage
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
                     </a>
 
@@ -29,13 +28,13 @@
                             height="50px" width="50px" /></a>
                 </div>
 
+
+
                 <div class="topnav">
                     <a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
                     <a href="pflege.xhtml">#{msg.Pf}</a>
                     <div class="search-container">
-
-                        <p:inputText type="text" placeholder="Suche" name="search" />
-
+                        <p:inputText type="text" placeholder="Suche" name="search"  />
                     </div>
                 </div>
             </ui:insert>
@@ -44,32 +43,31 @@
 
         <div id="content">
             <ui:insert name="content">
+                <h:form>
+                    <h1>#{msg.logout}</h1>
+                    <h:form id="form">
+
+                            <p:commandButton action="#{loginHandler.logout}" value="#{msg.logout}" />
+
+                        <br></br>
+                        <h2>#{msg.kdbearbeiten}</h2>
+                        <p:commandButton action="#{kdhandler.kundeBearbeiten}"
+                                         value="#{msg.bearbeiten}" immediate="true" />
+
+                        <br></br>
+                        <h2>#{msg.kdpwbearbeiten}</h2>
+                        <p:commandButton action="#{kdhandler.kundePwBearbeiten}"
+                                         value="#{msg.bearbeiten}" immediate="true" />
+
+                        <br></br>
+                        <h2>#{msg.kreditbearbeiten}</h2>
+                        <p:commandButton action="#{kdhandler.kreditbearbeiten}"
+                                         value="#{msg.bearbeiten}" immediate="true" />
+                    </h:form>
+                </h:form>
             </ui:insert>
-
-            <H1>#{produktHandler.merkeProdukt.marke}</H1>
-            <H2>#{produktHandler.merkeProdukt.titel}</H2>
-
-        <h:graphicImage value= "resources/images/#{produktHandler.merkeProdukt.titel}.PNG"
-                            style="height:200px; width:200px;" />
-
-            <H3>Menge:</H3>
-            <H4>#{produktHandler.merkeProdukt.menge} #{produktHandler.merkeProdukt.mengentyp.label}</H4>
-
-            <H3>Preis:</H3>
-            <H4>#{produktHandler.merkeProdukt.preis} #{produktHandler.merkeProdukt.waehrungtyp.label}</H4>
-
-            <f:facet name="header">#{msg.kaufen}</f:facet>
-            <p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
-                <p:ajax process="@this" />
-            </p:spinner>
-            <p:commandButton
-                    action="#{warenkorbhd.addWarenkorbItemToWarekorb(loginHandler.benutzer, produktHandler.merkeProdukt, warenkorbhd.stkZahl)}"
-                    value="#{msg.indenwarnkorb}">
-            </p:commandButton>
-
-            <H3>Produktbeschreibung:</H3>
-            <a>#{produktHandler.merkeProdukt.beschreibung}</a>
         </div>
+
         <div class="footer">
             <ul class="footermenu">
                 <li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
@@ -86,7 +84,7 @@
 
                 <div class="row copyright">
                     <div class="col-lg-12">
-                        Copyright &#169; 2019 | <a href="Startseite.xhtml">www.Cosmo.de</a>
+                        Copyright &#169; 2019 | <a href="startseite.xhtml">www.Cosmo.de</a>
                         | #{msg.title}
                     </div>
                 </div>
