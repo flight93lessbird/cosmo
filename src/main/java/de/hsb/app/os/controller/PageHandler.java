@@ -8,7 +8,7 @@ package de.hsb.app.os.controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-@ManagedBean(name = "pHandler")
+@ManagedBean(name = "pageHandler")
 @SessionScoped
 public class PageHandler {
 	public PageHandler() {
