@@ -206,7 +206,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			merkeProdukt = produkt;
 			return "Produkt?faces-redirect=true";
 		}
-		return "Startseite?faces-redirect=true";
+		return "startseite?faces-redirect=true";
 	}
 
 	public Produkt getMerkeProdukt() {

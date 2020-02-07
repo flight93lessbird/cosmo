@@ -191,7 +191,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "Startseite?faces-redirect=true";
+		return "startseite?faces-redirect=true";
 	}
 
 	public String speichernWk() {
