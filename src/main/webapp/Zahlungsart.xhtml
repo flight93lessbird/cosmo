@@ -39,6 +39,7 @@
             </ui:insert>
         </div>
 
+
         <div id="content">
             <h:form>
                 <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
@@ -49,22 +50,31 @@
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:outputText
                                     value="Hier kann man auch Rechnug bezahlen" />
-                            <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
+                            <div >
+                                <center>
+                                    <h:commandButton action="#{warenkorbhd.abbrechenZahl}"
+                                                     value="#{msg.abbrechen}" />
+                                    <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
                                              value="#{msg.speichern}" />
+                                </center>
+                            </div>
                         </h:panelGrid>
                     </p:tab>
                     <p:tab title="Vorkasse">
                         <h:panelGrid columns="2" cellpadding="10">
                             <h:outputText value="Hier kann man mit Vorkasse bezahlen." />
-                            <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
-                                             value="#{msg.speichern}" />
+                            <div>
+                                <center>
+                                    <h:commandButton action="#{warenkorbhd.abbrechenZahl}"
+                                                     value="#{msg.abbrechen}" />
+                                    <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
+                                                     value="#{msg.speichern}" />
+                                </center>
+                            </div>
                         </h:panelGrid>
                     </p:tab>
                     <p:tab title="Kreditkarte">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <h:outputText>
-
-                                <h:panelGrid var="kreditkarte" value="#{kdhandler.kunden}"
+                         <h:panelGrid var="kreditkarte" value="#{kdhandler.kunden}"
                                              columns="2" headerclass="header" footerClass="footer">
                                     <h:outputLabel value="#{msg.kunde}:" for="kunden" />
                                     <h:panelGroup>
@@ -104,26 +114,20 @@
                                                      requiredMessage="#{msg.eingabefehlt}." />
                                         <h:message for="inhaber" styleClass="message" />
                                     </h:panelGroup>
+
                                 </h:panelGrid>
+                        <br/><br/>
 
 
-                            </h:outputText>
-                        </h:panelGrid>
+                                <h:commandButton action="#{warenkorbhd.abbrechenZahl}"
+                                                 value="#{msg.abbrechen}" />
+                                <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
+                                                 value="#{msg.speichern}" />
+
+
                     </p:tab>
                 </p:accordionPanel>
 
-
-
-
-
-
-
-                    <div>
-                        <h:commandButton action="#{warenkorbhd.abbrechenZahl}"
-                                         value="#{msg.abbrechen}" />
-                        <h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
-                                     value="#{msg.speichern}" />
-                    </div>
 
             </h:form>
         </div>

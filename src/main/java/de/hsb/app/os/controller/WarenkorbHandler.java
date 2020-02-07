@@ -220,6 +220,10 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return "Zahlungsart?faces-redirect=true";
 	}
 
+	public String abbrechenZahl() {
+		return " ?faces-redirect=true";
+	}
+
 	public String toRegWarenkorb() {
 		return "RegistrierenWarenkorb?faces-redirect=true";
 	}
