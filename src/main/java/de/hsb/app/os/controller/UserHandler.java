@@ -342,6 +342,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	 * erhalten wir eine Fehlermeldung.
 	 **/
 	public String login() {
+		System.out.println("Testomato");
 		Query query = em
 				.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
 		query.setParameter("username", username);
@@ -510,4 +511,139 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		}
 		return result;
 	}
+	/*
+	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\ OS Handler /////////////////////////////
+	 */
+	
+
+	public String toRegistrieren() {
+		merkeBenutzer = new Benutzer();
+		return "registrieren?faces-redirect=true";
+	}
+
+
+
+	public String toKaufBestatigt() {
+		merkeBenutzer = new Benutzer();
+		return "kaufBestatigt?faces-redirect=true";
+	}
+
+//	public String benutzerRegistrieren() {
+//		for (Benutzer b : user) {
+//			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+//				FacesContext.getCurrentInstance().addMessage(null,
+//						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+//								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+//								null));
+//				;
+//
+//				return null;
+//			}
+//		}
+//		try {
+//			merkeBenutzer.setRolle(Rolle.KUNDE);
+//			utx.begin();
+//			merkeBenutzer = em.merge(merkeBenutzer);
+//			em.persist(merkeBenutzer);
+//			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+//			utx.commit();
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+//					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+//		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+//				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+//			e.printStackTrace();
+//		}
+//		return "meinKonto?faces-redirect=true";
+//	}
+
+	public String registrierenWk() {
+		for (Benutzer b : user) {
+			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+
+				return null;
+			}
+		}
+		try {
+			merkeBenutzer.setRolle(Rolle.KUNDE);
+			utx.begin();
+			merkeBenutzer = em.merge(merkeBenutzer);
+			em.persist(merkeBenutzer);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			utx.commit();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "kundendatenUeberpruefung?faces-redirect=true";
+	}
+
+	public String benutzerAnlegen(Warenkorb warenkorb) {
+		for (Benutzer b : user) {
+			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+
+				FacesContext.getCurrentInstance()
+						.addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_ERROR,
+										"Dieser Benutzername ist bereits vergeben "
+												+ "oder erfüllt nicht die vom Administrator festgelegten Richtlinien",
+										null));
+				return null;
+			}
+		}
+		try {
+			utx.begin();
+			warenkorb = em.merge(warenkorb);
+			merkeBenutzer.setWarenkorb(warenkorb);
+			merkeBenutzer = em.merge(merkeBenutzer);
+			em.persist(merkeBenutzer);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "benutzer?faces-redirect=true";
+	}
+
+//	public String deleteUser() {
+//		merkeBenutzer = user.getRowData();
+//		try {
+//			utx.begin();
+//			merkeBenutzer = em.merge(merkeBenutzer);
+//			em.remove(merkeBenutzer);
+//			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+//			utx.commit();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+
+	
+	public DataModel<Benutzer> getUser() {
+		return user;
+	}
+
+	public void setUser(DataModel<Benutzer> user) {
+		this.user = user;
+	}
+
+	public Benutzer getMerkeBenutzer() {
+		return merkeBenutzer;
+	}
+
+	public void setMerkeBenutzer(Benutzer merkeBenutzer) {
+		this.merkeBenutzer = merkeBenutzer;
+	}
+
+
+
+
 }
