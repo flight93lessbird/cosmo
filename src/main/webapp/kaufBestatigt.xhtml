@@ -20,10 +20,10 @@
 							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
 					</a>
 
-					<a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.benutzer)}"><h:graphicImage
+					<a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
 
-					<a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+					<a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
 							value="resources/images/shopping-cart-of-checkered-design.png"
 							height="50px" width="50px" /></a>
 				</div>
@@ -48,13 +48,13 @@
 					<br></br> <br></br>
 
 					<h:outputLabel value="#{msg.vorname}:" />
-					<h:outputLabel value="#{kdhandler.merkeKunde.vorname}" />
+					<h:outputLabel value="#{userHandler.merkeKunde.vorname}" />
 					<br></br>
 					<h:outputLabel value="#{msg.nachname}:" />
-					<h:outputLabel value="#{kdhandler.merkeKunde.nachname}" />
+					<h:outputLabel value="#{userHandler.merkeKunde.nachname}" />
 					<br></br>
 					<h:outputLabel value="#{msg.strasse}:" />
-					<h:outputLabel value="#{kdhandler.merkeKunde.adresse}" />
+					<h:outputLabel value="#{userHandler.merkeKunde.adresse}" />
 					<br></br>
 					<br></br>
 					<h:outputLabel value="#{msg.artklname}: " />

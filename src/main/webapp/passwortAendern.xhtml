@@ -21,10 +21,10 @@
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
                     </a>
 
-                    <a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/user.png" height="50px" width="50px" /></a>
 
-                    <a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/shopping-cart-of-checkered-design.png"
                             height="50px" width="50px" /></a>
                 </div>
@@ -48,24 +48,24 @@
                     <h1>#{msg.kdpwbearbeiten}</h1>
                         <p:messages autoUpdate="true" />
 
-                        <h:panelGrid var="passwort" value="#{loginHandler.passwort}"
+                        <h:panelGrid var="passwort" value="#{userHandler.passwort}"
                                                   columns="2" headerClass="header" footerClass="footer">
                             <f:facet name="header">#{msg.kdpwbearbeiten}</f:facet>
 
                         <p:outputLabel value="#{msg.passwort}:" for="password" />
-                        <p:password id="password" value="#{loginHandler.passwort}"
+                        <p:password id="password" value="#{userHandler.passwort}"
                                     required="true" label="Password">
                         </p:password>
 
                             <p:outputLabel value="#{msg.neupw}:" for="password" />
-                            <p:password id="neupassword" value="#{loginHandler.passwort}"
+                            <p:password id="neupassword" value="#{userHandler.passwort}"
                                         required="true" label="Password">
                             </p:password>
 
 
-                            <h:commandButton action="#{kdhandler.kdabbrechen}"
+                            <h:commandButton action="#{userHandler.kdabbrechen}"
                                              value="#{msg.abbrechen}" immediate="true" />
-                            <h:commandButton action="#{loginHandler.pwspeichern}"
+                            <h:commandButton action="#{userHandler.pwspeichern}"
                                              value="#{msg.speichern}" update="messages" />
                         </h:panelGrid>
                 </h:form>

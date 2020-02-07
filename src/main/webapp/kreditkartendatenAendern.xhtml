@@ -21,10 +21,10 @@
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
                     </a>
 
-                    <a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/user.png" height="50px" width="50px" /></a>
 
-                    <a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/shopping-cart-of-checkered-design.png"
                             height="50px" width="50px" /></a>
                 </div>
@@ -47,15 +47,15 @@
                 <h:form>
                     <h1>#{msg.kdbearbeiten}</h1>
                     <p:growl id="growl" showDetail="true" sticky="true" />
-                    <h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+                    <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                                  columns="2" headerClass="header" footerClass="footer">
 
                         <h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
                         <h:panelGroup>
                             <h:selectOneMenu id="kreditkarten"
-                                             value="#{kdhandler.merkeKreditkarte.typ}">
+                                             value="#{userHandler.merkeKreditkarte.typ}">
                                 <f:selectItems var="form"
-                                               value="#{kdhandler.kreditkartentypValues}" itemValue="#{form}"
+                                               value="#{userHandler.kreditkartentypValues}" itemValue="#{form}"
                                                itemLabel="#{form.label}" />
                             </h:selectOneMenu>
                         </h:panelGroup>
@@ -63,7 +63,7 @@
                         </h:outputLabel>
                         <h:panelGroup>
                             <h:inputText id="nummer"
-                                         value="#{kdhandler.merkeKreditkarte.nummer}" required="true"
+                                         value="#{userHandler.merkeKreditkarte.nummer}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}.">
                                 <f:converter converterId="kreditkartenConverter" />
                                 <f:validator validatorId="kreditkartenValidator" />
@@ -73,7 +73,7 @@
                                        for="gueltigBis" />
                         <h:panelGroup>
                             <p:calendar id="gueltigBis"
-                                        value="#{kdhandler.merkeKreditkarte.gueltigBis}" mode="popup"
+                                        value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
                                         navigator="true" showOn="button" pattern="MM.yy" required="true" yearRange="c-70:c+50"
                                         requiredMessage="#{msg.gueltigkdatumfehlt}." />
                             <h:message for="gueltigBis" styleClass="message" />
@@ -81,14 +81,14 @@
                         <h:outputLabel value="#{msg.inhaber}" for="inhaber" />
                         <h:panelGroup>
                             <h:inputText id="inhaber"
-                                         value="#{kdhandler.merkeKreditkarte.inhaber}" required="true"
+                                         value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}." />
                             <h:message for="inhaber" styleClass="message" />
                         </h:panelGroup>
 
-                        <h:commandButton action="#{kdhandler.kdabbrechen}"
+                        <h:commandButton action="#{userHandler.kdabbrechen}"
                                          value="#{msg.abbrechen}" immediate="true" />
-                        <h:commandButton action="#{kdhandler.kdspeichern}"
+                        <h:commandButton action="#{userHandler.kdspeichern}"
                                          value="#{msg.speichern}" update="messages" />
 
                     </h:panelGrid>

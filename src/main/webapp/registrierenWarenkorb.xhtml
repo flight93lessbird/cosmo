@@ -20,10 +20,10 @@
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
                     </a>
 
-                    <a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/user.png" height="50px" width="50px" /></a>
 
-                    <a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/shopping-cart-of-checkered-design.png"
                             height="50px" width="50px" /></a>
                 </div>
@@ -47,7 +47,7 @@
                 <h:form>
                     <h1>#{msg.meinkonto}</h1>
                     <p:growl id="growl" showDetail="true" sticky="true" />
-                    <h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+                    <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                                  columns="2" headerClass="header" footerClass="footer">
 
                         <h:outputLabel for="username" value="#{msg.username}" />
@@ -75,21 +75,21 @@
 
                         <h:outputLabel value="#{msg.anrede}:" for="anrede" />
                         <h:panelGroup>
-                            <h:selectOneMenu id="anrede" value="#{kdhandler.merkeKunde.anrede}">
-                                <f:selectItems var="form" value="#{kdhandler.anredeValues}" itemValue="#{form}" itemLabel="#{form.label}" />
+                            <h:selectOneMenu id="anrede" value="#{userHandler.merkeKunde.anrede}">
+                                <f:selectItems var="form" value="#{userHandler.anredeValues}" itemValue="#{form}" itemLabel="#{form.label}" />
                             </h:selectOneMenu>
                         </h:panelGroup>
                         <h:outputLabel value="#{msg.vorname}:" for="vorname" />
                         <h:panelGroup>
                             <h:inputText id="vorname"
-                                         value="#{kdhandler.merkeKunde.vorname}" required="true"
+                                         value="#{userHandler.merkeKunde.vorname}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}." />
                             <h:message for="vorname" styleClass="message" />
                         </h:panelGroup>
                         <h:outputLabel value="#{msg.nachname}:" for="nachname" />
                         <h:panelGroup>
                             <h:inputText id="nachname"
-                                         value="#{kdhandler.merkeKunde.nachname}" required="true"
+                                         value="#{userHandler.merkeKunde.nachname}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}." />
                             <h:message for="nachname" styleClass="message" />
                         </h:panelGroup>
@@ -97,7 +97,7 @@
                         <h:outputLabel value="#{msg.strasse}:" for="strasse" />
                         <h:panelGroup>
                             <h:inputText id="strasse"
-                                         value="#{kdhandler.merkeAdresse.strasse}" required="true"
+                                         value="#{userHandler.merkeAdresse.strasse}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}." />
                             <h:message for="strasse" styleClass="message" />
                         </h:panelGroup>
@@ -105,7 +105,7 @@
                         <h:outputLabel for="plz" value="#{msg.plz}:" />
                         <h:panelGroup>
                             <h:inputText id="plz" required="true"
-                                         value="#{kdhandler.merkeAdresse.plz}">
+                                         value="#{userHandler.merkeAdresse.plz}">
                                 <f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
                             </h:inputText>
                         </h:panelGroup>
@@ -113,13 +113,13 @@
                         <h:outputLabel for="ort" value="#{msg.ort}:" />
                         <h:panelGroup>
                             <h:inputText id="ort" required="true"
-                                         value="#{kdhandler.merkeAdresse.ort}" />
+                                         value="#{userHandler.merkeAdresse.ort}" />
                         </h:panelGroup>
 
                         <h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
                         <h:panelGroup>
                             <p:calendar id="geburtsdatum"
-                                        value="#{kdhandler.merkeKunde.geburtsdatum}" mode="popup"
+                                        value="#{userHandler.merkeKunde.geburtsdatum}" mode="popup"
                                         navigator="true" showOn="button" pattern="dd.MM.yyyy" yearRange="c-70:c+50"
                                         required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
                             <h:message styleClass="message" for="geburtsdatum" />

@@ -35,33 +35,33 @@
 				<h:form>
 					<h1>#{msg.anschrftanlgbear}</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" />
-					<h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+					<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
 						columns="2" headerClass="header" footerClass="footer">
 						<h:outputLabel value="#{msg.kunde}:" for="kunden" />
 						<h:panelGroup>
 							<h:outputLabel id="kunden"
-								value="#{kdhandler.merkeKunde.vorname.concat(' ').concat(kdhandler.merkeKunde.nachname)}" />
+								value="#{userHandler.merkeKunde.vorname.concat(' ').concat(userHandler.merkeKunde.nachname)}" />
 						</h:panelGroup>
 						<h:outputLabel for="strasse" value="#{msg.strasse}:" />
 						<h:panelGroup>
 							<h:inputText id="strasse" required="true"
-								value="#{kdhandler.merkeAdresse.strasse}" />
+								value="#{userHandler.merkeAdresse.strasse}" />
 						</h:panelGroup>
 						<h:outputLabel for="plz" value="#{msg.plz}:" />
 						<h:panelGroup>
 							<h:inputText id="plz" required="true"
-								value="#{kdhandler.merkeAdresse.plz}">
+								value="#{userHandler.merkeAdresse.plz}">
 								<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
 							</h:inputText>
 						</h:panelGroup>
 						<h:outputLabel for="ort" value="#{msg.ort}:" />
 						<h:panelGroup>
 							<h:inputText id="ort" required="true"
-								value="#{kdhandler.merkeAdresse.ort}" />
+								value="#{userHandler.merkeAdresse.ort}" />
 						</h:panelGroup>
-						<h:commandButton action="#{kdhandler.abbrechen}"
+						<h:commandButton action="#{userHandler.abbrechen}"
 										 value="#{msg.abbrechen}" immediate="true" />
-						<h:commandButton action="#{kdhandler.speichern}"
+						<h:commandButton action="#{userHandler.speichern}"
 							value="#{msg.speichern}" update="messages" />
 					</h:panelGrid>
 				</h:form>

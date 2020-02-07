@@ -20,10 +20,10 @@
                             value="resources/images/COS'MO.PNG" height="150px" width="150px" />
                     </a>
 
-                    <a class="account" href="#{loginHandler.checkLoggedUser(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/user.png" height="50px" width="50px" /></a>
 
-                    <a class="account" href="#{warenkorbhd.checkWarenkorb(loginHandler.benutzer)}"><h:graphicImage
+                    <a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
                             value="resources/images/shopping-cart-of-checkered-design.png"
                             height="50px" width="50px" /></a>
                 </div>
@@ -46,13 +46,13 @@
             <h:form>
              <h1>#{msg.loginWarenkorb}</h1>
                 <p:growl id="growl" showDetail="true" sticky="true" />
-                <h:panelGrid var="kunde" value="#{kdhandler.merkeKunde}"
+                <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                      columns="2" headerClass="header" footerClass="footer">
 
                  <h:outputLabel for="username" value="#{msg.username}" />
                     <h:panelGroup>
                           <h:inputText id="username"
-                             value="#{kdhandler.merkeKunde.vorname}" required="true"
+                             value="#{userHandler.merkeKunde.vorname}" required="true"
                              requiredMessage="#{msg.eingabefehlt}">
                                 <f:validateLength minimum="2" />
                          </h:inputText>
@@ -60,12 +60,12 @@
                 <h:outputLabel for="passwort" value="#{msg.passwort}" />
             <h:panelGroup>
                 <p:password id="passwort"
-                            value="#{loginHandler.passwort}" required="true"
+                            value="#{userHandler.passwort}" required="true"
                             requiredMessage="#{msg.eingabefehlt}" label="Password">
                 </p:password>
             </h:panelGroup>
 
-            <h:commandButton action="#{loginHandler.WkLogin}"
+            <h:commandButton action="#{userHandler.WkLogin}"
                              value="#{msg.login}"  />
 
         </h:panelGrid>
