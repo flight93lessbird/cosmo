@@ -100,10 +100,11 @@
 						<h:message styleClass="message" for="geburtsdatum" />
 					</h:panelGroup>
 
+					<h:commandButton action="#{kdhandler.abbrechen}"
+									 value="#{msg.abbrechen}" immediate="true" />
 					<h:commandButton action="#{kdhandler.speichernReg}"
 						value="#{msg.speichern}" update="messages" />
-					<h:commandButton action="#{kdhandler.abbrechen}"
-						value="#{msg.abbrechen}" immediate="true" />
+
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>

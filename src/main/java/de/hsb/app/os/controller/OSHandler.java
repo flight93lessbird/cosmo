@@ -101,6 +101,34 @@ public class OSHandler {
 		return "meinKonto?faces-redirect=true";
 	}
 
+	public String registrierenWk() {
+		for (Benutzer b : user) {
+			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+
+				return null;
+			}
+		}
+		try {
+			merkeBenutzer.setRolle(Rolle.KUNDE);
+			utx.begin();
+			merkeBenutzer = em.merge(merkeBenutzer);
+			em.persist(merkeBenutzer);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			utx.commit();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "kundendatenUeberpruefung?faces-redirect=true";
+	}
+
 	public String benutzerAnlegen(Warenkorb warenkorb) {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {

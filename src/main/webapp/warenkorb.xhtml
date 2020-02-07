@@ -64,7 +64,7 @@
 
 					<h:column>
 						<f:facet name="header">#{msg.artmenge}</f:facet>
-						<h:outputText value="#{warenkorbItem.p.menge} #{warenkorbItem.p.mengentyp.label}" />
+						<h:outputText value="#{warenkorbItem.p.menge} #{warenkorbItem.p.mengentyp}" />
 <!--						<h:outputText value="#{warenkorbItem.p.menge.concat(msg[warenkorbItem.p.mengentyp])}"/> -->
 					</h:column>
 
@@ -99,7 +99,7 @@
 				<h:commandButton action="#{produktHandler.aktualisieren}"
 					value="#{msg.aktualisieren}" />
 
-				<h:commandButton action="#{warenkorbhd.toKundendatenOrZahlungsart}"
+				<h:commandButton action="#{warenkorbhd.toKundendaten(loginHandler.benutzer)}"
 					value="#{msg.bestellaschl}" />
 
 

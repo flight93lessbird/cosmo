@@ -167,6 +167,20 @@ public class KundenHandler {
 		return "Startseite?faces-redirect=true";
 	}
 
+	public String speichernWk() {
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.persist(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "kundendatenUeberpruefung?faces-redirect=true";
+	}
+
     public String kdspeichern() {
         try {
             utx.begin();
