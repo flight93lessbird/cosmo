@@ -46,16 +46,8 @@ public class PageHandler {
 		return "kreditkartendatenAendern?faces-redirect=true";
 	}
 
-	public String toKundendatenBearbeiten() {
-		return "kundendatenBearbeiten?faces-redirect=true";
-	}
-
 	public String toPasswortAendern() {
 		return "passwortAendern?faces-redirect=true";
-	}
-
-	public String toZahlungsart() {
-		return "zahlungsart?faces-redirect=true";
 	}
 
 	public String toRegistrieren() {

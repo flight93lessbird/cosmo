@@ -99,7 +99,6 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			/*
 			 * init aus KundenHAndler
 			 */
-
 			em.persist(new Kunde("lena", "Geheim0!", Rolle.ADMIN, Anrede.FRAU, "Lena", "Eichhorst",
 					new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime(), new Kreditkarte(), new Adresse()));
 			em.persist(new Kunde("pascal", "Pascal0!", Rolle.ADMIN, Anrede.HERR, "Pascal", "Zacheja",
@@ -121,7 +120,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		}
 	}
 
-	public String neu() {
+	public String newUser() {
 		merkeKunde = new Kunde();
 		return "neuerKunde?faces-redirect=true";
 	}
@@ -130,6 +129,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
 	}
 
+	// brauchen wir glaub ich nicht
 	public String neuAdresse() {
 		merkeAdresse = new Adresse();
 		return "neueAnschrift?faces-redirect=true";
@@ -158,15 +158,16 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicMixedException | HeuristicRollbackException e) {
 			e.printStackTrace();
 		}
-		return "kunde?faces-redirect=true";
+		return "kunden?faces-redirect=true";
 	}
 
+	// ich glaube brauchen wir nicht
 	public String neuKreditkarte() {
 		merkeKreditkarte = new Kreditkarte();
 		return "kreditkarte?faces-redirect=true";
 	}
 
-	public String speichern() {
+	public String neuerKundeSpeichern() {
 		try {
 			utx.begin();
 			merkeKunde = em.merge(merkeKunde);
@@ -177,7 +178,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "kunde?faces-redirect=true";
+		return "kunden?faces-redirect=true";
 	}
 
 	public String speichernReg() {
@@ -194,6 +195,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return "startseite?faces-redirect=true";
 	}
 
+
 	public String speichernWk() {
 		try {
 			utx.begin();
@@ -205,10 +207,10 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "kundendatenUeberpruefung?faces-redirect=true";
+		return "zahlungsart?faces-redirect=true";
 	}
 
-	public String kdspeichern() {
+	public String kreditkarteSpeichern() {
 		try {
 			utx.begin();
 			merkeKunde = em.merge(merkeKunde);
@@ -219,10 +221,10 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "Logout?faces-redirect=true";
+		return "logout?faces-redirect=true";
 	}
 
-	public String edit() {
+	public String editUser() {
 		merkeKunde = kunden.getRowData();
 		return "neuerKunde?faces-redirect=true";
 	}
@@ -236,7 +238,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return "kreditkarte?faces-redirect=true";
 	}
 
-	public String kreditkarteSpeichern() {
+	public String kreditkarteSpeichernAd() {
 		merkeKunde.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
@@ -253,12 +255,25 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return "kunde?faces-redirect=true";
 	}
 
+	public String kundendatenSpeichern() {
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.persist(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "logout?faces-redirect=true";
+	}
+
 	public Kreditkartentyp[] getKreditkartentypValues() {
 		return Kreditkartentyp.values();
 	}
 
 	public String deleteUser() {
-
 		merkeKunde = kunden.getRowData();
 		try {
 			utx.begin();
@@ -347,7 +362,6 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
 		query.setParameter("username", username);
 		query.setParameter("passwort", passwort);
-
 		@SuppressWarnings("unchecked")
 		List<Benutzer> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
@@ -364,38 +378,38 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 							"Du hast einen falschen Benutzernamen " + "oder ein falsches Kennwort eingegeben."
 									+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)",
 							passwort));
-
 		}
 		return null;
 	}
 
-// Warenkorb
-	public String WkLogin() {
-		Query query = em
-				.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
-		query.setParameter("username", username);
-		query.setParameter("passwort", passwort);
+// login für den Warenkorb
+public String WkLogin() {
+	Query query = em
+			.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
+	query.setParameter("username", username);
+	query.setParameter("passwort", passwort);
 
-		@SuppressWarnings("unchecked")
-		List<Benutzer> user = query.getResultList();
-		System.out.println("Größe von userList: " + user.size());
-		if (user.size() == 1) {
-			benutzer = user.get(0);
-			if (benutzer.getRolle() == Rolle.ADMIN) {
-				return "/admin?faces-redirect=true";
-			} else {
-				return "/kundendatenUeberpruefung?faces-redirect=true";
-			}
+	@SuppressWarnings("unchecked")
+	List<Benutzer> user = query.getResultList();
+	System.out.println("Größe von userList: " + user.size());
+	if (user.size() == 1) {
+		benutzer = user.get(0);
+		if (benutzer.getRolle() == Rolle.ADMIN) {
+			return "/admin?faces-redirect=true";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Du hast einen falschen Benutzernamen " + "oder ein falsches Kennwort eingegeben."
-									+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)",
-							passwort));
+			return "/kundendatenUeberpruefung?faces-redirect=true";
 		}
-		return null;
+	} else {
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Du hast einen falschen Benutzernamen " + "oder ein falsches Kennwort eingegeben."
+								+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)",
+						passwort));
 	}
+	return null;
+}
 
+	//brauchen wir glaub ich nicht
 	public void checkLoggedIn(ComponentSystemEvent cse) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (benutzer == null) {
@@ -418,7 +432,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	 **/
 	public String logout() {
 		benutzer = null;
-		return "/konto.xhtml?faces -redirect=true";
+		return "/startseite.xhtml?faces -redirect=true";
 	}
 
 	/**
@@ -514,7 +528,8 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	/*
 	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\ OS Handler /////////////////////////////
 	 */
-	
+
+	/*
 
 	public String toRegistrieren() {
 		merkeBenutzer = new Benutzer();
@@ -556,6 +571,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 //		return "meinKonto?faces-redirect=true";
 //	}
 
+	 */
 	public String registrierenWk() {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
@@ -564,7 +580,6 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
 								null));
 				;
-
 				return null;
 			}
 		}
@@ -584,6 +599,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return "kundendatenUeberpruefung?faces-redirect=true";
 	}
 
+	//brauchen wir nicht
 	public String benutzerAnlegen(Warenkorb warenkorb) {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {

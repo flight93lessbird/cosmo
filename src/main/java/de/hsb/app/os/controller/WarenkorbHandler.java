@@ -68,16 +68,19 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 //		this.warenkorb.remove(produkt);
 //		addMessage(produkt.getTitel() + "wurde aus dem Warenkorb entfernt");
 //	}
+
 	public String checkWarenkorb(Benutzer benutzer) {
 		System.out.println("Checked WK");
 		if(benutzer != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()){
 			return "/os/warenkorb.xhtml";
 		} else if(!warenkorb.getWarenkorbItems().isEmpty()){
-			return "/os/warenkorb.xhtml";	
+			return "/os/warenkorb.xhtml";
 		} else {
 			return "/os/warenkorbLeer.xhtml";
 		}
 	}
+
+	//brauchen wir nicht
 	public void changeStkZahl(int zahl) {
 		
 		System.out.println(zahl);
@@ -101,6 +104,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 			}
 		}
 	}
+
 	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt, int stkZahl){
 		System.out.println("Produkt: " + produkt.getTitel() + " Stückzahl: " + stkZahl);
 		if (produkt != null){
@@ -118,7 +122,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 		return "warenkorb?faces-redirect=true";
 	}
-	
+
 	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt, int stkZahl){
 		if (stkZahl > 0) {
 			try {
@@ -132,7 +136,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 						break;
 					}
 				}
-				
+
 				if (isNewItem) {
 					produkt = this.em.merge(produkt);
 					WarenkorbItem warenkorbItem = this.em.merge(new WarenkorbItem(stkZahl, produkt));
@@ -212,7 +216,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		if(benutzer != null){
 			return "kundendatenUeberpruefung?faces-redirect=true";
 		} else {
-			return "Kundendaten?faces-redirect=true";
+			return "kundendaten?faces-redirect=true";
 		}
 	}
 
