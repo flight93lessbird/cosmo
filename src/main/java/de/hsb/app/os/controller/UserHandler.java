@@ -408,7 +408,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		if (benutzer != null) {
 			return "/os/logout.xhtml";
 		} else {
-			return "/os/login.xhtml";
+			return "/os/testLogin.xhtml";
 		}
 	}
 
