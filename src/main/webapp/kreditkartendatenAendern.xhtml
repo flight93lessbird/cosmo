@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,13 +12,11 @@
 
 <h:body>
     <h:form>
-
         <div id="header">
             <ui:insert name="header">
                 <ui:include src="/header.xhtml" />
             </ui:insert>
         </div>
-
 
         <div id="content">
             <ui:insert name="content">
@@ -28,7 +25,13 @@
                     <p:growl id="growl" showDetail="true" sticky="true" />
                     <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                                  columns="2" headerClass="header" footerClass="footer">
-
+                        <h:outputLabel value="#{msg.inhaber}" for="inhaber" />
+                        <h:panelGroup>
+                            <h:inputText id="inhaber"
+                                         value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
+                                         requiredMessage="#{msg.eingabefehlt}." />
+                            <h:message for="inhaber" styleClass="message" />
+                        </h:panelGroup>
                         <h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
                         <h:panelGroup>
                             <h:selectOneMenu id="kreditkarten"
@@ -53,23 +56,14 @@
                         <h:panelGroup>
                             <p:calendar id="gueltigBis"
                                         value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
-                                        navigator="true" showOn="button" pattern="MM.yy" required="true" yearRange="c-70:c+50"
+                                        navigator="true" showOn="button" pattern="MM.yy" required="true"
                                         requiredMessage="#{msg.gueltigkdatumfehlt}." />
                             <h:message for="gueltigBis" styleClass="message" />
                         </h:panelGroup>
-                        <h:outputLabel value="#{msg.inhaber}" for="inhaber" />
-                        <h:panelGroup>
-                            <h:inputText id="inhaber"
-                                         value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
-                                         requiredMessage="#{msg.eingabefehlt}." />
-                            <h:message for="inhaber" styleClass="message" />
-                        </h:panelGroup>
-
-                        <h:commandButton action="#{userHandler.kdabbrechen}"
+                        <h:commandButton action="#{pageHandler.toLogout}"
                                          value="#{msg.abbrechen}" immediate="true" />
-                        <h:commandButton action="#{userHandler.kdspeichern}"
+                        <h:commandButton action="#{userHandler.kreditkarteSpeichern}"
                                          value="#{msg.speichern}" update="messages" />
-
                     </h:panelGrid>
                 </h:form>
             </ui:insert>

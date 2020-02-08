@@ -13,7 +13,6 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
@@ -22,14 +21,11 @@
 					</a> <a class="account" href="adminLogout.xhtml"><h:graphicImage
 							value="resources/images/user.png" height="50px" width="50px" /></a>
 				</div>
-
 				<div class="topnav">
 					<a> </a>
 				</div>
 			</ui:insert>
 		</div>
-
-
 
 		<div id="content">
 			<ui:insert name="content">
@@ -38,35 +34,29 @@
 					<p:growl id="growl" showDetail="true" sticky="true" />
 					<h:panelGrid var="kunde" value="#{pageHandler}" columns="2"
 						headerClass="header" footerClass="footer">
-
-
-						<h:outputLabel for="kunden" value="#{msg.admkdnbear}:" />
+						<h:outputLabel value="#{msg.admkdnbear}:" />
 						<h:panelGroup>
 							<h:commandButton action="#{pageHandler.toKunden}" value="#{msg.kunden}" />
 						</h:panelGroup>
-
-						<h:outputLabel for="produkte" value="#{msg.admpdkbear}:" />
+						<h:outputLabel value="#{msg.admpdkbear}:" />
 						<h:panelGroup>
-							<h:commandButton action="#{pageHandler.toProdukt}" value="#{msg.produkte}" />
+							<h:commandButton action="#{pageHandler.toProdukte}" value="#{msg.produkte}" />
 						</h:panelGroup>
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>
-
 		</div>
 
 		<div class="footer">
 			<ul class="footermenu">
 				<li><a></a></li>
 			</ul>
-
 			<center>
 				<div class="contact">
 					<div class="custom">
 						Cosmostrasse 10<br /> 27472 Cosmostadt
 					</div>
 				</div>
-
 				<div class="row copyright">
 					<div class="col-lg-12">
 						Copyright &#169; 2019 | <a href="admin.xhtml">www.Cosmo.de</a>
@@ -74,7 +64,6 @@
 					</div>
 				</div>
 			</center>
-
 		</div>
 	</h:form>
 </h:body>

@@ -22,17 +22,14 @@
 		<div id="content">
 			<ui:insert name="content">
 				<h1>#{msg.warenkinfoleer}</h1>
-				<h:commandButton action="#{mbos.weiterShoppen}"
+				<h:commandButton action="#{pageHandler.toStartseite}"
 					value="#{msg.weitershoppen}" update="messages" />
 			</ui:insert>
 		</div>
 
-
-
-			<div class="footer">
-				<ui:include src="/footer.xhtml" />
+		<div class="footer">
+			<ui:include src="/footer.xhtml" />
 		</div>
-
 	</h:form>
 </h:body>
 </html>

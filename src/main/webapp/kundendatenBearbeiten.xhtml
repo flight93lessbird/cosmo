@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,115 +12,72 @@
 
 <h:body>
     <h:form>
-
         <div id="header">
             <ui:insert name="header">
                 <ui:include src="/header.xhtml" />
             </ui:insert>
         </div>
 
-
         <div id="content">
             <ui:insert name="content">
-        <h:form>
-            <h1>#{msg.kdbearbeiten}</h1>
-            <p:growl id="growl" showDetail="true" sticky="true" />
-            <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
+                <h:form>
+                    <h1>#{msg.kdbearbeiten}</h1>
+                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                          columns="2" headerClass="header" footerClass="footer">
-                <h:outputLabel value="#{msg.anrede}:" for="anrede" />
-                <h:panelGroup>
-                    <h:selectOneMenu id="anrede"
+                    <h:outputLabel value="#{msg.anrede}:" for="anrede" />
+                    <h:panelGroup>
+                        <h:selectOneMenu id="anrede"
                                      value="#{userHandler.merkeKunde.anrede}">
                         <f:selectItems var="form" value="#{userHandler.anredeValues}"
                                        itemValue="#{form}" itemLabel="#{form.label}" />
-                    </h:selectOneMenu>
-                </h:panelGroup>
-                <h:outputLabel value="#{msg.vorname}:" for="vorname" />
-                <h:panelGroup>
-                    <h:inputText id="vorname"
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                    <h:outputLabel value="#{msg.vorname}:" for="vorname" />
+                    <h:panelGroup>
+                        <h:inputText id="vorname"
                                  value="#{userHandler.merkeKunde.vorname}" required="true"
                                  requiredMessage="#{msg.eingabefehlt}." />
-                    <h:message for="vorname" styleClass="message" />
-                </h:panelGroup>
-                <h:outputLabel value="#{msg.nachname}:" for="nachname" />
-                <h:panelGroup>
-                    <h:inputText id="nachname"
+                        <h:message for="vorname" styleClass="message" />
+                    </h:panelGroup>
+                    <h:outputLabel value="#{msg.nachname}:" for="nachname" />
+                    <h:panelGroup>
+                        <h:inputText id="nachname"
                                  value="#{userHandler.merkeKunde.nachname}" required="true"
                                  requiredMessage="#{msg.eingabefehlt}." />
-                    <h:message for="nachname" styleClass="message" />
-                </h:panelGroup>
-                <h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
-                <h:panelGroup>
-                    <p:calendar id="geburtsdatum"
+                        <h:message for="nachname" styleClass="message" />
+                    </h:panelGroup>
+                    <h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
+                    <h:panelGroup>
+                        <p:calendar id="geburtsdatum"
                                 value="#{userHandler.merkeKunde.geburtsdatum}" mode="popup"
                                 navigator="true" showOn="button" pattern="dd.MM.yyyy" yearRange="c-70:c+50"
                                 required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
-                    <h:message styleClass="message" for="geburtsdatum" />
-                </h:panelGroup>
-
-
-                <h:outputLabel for="strasse" value="#{msg.strasse}:" />
-                <h:panelGroup>
-                    <h:inputText id="strasse" required="true"
+                        <h:message styleClass="message" for="geburtsdatum" />
+                    </h:panelGroup>
+                    <h:outputLabel for="strasse" value="#{msg.strasse}:" />
+                    <h:panelGroup>
+                        <h:inputText id="strasse" required="true"
                                  value="#{userHandler.merkeAdresse.strasse}" />
-                </h:panelGroup>
-                <h:outputLabel for="plz" value="#{msg.plz}:" />
-                <h:panelGroup>
-                    <h:inputText id="plz" required="true"
+                        </h:panelGroup>
+                    <h:outputLabel for="plz" value="#{msg.plz}:" />
+                    <h:panelGroup>
+                        <h:inputText id="plz" required="true"
                                  value="#{userHandler.merkeAdresse.plz}">
                         <f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
-                    </h:inputText>
-                </h:panelGroup>
-                <h:outputLabel for="ort" value="#{msg.ort}:" />
-                <h:panelGroup>
-                    <h:inputText id="ort" required="true"
+                        </h:inputText>
+                    </h:panelGroup>
+                    <h:outputLabel for="ort" value="#{msg.ort}:" />
+                    <h:panelGroup>
+                        <h:inputText id="ort" required="true"
                                  value="#{userHandler.merkeAdresse.ort}" />
-                </h:panelGroup>
-
-
-                <h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
-                <h:panelGroup>
-                    <h:selectOneMenu id="kreditkarten"
-                                     value="#{userHandler.merkeKreditkarte.typ}">
-                        <f:selectItems var="form"
-                                       value="#{userHandler.kreditkartentypValues}" itemValue="#{form}"
-                                       itemLabel="#{form.label}" />
-                    </h:selectOneMenu>
-                </h:panelGroup>
-                <h:outputLabel value="#{msg.kknummer}" for="nummer">
-                </h:outputLabel>
-                <h:panelGroup>
-                    <h:inputText id="nummer"
-                                 value="#{userHandler.merkeKreditkarte.nummer}" required="true"
-                                 requiredMessage="#{msg.eingabefehlt}.">
-                        <f:converter converterId="kreditkartenConverter" />
-                        <f:validator validatorId="kreditkartenValidator" />
-                    </h:inputText>
-                </h:panelGroup>
-                <h:outputLabel value="#{msg.gueltigBis}: (z.B. 01/22)"
-                               for="gueltigBis" />
-                <h:panelGroup>
-                    <p:calendar id="gueltigBis"
-                                value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
-                                navigator="true" showOn="button" pattern="MM.yy" required="true"
-                                requiredMessage="#{msg.gueltigkdatumfehlt}." />
-                    <h:message for="gueltigBis" styleClass="message" />
-                </h:panelGroup>
-                <h:outputLabel value="#{msg.inhaber}" for="inhaber" />
-                <h:panelGroup>
-                    <h:inputText id="inhaber"
-                                 value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
-                                 requiredMessage="#{msg.eingabefehlt}." />
-                    <h:message for="inhaber" styleClass="message" />
-                </h:panelGroup>
-
-                <h:commandButton action="#{userHandler.kdabbrechen()}"
+                    </h:panelGroup>
+                    <h:commandButton action="#{pageHandler.toLogout}"
                                  value="#{msg.abbrechen}" immediate="true" />
-                <h:commandButton action="#{userHandler.kdspeichern()}"
+                    <h:commandButton action="#{userHandler.kundendatenSpeichern}"
                                  value="#{msg.speichern}" update="messages" />
-
-            </h:panelGrid>
-        </h:form>
+                    </h:panelGrid>
+                </h:form>
             </ui:insert>
         </div>
 

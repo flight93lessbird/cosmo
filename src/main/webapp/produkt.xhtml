@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,30 +12,23 @@
 
 <h:body>
     <h:form>
-
         <div id="header">
             <ui:insert name="header">
                 <ui:include src="/header.xhtml" />
             </ui:insert>
         </div>
 
-
         <div id="content">
             <ui:insert name="content">
             </ui:insert>
-
             <H1>#{produktHandler.merkeProdukt.marke}</H1>
             <H2>#{produktHandler.merkeProdukt.titel}</H2>
-
-        <h:graphicImage value= "resources/images/#{produktHandler.merkeProdukt.titel}.PNG"
+            <h:graphicImage value= "resources/images/#{produktHandler.merkeProdukt.titel}.PNG"
                             style="height:200px; width:200px;" />
-
             <H3>Menge:</H3>
             <H4>#{produktHandler.merkeProdukt.menge} #{produktHandler.merkeProdukt.mengentyp.label}</H4>
-
             <H3>Preis:</H3>
             <H4>#{produktHandler.merkeProdukt.preis} #{produktHandler.merkeProdukt.waehrungtyp.label}</H4>
-
             <f:facet name="header">#{msg.kaufen}</f:facet>
             <p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
                 <p:ajax process="@this" />
@@ -45,7 +37,6 @@
                     action="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.benutzer, produktHandler.merkeProdukt, warenkorbhd.stkZahl)}"
                     value="#{msg.indenwarnkorb}">
             </p:commandButton>
-
             <H3>Produktbeschreibung:</H3>
             <a>#{produktHandler.merkeProdukt.beschreibung}</a>
         </div>

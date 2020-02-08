@@ -12,14 +12,11 @@
 
 <h:body>
     <h:form>
-
         <div id="header">
             <ui:insert name="header">
                 <ui:include src="/header.xhtml" />
             </ui:insert>
         </div>
-
-
 
         <div id="content">
             <ui:insert name="content">
@@ -58,10 +55,7 @@
                                         required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
                             <h:message styleClass="message" for="geburtsdatum" />
                         </h:panelGroup>
-
                     </h:panelGrid>
-
-
                     <h1>#{msg.lieferanschrft}</h1>
                     <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                                  columns="2" headerClass="header" footerClass="footer">
@@ -85,9 +79,9 @@
                                          value="#{userHandler.merkeAdresse.ort}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}."/>
                         </h:panelGroup>
-                        <h:commandButton action="#{warenkorbhd.abbrechenkdue}"
+                        <h:commandButton action="#{pageHandler.toWarenkorb}"
                                          value="#{msg.abbrechen}" immediate="true" />
-                        <h:commandButton action="#{warenkorbhd.speichernwk}"
+                        <h:commandButton action="#{userHandler.speichernWk}"
                                          value="#{msg.speichern}" update="messages" />
                     </h:panelGrid>
                 </h:form>

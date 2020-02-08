@@ -12,13 +12,11 @@
 
 <h:body>
     <h:form>
-
         <div id="header">
             <ui:insert name="header">
                 <ui:include src="/header.xhtml" />
             </ui:insert>
         </div>
-
 
     <div id="content">
         <ui:insert name="content">
@@ -27,14 +25,13 @@
                 <p:growl id="growl" showDetail="true" sticky="true" />
                 <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                      columns="2" headerClass="header" footerClass="footer">
-
-                 <h:outputLabel for="username" value="#{msg.username}" />
+                    <h:outputLabel for="username" value="#{msg.username}" />
                     <h:panelGroup>
-                          <h:inputText id="username"
-                             value="#{userHandler.merkeKunde.vorname}" required="true"
-                             requiredMessage="#{msg.eingabefehlt}">
-                                <f:validateLength minimum="2" />
-                         </h:inputText>
+                        <h:inputText id="username"
+                                     value="#{userHandler.username}" required="true"
+                                     requiredMessage="#{msg.eingabefehlt}">
+                            <f:validateLength minimum="2" />
+                        </h:inputText>
                     </h:panelGroup>
                 <h:outputLabel for="passwort" value="#{msg.passwort}" />
             <h:panelGroup>
@@ -43,25 +40,19 @@
                             requiredMessage="#{msg.eingabefehlt}" label="Password">
                 </p:password>
             </h:panelGroup>
-
             <h:commandButton action="#{userHandler.WkLogin}"
                              value="#{msg.login}"  />
-
         </h:panelGrid>
-
                         <br/>
                         <h2>#{msg.nochknkdWarenkorb}</h2>
-                        <h:commandButton action="#{warenkorbhd.toRegWarenkorb}"
+                        <h:commandButton action="#{pageHandler.toRegistrierenWarenkorb}"
                                          value="#{msg.registrieren}" immediate="true" />
-
                         <br/><br/>
                         <h2>#{msg.gast}</h2>
-                        <h:commandButton action="#{warenkorbhd.toUeberpruefung}"
+                        <h:commandButton action="#{pageHandler.toKundendatenUeberpruefung}"
                                  value="#{msg.gastBn}" immediate="true" />
-
                          <br/><br/><br/>
-                        <h:commandButton action="#{warenkorbhd.abbrechenLog}" value="#{msg.abbrechen}"/>
-
+                        <h:commandButton action="#{pageHandler.toWarenkorb}" value="#{msg.abbrechen}"/>
                 </h:form>
             </ui:insert>
         </div>

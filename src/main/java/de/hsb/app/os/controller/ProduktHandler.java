@@ -93,12 +93,12 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	
 	/**Hier legen wir neue Artikel an*/
 	public String ProduktAnlegen() {
-		try {
+//		try {
 //			pdList.setRowIndex(0);
 			merkeProdukt = new Produkt();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		return "neuProdukt?faces-redirect=true";
 	}
 	
@@ -139,7 +139,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	/**
 	 * Loescht einen Eintrag in der Produkt-Liste.
 	 */
-	// pddelete(Produkt produkt)
 	public String pddelete() {
 		merkeProdukt = pdList.getRowData();
 		try {
@@ -204,7 +203,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public String ansicht(Produkt produkt) {
 		if (produkt != null){
 			merkeProdukt = produkt;
-			return "Produkt?faces-redirect=true";
+			return "produkt?faces-redirect=true";
 		}
 		return "startseite?faces-redirect=true";
 	}

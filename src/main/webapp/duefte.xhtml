@@ -12,7 +12,6 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<ui:include src="/header.xhtml" />
@@ -25,48 +24,38 @@
 					value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
 					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.duefte}</f:facet>
-
 						<h:column>
 							<f:facet name="header">#{msg.artkllabel}</f:facet>
 							<h:outputText value="#{produkt.marke}" />
 						</h:column>
-
 						<h:column>
 							<f:facet name="header">#{msg.artklname}</f:facet>
 							<h:outputText value="#{produkt.titel}" />
 						</h:column>
-
-
 						<h:column>
 							<f:facet name="header">#{msg.artklbesch}</f:facet>
 							<h:outputText value="#{produkt.beschreibung}" />
 						</h:column>
-
 						<h:column>
 							<f:facet name="header">#{msg.artklpreis}</f:facet>
 							<h:outputText value="#{produkt.preis}" />
 							<h:outputText value="#{produkt.waehrungtyp.label}" />
 						</h:column>
-
 						<h:column>
 							<f:facet name="header">#{msg.artmenge}</f:facet>
 							<h:outputText value="#{produkt.menge}" />
 							<h:outputText value="#{produkt.mengentyp.label}" />
 						</h:column>
-
 						<h:column>
 							<f:facet name="header">Ansicht</f:facet>
-						
 							<h:commandButton
 									action="#{produktHandler.ansicht(produkt)}"
 									value="Ansicht">
 							</h:commandButton>
 						</h:column>
-
 					</h:dataTable>
 			</ui:insert>
 		</div>
-
 
 		<div class="footer">
 			<ui:include src="/footer.xhtml" />

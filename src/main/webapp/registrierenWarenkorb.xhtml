@@ -12,13 +12,11 @@
 
 <h:body>
     <h:form>
-
         <div id="header">
             <ui:insert name="header">
                 <ui:include src="/header.xhtml" />
             </ui:insert>
         </div>
-
 
         <div id="content">
             <ui:insert name="content">
@@ -27,30 +25,26 @@
                     <p:growl id="growl" showDetail="true" sticky="true" />
                     <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
                                  columns="2" headerClass="header" footerClass="footer">
-
                         <h:outputLabel for="username" value="#{msg.username}" />
                         <h:panelGroup>
                             <h:inputText id="username"
-                                         value="#{mbos.merkeBenutzer.username}" required="true"
+                                         value="#{userHandler.merkeBenutzer.username}" required="true"
                                          requiredMessage="#{msg.eingabefehlt}" />
                         </h:panelGroup>
-
                         <h:outputLabel for="passwort1" value="#{msg.passwort}" />
                         <h:panelGroup>
                             <p:password id="passwort1"
-                                        value="#{mbos.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
+                                        value="#{userHandler.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
                                         requiredMessage="#{msg.eingabefehlt}">
                             </p:password>
                         </h:panelGroup>
-
                         <h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
                         <h:panelGroup>
                             <p:password id="passwort2"
-                                        value="#{mbos.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
+                                        value="#{userHandler.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
                                 <f:validator validatorId="PasswordValidation" />
                             </p:password>
                         </h:panelGroup>
-
                         <h:outputLabel value="#{msg.anrede}:" for="anrede" />
                         <h:panelGroup>
                             <h:selectOneMenu id="anrede" value="#{userHandler.merkeKunde.anrede}">
@@ -71,7 +65,6 @@
                                          requiredMessage="#{msg.eingabefehlt}." />
                             <h:message for="nachname" styleClass="message" />
                         </h:panelGroup>
-
                         <h:outputLabel value="#{msg.strasse}:" for="strasse" />
                         <h:panelGroup>
                             <h:inputText id="strasse"
@@ -79,7 +72,6 @@
                                          requiredMessage="#{msg.eingabefehlt}." />
                             <h:message for="strasse" styleClass="message" />
                         </h:panelGroup>
-
                         <h:outputLabel for="plz" value="#{msg.plz}:" />
                         <h:panelGroup>
                             <h:inputText id="plz" required="true"
@@ -87,13 +79,11 @@
                                 <f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
                             </h:inputText>
                         </h:panelGroup>
-
                         <h:outputLabel for="ort" value="#{msg.ort}:" />
                         <h:panelGroup>
                             <h:inputText id="ort" required="true"
                                          value="#{userHandler.merkeAdresse.ort}" />
                         </h:panelGroup>
-
                         <h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
                         <h:panelGroup>
                             <p:calendar id="geburtsdatum"
@@ -102,16 +92,11 @@
                                         required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
                             <h:message styleClass="message" for="geburtsdatum" />
                         </h:panelGroup>
-
-                        <h:commandButton action="#{warenkorbhd.abbrechenReg}"
+                        <h:commandButton action="#{pageHandler.toKundendaten}"
                                          value="#{msg.abbrechen}" immediate="true" />
-
-
-                        <h:commandButton action="#{mbos.registrierenWk}"
+                        <h:commandButton action="#{userHandler.registrierenWk}"
                                          value="#{msg.speichern}" update="messages" />
-
                     </h:panelGrid>
-
                 </h:form>
             </ui:insert>
         </div>

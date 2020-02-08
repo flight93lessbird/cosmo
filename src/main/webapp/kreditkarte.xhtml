@@ -12,7 +12,6 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
@@ -21,12 +20,9 @@
 					</a> <a class="account" href="adminLogout.xhtml"><h:graphicImage
 						value="resources/images/user.png" height="50px" width="50px" /></a>
 				</div>
-
-
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
 				</div>
-
 			</ui:insert>
 		</div>
 
@@ -77,30 +73,25 @@
 										 requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="inhaber" styleClass="message" />
 						</h:panelGroup>
-						<h:commandButton action="#{userHandler.abbrechen}"
+						<h:commandButton action="#{pageHandler.toKunden}"
 										 value="#{msg.abbrechen}" immediate="true" />
 						<h:commandButton action="#{userHandler.kreditkarteSpeichern}"
 										 value="#{msg.speichern}" update="messages" />
-
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>
 		</div>
 
-
-
 		<div class="footer">
 			<ul class="footermenu">
 				<li><a></a></li>
 			</ul>
-
 			<center>
 				<div class="contact">
 					<div class="custom">
 						Cosmostrasse 10<br /> 27472 Cosmostadt
 					</div>
 				</div>
-
 				<div class="row copyright">
 					<div class="col-lg-12">
 						Copyright &#169; 2019 | <a href="admin.xhtml">www.Cosmo.de</a>
@@ -109,7 +100,6 @@
 				</div>
 			</center>
 		</div>
-
 	</h:form>
 </h:body>
 </html>

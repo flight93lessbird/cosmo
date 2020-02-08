@@ -12,35 +12,9 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
-			<ui:insert name="header">
-				<div class="logo">
-					<a class="" href="/os/startseite.xhtml"> <h:graphicImage
-							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a>
-
-					<a class="account" href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
-							value="resources/images/user.png" height="50px" width="50px" /></a>
-
-					<a class="account" href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
-							value="resources/images/shopping-cart-of-checkered-design.png"
-							height="50px" width="50px" /></a>
-				</div>
-
-
-
-				<div class="topnav">
-					<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
-					<a href="pflege.xhtml">#{msg.Pf}</a>
-					<div class="search-container">
-						<input type="text" name="placeHolder" value="#{msg.suchen}" />
-						<h:commandButton action="#{duftHandler.suche}" value="#{msg.suche}" />
-					</div>
-				</div>
-			</ui:insert>
+			<ui:include src="/header.xhtml" />
 		</div>
-
 
 		<div id="content">
 			<ui:insert name="content">
@@ -49,39 +23,32 @@
 					<p:growl id="growl" showDetail="true" sticky="true" />
 					<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
 								 columns="2" headerClass="header" footerClass="footer">
-
 						<h:outputLabel for="username" value="#{msg.username}" />
 						<h:panelGroup>
 							<h:inputText id="username"
-										 value="#{mbos.merkeBenutzer.username}" required="true"
+										 value="#{userHandler.merkeBenutzer.username}" required="true"
 										 requiredMessage="#{msg.eingabefehlt}" />
 						</h:panelGroup>
-
 						<h:outputLabel for="passwort1" value="#{msg.passwort}" />
 						<h:panelGroup>
 							<p:password id="passwort1"
-										 value="#{mbos.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
+										 value="#{userHandler.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
 										 requiredMessage="#{msg.eingabefehlt}">
 							</p:password>
 						</h:panelGroup>
-
 						<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
 						<h:panelGroup>
 							<p:password id="passwort2"
-										 value="#{mbos.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
+										 value="#{userHandler.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
 						</h:panelGroup>
-
 						<h:commandButton value="#{msg.zuruck}" icon="ui-icon-carat-1-w"
-										 action="#{mbos.toLogin}" immediate="true" />
+										 action="#{pageHandler.toLogin}" immediate="true" />
 						<h:commandButton id="registrieren" update="grid"
-										 value="#{msg.registrieren}" action="#{mbos.benutzerRegistrieren}" />
-
+										 value="#{msg.registrieren}" action="#{userHandler.benutzerRegistrieren}" />
 					</h:panelGrid>
-
 				</h:form>
-
 			</ui:insert>
 		</div>
 	</h:form>

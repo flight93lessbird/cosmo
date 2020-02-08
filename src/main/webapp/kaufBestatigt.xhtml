@@ -12,7 +12,6 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<ui:include src="/header.xhtml" />
@@ -27,7 +26,6 @@
 					</h1>
 					<h3>#{msg.kaufbestaetig}</h3>
 					<br></br> <br></br>
-
 					<h:outputLabel value="#{msg.vorname}:" />
 					<h:outputLabel value="#{userHandler.merkeKunde.vorname}" />
 					<br></br>
@@ -39,32 +37,28 @@
 					<br></br>
 					<br></br>
 					<h:outputLabel value="#{msg.artklname}: " />
-					<h:outputLabel value="#{mbHS.merkeArtikel.artikel}" />
+					<h:outputLabel value="#{warenkorbItem.p.marke}" />
 					<br></br>
-
 					<h:outputLabel value="#{msg.bestellmenge}: " />
 					<br></br>
-					<h:outputLabel value="#{mbHS.merkeArtikel.bestellmenge}" />
+					<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
 					<h:outputLabel value="#{msg.preisinkmws}: " />
-					<h:outputText id="a" value="#{mbHS.merkeArtikel.verkaufspreis} €"
+					<h:outputText id="a" value="#{warenkorbItem.p.verkaufspreis} €"
 						required="true" />
 					<br></br>
 					<h:outputText value="#{msg.bestelldatum}: " />
-					<h:outputText value="#{mbHS.merkeArtikel.date}">
+					<h:outputText value="#{warenkorbItem.p.date}">
 						<f:convertDateTime pattern="dd.MM.yyyy" />
 					</h:outputText>
 					<br></br>
 					<br></br>
 					<h:commandButton id="auswählen" value="#{msg.quitdruck}"
 						onclick="javascript:window.print()" icon="ui-icon-search" />
-					<h:commandButton action="#{mbos.weiterShoppen}"
+					<h:commandButton action="#{pageHandler.toStartseite}"
 									 value="#{msg.weitershoppen}" update="messages" />
 				</div>
 			</ui:insert>
 		</div>
-		
-		<br></br>
-		<br></br>
 
 		<div class="footer">
 			<ui:include src="/footer.xhtml" />

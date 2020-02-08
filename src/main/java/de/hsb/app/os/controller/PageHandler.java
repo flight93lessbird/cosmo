@@ -34,6 +34,10 @@ public class PageHandler {
 		return "produkte?faces-redirect=true";
 	}
 
+	public String toMeinKonto() {
+		return "meinKonto?faces-redirect=true";
+	}
+
 	public String toLogout() {
 		return "logout?faces-redirect=true";
 	}
@@ -54,6 +58,10 @@ public class PageHandler {
 		return "zahlungsart?faces-redirect=true";
 	}
 
+	public String toRegistrieren() {
+		return "registrieren?faces-redirect=true";
+	}
+
 	public String toRegistrierenWarenkorb() {
 		return "registrierenWarenkorb?faces-redirect=true";
 	}
@@ -66,7 +74,6 @@ public class PageHandler {
 		return "Kundendaten?faces-redirect=true";
 	}
 
-	/** Hier wird der Warenkorb versendet */
 	public String toKaufBestatigt() {
 		return "kaufBestatigt?faces-redirect=true";
 	}

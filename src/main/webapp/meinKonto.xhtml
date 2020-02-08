@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -13,13 +12,11 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<ui:include src="/header.xhtml" />
 			</ui:insert>
 		</div>
-
 
 		<div id="content">
 			<ui:insert name="content">
@@ -47,7 +44,6 @@
 								requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="nachname" styleClass="message" />
 						</h:panelGroup>
-
 						<h:outputLabel value="#{msg.strasse}:" for="strasse" />
 						<h:panelGroup>
 							<h:inputText id="strasse"
@@ -55,7 +51,6 @@
 								requiredMessage="#{msg.eingabefehlt}." />
 							<h:message for="strasse" styleClass="message" />
 						</h:panelGroup>
-
 						<h:outputLabel for="plz" value="#{msg.plz}:" />
 						<h:panelGroup>
 							<h:inputText id="plz" required="true"
@@ -63,13 +58,11 @@
 								<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
 							</h:inputText>
 						</h:panelGroup>
-
 						<h:outputLabel for="ort" value="#{msg.ort}:" />
 						<h:panelGroup>
 							<h:inputText id="ort" required="true"
 								value="#{userHandler.merkeAdresse.ort}" />
 						</h:panelGroup>
-
 					<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
 					<h:panelGroup>
 						<p:calendar id="geburtsdatum"
@@ -78,17 +71,14 @@
 							required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
 						<h:message styleClass="message" for="geburtsdatum" />
 					</h:panelGroup>
-
-					<h:commandButton action="#{userHandler.abbrechen}"
+					<h:commandButton action="#{pageHandler.toLogout}"
 									 value="#{msg.abbrechen}" immediate="true" />
 					<h:commandButton action="#{userHandler.speichernReg}"
 						value="#{msg.speichern}" update="messages" />
-
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>
 		</div>
-
 
 		<div class="footer">
 			<ui:include src="/footer.xhtml" />

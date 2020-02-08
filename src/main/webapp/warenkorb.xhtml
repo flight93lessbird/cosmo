@@ -12,7 +12,6 @@
 
 <h:body>
 	<h:form>
-
 		<div id="header">
 			<ui:insert name="header">
 				<ui:include src="/header.xhtml" />
@@ -25,18 +24,14 @@
 					value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
 					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.warenk}</f:facet>
-
-
 					<h:column>
 						<f:facet name="header">#{msg.artkllabel}</f:facet>
 						<h:outputText value="#{warenkorbItem.p.marke}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">#{msg.artklname}</f:facet>
 						<h:outputText value="#{warenkorbItem.p.titel}" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">#{msg.artklpreis}</f:facet>
 						<h:outputText value="#{warenkorbItem.p.preis}" />
@@ -45,9 +40,7 @@
 					<h:column>
 						<f:facet name="header">#{msg.artmenge}</f:facet>
 						<h:outputText value="#{warenkorbItem.p.menge} #{warenkorbItem.p.mengentyp}" />
-<!--						<h:outputText value="#{warenkorbItem.p.menge.concat(msg[warenkorbItem.p.mengentyp])}"/> -->
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">#{msg.artklanzl}</f:facet>
 						<h:outputLabel for="@next"/>
@@ -58,7 +51,6 @@
 						</p:spinner>
 						<h:outputText id="ajaxSpinnerValue" value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
 					</h:column>
-
 					<h:column>
 						<f:facet name="header">#{msg.artgesamt}</f:facet>
 						<h:outputText
@@ -72,13 +64,10 @@
 							<p:ajax event="click" update="warenkorbTabelle"/>
 						</p:commandButton>
 					</h:column>
-
 				</h:dataTable>
-				
 				<h3>#{msg.artzwschsum}:</h3>
-				<h:commandButton action="#{produktHandler.aktualisieren}"
+				<h:commandButton action="#{pageHandler.toWarenkorb}"
 					value="#{msg.aktualisieren}" />
-
 				<h:commandButton action="#{warenkorbhd.toKundendaten(userHandler.benutzer)}"
 					value="#{msg.bestellaschl}" />
 			</ui:insert>
