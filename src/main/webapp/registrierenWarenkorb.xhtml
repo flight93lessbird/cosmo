@@ -1,124 +1,105 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <link rel="stylesheet" href="resources/style.css" type="text/css" />
-    <title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
-</h:head>
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:body>
-    <h:form>
+	<ui:define name="content">
+		<h:form>
+			<h1>#{msg.meinkonto}</h1>
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
+				columns="2" headerClass="header" footerClass="footer">
 
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="/header.xhtml" />
-            </ui:insert>
-        </div>
+				<h:outputLabel for="username" value="#{msg.username}" />
+				<h:panelGroup>
+					<h:inputText id="username"
+						value="#{userHandler.merkeBenutzer.username}" required="true"
+						requiredMessage="#{msg.eingabefehlt}" />
+				</h:panelGroup>
 
+				<h:outputLabel for="passwort1" value="#{msg.passwort}" />
+				<h:panelGroup>
+					<p:password id="passwort1"
+						value="#{userHandler.merkeBenutzer.passwort}" match="passwort2"
+						label="Password 1" required="true"
+						requiredMessage="#{msg.eingabefehlt}">
+					</p:password>
+				</h:panelGroup>
 
-        <div id="content">
-            <ui:insert name="content">
-                <h:form>
-                    <h1>#{msg.meinkonto}</h1>
-                    <p:growl id="growl" showDetail="true" sticky="true" />
-                    <h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
-                                 columns="2" headerClass="header" footerClass="footer">
+				<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
+				<h:panelGroup>
+					<p:password id="passwort2"
+						value="#{userHandler.merkeBenutzer.passwort}" label="Password 2"
+						required="true" requiredMessage="true">
+						<f:validator validatorId="PasswordValidation" />
+					</p:password>
+				</h:panelGroup>
 
-                        <h:outputLabel for="username" value="#{msg.username}" />
-                        <h:panelGroup>
-                            <h:inputText id="username"
-                                         value="#{userHandler.merkeBenutzer.username}" required="true"
-                                         requiredMessage="#{msg.eingabefehlt}" />
-                        </h:panelGroup>
+				<h:outputLabel value="#{msg.anrede}:" for="anrede" />
+				<h:panelGroup>
+					<h:selectOneMenu id="anrede"
+						value="#{userHandler.merkeKunde.anrede}">
+						<f:selectItems var="form" value="#{userHandler.anredeValues}"
+							itemValue="#{form}" itemLabel="#{form.label}" />
+					</h:selectOneMenu>
+				</h:panelGroup>
+				<h:outputLabel value="#{msg.vorname}:" for="vorname" />
+				<h:panelGroup>
+					<h:inputText id="vorname" value="#{userHandler.merkeKunde.vorname}"
+						required="true" requiredMessage="#{msg.eingabefehlt}." />
+					<h:message for="vorname" styleClass="message" />
+				</h:panelGroup>
+				<h:outputLabel value="#{msg.nachname}:" for="nachname" />
+				<h:panelGroup>
+					<h:inputText id="nachname"
+						value="#{userHandler.merkeKunde.nachname}" required="true"
+						requiredMessage="#{msg.eingabefehlt}." />
+					<h:message for="nachname" styleClass="message" />
+				</h:panelGroup>
 
-                        <h:outputLabel for="passwort1" value="#{msg.passwort}" />
-                        <h:panelGroup>
-                            <p:password id="passwort1"
-                                        value="#{userHandler.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
-                                        requiredMessage="#{msg.eingabefehlt}">
-                            </p:password>
-                        </h:panelGroup>
+				<h:outputLabel value="#{msg.strasse}:" for="strasse" />
+				<h:panelGroup>
+					<h:inputText id="strasse"
+						value="#{userHandler.merkeAdresse.strasse}" required="true"
+						requiredMessage="#{msg.eingabefehlt}." />
+					<h:message for="strasse" styleClass="message" />
+				</h:panelGroup>
 
-                        <h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
-                        <h:panelGroup>
-                            <p:password id="passwort2"
-                                        value="#{userHandler.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
-                                <f:validator validatorId="PasswordValidation" />
-                            </p:password>
-                        </h:panelGroup>
+				<h:outputLabel for="plz" value="#{msg.plz}:" />
+				<h:panelGroup>
+					<h:inputText id="plz" required="true"
+						value="#{userHandler.merkeAdresse.plz}">
+						<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
+					</h:inputText>
+				</h:panelGroup>
 
-                        <h:outputLabel value="#{msg.anrede}:" for="anrede" />
-                        <h:panelGroup>
-                            <h:selectOneMenu id="anrede" value="#{userHandler.merkeKunde.anrede}">
-                                <f:selectItems var="form" value="#{userHandler.anredeValues}" itemValue="#{form}" itemLabel="#{form.label}" />
-                            </h:selectOneMenu>
-                        </h:panelGroup>
-                        <h:outputLabel value="#{msg.vorname}:" for="vorname" />
-                        <h:panelGroup>
-                            <h:inputText id="vorname"
-                                         value="#{userHandler.merkeKunde.vorname}" required="true"
-                                         requiredMessage="#{msg.eingabefehlt}." />
-                            <h:message for="vorname" styleClass="message" />
-                        </h:panelGroup>
-                        <h:outputLabel value="#{msg.nachname}:" for="nachname" />
-                        <h:panelGroup>
-                            <h:inputText id="nachname"
-                                         value="#{userHandler.merkeKunde.nachname}" required="true"
-                                         requiredMessage="#{msg.eingabefehlt}." />
-                            <h:message for="nachname" styleClass="message" />
-                        </h:panelGroup>
+				<h:outputLabel for="ort" value="#{msg.ort}:" />
+				<h:panelGroup>
+					<h:inputText id="ort" required="true"
+						value="#{userHandler.merkeAdresse.ort}" />
+				</h:panelGroup>
 
-                        <h:outputLabel value="#{msg.strasse}:" for="strasse" />
-                        <h:panelGroup>
-                            <h:inputText id="strasse"
-                                         value="#{userHandler.merkeAdresse.strasse}" required="true"
-                                         requiredMessage="#{msg.eingabefehlt}." />
-                            <h:message for="strasse" styleClass="message" />
-                        </h:panelGroup>
+				<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
+				<h:panelGroup>
+					<p:calendar id="geburtsdatum"
+						value="#{userHandler.merkeKunde.geburtsdatum}" mode="popup"
+						navigator="true" showOn="button" pattern="dd.MM.yyyy"
+						yearRange="c-70:c+50" required="true"
+						requiredMessage="#{msg.gueltigkdatumfehlt}." />
+					<h:message styleClass="message" for="geburtsdatum" />
+				</h:panelGroup>
 
-                        <h:outputLabel for="plz" value="#{msg.plz}:" />
-                        <h:panelGroup>
-                            <h:inputText id="plz" required="true"
-                                         value="#{userHandler.merkeAdresse.plz}">
-                                <f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
-                            </h:inputText>
-                        </h:panelGroup>
-
-                        <h:outputLabel for="ort" value="#{msg.ort}:" />
-                        <h:panelGroup>
-                            <h:inputText id="ort" required="true"
-                                         value="#{userHandler.merkeAdresse.ort}" />
-                        </h:panelGroup>
-
-                        <h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
-                        <h:panelGroup>
-                            <p:calendar id="geburtsdatum"
-                                        value="#{userHandler.merkeKunde.geburtsdatum}" mode="popup"
-                                        navigator="true" showOn="button" pattern="dd.MM.yyyy" yearRange="c-70:c+50"
-                                        required="true" requiredMessage="#{msg.gueltigkdatumfehlt}." />
-                            <h:message styleClass="message" for="geburtsdatum" />
-                        </h:panelGroup>
-
-                        <h:commandButton action="#{pageHandler.toStartseite()}"
-                                         value="#{msg.abbrechen}" immediate="true" />
+				<h:commandButton action="#{pageHandler.toStartseite()}"
+					value="#{msg.abbrechen}" immediate="true" />
 
 
-                        <h:commandButton action="#{userHandler.speichernReg()}"
-                                         value="#{msg.speichern}" update="messages" />
+				<h:commandButton action="#{userHandler.speichernReg()}"
+					value="#{msg.speichern}" update="messages" />
 
-                    </h:panelGrid>
+			</h:panelGrid>
 
-                </h:form>
-            </ui:insert>
-        </div>
-
-        <div class="footer">
-            <ui:include src="/footer.xhtml" />
-        </div>
-    </h:form>
-</h:body>
-</html>
+		</h:form>
+	</ui:define>
+</ui:composition>

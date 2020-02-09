@@ -204,9 +204,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public String ansicht(Produkt produkt) {
 		if (produkt != null){
 			merkeProdukt = produkt;
-			return "Produkt?faces-redirect=true";
+			return "produkt?faces -redirect=true";
 		}
-		return "Startseite?faces-redirect=true";
+		return "startseite?faces -redirect=true";
 	}
 
 	public Produkt getMerkeProdukt() {

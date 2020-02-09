@@ -1,77 +1,52 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
-</h:head>
 
-<h:body>
-	<h:form>
-
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/header.xhtml" />
-			</ui:insert>
-		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-				<h:dataTable var="produkt"
-					value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
-					rowClasses="odd,even" headerClass="header">
-					<f:facet name="header">#{msg.Pf}</f:facet>
+	<ui:define name="content">
+		<h:dataTable var="produkt"
+			value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+			rowClasses="odd,even" headerClass="header">
+			<f:facet name="header">#{msg.Pf}</f:facet>
 
 
-					<h:column>
-						<f:facet name="header">#{msg.artkllabel}</f:facet>
-						<h:outputText value="#{produkt.marke}" />
-					</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.artkllabel}</f:facet>
+				<h:outputText value="#{produkt.marke}" />
+			</h:column>
 
-					<h:column>
-						<f:facet name="header">#{msg.artklname}</f:facet>
-						<h:outputText value="#{produkt.titel}" />
-					</h:column>
-
-
-					<h:column>
-						<f:facet name="header">#{msg.artklbesch}</f:facet>
-						<h:outputText value="#{produkt.beschreibung}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">#{msg.artklpreis}</f:facet>
-						<h:outputText value="#{produkt.preis}" />
-						<h:outputText value="#{produkt.waehrungtyp.label}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Menge</f:facet>
-						<h:outputText value="#{produkt.menge}" />
-						<h:outputText value="#{produkt.mengentyp.label}" />
-					</h:column>
-
-					<h:column>
-						<f:facet name="header">Ansicht</f:facet>
-
-						<h:commandButton
-								action="#{produktHandler.ansicht(produkt)}"
-								value="Ansicht">
-						</h:commandButton>
-					</h:column>
-				</h:dataTable>
-			</ui:insert>
-		</div>
+			<h:column>
+				<f:facet name="header">#{msg.artklname}</f:facet>
+				<h:outputText value="#{produkt.titel}" />
+			</h:column>
 
 
+			<h:column>
+				<f:facet name="header">#{msg.artklbesch}</f:facet>
+				<h:outputText value="#{produkt.beschreibung}" />
+			</h:column>
 
-		<div class="footer">
-			<ui:include src="/footer.xhtml" />
-		</div>
-	</h:form>
-</h:body>
-</html>
+			<h:column>
+				<f:facet name="header">#{msg.artklpreis}</f:facet>
+				<h:outputText value="#{produkt.preis}" />
+				<h:outputText value="#{produkt.waehrungtyp.label}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Menge</f:facet>
+				<h:outputText value="#{produkt.menge}" />
+				<h:outputText value="#{produkt.mengentyp.label}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Ansicht</f:facet>
+
+				<h:commandButton action="#{produktHandler.ansicht(produkt)}"
+					value="Ansicht">
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>

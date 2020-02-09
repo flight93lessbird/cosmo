@@ -1,40 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
-</h:head>
 
-<h:body>
-	<h:form>
-
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/header.xhtml" />
-			</ui:insert>
+	<ui:define name="content">
+		<div class="Impressum">
+			<h1>#{msg.impressum}</h1>
+			<p>
+				COS'MO <br /> Cosmostrasse 10 <br /> 28195 Bremen
+			</p>
+			<h2>Telefon</h2>
+			<p>+49 123456789</p>
 		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-				<div class="Impressum">
-					<h1> #{msg.impressum} </h1>
-					<p>
-						COS'MO <br /> Cosmostrasse 10 <br /> 28195 Bremen
-					</p>
-					<h2> Telefon </h2>
-					<p>+49 123456789</p>
-				</div>
-			</ui:insert>
-		</div>
-
-		<div class="footer">
-			<ui:include src="/footer.xhtml" />
-		</div>
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

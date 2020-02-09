@@ -219,7 +219,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "Logout?faces-redirect=true";
+		return "logout?faces-redirect=true";
 	}
 
 	public String edit() {
@@ -356,7 +356,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			if (benutzer.getRolle() == Rolle.ADMIN) {
 				return "/admin.xhtml";
 			} else {
-				return "/Startseite.xhtml?faces-redirect=true";
+				return "/startseite.xhtml?faces-redirect=true";
 			}
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -408,7 +408,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		if (benutzer != null) {
 			return "/os/logout.xhtml";
 		} else {
-			return "/os/testLogin.xhtml";
+			return "/os/login.xhtml";
 		}
 	}
 
@@ -418,7 +418,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	 **/
 	public String logout() {
 		benutzer = null;
-		return "/konto.xhtml?faces -redirect=true";
+		return "/login.xhtml?faces -redirect=true";
 	}
 
 	/**

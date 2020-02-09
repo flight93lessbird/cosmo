@@ -1,26 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
-</h:head>
 
-<h:body>
-	<h:form>
-
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/header.xhtml" />
-			</ui:insert>
-		</div>
-
-		<div id="content">
-			<ui:insert name="content">
+	<ui:define name="content">
 				<div class="urheberrecht">
 					<h1> Urheberrecht und Haftung </h1>
 					<p>Hier ein paar rechtliche Hinweise zum Urheberrecht und den
@@ -55,13 +40,5 @@
 						Rechtsverletzungen werden wir derartige Inhalte umgehend
 						entfernen.</p>
 				</div>
-			</ui:insert>
-		</div>
-
-
-		<div class="footer">
-			<ui:include src="/header.xhtml" />
-		</div>
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

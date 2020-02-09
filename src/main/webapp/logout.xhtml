@@ -1,55 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <link rel="stylesheet" href="resources/style.css" type="text/css" />
-    <title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
-</h:head>
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:body>
-    <h:form>
+	<ui:define name="content">
+		<h:form>
+			<h1>#{msg.logout}</h1>
+			<h:form id="form">
 
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="/header.xhtml" />
-            </ui:insert>
-        </div>
+				<p:commandButton action="#{userHandler.logout}"
+					value="#{msg.logout}" />
 
+				<br></br>
+				<h2>#{msg.kdbearbeiten}</h2>
+				<p:commandButton action="#{pageHandler.toKundendatenBearbeiten()}"
+					value="#{msg.bearbeiten}" immediate="true" />
 
-        <div id="content">
-            <ui:insert name="content">
-                <h:form>
-                    <h1>#{msg.logout}</h1>
-                    <h:form id="form">
+				<br></br>
+				<h2>#{msg.kdpwbearbeiten}</h2>
+				<p:commandButton action="#{pageHandler.toPasswortAendern()}"
+					value="#{msg.bearbeiten}" immediate="true" />
 
-                            <p:commandButton action="#{userHandler.logout}" value="#{msg.logout}" />
-
-                        <br></br>
-                        <h2>#{msg.kdbearbeiten}</h2>
-                        <p:commandButton action="#{pageHandler.toKundendatenBearbeiten()}"
-                                         value="#{msg.bearbeiten}" immediate="true" />
-
-                        <br></br>
-                        <h2>#{msg.kdpwbearbeiten}</h2>
-                        <p:commandButton action="#{pageHandler.toPasswortAendern()}"
-                                         value="#{msg.bearbeiten}" immediate="true" />
-
-                        <br></br>
-                        <h2>#{msg.kreditbearbeiten}</h2>
-                        <p:commandButton action="#{pageHandler.toKreditkartendatenAendern()}"
-                                         value="#{msg.bearbeiten}" immediate="true" />
-                    </h:form>
-                </h:form>
-            </ui:insert>
-        </div>
-
-        <div class="footer">
-            <ui:include src="/footer.xhtml" />
-        </div>
-    </h:form>
-</h:body>
-</html>
+				<br></br>
+				<h2>#{msg.kreditbearbeiten}</h2>
+				<p:commandButton
+					action="#{pageHandler.toKreditkartendatenAendern()}"
+					value="#{msg.bearbeiten}" immediate="true" />
+			</h:form>
+		</h:form>
+	</ui:define>
+</ui:composition>
