@@ -6,63 +6,63 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<h:form>
-		<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
-			value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
-			rowClasses="odd,even" headerClass="header">
-			<f:facet name="header">#{msg.warenk}</f:facet>
-			<h:column>
-				<f:facet name="header">#{msg.artkllabel}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.marke}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artklname}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.titel}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artklpreis}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.preis}" />
-				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artmenge}</f:facet>
-				<h:outputText
-					value="#{warenkorbItem.p.menge}" />
-				<h:outputText
-					value="#{warenkorbItem.p.mengentyp.label}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artklanzl}</f:facet>
-				<h:outputLabel for="@next" />
-				<p:spinner id="basic" min="1" max="99" size="1"
-					value="#{warenkorbItem.stkZahl}">
-					<p:ajax
-						listener="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.benutzer, warenkorbItem.p, this.val())}"
-						update="ajaxSpinnerValue" process="@this" />
-				</p:spinner>
-				<h:outputText id="ajaxSpinnerValue" value="#{warenkorbItem.stkZahl}"
-					style="padding-left: 10px" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artgesamt}</f:facet>
-				<h:outputText
-					value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}" />
-				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.loeschen}</f:facet>
-				<h:commandButton
-					action="#{warenkorbhd.deleteWarenkorbItem(userHandler.benutzer, warenkorbItem)}"
-					value="#{msg.loeschen}">
-					<p:ajax event="click" update="warenkorbTabelle" />
-				</h:commandButton>
-			</h:column>
-		</h:dataTable>
+			<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
+				value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
+				rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">#{msg.warenk}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.artkllabel}</f:facet>
+					<h:outputText value="#{warenkorbItem.p.marke}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.artklname}</f:facet>
+					<h:outputText value="#{warenkorbItem.p.titel}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.artklpreis}</f:facet>
+					<h:outputText value="#{warenkorbItem.p.preis}" />
+					<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.artmenge}</f:facet>
+					<h:outputText value="#{warenkorbItem.p.menge}" />
+					<h:outputText value="#{warenkorbItem.p.mengentyp.label}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.artklanzl}</f:facet>
+					<h:outputLabel for="@next" />
+					<p:spinner id="basic" min="1" max="99" size="1"
+						value="#{warenkorbItem.stkZahl}">
+						<p:ajax
+							listener="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.benutzer, warenkorbItem.p, this.val())}"
+							update="ajaxSpinnerValue" process="@this" />
+					</p:spinner>
+					<h:outputText id="ajaxSpinnerValue"
+						value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.artgesamt}</f:facet>
+					<h:outputText
+						value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}" />
+					<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.loeschen}</f:facet>
+					<h:commandButton
+						action="#{warenkorbhd.deleteWarenkorbItem(userHandler.benutzer, warenkorbItem)}"
+						value="#{msg.loeschen}">
+						<p:ajax event="click" update="warenkorbTabelle" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
 		</h:form>
-		<h3>#{msg.artzwschsum}:</h3>
-		<h:commandButton action="#{pageHandler.toWarenkorb}"
-			value="#{msg.aktualisieren}" />
-		<h:commandButton
-			action="#{warenkorbhd.toKundendaten(userHandler.benutzer)}"
-			value="#{msg.bestellaschl}" />
+		<h:form>
+			<h3>#{msg.artzwschsum}:</h3>
+			<h:commandButton action="#{pageHandler.toWarenkorb}"
+				value="#{msg.aktualisieren}" />
+			<h:commandButton
+				action="#{warenkorbhd.toKundendaten(userHandler.benutzer)}"
+				value="#{msg.bestellaschl}" />
+		</h:form>
 	</ui:define>
 </ui:composition>
