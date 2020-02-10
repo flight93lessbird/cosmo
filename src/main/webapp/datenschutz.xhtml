@@ -1,97 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">     #{msg.title}     </ui:insert></title>
-</h:head>
-
-<h:body>
-	<h:form>
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/header.xhtml" />
-			</ui:insert>
+	<ui:define name="content">
+		<div class="datenschutz">
+			<h1>#{msg.datenschtz}</h1>
+			<p>Hier finden Sie unsere Datenschutzhinweise, unter anderem mit
+				Bezug auf die Nutzung dieser Internetpräsenz, den Kontakt mit und
+				über die angebotenen Kommunikationswege und die Einbindung von
+				Social Media Funktionen.</p>
+			<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe
+				personenbezogener Daten möglich. Soweit auf unseren Seiten
+				personenbezogene Daten (beispielsweise Name, Anschrift oder
+				eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets
+				auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche
+				Zustimmung nicht an Dritte weitergegeben.</p>
+			<p>Wir weisen darauf hin, dass die Datenübertragung im Internet
+				(z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen
+				kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte
+				ist nicht möglich.</p>
+			<p>Der Nutzung von im Rahmen der Impressumspflicht
+				veröffentlichten Kontaktdaten durch Dritte zur übersendung von nicht
+				ausdrücklich angeforderter Werbung und Informationsmaterialien wird
+				hiermit ausdrücklich widersprochen. Die Betreiber der Seiten
+				behalten sich ausdrücklich rechtliche Schritte im Falle der
+				unverlangten Zusendung von Werbeinformationen, etwa durch
+				Spam-Mails, vor.</p>
+			<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe
+				personenbezogener Daten möglich. Soweit auf unseren Seiten
+				personenbezogene Daten (beispielsweise Name, Anschrift oder
+				eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets
+				auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche
+				Zustimmung nicht an Dritte weitergegeben.</p>
+			<p>Auskunft, Löschung, Sperrung Sie haben jederzeit das Recht auf
+				unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen
+				Daten, deren Herkunft und Empfänger und den Zweck der
+				Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder
+				Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema
+				personenbezogene Daten können Sie sich jederzeit über die im
+				Impressum angegeben Adresse des Webseitenbetreibers an uns wenden.</p>
+			<h2>Datenschutzerklärung in Bezug auf die Nutzung von
+				Analyse-Software</h2>
+			<p>Wir nehmen Datenschutz sehr ernst und verzichten daher auf die
+				Nutzung von Analyse-Diensten von externen Anbietern, bei denen die
+				erfassten statistischen Zugriffsdaten unkontrollierbar auf andere
+				Server bzw. in andere Länder übertragen würden. Diese Website
+				benutzt eine von dritten Dienstleistern unabhängige Analyse-Software
+				zur Erstellung von Zugriffsstatistiken. Auf die von uns anonymisiert
+				gesammelten, statistischen Daten haben grundsätzlich nur unser
+				deutscher Provider/Rechenzentrumsbetreiber und wir selbst Zugriff.
+				über die gesammelten, anonymen Daten lassen sich Rückschlüsse auf
+				die Nutzung unserer Internetpräsenz ziehen. Dazu zählen etwa Anzahl
+				der aufgerufenen Seiten, Suchbegriff aus einer weitergeleiteten
+				Anfrage aus Suchmaschinen oder auch Seitenaufrufe durch Verlinkungen
+				von anderen Seiten, jedoch nicht auf Ihre persönlichen bzw.
+				personenbezogenen Daten.</p>
+			<p>Die Analyse-Software verwendet sog. "Cookies", Textdateien,
+				die auf Ihrem Computer gespeichert werden und die eine Analyse der
+				Benutzung der Website ermöglicht. Die durch den Cookie erzeugten
+				Informationen über die Benutzung dieser Internetpräsenz werden nicht
+				an einen anderen Server oder einen ausländischen Dienstleister
+				übertragen, sondern dienen ausschlieÃŸlich der Zugriffs-Analyse
+				dieses Internetangebots. StandardmäÃŸig erfasst die Analysesoftware
+				auch die IP-Adresse der Besucher. Diese wird jedoch aus
+				Datenschutzgründen nur verkürzt gespeichert und ist damit zur
+				eindeutigen Identifikation des abfragenden Internetzugangs nicht
+				mehr geeignet. Die gekürzte IP-Adresse dient der ungefähren
+				regionalen Eingrenzung von Seitenaufrufen.</p>
 		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-				<div class="datenschutz">
-					<h1>#{msg.datenschtz}</h1>
-					<p>Hier finden Sie unsere Datenschutzhinweise, unter anderem
-						mit Bezug auf die Nutzung dieser Internetpräsenz, den Kontakt mit
-						und über die angebotenen Kommunikationswege und die Einbindung von
-						Social Media Funktionen.</p>
-					<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe
-						personenbezogener Daten möglich. Soweit auf unseren Seiten
-						personenbezogene Daten (beispielsweise Name, Anschrift oder
-						eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich,
-						stets auf freiwilliger Basis. Diese Daten werden ohne Ihre
-						ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
-					<p>Wir weisen darauf hin, dass die Datenübertragung im Internet
-						(z.B. bei der Kommunikation per E-Mail) Sicherheitslücken
-						aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff
-						durch Dritte ist nicht möglich.</p>
-					<p>Der Nutzung von im Rahmen der Impressumspflicht
-						veröffentlichten Kontaktdaten durch Dritte zur übersendung von
-						nicht ausdrücklich angeforderter Werbung und
-						Informationsmaterialien wird hiermit ausdrücklich widersprochen.
-						Die Betreiber der Seiten behalten sich ausdrücklich rechtliche
-						Schritte im Falle der unverlangten Zusendung von
-						Werbeinformationen, etwa durch Spam-Mails, vor.</p>
-					<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe
-						personenbezogener Daten möglich. Soweit auf unseren Seiten
-						personenbezogene Daten (beispielsweise Name, Anschrift oder
-						eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich,
-						stets auf freiwilliger Basis. Diese Daten werden ohne Ihre
-						ausdrückliche Zustimmung nicht an Dritte weitergegeben.</p>
-					<p>Auskunft, Löschung, Sperrung Sie haben jederzeit das Recht
-						auf unentgeltliche Auskunft über Ihre gespeicherten
-						personenbezogenen Daten, deren Herkunft und Empfänger und den
-						Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung,
-						Sperrung oder Löschung dieser Daten. Hierzu sowie zu weiteren
-						Fragen zum Thema personenbezogene Daten können Sie sich jederzeit
-						über die im Impressum angegeben Adresse des Webseitenbetreibers an
-						uns wenden.</p>
-					<h2>Datenschutzerklärung in Bezug auf die Nutzung von
-						Analyse-Software</h2>
-					<p>Wir nehmen Datenschutz sehr ernst und verzichten daher auf
-						die Nutzung von Analyse-Diensten von externen Anbietern, bei denen
-						die erfassten statistischen Zugriffsdaten unkontrollierbar auf
-						andere Server bzw. in andere Länder übertragen würden. Diese
-						Website benutzt eine von dritten Dienstleistern unabhängige
-						Analyse-Software zur Erstellung von Zugriffsstatistiken. Auf die
-						von uns anonymisiert gesammelten, statistischen Daten haben
-						grundsätzlich nur unser deutscher Provider/Rechenzentrumsbetreiber
-						und wir selbst Zugriff. über die gesammelten, anonymen Daten
-						lassen sich Rückschlüsse auf die Nutzung unserer Internetpräsenz
-						ziehen. Dazu zählen etwa Anzahl der aufgerufenen Seiten,
-						Suchbegriff aus einer weitergeleiteten Anfrage aus Suchmaschinen
-						oder auch Seitenaufrufe durch Verlinkungen von anderen Seiten,
-						jedoch nicht auf Ihre persönlichen bzw. personenbezogenen Daten.</p>
-					<p>Die Analyse-Software verwendet sog. "Cookies", Textdateien,
-						die auf Ihrem Computer gespeichert werden und die eine Analyse der
-						Benutzung der Website ermöglicht. Die durch den Cookie erzeugten
-						Informationen über die Benutzung dieser Internetpräsenz werden
-						nicht an einen anderen Server oder einen ausländischen
-						Dienstleister übertragen, sondern dienen ausschlieÃŸlich der
-						Zugriffs-Analyse dieses Internetangebots. StandardmäÃŸig erfasst
-						die Analysesoftware auch die IP-Adresse der Besucher. Diese wird
-						jedoch aus Datenschutzgründen nur verkürzt gespeichert und ist
-						damit zur eindeutigen Identifikation des abfragenden
-						Internetzugangs nicht mehr geeignet. Die gekürzte IP-Adresse dient
-						der ungefähren regionalen Eingrenzung von Seitenaufrufen.</p>
-				</div>
-			</ui:insert>
-		</div>
-
-		<div class="footer">
-			<ui:include src="/footer.xhtml" />
-		</div>
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

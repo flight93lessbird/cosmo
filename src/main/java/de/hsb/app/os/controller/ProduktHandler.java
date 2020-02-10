@@ -33,9 +33,8 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	private ListDataModel<Produkt> pdList;
 
-	/**Erstellung eines Datamodels aus der Klasse Produkt*/
+	/** Erstellung eines Datamodels aus der Klasse Produkt */
 //	private DataModel<Produkt> pdlist = new ListDataModel<Produkt>();
-
 
 	@PostConstruct
 	public void init() {
@@ -43,65 +42,55 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			produkte = new ArrayList<>();
 
 			// Create Duefte
-			produkte.add(new Produkt("Valentino", "Valentina",
-					"Das Valentina Parfüm vereint moderne mit klassischem.", "49,99", Waehrungtyp.EURO, "30",
-					Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
-			produkte.add(new Produkt("Guess", "1981",
-					"In der Kopfnote wird Veilchen und Abrette verbunden.",
-					"27,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
-			produkte.add(new Produkt("Boss", "Ma Vie",
-					"In der Kopfnote befindet sich Kaktusblüten.",
-					"35,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
-			produkte.add(new Produkt("Michael Kors", "Wonderlust",
-					"In der Kopfnote wird Bergamotte, rosa Pfeffer und feiner Mandelmilch verbunden.",
+			produkte.add(new Produkt("Valentino", "Valentina", "Das Valentina Parfüm vereint moderne mit klassischem.",
 					"49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
+			produkte.add(new Produkt("Guess", "1981", "In der Kopfnote wird Veilchen und Abrette verbunden.", "27,99",
+					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
+			produkte.add(new Produkt("Boss", "Ma Vie", "In der Kopfnote befindet sich Kaktusblüten.", "35,99",
+					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
+			produkte.add(new Produkt("Michael Kors", "Wonderlust",
+					"In der Kopfnote wird Bergamotte, rosa Pfeffer und feiner Mandelmilch verbunden.", "49,99",
+					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>()));
 			// Create Pflege
 			produkte.add(new Produkt("Treaclemoon", "Körpermilch Pretty Rose Hearts",
-					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.","5,99",
+					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.", "5,99", Waehrungtyp.EURO, "350",
+					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
+			produkte.add(new Produkt("i+m", "Hytro Perform Reinigungsmilch", "Für normale bis trockene Haut.", "9,99",
 					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
-			produkte.add(new Produkt("i+m", "Hytro Perform Reinigungsmilch",
-					"Für normale bis trockene Haut.",
-					"9,99", Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
-			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO,
-					"200", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
-			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasser",
-					"Reinigt empfindliche Haut.",
-					"4,99", Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
+			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO, "200",
+					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
+			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasser", "Reinigt empfindliche Haut.", "4,99",
+					Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			// Create Make-Up
-			produkte.add(new Produkt("L'oreal", "Blush Sculpt 201",
-					"Natürliche Akt-Shades.", "5,99",
-					Waehrungtyp.EURO, "30", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>()));
+			produkte.add(new Produkt("L'oreal", "Blush Sculpt 201", "Natürliche Akt-Shades.", "5,99", Waehrungtyp.EURO,
+					"30", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>()));
 			produkte.add(new Produkt("Maybelline", "The Graffiti Nudes",
 					"Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "11,99",
 					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>()));
-			produkte.add(new Produkt("Maybelline", "Vivid Matte Liquid",
-					"Mittlere Deckkraft. Schimmernd/Glänzend.", "6,99",
-					Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>()));
-			produkte.add(new Produkt("Essence", "Künstliche Wimpern",
-					"Lassen sich einfach und schnell aufkleben.", "2,99",
-					Waehrungtyp.EURO, "1", Mengentyp.STUECK, Kategorie.MAKEUP, new ArrayList<>()));
+			produkte.add(new Produkt("Maybelline", "Vivid Matte Liquid", "Mittlere Deckkraft. Schimmernd/Glänzend.",
+					"6,99", Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>()));
+			produkte.add(new Produkt("Essence", "Künstliche Wimpern", "Lassen sich einfach und schnell aufkleben.",
+					"2,99", Waehrungtyp.EURO, "1", Mengentyp.STUECK, Kategorie.MAKEUP, new ArrayList<>()));
 
-			for (Produkt produkt : produkte){
+			for (Produkt produkt : produkte) {
 				this.save(produkt);
 			}
 
-            pdList = new ListDataModel<Produkt>();
-            pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
+			pdList = new ListDataModel<Produkt>();
+			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
 		}
 	}
 
-	
-	/**Hier legen wir neue Artikel an*/
+	/** Hier legen wir neue Artikel an */
 	public String ProduktAnlegen() {
 //		try {
 //			pdList.setRowIndex(0);
-			merkeProdukt = new Produkt();
+		merkeProdukt = new Produkt();
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
 		return "neuProdukt?faces-redirect=true";
 	}
-	
 
 	public String speichern() {
 		try {
@@ -116,7 +105,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return "produkte?faces-redirect=true";
 	}
-	
+
 	public String pdedit() {
 		merkeProdukt = pdList.getRowData();
 		return "neuProdukt?faces-redirect=true";
@@ -153,7 +142,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return "produkte?faces-redirect=true";
 	}
-
 
 	public String getProduktFullName() {
 		return selectedEntity.getMarke() + " " + selectedEntity.getTitel();
@@ -199,9 +187,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return result;
 	}
-	
+
 	public String ansicht(Produkt produkt) {
-		if (produkt != null){
+		if (produkt != null) {
 			merkeProdukt = produkt;
 			return "produkt?faces-redirect=true";
 		}

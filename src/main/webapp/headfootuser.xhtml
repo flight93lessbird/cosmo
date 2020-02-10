@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" href="resources/style.css" type="text/css" />
+	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
+</h:head>
+
+<h:body>
+	<div id="header">
+		<h:form>
+			<div class="logo">
+				<a class="logo" href="/os/startseite.xhtml"> <h:graphicImage
+						value="resources/images/COS'MO.PNG" height="150px" width="150px" />
+				</a> <a class="account"
+					href="#{userHandler.checkLoggedUser(userHandler.benutzer)}"><h:graphicImage
+						value="resources/images/user.png" height="50px" width="50px" /> </a>
+				<a>#{userHandler.userLoginText()}</a> <a class="account"
+					href="#{warenkorbhd.checkWarenkorb(userHandler.benutzer)}"><h:graphicImage
+						value="resources/images/shopping-cart-of-checkered-design.png"
+						height="50px" width="50px" /></a>
+			</div>
+			<div class="topnav">
+				<a href="duefte.xhtml">#{msg.duefte}</a> <a href="makeup.xhtml">#{msg.MU}</a>
+				<a href="pflege.xhtml">#{msg.Pf}</a>
+				<div class="search-container">
+					<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" />
+				</div>
+			</div>
+		</h:form>
+	</div>
+	<div id="content">
+		<ui:insert name="content">Default content</ui:insert>
+	</div>
+	<div id="footer">
+		<h:form>
+			<ul class="footermenu">
+				<li><a href="datenschutz.xhtml">#{msg.datenschtz}</a></li>
+				<li><a href="impressum.xhtml">#{msg.impressum}</a></li>
+				<li><a href="urheberrecht.xhtml">#{msg.urheberrecht}</a></li>
+			</ul>
+			<center>
+				<div class="contact">
+					<div class="custom">
+						Cosmostrasse 10<br /> 27472 Cosmostadt
+					</div>
+				</div>
+				<div class="row copyright">
+					<div class="col-lg-12">
+						Copyright &#169; 2019 | <a href="startseite.xhtml">www.Cosmo.de</a>
+						| #{msg.title}
+					</div>
+				</div>
+			</center>
+		</h:form>
+	</div>
+</h:body>
+</html>

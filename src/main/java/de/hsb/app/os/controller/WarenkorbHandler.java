@@ -22,41 +22,44 @@ import de.hsb.app.os.repository.AbstractCrudRepository;
 
 @ManagedBean(name = "warenkorbhd")
 @SessionScoped
-/* 
+/*
  * Die Bean wird für die gesamte Session erhalten bleiben bzw. wird einem User
- * zugeordnet, somit bleibt der Warenkorb für die gesamte Browsersession erhalten.
+ * zugeordnet, somit bleibt der Warenkorb für die gesamte Browsersession
+ * erhalten.
  */
 public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implements Serializable {
 
 	private static final long serialVersionUID = 1332117572442977016L;
-	
-	//Warenkorb
+
+	// Warenkorb
 	private Warenkorb warenkorb = new Warenkorb();
 
 	private int stkZahl = 1;
 
 	public WarenkorbHandler() {
-		
+
 	}
-	//damit können wir dann gleich anzeigen, das ein Artikel
-	//hinzugefügt oder entfernt wurde
+
+	// damit können wir dann gleich anzeigen, das ein Artikel
+	// hinzugefügt oder entfernt wurde
 	public void addMessage(String summary) {
-		//aktuelle FacesContext Instance besorgen
+		// aktuelle FacesContext Instance besorgen
 		FacesContext ctx = FacesContext.getCurrentInstance();
 		ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null));
 	}
-	
+
 	/**
 	 * Den gesamten Warenkorb ausgeben
+	 * 
 	 * @return
 	 */
 	public Warenkorb getWarenkorb(Benutzer benutzer) {
-		if (benutzer != null){
+		if (benutzer != null) {
 			return benutzer.getWarenkorb();
 		}
 		return warenkorb;
 	}
-	
+
 //	//visuell anzeigen, dass ein Artikel hinzugefügt wurde
 //	public void addProdukte(Produkt produkt) {
 //		this.warenkorb.add(produkt);
@@ -71,20 +74,21 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 
 	public String checkWarenkorb(Benutzer benutzer) {
 		System.out.println("Checked WK");
-		if(benutzer != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()){
+		if (benutzer != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()) {
 			return "/os/warenkorb.xhtml";
-		} else if(!warenkorb.getWarenkorbItems().isEmpty()){
+		} else if (!warenkorb.getWarenkorbItems().isEmpty()) {
 			return "/os/warenkorb.xhtml";
 		} else {
 			return "/os/warenkorbLeer.xhtml";
 		}
 	}
 
-	//brauchen wir nicht
+	// brauchen wir nicht
 	public void changeStkZahl(int zahl) {
-		
+
 		System.out.println(zahl);
 	}
+
 	public void changeStkZahl(Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
 		if (stkZahl > 0) {
 			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());
@@ -99,31 +103,30 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				warenkorb = this.em.merge(this.warenkorb);
 				this.em.persist(warenkorb);
 				this.utx.commit();
-			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
-					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
+					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 			}
 		}
 	}
 
-	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt, int stkZahl){
+	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt, int stkZahl) {
 		System.out.println("Produkt: " + produkt.getTitel() + " Stückzahl: " + stkZahl);
-		if (produkt != null){
-			if (loggedBenutzer != null){
+		if (produkt != null) {
+			if (loggedBenutzer != null) {
 				addWarenkorbItemToWarenkorb(loggedBenutzer.getWarenkorb(), produkt, stkZahl);
-			}else if (warenkorb != null){
+			} else if (warenkorb != null) {
 				System.out.println("Kein Benutzer Warenkorb");
 				addWarenkorbItemToWarenkorb(warenkorb, produkt, stkZahl);
 			}
-		}else {
+		} else {
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(
-					"Produkt konnte dem Warenkorb nicht hinzugefuegt werden",
+			context.addMessage(null, new FacesMessage("Produkt konnte dem Warenkorb nicht hinzugefuegt werden",
 					"Es wurde keine Produkt ausgewaehlt."));
 		}
 		return "warenkorb?faces-redirect=true";
 	}
 
-	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt, int stkZahl){
+	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt, int stkZahl) {
 		if (stkZahl > 0) {
 			try {
 				this.utx.begin();
@@ -148,42 +151,41 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				warenkorb = this.em.merge(this.warenkorb);
 				this.em.persist(warenkorb);
 				this.utx.commit();
-			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
-					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
+					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 			}
 		}
 		return "warenkorb?faces-redirect=true";
 	}
 
-
-	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(Benutzer loggedBenutzer){
+	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(Benutzer loggedBenutzer) {
 		if (loggedBenutzer != null) {
-			Query query = this.em.createQuery(
-					"select b.warenkorb.warenkorbItems from Benutzer b where b.id = :benutzerId");
+			Query query = this.em
+					.createQuery("select b.warenkorb.warenkorbItems from Benutzer b where b.id = :benutzerId");
 			query.setParameter("benutzerId", loggedBenutzer.getId());
 			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
 			if (warenkorbItems != null) {
 				return warenkorbItems;
-			}else {
+			} else {
 				return new ArrayList<>();
 			}
 		}
 		return warenkorb.getWarenkorbItems();
 	}
 
-	public String computeTotalPrice(String preisString, Integer stkZahl){
+	public String computeTotalPrice(String preisString, Integer stkZahl) {
 		DecimalFormat f = new DecimalFormat("#0.00");
 		double preis = Double.parseDouble(preisString.replace(",", "."));
 		double stkueckZahl = Double.valueOf(stkZahl);
-		return String.valueOf(f.format(preis*stkueckZahl)).replace(".", ",");
+		return String.valueOf(f.format(preis * stkueckZahl)).replace(".", ",");
 	}
 
-	public String deleteWarenkorbItem(Benutzer loggedBenutzer, WarenkorbItem warenkorbItem){
+	public String deleteWarenkorbItem(Benutzer loggedBenutzer, WarenkorbItem warenkorbItem) {
 		if (warenkorbItem != null) {
 			if (loggedBenutzer != null) {
 				this.warenkorb = loggedBenutzer.getWarenkorb();
 			}
-			try{
+			try {
 				this.utx.begin();
 				Produkt produkt = this.em.merge(warenkorbItem.getP());
 				warenkorbItem = this.em.merge(warenkorbItem);
@@ -199,11 +201,11 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				this.utx.commit();
 				if (loggedBenutzer != null) {
 					loggedBenutzer.setWarenkorb(this.warenkorb);
-					System.out.println("WK zugeordnet: "+loggedBenutzer.getUsername());
+					System.out.println("WK zugeordnet: " + loggedBenutzer.getUsername());
 				}
 				return "warenkorb?faces-redirect=true";
-			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException |
-					RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
+					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 				return "startseite?faces-redirect=true";
 			}
 
@@ -211,9 +213,8 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return "startseite?faces-redirect=true";
 	}
 
-
 	public String toKundendaten(Benutzer benutzer) {
-		if(benutzer != null){
+		if (benutzer != null) {
 			return "kundendatenUeberpruefung?faces-redirect=true";
 		} else {
 			return "kundendaten?faces-redirect=true";

@@ -1,65 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
-</h:head>
-
-<h:body>
-	<h:form>
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/header.xhtml" />
-			</ui:insert>
+	<ui:define name="content">
+		<div class="urheberrecht">
+			<h1>Urheberrecht und Haftung</h1>
+			<p>Hier ein paar rechtliche Hinweise zum Urheberrecht und den
+				Umgang mit den Inhalten dieser Internetpräsenz.</p>
+			<h2>Haftung für Inhalte</h2>
+			<p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene
+				Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+				verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter
+				jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde
+				Informationen zu überwachen oder nach Umständen zu forschen, die auf
+				eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur
+				Entfernung oder Sperrung der Nutzung von Informationen nach den
+				allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
+				Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer
+				konkreten Rechtsverletzung möglich. Bei Bekanntwerden von
+				entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend
+				entfernen.</p>
+			<h2>Urheberrecht</h2>
+			<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf
+				diesen Seiten unterliegen dem deutschen Urheberrecht. Die
+				Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
+				Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+				schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+				Downloads und Kopien dieser Seite sind nur für den privaten, nicht
+				kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser
+				Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte
+				Dritter beachtet. Insbesondere werden Inhalte Dritter als solche
+				gekennzeichnet. Sollten Sie trotzdem auf eine
+				Urheberrechtsverletzung aufmerksam werden, bitten wir um einen
+				entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen
+				werden wir derartige Inhalte umgehend entfernen.</p>
 		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-				<div class="urheberrecht">
-					<h1> Urheberrecht und Haftung </h1>
-					<p>Hier ein paar rechtliche Hinweise zum Urheberrecht und den
-						Umgang mit den Inhalten dieser Internetpräsenz.</p>
-					<h2> Haftung für Inhalte </h2>
-					<p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG
-						für eigene Inhalte auf diesen Seiten nach den allgemeinen
-						Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als
-						Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-						gespeicherte fremde Informationen zu überwachen oder nach
-						Umständen zu forschen, die auf eine rechtswidrige
-						Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder
-						Sperrung der Nutzung von Informationen nach den allgemeinen
-						Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
-						Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer
-						konkreten Rechtsverletzung möglich. Bei Bekanntwerden von
-						entsprechenden Rechtsverletzungen werden wir diese Inhalte
-						umgehend entfernen.</p>
-					<h2> Urheberrecht </h2>
-					<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke
-						auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die
-						Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
-						Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen
-						der schriftlichen Zustimmung des jeweiligen Autors bzw.
-						Erstellers. Downloads und Kopien dieser Seite sind nur für
-						den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die
-						Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden,
-						werden die Urheberrechte Dritter beachtet. Insbesondere werden
-						Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem
-						auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um
-						einen entsprechenden Hinweis. Bei Bekanntwerden von
-						Rechtsverletzungen werden wir derartige Inhalte umgehend
-						entfernen.</p>
-				</div>
-			</ui:insert>
-		</div>
-
-		<div class="footer">
-			<ui:include src="/footer.xhtml" />
-		</div>
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

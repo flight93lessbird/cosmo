@@ -1,51 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <link rel="stylesheet" href="resources/style.css" type="text/css" />
-    <title><ui:insert name="title">   #{msg.titlebenutz}    </ui:insert></title>
-</h:head>
-
-<h:body>
-    <h:form>
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="/header.xhtml" />
-            </ui:insert>
-        </div>
-
-        <div id="content">
-            <ui:insert name="content">
-                <h:form id="form">
-                    <h1>#{msg.kdpwbearbeiten}</h1>
-                        <p:messages autoUpdate="true" />
-                        <h:panelGrid var="passwort" value="#{userHandler.passwort}"
-                                                  columns="2" headerClass="header" footerClass="footer">
-                            <f:facet name="header">#{msg.kdpwbearbeiten}</f:facet>
-                        <p:outputLabel value="#{msg.passwort}:" for="password" />
-                        <p:password id="password" value="#{userHandler.passwort}"
-                                    required="true" label="Password">
-                        </p:password>
-                            <p:outputLabel value="#{msg.neupw}:" for="password" />
-                            <p:password id="neupassword" value="#{userHandler.passwort}"
-                                        required="true" label="Password">
-                            </p:password>
-                            <h:commandButton action="#{pageHandler.toLogout}"
-                                             value="#{msg.abbrechen}" immediate="true" />
-                            <h:commandButton action="#{userHandler.pwspeichern}"
-                                             value="#{msg.speichern}" update="messages" />
-                        </h:panelGrid>
-                </h:form>
-            </ui:insert>
-        </div>
-
-        <div class="footer">
-            <ui:include src="/footer.xhtml" />
-        </div>
-    </h:form>
-</h:body>
-</html>
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<h:form>
+			<h1>#{msg.kdpwbearbeiten}</h1>
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<h:panelGrid var="passwort" value="#{userHandler.passwort}"
+				columns="2" headerClass="header" footerClass="footer">
+				<p:outputLabel value="#{msg.passwort}:" for="password" />
+				<p:password id="password" value="#{userHandler.passwort}"
+					required="true" label="Password">
+				</p:password>
+				<p:outputLabel value="#{msg.neupw}:" for="password" />
+				<p:password id="neupassword" value="#{userHandler.passwort}"
+					required="true" label="Password">
+				</p:password>
+				<h:commandButton action="#{pageHandler.toLogout}"
+					value="#{msg.abbrechen}" immediate="true" />
+				<h:commandButton action="#{userHandler.pwspeichern}"
+					value="#{msg.speichern}" update="messages" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

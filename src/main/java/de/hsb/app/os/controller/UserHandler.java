@@ -195,7 +195,6 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return "startseite?faces-redirect=true";
 	}
 
-
 	public String speichernWk() {
 		try {
 			utx.begin();
@@ -383,33 +382,33 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	}
 
 // login für den Warenkorb
-public String WkLogin() {
-	Query query = em
-			.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
-	query.setParameter("username", username);
-	query.setParameter("passwort", passwort);
+	public String WkLogin() {
+		Query query = em
+				.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
+		query.setParameter("username", username);
+		query.setParameter("passwort", passwort);
 
-	@SuppressWarnings("unchecked")
-	List<Benutzer> user = query.getResultList();
-	System.out.println("Größe von userList: " + user.size());
-	if (user.size() == 1) {
-		benutzer = user.get(0);
-		if (benutzer.getRolle() == Rolle.ADMIN) {
-			return "/admin?faces-redirect=true";
+		@SuppressWarnings("unchecked")
+		List<Benutzer> user = query.getResultList();
+		System.out.println("Größe von userList: " + user.size());
+		if (user.size() == 1) {
+			benutzer = user.get(0);
+			if (benutzer.getRolle() == Rolle.ADMIN) {
+				return "/admin?faces-redirect=true";
+			} else {
+				return "/kundendatenUeberpruefung?faces-redirect=true";
+			}
 		} else {
-			return "/kundendatenUeberpruefung?faces-redirect=true";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Du hast einen falschen Benutzernamen " + "oder ein falsches Kennwort eingegeben."
+									+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)",
+							passwort));
 		}
-	} else {
-		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Du hast einen falschen Benutzernamen " + "oder ein falsches Kennwort eingegeben."
-								+ "Vergiss dabei nicht, auf die Groß-/Kleinschreibung des Kennwortes zu achten.)",
-						passwort));
+		return null;
 	}
-	return null;
-}
 
-	//brauchen wir glaub ich nicht
+	// brauchen wir glaub ich nicht
 	public void checkLoggedIn(ComponentSystemEvent cse) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (benutzer == null) {
@@ -530,47 +529,32 @@ public String WkLogin() {
 	 */
 
 	/*
-
-	public String toRegistrieren() {
-		merkeBenutzer = new Benutzer();
-		return "registrieren?faces-redirect=true";
-	}
-
-
-
-	public String toKaufBestatigt() {
-		merkeBenutzer = new Benutzer();
-		return "kaufBestatigt?faces-redirect=true";
-	}
-
-//	public String benutzerRegistrieren() {
-//		for (Benutzer b : user) {
-//			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
-//				FacesContext.getCurrentInstance().addMessage(null,
-//						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
-//								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
-//								null));
-//				;
-//
-//				return null;
-//			}
-//		}
-//		try {
-//			merkeBenutzer.setRolle(Rolle.KUNDE);
-//			utx.begin();
-//			merkeBenutzer = em.merge(merkeBenutzer);
-//			em.persist(merkeBenutzer);
-//			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-//			utx.commit();
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-//					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
-//		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-//				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-//			e.printStackTrace();
-//		}
-//		return "meinKonto?faces-redirect=true";
-//	}
-
+	 * 
+	 * public String toRegistrieren() { merkeBenutzer = new Benutzer(); return
+	 * "registrieren?faces-redirect=true"; }
+	 * 
+	 * 
+	 * 
+	 * public String toKaufBestatigt() { merkeBenutzer = new Benutzer(); return
+	 * "kaufBestatigt?faces-redirect=true"; }
+	 * 
+	 * // public String benutzerRegistrieren() { // for (Benutzer b : user) { // if
+	 * (b.getUsername().equals(merkeBenutzer.getUsername())) { //
+	 * FacesContext.getCurrentInstance().addMessage(null, // new
+	 * FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername " // +
+	 * "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien."
+	 * , // null)); // ; // // return null; // } // } // try { //
+	 * merkeBenutzer.setRolle(Rolle.KUNDE); // utx.begin(); // merkeBenutzer =
+	 * em.merge(merkeBenutzer); // em.persist(merkeBenutzer); //
+	 * user.setWrappedData(em.createNamedQuery("SelectUser").getResultList()); //
+	 * utx.commit(); // FacesContext.getCurrentInstance().addMessage(null, new
+	 * FacesMessage(FacesMessage.SEVERITY_INFO, //
+	 * "Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null)); // }
+	 * catch (SecurityException | IllegalStateException | RollbackException |
+	 * HeuristicMixedException // | HeuristicRollbackException | SystemException |
+	 * NotSupportedException e) { // e.printStackTrace(); // } // return
+	 * "meinKonto?faces-redirect=true"; // }
+	 * 
 	 */
 	public String registrierenWk() {
 		for (Benutzer b : user) {
@@ -599,7 +583,7 @@ public String WkLogin() {
 		return "kundendatenUeberpruefung?faces-redirect=true";
 	}
 
-	//brauchen wir nicht
+	// brauchen wir nicht
 	public String benutzerAnlegen(Warenkorb warenkorb) {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
@@ -642,7 +626,6 @@ public String WkLogin() {
 //		return null;
 //	}
 
-	
 	public DataModel<Benutzer> getUser() {
 		return user;
 	}
@@ -658,8 +641,5 @@ public String WkLogin() {
 	public void setMerkeBenutzer(Benutzer merkeBenutzer) {
 		this.merkeBenutzer = merkeBenutzer;
 	}
-
-
-
 
 }

@@ -1,68 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/headfootuser.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.kauftitel}      </ui:insert></title>
-</h:head>
-
-<h:body>
-	<h:form>
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/header.xhtml" />
-			</ui:insert>
+	<ui:define name="content">
+		<div class="ware">
+			<h1>
+				#{msg.kaufdank} <br />
+			</h1>
+			<h3>#{msg.kaufbestaetig}</h3>
+			<br></br> <br></br>
+			<h:outputLabel value="#{msg.vorname}:" />
+			<h:outputLabel value="#{userHandler.merkeKunde.vorname}" />
+			<br></br>
+			<h:outputLabel value="#{msg.nachname}:" />
+			<h:outputLabel value="#{userHandler.merkeKunde.nachname}" />
+			<br></br>
+			<h:outputLabel value="#{msg.strasse}:" />
+			<h:outputLabel value="#{userHandler.merkeKunde.adresse}" />
+			<br></br> <br></br>
+			<h:outputLabel value="#{msg.artklname}: " />
+			<h:outputLabel value="#{warenkorbItem.p.marke}" />
+			<br></br>
+			<h:outputLabel value="#{msg.bestellmenge}: " />
+			<br></br>
+			<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
+			<h:outputLabel value="#{msg.preisinkmws}: " />
+			<h:outputText id="a" value="#{warenkorbItem.p.verkaufspreis} €"
+				required="true" />
+			<br></br>
+			<h:outputText value="#{msg.bestelldatum}: " />
+			<h:outputText value="#{warenkorbItem.p.date}">
+				<f:convertDateTime pattern="dd.MM.yyyy" />
+			</h:outputText>
+			<br></br> <br></br>
+			<h:commandButton id="auswählen" value="#{msg.quitdruck}"
+				onclick="javascript:window.print()" icon="ui-icon-search" />
+			<h:commandButton action="#{pageHandler.toStartseite}"
+				value="#{msg.weitershoppen}" update="messages" />
 		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-				<div class="ware">
-					<h1>
-						#{msg.kaufdank} <br /> 
-					</h1>
-					<h3>#{msg.kaufbestaetig}</h3>
-					<br></br> <br></br>
-					<h:outputLabel value="#{msg.vorname}:" />
-					<h:outputLabel value="#{userHandler.merkeKunde.vorname}" />
-					<br></br>
-					<h:outputLabel value="#{msg.nachname}:" />
-					<h:outputLabel value="#{userHandler.merkeKunde.nachname}" />
-					<br></br>
-					<h:outputLabel value="#{msg.strasse}:" />
-					<h:outputLabel value="#{userHandler.merkeKunde.adresse}" />
-					<br></br>
-					<br></br>
-					<h:outputLabel value="#{msg.artklname}: " />
-					<h:outputLabel value="#{warenkorbItem.p.marke}" />
-					<br></br>
-					<h:outputLabel value="#{msg.bestellmenge}: " />
-					<br></br>
-					<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
-					<h:outputLabel value="#{msg.preisinkmws}: " />
-					<h:outputText id="a" value="#{warenkorbItem.p.verkaufspreis} €"
-						required="true" />
-					<br></br>
-					<h:outputText value="#{msg.bestelldatum}: " />
-					<h:outputText value="#{warenkorbItem.p.date}">
-						<f:convertDateTime pattern="dd.MM.yyyy" />
-					</h:outputText>
-					<br></br>
-					<br></br>
-					<h:commandButton id="auswählen" value="#{msg.quitdruck}"
-						onclick="javascript:window.print()" icon="ui-icon-search" />
-					<h:commandButton action="#{pageHandler.toStartseite}"
-									 value="#{msg.weitershoppen}" update="messages" />
-				</div>
-			</ui:insert>
-		</div>
-
-		<div class="footer">
-			<ui:include src="/footer.xhtml" />
-		</div>
-	</h:form>
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>

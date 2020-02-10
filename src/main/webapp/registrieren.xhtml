@@ -22,39 +22,42 @@
 					<h1>#{msg.registrierung}</h1>
 					<p:growl id="growl" showDetail="true" sticky="true" />
 					<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
-								 columns="2" headerClass="header" footerClass="footer">
+						columns="2" headerClass="header" footerClass="footer">
 						<h:outputLabel for="username" value="#{msg.username}" />
 						<h:panelGroup>
 							<h:inputText id="username"
-										 value="#{userHandler.merkeBenutzer.username}" required="true"
-										 requiredMessage="#{msg.eingabefehlt}" />
+								value="#{userHandler.merkeBenutzer.username}" required="true"
+								requiredMessage="#{msg.eingabefehlt}" />
 						</h:panelGroup>
 						<h:outputLabel for="passwort1" value="#{msg.passwort}" />
 						<h:panelGroup>
 							<p:password id="passwort1"
-										 value="#{userHandler.merkeBenutzer.passwort}" match="passwort2" label="Password 1" required="true"
-										 requiredMessage="#{msg.eingabefehlt}">
+								value="#{userHandler.merkeBenutzer.passwort}" match="passwort2"
+								label="Password 1" required="true"
+								requiredMessage="#{msg.eingabefehlt}">
 							</p:password>
 						</h:panelGroup>
 						<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
 						<h:panelGroup>
 							<p:password id="passwort2"
-										 value="#{userHandler.merkeBenutzer.passwort}" label="Password 2" required="true" requiredMessage="true">
+								value="#{userHandler.merkeBenutzer.passwort}" label="Password 2"
+								required="true" requiredMessage="true">
 								<f:validator validatorId="PasswordValidation" />
 							</p:password>
 						</h:panelGroup>
 						<h:commandButton value="#{msg.zuruck}" icon="ui-icon-carat-1-w"
-										 action="#{pageHandler.toLogin}" immediate="true" />
+							action="#{pageHandler.toLogin}" immediate="true" />
 						<h:commandButton id="registrieren" update="grid"
-										 value="#{msg.registrieren}" action="#{userHandler.benutzerRegistrieren}" />
+							value="#{msg.registrieren}"
+							action="#{userHandler.benutzerRegistrieren}" />
 					</h:panelGrid>
 				</h:form>
 			</ui:insert>
 		</div>
 	</h:form>
-	
+
 	<div class="footer">
 		<ui:include src="/footer.xhtml" />
-		</div>
+	</div>
 </h:body>
 </html>
