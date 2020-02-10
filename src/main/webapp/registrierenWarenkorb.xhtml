@@ -13,24 +13,26 @@
 				<h:outputLabel for="username" value="#{msg.username}" />
 				<h:panelGroup>
 					<h:inputText id="username"
-						value="#{userHandler.merkeBenutzer.username}" required="true"
-						requiredMessage="#{msg.eingabefehlt}" />
+						value="#{userHandler.merkeBenutzer.username}"
+								 required="true" requiredMessage="#{msg.eingabefehlt}."/>
+					<h:message for="username" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="passwort1" value="#{msg.passwort}" />
 				<h:panelGroup>
 					<p:password id="passwort1"
 						value="#{userHandler.merkeBenutzer.passwort}" match="passwort2"
-						label="Password 1" required="true"
-						requiredMessage="#{msg.eingabefehlt}">
+						label="Password 1" required="true" requiredMessage="#{msg.eingabefehlt}.">
 					</p:password>
+					<h:message for="passwort1" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
 				<h:panelGroup>
 					<p:password id="passwort2"
 						value="#{userHandler.merkeBenutzer.passwort}" label="Password 2"
-						required="true" requiredMessage="true">
+								required="true" requiredMessage="#{msg.eingabefehlt}.">
 						<f:validator validatorId="PasswordValidation" />
 					</p:password>
+					<h:message for="passwort2" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.anrede}:" for="anrede" />
 				<h:panelGroup>
@@ -62,23 +64,26 @@
 				</h:panelGroup>
 				<h:outputLabel for="plz" value="#{msg.plz}:" />
 				<h:panelGroup>
-					<h:inputText id="plz" required="true"
-						value="#{userHandler.merkeAdresse.plz}">
+					<h:inputText id="plz"
+						value="#{userHandler.merkeAdresse.plz}"
+								 required="true" requiredMessage="#{msg.eingabefehlt}.">
 						<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
 					</h:inputText>
+					<h:message for="plz" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="ort" value="#{msg.ort}:" />
 				<h:panelGroup>
-					<h:inputText id="ort" required="true"
+					<h:inputText id="ort" required="true" requiredMessage="#{msg.eingabefehlt}."
 						value="#{userHandler.merkeAdresse.ort}" />
+					<h:message for="ort" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
 				<h:panelGroup>
 					<p:calendar id="geburtsdatum"
 						value="#{userHandler.merkeKunde.geburtsdatum}" mode="popup"
 						navigator="true" showOn="button" pattern="dd.MM.yyyy"
-						yearRange="c-70:c+50" required="true"
-						requiredMessage="#{msg.gueltigkdatumfehlt}." />
+						yearRange="c-70:c+50"
+								required="true" requiredMessage="#{msg.eingabefehlt}." />
 					<h:message styleClass="message" for="geburtsdatum" />
 				</h:panelGroup>
 				<h:commandButton action="#{pageHandler.toKundendaten}"

@@ -63,7 +63,7 @@ public class PageHandler {
 	}
 
 	public String toKundendaten() {
-		return "Kundendaten?faces-redirect=true";
+		return "kundendaten?faces-redirect=true";
 	}
 
 	public String toKaufBestatigt() {

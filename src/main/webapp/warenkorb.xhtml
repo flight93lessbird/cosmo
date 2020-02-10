@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<h:form>
 		<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
 			value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
 			rowClasses="odd,even" headerClass="header">
@@ -20,12 +21,14 @@
 			<h:column>
 				<f:facet name="header">#{msg.artklpreis}</f:facet>
 				<h:outputText value="#{warenkorbItem.p.preis}" />
+				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
 			</h:column>
-
 			<h:column>
 				<f:facet name="header">#{msg.artmenge}</f:facet>
 				<h:outputText
-					value="#{warenkorbItem.p.menge} #{warenkorbItem.p.mengentyp}" />
+					value="#{warenkorbItem.p.menge}" />
+				<h:outputText
+					value="#{warenkorbItem.p.mengentyp.label}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.artklanzl}</f:facet>
@@ -43,16 +46,18 @@
 				<f:facet name="header">#{msg.artgesamt}</f:facet>
 				<h:outputText
 					value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}" />
+				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.loeschen}</f:facet>
-				<p:commandButton
+				<h:commandButton
 					action="#{warenkorbhd.deleteWarenkorbItem(userHandler.benutzer, warenkorbItem)}"
 					value="#{msg.loeschen}">
 					<p:ajax event="click" update="warenkorbTabelle" />
-				</p:commandButton>
+				</h:commandButton>
 			</h:column>
 		</h:dataTable>
+		</h:form>
 		<h3>#{msg.artzwschsum}:</h3>
 		<h:commandButton action="#{pageHandler.toWarenkorb}"
 			value="#{msg.aktualisieren}" />
