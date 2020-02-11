@@ -57,6 +57,15 @@
 								value="#{produktHandler.merkeProdukt.preis}" required="true"
 								requiredMessage="#{msg.markeangeben}." />
 						</h:panelGroup>
+						<h:outputLabel value="#{msg.warhrungstyp}:" for="warhrungstyp" />
+						<h:panelGroup>
+							<h:selectOneMenu id="warhrungstyp"
+											 value="#{produktHandler.merkeProdukt.waehrungtyp}">
+								<f:selectItems var="form"
+											   value="#{produktHandler.waehrungtypValues}" itemValue="#{form}"
+											   itemLabel="#{form.label}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
 						<p:outputLabel for="menge" value="#{msg.artmenge}:" />
 						<h:panelGroup>
 							<p:inputText id="menge"

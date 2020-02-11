@@ -208,6 +208,10 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return Mengentyp.values();
 	}
 
+	public Waehrungtyp[] getWaehrungtypValues() {
+		return Waehrungtyp.values();
+	}
+
 	public void setMerkeProdukt(Produkt merkeProdukt) {
 		this.merkeProdukt = merkeProdukt;
 	}
