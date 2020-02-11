@@ -9,69 +9,71 @@
 			<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
 			<h1>#{msg.kkhinzbear}</h1>
 			<p:accordionPanel>
-				<p:tab title="Rechnung">
+				<p:tab title="#{msg.rechnung}">
 					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Hier kann man auch Rechnug bezahlen" />
+						<h:outputText value="#{msg.rechnungtxt}" />
 					</h:panelGrid>
 					<h:commandButton action="#{pageHandler.toKundendatenUeberpruefung}"
-						value="#{msg.abbrechen}" />
+						value="#{msg.abbrechen}" immediate="true"/>
 					<h:commandButton action="#{pageHandler.toKaufBestatigt}"
-						value="#{msg.speichern}" />
+						value="#{msg.bestaetigen}" immediate="true"/>
 				</p:tab>
-				<p:tab title="Vorkasse">
+				<p:tab title="#{msg.vorkasse}">
 					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Hier kann man mit Vorkasse bezahlen." />
+						<h:outputText value="#{msg.vorkassetxt}" />
 					</h:panelGrid>
 					<h:commandButton action="#{pageHandler.toKundendatenUeberpruefung}"
-						value="#{msg.abbrechen}" />
+						value="#{msg.abbrechen}" immediate="true"/>
 					<h:commandButton action="#{pageHandler.toKaufBestatigt}"
-						value="#{msg.speichern}" />
+						value="#{msg.bestaetigen}" immediate="true"/>
 				</p:tab>
-				<p:tab title="Kreditkarte">
-					<h:panelGrid var="kreditkarte" value="#{userHandler.kunden}"
-						columns="2" headerclass="header" footerClass="footer">
-						<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
-						<h:panelGroup>
-							<h:inputText id="inhaber"
-								value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
-								requiredMessage="#{msg.eingabefehlt}." />
-							<h:message for="inhaber" styleClass="message" />
-						</h:panelGroup>
-						<h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
-						<h:panelGroup>
-							<h:selectOneMenu id="kreditkarten"
-								value="#{userHandler.merkeKreditkarte.typ}">
-								<f:selectItems var="form"
-									value="#{userHandler.kreditkartentypValues}"
-									itemValue="#{form}" itemLabel="#{form.label}" />
-							</h:selectOneMenu>
-						</h:panelGroup>
-						<h:outputLabel value="#{msg.kknummer}" for="nummer">
-						</h:outputLabel>
-						<h:inputText id="nummer"
-							value="#{userHandler.merkeKreditkarte.nummer}" required="true"
-							requiredMessage="#{msg.eingabefehlt}.">
-							<f:converter converterId="kreditkartenConverter" />
-							<f:validator validatorId="kreditkartenValidator" />
-						</h:inputText>
-						<h:outputLabel value="#{msg.gueltigBis}: (z.B. 10/13)"
-							for="gueltigBis" />
-						<h:panelGroup>
-							<p:calendar id="gueltigBis"
-								value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
-								navigator="true" showOn="button" pattern="MM.yy" required="true"
-								yearRange="c-70:c+50"
-								requiredMessage="#{msg.gueltigkdatumfehlt}." />
-							<h:message for="gueltigBis" styleClass="message" />
-						</h:panelGroup>
-					</h:panelGrid>
-					<div>
-						<h:commandButton
-							action="#{pageHandler.toKundendatenUeberpruefung}"
-							value="#{msg.abbrechen}" />
-						<h:commandButton action="#{warenkorbhd.toKaufBestatigt}"
-							value="#{msg.speichern}" />
-					</div>
+				<p:tab title="#{msg.kreditkarte}">
+					<h:form>
+						<p:growl id="growl" showDetail="true" sticky="true" />
+						<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
+									 columns="2" headerClass="header" footerClass="footer">
+							<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
+							<h:panelGroup>
+								<h:inputText id="inhaber"
+											 value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
+											 requiredMessage="#{msg.eingabefehlt}." />
+								<h:message for="inhaber" styleClass="message" />
+							</h:panelGroup>
+							<h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
+							<h:panelGroup>
+								<h:selectOneMenu id="kreditkarten"
+												 value="#{userHandler.merkeKreditkarte.typ}">
+									<f:selectItems var="form"
+												   value="#{userHandler.kreditkartentypValues}" itemValue="#{form}"
+												   itemLabel="#{form.label}" />
+								</h:selectOneMenu>
+							</h:panelGroup>
+							<h:outputLabel value="#{msg.kknummer}" for="nummer">
+							</h:outputLabel>
+							<h:panelGroup>
+								<h:inputText id="nummer"
+											 value="#{userHandler.merkeKreditkarte.nummer}" required="true"
+											 requiredMessage="#{msg.eingabefehlt}.">
+									<f:converter converterId="kreditkartenConverter" />
+									<f:validator validatorId="kreditkartenValidator" />
+								</h:inputText>
+								<h:message for="nummer" styleClass="message" />
+							</h:panelGroup>
+							<h:outputLabel value="#{msg.gueltigBis}: (z.B. 01/22)"
+										   for="gueltigBis" />
+							<h:panelGroup>
+								<p:calendar id="gueltigBis"
+											value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
+											navigator="true" showOn="button" pattern="MM.yy" required="true"
+											requiredMessage="#{msg.gueltigkdatumfehlt}." />
+								<h:message for="gueltigBis" styleClass="message" />
+							</h:panelGroup>
+							<h:commandButton action="#{pageHandler.toKundendatenUeberpruefung}"
+											 value="#{msg.abbrechen}" immediate="true" />
+							<h:commandButton action="#{userHandler.kreditkarteSpeichernWk}"
+											 value="#{msg.bestaetigen}" update="messages" />
+						</h:panelGrid>
+					</h:form>
 				</p:tab>
 			</p:accordionPanel>
 		</h:form>

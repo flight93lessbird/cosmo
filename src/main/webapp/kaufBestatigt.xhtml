@@ -10,35 +10,75 @@
 				#{msg.kaufdank} <br />
 			</h1>
 			<h3>#{msg.kaufbestaetig}</h3>
-			<br></br> <br></br>
-			<h:outputLabel value="#{msg.vorname}:" />
+			<br />
+			<h:outputLabel value="#{msg.vorname}:	" />
 			<h:outputLabel value="#{userHandler.merkeKunde.vorname}" />
-			<br></br>
-			<h:outputLabel value="#{msg.nachname}:" />
+			<br />
+			<h:outputLabel value="#{msg.nachname}:	" />
 			<h:outputLabel value="#{userHandler.merkeKunde.nachname}" />
-			<br></br>
-			<h:outputLabel value="#{msg.strasse}:" />
-			<h:outputLabel value="#{userHandler.merkeKunde.adresse}" />
+			<br />
+			<h2>#{msg.lieferanschrft}</h2>
+			<h:outputLabel value="#{msg.strasse}:	" />
+			<h:outputLabel value="#{userHandler.merkeAdresse.strasse}" />
+			<br />
+			<h:outputLabel value="#{msg.plz}:	" />
+			<h:outputLabel value="#{userHandler.merkeAdresse.plz}" />
+			<br />
+			<h:outputLabel value="#{msg.ort}:	" />
+			<h:outputLabel value="#{userHandler.merkeAdresse.ort}" />
+			<br />
 			<br></br> <br></br>
-			<h:outputLabel value="#{msg.artklname}: " />
-			<h:outputLabel value="#{warenkorbItem.p.marke}" />
-			<br></br>
-			<h:outputLabel value="#{msg.bestellmenge}: " />
-			<br></br>
+
+			<h:form>
+			<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
+						 value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
+						 rowClasses="odd,even" headerClass="header">
+			<f:facet name="header">#{msg.produktk}</f:facet>
+			<h:column>
+				<f:facet name="header">#{msg.artkllabel}</f:facet>
+				<h:outputText value="#{warenkorbItem.p.marke}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.artklname}</f:facet>
+				<h:outputText value="#{warenkorbItem.p.titel}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.artklpreis}</f:facet>
+				<h:outputText value="#{warenkorbItem.p.preis}" />
+				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.artmenge}</f:facet>
+				<h:outputText value="#{warenkorbItem.p.menge}" />
+				<h:outputText value="#{warenkorbItem.p.mengentyp.label}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.artklanzl}</f:facet>
+				<h:outputLabel for="@next" />
+				<h:outputText id="ajaxSpinnerValue"
+							  value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.artgesamt}</f:facet>
+				<h:outputText
+						value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}" />
+				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
+			</h:column>
+			</h:dataTable>
+
+
+			<br /> <br />
 			<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
 			<h:outputLabel value="#{msg.preisinkmws}: " />
 			<h:outputText id="a" value="#{warenkorbItem.p.verkaufspreis} €"
 				required="true" />
-			<br></br>
-			<h:outputText value="#{msg.bestelldatum}: " />
-			<h:outputText value="#{warenkorbItem.p.date}">
-				<f:convertDateTime pattern="dd.MM.yyyy" />
-			</h:outputText>
+
 			<br></br> <br></br>
 			<h:commandButton id="auswählen" value="#{msg.quitdruck}"
 				onclick="javascript:window.print()" icon="ui-icon-search" />
 			<h:commandButton action="#{pageHandler.toStartseite}"
-				value="#{msg.weitershoppen}" update="messages" />
+							 value="#{msg.weitershoppen}" immediate="true" />
+			</h:form>
 		</div>
 	</ui:define>
 </ui:composition>

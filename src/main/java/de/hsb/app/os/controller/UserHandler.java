@@ -195,19 +195,6 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return "startseite?faces-redirect=true";
 	}
 
-	public String speichernWk() {
-		try {
-			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "zahlungsart?faces-redirect=true";
-	}
 
 	public String kreditkarteSpeichern() {
 		try {
@@ -221,6 +208,20 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			e.printStackTrace();
 		}
 		return "logout?faces-redirect=true";
+	}
+
+	public String kreditkarteSpeichernWk() {
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.persist(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "kaufBestatigt?faces-redirect=true";
 	}
 
 	public String editUser() {
@@ -556,6 +557,20 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	 * "meinKonto?faces-redirect=true"; // }
 	 * 
 	 */
+	public String speichernWk() {
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.persist(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "zahlungsart?faces-redirect=true";
+	}
+
 	public String registrierenWk() {
 		for (Benutzer b : user) {
 			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
@@ -576,6 +591,16 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.persist(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
