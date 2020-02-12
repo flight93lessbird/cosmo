@@ -106,8 +106,8 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return "produkte?faces-redirect=true";
 	}
 
-	public String pdedit() {
-		merkeProdukt = pdList.getRowData();
+	public String pdedit(Produkt produkt) {
+		merkeProdukt = produkt;
 		return "neuProdukt?faces-redirect=true";
 	}
 
@@ -128,8 +128,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	/**
 	 * Loescht einen Eintrag in der Produkt-Liste.
 	 */
-	public String pddelete() {
-		merkeProdukt = pdList.getRowData();
+	public String pddelete(Produkt produkt) {
+		merkeProdukt = produkt;
+//		merkeProdukt = pdList.getRowData();
 		try {
 			utx.begin();
 			merkeProdukt = em.merge(merkeProdukt);
