@@ -148,7 +148,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String adresseSpeichern() {
-		merkeUser.setKreditkarte(merkeKreditkarte);
+		merkeUser.setAdresse(merkeAdresse);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
