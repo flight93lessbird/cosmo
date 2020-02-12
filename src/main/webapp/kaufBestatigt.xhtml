@@ -31,7 +31,7 @@
 
 			<h:form>
 			<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
-						 value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
+						 value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser)}"
 						 rowClasses="odd,even" headerClass="header">
 			<f:facet name="header">#{msg.produktk}</f:facet>
 			<h:column>

@@ -7,7 +7,7 @@
 	<ui:define name="content">
 		<h:form>
 			<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
-				value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.benutzer)}"
+				value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser)}"
 				rowClasses="odd,even" headerClass="header">
 				<f:facet name="header">#{msg.warenk}</f:facet>
 				<h:column>
@@ -33,7 +33,7 @@
 					<p:spinner id="basic" min="1" max="99" size="1"
 						value="#{warenkorbItem.stkZahl}">
 						<p:ajax
-							listener="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.benutzer, warenkorbItem.p, this.val())}"
+							listener="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.merkeUser, warenkorbItem.p, this.val())}"
 							update="ajaxSpinnerValue" process="@this" />
 					</p:spinner>
 					<h:outputText id="ajaxSpinnerValue"
@@ -48,7 +48,7 @@
 				<h:column>
 					<f:facet name="header">#{msg.loeschen}</f:facet>
 					<h:commandButton
-						action="#{warenkorbhd.deleteWarenkorbItem(userHandler.benutzer, warenkorbItem)}"
+						action="#{warenkorbhd.deleteWarenkorbItem(userHandler.merkeUser, warenkorbItem)}"
 						value="#{msg.loeschen}">
 						<p:ajax event="click" update="warenkorbTabelle" />
 					</h:commandButton>
@@ -60,7 +60,7 @@
 			<h:commandButton action="#{pageHandler.toWarenkorb}"
 				value="#{msg.aktualisieren}" />
 			<h:commandButton
-				action="#{warenkorbhd.toKundendaten(userHandler.benutzer)}"
+				action="#{warenkorbhd.toKundendaten(userHandler.merkeUser)}"
 				value="#{msg.bestellaschl}" />
 		</h:form>
 	</ui:define>

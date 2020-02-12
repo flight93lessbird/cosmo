@@ -133,7 +133,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				boolean isNewItem = true;
 				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
 					if (warenkorbItem.getP().getId().equals(produkt.getId())) {
-						stkZahl = warenkorbItem.getStkZahl();
+						//stkZahl = warenkorbItem.getStkZahl();
 						warenkorbItem.setStkZahl(stkZahl);
 						isNewItem = false;
 						break;

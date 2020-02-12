@@ -47,7 +47,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	private String username;
 	private String passwort;
-	private User benutzer;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -336,17 +335,17 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 */
 
 	public String userLoginText() {
-		if (benutzer == null)
+		if (merkeUser == null)
 			return " ";
 		else
-			return "Hallo, " + benutzer.getVorname() + " ";
+			return "Hallo, " + merkeUser.getVorname() + " ";
 	}
 
 	public String pwspeichern() {
 		try {
 			utx.begin();
 			user = em.merge(user);
-			em.persist(passwort);
+			em.persist(merkeUser);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
@@ -371,8 +370,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		List<User> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
 		if (user.size() > 0) {
-			benutzer = user.get(0);
-			if (benutzer.getRolle() == Rolle.ADMIN) {
+			merkeUser = user.get(0);
+			if (merkeUser.getRolle() == Rolle.ADMIN) {
 				return "/admin.xhtml";
 			} else {
 				return "/startseite.xhtml?faces-redirect=true";
@@ -398,8 +397,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		List<User> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
 		if (user.size() == 1) {
-			benutzer = user.get(0);
-			if (benutzer.getRolle() == Rolle.ADMIN) {
+			merkeUser = user.get(0);
+			if (merkeUser.getRolle() == Rolle.ADMIN) {
 				return "/admin?faces-redirect=true";
 			} else {
 				return "/kundendatenUeberpruefung?faces-redirect=true";
@@ -417,7 +416,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	// brauchen wir glaub ich nicht
 	public void checkLoggedIn(ComponentSystemEvent cse) {
 		FacesContext context = FacesContext.getCurrentInstance();
-		if (benutzer == null) {
+		if (merkeUser == null) {
 			context.getApplication().getNavigationHandler().handleNavigation(context, null,
 					"/login.xhtml?faces-redirect=true");
 		}
@@ -436,7 +435,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 * konto.xhtml Seite weitergeleitet.
 	 **/
 	public String logout() {
-		benutzer = null;
+		merkeUser = null;
 		return "/startseite.xhtml?faces -redirect=true";
 	}
 
@@ -502,14 +501,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	public void setPasswort(String passwort) {
 		this.passwort = passwort;
-	}
-
-	public User getBenutzer() {
-		return benutzer;
-	}
-
-	public void setBenutzer(User benutzer) {
-		this.benutzer = benutzer;
 	}
 
 	@Override
