@@ -98,7 +98,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			em.persist(new User("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 			em.persist(new User("admin", "admin", Rolle.ADMIN, warenkorb2));
 			em.persist(new User("lena", "lena", Rolle.KUNDE, warenkorb3));
-
 			/*
 			 * init aus KundenHAndler
 			 */
@@ -123,19 +122,18 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 	}
 
-	public String newUser() {
-		merkeUser = new User();
-		return "startseite?faces-redirect=true";
+	public String neuAdresse() {
+		merkeAdresse = new Adresse();
+		return "neueAnschrift?faces-redirect=true";
+	}
+
+	public String neuKreditkarte() {
+		merkeKreditkarte = new Kreditkarte();
+		return "kreditkarte?faces-redirect=true";
 	}
 
 	public String formatDateDDMMYYYY(Date date) {
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
-	}
-
-	// brauchen wir glaub ich nicht
-	public String neuAdresse() {
-		merkeAdresse = new Adresse();
-		return "neueAnschrift?faces-redirect=true";
 	}
 
 	public String editAdresse() {
@@ -164,13 +162,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "kunden?faces-redirect=true";
 	}
 
-	// ich glaube brauchen wir nicht
-	public String neuKreditkarte() {
-		merkeKreditkarte = new Kreditkarte();
-		return "kreditkarte?faces-redirect=true";
-	}
-
-	public String neuerKundeSpeichern() {
+	public String kundendatenBearbeiten() {
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
@@ -197,14 +189,16 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "startseite?faces-redirect=true";
+		return "logout?faces-redirect=true";
 	}
 
 	public String kreditkarteSpeichern() {
+		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			em.persist(merkeUser);
+			em.persist(merkeKreditkarte);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
@@ -212,34 +206,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			e.printStackTrace();
 		}
 		return "logout?faces-redirect=true";
-	}
-
-	public String kreditkarteSpeichernWk() {
-		try {
-			utx.begin();
-			merkeUser = em.merge(merkeUser);
-			em.persist(merkeUser);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "kaufBestatigt?faces-redirect=true";
-	}
-
-	public String editUser() {
-		merkeUser = user.getRowData();
-		return "neuerKunde?faces-redirect=true";
-	}
-
-	public String editKreditkarte() {
-		merkeUser = getKunden().getRowData();
-		merkeKreditkarte = user.getRowData().getKreditkarte();
-		if (merkeKreditkarte == null) {
-			merkeKreditkarte = new Kreditkarte();
-		}
-		return "kreditkarte?faces-redirect=true";
 	}
 
 	public String kreditkarteSpeichernAd() {
@@ -259,7 +225,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "kunde?faces-redirect=true";
 	}
 
-	public String kundendatenSpeichern() {
+	public String kreditkarteSpeichernWk() {
+		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
@@ -270,11 +237,37 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "logout?faces-redirect=true";
+		return "kaufBestatigt?faces-redirect=true";
 	}
 
-	public Kreditkartentyp[] getKreditkartentypValues() {
-		return Kreditkartentyp.values();
+	public String editUser() {
+		merkeUser = user.getRowData();
+		return "kundendatenBearbeitenAdmin?faces-redirect=true";
+	}
+
+	public String editKreditkarte() {
+		merkeUser = getKunden().getRowData();
+		merkeKreditkarte = user.getRowData().getKreditkarte();
+		if (merkeKreditkarte == null) {
+			merkeKreditkarte = new Kreditkarte();
+		}
+		return "kreditkarte?faces-redirect=true";
+	}
+
+	public String kundendatenSpeichern() {
+		merkeUser.setAdresse(merkeAdresse);
+		try {
+			utx.begin();
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			em.persist(merkeAdresse);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "logout?faces-redirect=true";
 	}
 
 	public String deleteUser() {
@@ -289,10 +282,13 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "benutzer?faces-redirect=true";
+		return "kunden?faces-redirect=true";
 	}
 
 	/* Getter und Setter */
+	public Kreditkartentyp[] getKreditkartentypValues() {
+		return Kreditkartentyp.values();
+	}
 
 	public DataModel<User> getKunden() {
 		return user;
@@ -396,7 +392,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		@SuppressWarnings("unchecked")
 		List<User> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
-		if (user.size() == 1) {
+		if (user.size() > 0) {
 			merkeUser = user.get(0);
 			if (merkeUser.getRolle() == Rolle.ADMIN) {
 				return "/admin?faces-redirect=true";
@@ -413,6 +409,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return null;
 	}
 
+/*
 	// brauchen wir glaub ich nicht
 	public void checkLoggedIn(ComponentSystemEvent cse) {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -421,6 +418,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 					"/login.xhtml?faces-redirect=true");
 		}
 	}
+ */
 
 	public String checkLoggedUser(User benutzer) {
 		if (benutzer != null) {
@@ -436,6 +434,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 **/
 	public String logout() {
 		merkeUser = null;
+		merkeAdresse = new Adresse();
+		merkeKreditkarte = new Kreditkarte();
 		return "/startseite.xhtml?faces -redirect=true";
 	}
 
@@ -454,16 +454,13 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
 								null));
 				;
-
 				return null;
-
 			}else if (u.getUsername().equals(merkeUser.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
 								null));
 				;
-
 				return null;
 			}
 			
@@ -483,7 +480,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "meinKonto?faces-redirect=true";
+		return "startseite?faces-redirect=true";
 	}
 
 	// Getter + Setter
@@ -535,34 +532,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\ OS Handler /////////////////////////////
 	 */
 
-	/*
-	 * 
-	 * public String toRegistrieren() { merkeUser = new Benutzer(); return
-	 * "registrieren?faces-redirect=true"; }
-	 * 
-	 * 
-	 * 
-	 * public String toKaufBestatigt() { merkeUser = new Benutzer(); return
-	 * "kaufBestatigt?faces-redirect=true"; }
-	 * 
-	 * // public String benutzerRegistrieren() { // for (Benutzer b : user) { // if
-	 * (b.getUsername().equals(merkeUser.getUsername())) { //
-	 * FacesContext.getCurrentInstance().addMessage(null, // new
-	 * FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername " // +
-	 * "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien."
-	 * , // null)); // ; // // return null; // } // } // try { //
-	 * merkeUser.setRolle(Rolle.KUNDE); // utx.begin(); // merkeUser =
-	 * em.merge(merkeUser); // em.persist(merkeUser); //
-	 * user.setWrappedData(em.createNamedQuery("SelectUser").getResultList()); //
-	 * utx.commit(); // FacesContext.getCurrentInstance().addMessage(null, new
-	 * FacesMessage(FacesMessage.SEVERITY_INFO, //
-	 * "Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null)); // }
-	 * catch (SecurityException | IllegalStateException | RollbackException |
-	 * HeuristicMixedException // | HeuristicRollbackException | SystemException |
-	 * NotSupportedException e) { // e.printStackTrace(); // } // return
-	 * "meinKonto?faces-redirect=true"; // }
-	 * 
-	 */
 	public String speichernWk() {
 		try {
 			utx.begin();
@@ -603,49 +572,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return "kundendatenUeberpruefung?faces-redirect=true";
 	}
-
-	// brauchen wir nicht
-	public String benutzerAnlegen(Warenkorb warenkorb) {
-		for (User u : user) {
-			if (u.getUsername().equals(merkeUser.getUsername())) {
-
-				FacesContext.getCurrentInstance()
-						.addMessage(null,
-								new FacesMessage(FacesMessage.SEVERITY_ERROR,
-										"Dieser Benutzername ist bereits vergeben "
-												+ "oder erfüllt nicht die vom Administrator festgelegten Richtlinien",
-										null));
-				return null;
-			}
-		}
-		try {
-			utx.begin();
-			warenkorb = em.merge(warenkorb);
-			merkeUser.setWarenkorb(warenkorb);
-			merkeUser = em.merge(merkeUser);
-			em.persist(merkeUser);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "benutzer?faces-redirect=true";
-	}
-
-//	public String deleteUser() {
-//		merkeUser = user.getRowData();
-//		try {
-//			utx.begin();
-//			merkeUser = em.merge(merkeUser);
-//			em.remove(merkeUser);
-//			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-//			utx.commit();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
 
 	public DataModel<User> getUser() {
 		return user;
