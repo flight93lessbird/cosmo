@@ -58,7 +58,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	private DataModel<User> user = new ListDataModel<User>();
 
 	/** Erstellung des Objektes der Klasse Benutzer */
-	private User merkeUser = new User();
+	private User merkeUser = null;
 
 	private Kreditkarte merkeKreditkarte = new Kreditkarte();
 
@@ -344,7 +344,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String pwspeichern() {
 		try {
 			utx.begin();
-			user = em.merge(user);
+			merkeUser = em.merge(merkeUser);
 			em.persist(merkeUser);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();

@@ -8,14 +8,14 @@
 		<h:form>
 			<h1>#{msg.kdpwbearbeiten}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
-			<h:panelGrid var="passwort" value="#{userHandler.passwort}"
+			<h:panelGrid var="passwort" value="#{userHandler.merkeUser.passwort}"
 				columns="2" headerClass="header" footerClass="footer">
 				<p:outputLabel value="#{msg.passwort}:" for="password" />
-				<p:password id="password" value="#{userHandler.passwort}"
+				<p:password id="password" value="#{userHandler.merkeUser.passwort}"
 					required="true" label="Password">
 				</p:password>
 				<p:outputLabel value="#{msg.neupw}:" for="password" />
-				<p:password id="neupassword" value="#{userHandler.passwort}"
+				<p:password id="neupassword" value="#{userHandler.merkeUser.passwort}"
 					required="true" label="Password">
 				</p:password>
 				<h:commandButton action="#{pageHandler.toLogout}"
