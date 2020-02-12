@@ -14,8 +14,8 @@ import javax.persistence.Query;
 import javax.transaction.*;
 
 import de.hsb.app.os.enumuration.Rolle;
-import de.hsb.app.os.model.Benutzer;
 import de.hsb.app.os.model.Produkt;
+import de.hsb.app.os.model.User;
 import de.hsb.app.os.model.Warenkorb;
 import de.hsb.app.os.model.WarenkorbItem;
 import de.hsb.app.os.repository.AbstractCrudRepository;
@@ -53,7 +53,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	 * 
 	 * @return
 	 */
-	public Warenkorb getWarenkorb(Benutzer benutzer) {
+	public Warenkorb getWarenkorb(User benutzer) {
 		if (benutzer != null) {
 			return benutzer.getWarenkorb();
 		}
@@ -72,7 +72,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 //		addMessage(produkt.getTitel() + "wurde aus dem Warenkorb entfernt");
 //	}
 
-	public String checkWarenkorb(Benutzer benutzer) {
+	public String checkWarenkorb(User benutzer) {
 		System.out.println("Checked WK");
 		if (benutzer != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()) {
 			return "/os/warenkorb.xhtml";
@@ -109,7 +109,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 	}
 
-	public String addWarenkorbItemToWarekorb(Benutzer loggedBenutzer, Produkt produkt, int stkZahl) {
+	public String addWarenkorbItemToWarekorb(User loggedBenutzer, Produkt produkt, int stkZahl) {
 		System.out.println("Produkt: " + produkt.getTitel() + " Stückzahl: " + stkZahl);
 		if (produkt != null) {
 			if (loggedBenutzer != null) {
@@ -157,11 +157,11 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return "warenkorb?faces-redirect=true";
 	}
 
-	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(Benutzer loggedBenutzer) {
+	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(User loggedBenutzer) {
 		if (loggedBenutzer != null) {
 			Query query = this.em
 					.createQuery("select b.warenkorb.warenkorbItems from Benutzer b where b.id = :benutzerId");
-			query.setParameter("benutzerId", loggedBenutzer.getId());
+			query.setParameter("benutzerId", loggedBenutzer.getID());
 			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
 			if (warenkorbItems != null) {
 				return warenkorbItems;
@@ -179,7 +179,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return String.valueOf(f.format(preis * stkueckZahl)).replace(".", ",");
 	}
 
-	public String deleteWarenkorbItem(Benutzer loggedBenutzer, WarenkorbItem warenkorbItem) {
+	public String deleteWarenkorbItem(User loggedBenutzer, WarenkorbItem warenkorbItem) {
 		if (warenkorbItem != null) {
 			if (loggedBenutzer != null) {
 				this.warenkorb = loggedBenutzer.getWarenkorb();
@@ -212,7 +212,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return "startseite?faces-redirect=true";
 	}
 
-	public String toKundendaten(Benutzer benutzer) {
+	public String toKundendaten(User benutzer) {
 		if (benutzer != null) {
 			return "kundendatenUeberpruefung?faces-redirect=true";
 		} else {

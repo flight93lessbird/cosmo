@@ -35,20 +35,19 @@ import de.hsb.app.os.enumuration.Anrede;
 import de.hsb.app.os.enumuration.Kreditkartentyp;
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.model.Adresse;
-import de.hsb.app.os.model.Benutzer;
 import de.hsb.app.os.model.Kreditkarte;
-import de.hsb.app.os.model.Kunde;
+import de.hsb.app.os.model.User;
 import de.hsb.app.os.model.Warenkorb;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
 @ManagedBean(name = "userHandler")
 @ApplicationScoped
-public class UserHandler extends AbstractCrudRepository<Benutzer> implements Serializable {
+public class UserHandler extends AbstractCrudRepository<User> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String username;
 	private String passwort;
-	private Benutzer benutzer;
+	private User benutzer;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -57,14 +56,14 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	private UserTransaction utx;
 
 	/** Erstellung eines Datamodels aus der Klasse Benutzer */
-	private DataModel<Benutzer> user = new ListDataModel<Benutzer>();
+	private DataModel<User> user = new ListDataModel<User>();
 
 	/** Erstellung des Objektes der Klasse Benutzer */
-	private Benutzer merkeBenutzer = new Benutzer();
+	private User merkeBenutzer = new User();
 
-	private DataModel<Kunde> kunden;
+	private DataModel<User> kunden;
 
-	private Kunde merkeKunde = new Kunde();
+	private User merkeKunde = new User();
 
 	private Kreditkarte merkeKreditkarte = new Kreditkarte();
 
@@ -91,27 +90,27 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			em.persist(warenkorb1);
 			em.persist(warenkorb2);
 			em.persist(warenkorb3);
-			em.persist(new Benutzer("kunde", "kunde", Rolle.KUNDE, warenkorb1));
-			em.persist(new Benutzer("admin", "admin", Rolle.ADMIN, warenkorb2));
-			em.persist(new Benutzer("lena", "lena", Rolle.KUNDE, warenkorb3));
-			user = new ListDataModel<Benutzer>();
+			em.persist(new User("kunde", "kunde", Rolle.KUNDE, warenkorb1));
+			em.persist(new User("admin", "admin", Rolle.ADMIN, warenkorb2));
+			em.persist(new User("lena", "lena", Rolle.KUNDE, warenkorb3));
+			user = new ListDataModel<User>();
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			/*
 			 * init aus KundenHAndler
 			 */
-			em.persist(new Kunde("lena", "Geheim0!", Rolle.ADMIN, Anrede.FRAU, "Lena", "Eichhorst",
+			em.persist(new User("lena", "Geheim0!", Rolle.ADMIN, new Warenkorb(),Anrede.FRAU, "Lena", "Eichhorst",
 					new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime(), new Kreditkarte(), new Adresse()));
-			em.persist(new Kunde("pascal", "Pascal0!", Rolle.ADMIN, Anrede.HERR, "Pascal", "Zacheja",
+			em.persist(new User("pascal", "Pascal0!", Rolle.ADMIN, new Warenkorb(), Anrede.HERR, "Pascal", "Zacheja",
 					new GregorianCalendar(1960, Calendar.FEBRUARY, 2).getTime(), new Kreditkarte(), new Adresse()));
-			em.persist(new Kunde("emma", "Emma0!", Rolle.ADMIN, Anrede.FRAU, "Emmanuelle", "Zielke",
+			em.persist(new User("emma", "Emma0!", Rolle.ADMIN, new Warenkorb(), Anrede.FRAU, "Emmanuelle", "Zielke",
 					new GregorianCalendar(1912, Calendar.JUNE, 23).getTime(), new Kreditkarte(), new Adresse()));
-			em.persist(new Kunde("donald", "geheim", Rolle.KUNDE, Anrede.HERR, "Donald", "Knuth",
+			em.persist(new User("donald", "geheim", Rolle.KUNDE, new Warenkorb(), Anrede.HERR, "Donald", "Knuth",
 					new GregorianCalendar(1938, Calendar.JANUARY, 10).getTime(), new Kreditkarte(), new Adresse()));
-			em.persist(new Kunde("edsger", "geheim", Rolle.KUNDE, Anrede.HERR, "Edsger W.", "Dijkstra",
+			em.persist(new User("edsger", "geheim", Rolle.KUNDE, new Warenkorb(), Anrede.HERR, "Edsger W.", "Dijkstra",
 					new GregorianCalendar(1930, Calendar.MAY, 11).getTime(), new Kreditkarte(), new Adresse()));
 
-			kunden = new ListDataModel<Kunde>();
-			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			kunden = new ListDataModel<User>();
+			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
@@ -121,7 +120,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	}
 
 	public String newUser() {
-		merkeKunde = new Kunde();
+		merkeKunde = new User();
 		return "neuerKunde?faces-redirect=true";
 	}
 
@@ -186,7 +185,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 			utx.begin();
 			merkeKunde = em.merge(merkeKunde);
 			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -290,7 +289,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 
 	/* Getter und Setter */
 
-	public DataModel<Kunde> getKunden() {
+	public DataModel<User> getKunden() {
 		return kunden;
 	}
 
@@ -298,15 +297,15 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		return Anrede.values();
 	}
 
-	public void setKunden(DataModel<Kunde> kunden) {
+	public void setKunden(DataModel<User> kunden) {
 		this.kunden = kunden;
 	}
 
-	public Kunde getMerkeKunde() {
+	public User getMerkeKunde() {
 		return merkeKunde;
 	}
 
-	public void setMerkeKunde(Kunde merkeKunde) {
+	public void setMerkeKunde(User merkeKunde) {
 		this.merkeKunde = merkeKunde;
 	}
 
@@ -359,11 +358,11 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	public String login() {
 		System.out.println("Testomato");
 		Query query = em
-				.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
+				.createQuery("Select u from User u" + " where u.username = :username and u.passwort = :passwort ");
 		query.setParameter("username", username);
 		query.setParameter("passwort", passwort);
 		@SuppressWarnings("unchecked")
-		List<Benutzer> user = query.getResultList();
+		List<User> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
 		if (user.size() > 0) {
 			benutzer = user.get(0);
@@ -390,7 +389,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		query.setParameter("passwort", passwort);
 
 		@SuppressWarnings("unchecked")
-		List<Benutzer> user = query.getResultList();
+		List<User> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
 		if (user.size() == 1) {
 			benutzer = user.get(0);
@@ -418,7 +417,7 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		}
 	}
 
-	public String checkLoggedUser(Benutzer benutzer) {
+	public String checkLoggedUser(User benutzer) {
 		if (benutzer != null) {
 			return "/os/logout.xhtml";
 		} else {
@@ -443,8 +442,8 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	 * dazu wird eine Fehlermeldung ausgegeben.
 	 */
 	public String benutzerRegistrieren() {
-		for (Benutzer b : user) {
-			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+		for (User u : user) {
+			if (u.getUsername().equals(merkeBenutzer.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -489,17 +488,17 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 		this.passwort = passwort;
 	}
 
-	public Benutzer getBenutzer() {
+	public User getBenutzer() {
 		return benutzer;
 	}
 
-	public void setBenutzer(Benutzer benutzer) {
+	public void setBenutzer(User benutzer) {
 		this.benutzer = benutzer;
 	}
 
 	@Override
-	protected Class<Benutzer> getRepositoryClass() {
-		return Benutzer.class;
+	protected Class<User> getRepositoryClass() {
+		return User.class;
 	}
 
 	@Override
@@ -513,13 +512,13 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	}
 
 	@Override
-	protected List<Benutzer> uncheckedSolver(Object var) {
-		final List<Benutzer> result = new ArrayList<>();
+	protected List<User> uncheckedSolver(Object var) {
+		final List<User> result = new ArrayList<>();
 		if (var instanceof List) {
 			for (int i = 0; i < ((List<?>) var).size(); i++) {
 				final Object item = ((List<?>) var).get(i);
-				if (item instanceof Benutzer) {
-					result.add((Benutzer) item);
+				if (item instanceof User) {
+					result.add((User) item);
 				}
 			}
 		}
@@ -572,8 +571,8 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 	}
 
 	public String registrierenWk() {
-		for (Benutzer b : user) {
-			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+		for (User u : user) {
+			if (u.getUsername().equals(merkeBenutzer.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -610,8 +609,8 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 
 	// brauchen wir nicht
 	public String benutzerAnlegen(Warenkorb warenkorb) {
-		for (Benutzer b : user) {
-			if (b.getUsername().equals(merkeBenutzer.getUsername())) {
+		for (User u : user) {
+			if (u.getUsername().equals(merkeBenutzer.getUsername())) {
 
 				FacesContext.getCurrentInstance()
 						.addMessage(null,
@@ -651,19 +650,19 @@ public class UserHandler extends AbstractCrudRepository<Benutzer> implements Ser
 //		return null;
 //	}
 
-	public DataModel<Benutzer> getUser() {
+	public DataModel<User> getUser() {
 		return user;
 	}
 
-	public void setUser(DataModel<Benutzer> user) {
+	public void setUser(DataModel<User> user) {
 		this.user = user;
 	}
 
-	public Benutzer getMerkeBenutzer() {
+	public User getMerkeBenutzer() {
 		return merkeBenutzer;
 	}
 
-	public void setMerkeBenutzer(Benutzer merkeBenutzer) {
+	public void setMerkeBenutzer(User merkeBenutzer) {
 		this.merkeBenutzer = merkeBenutzer;
 	}
 
