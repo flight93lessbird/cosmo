@@ -8,7 +8,7 @@
 		<h:form>
 			<h1>#{msg.kdbearbeiten}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
-			<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
+			<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
 				columns="2" headerClass="header" footerClass="footer">
 				<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
 				<h:panelGroup>

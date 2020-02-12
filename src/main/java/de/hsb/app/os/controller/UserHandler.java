@@ -59,11 +59,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	private DataModel<User> user = new ListDataModel<User>();
 
 	/** Erstellung des Objektes der Klasse Benutzer */
-	private User merkeBenutzer = new User();
+	private User merkeUser = new User();
 
-	private DataModel<User> kunden;
-
-	private User merkeKunde = new User();
 
 	private Kreditkarte merkeKreditkarte = new Kreditkarte();
 
@@ -93,8 +90,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			em.persist(new User("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 			em.persist(new User("admin", "admin", Rolle.ADMIN, warenkorb2));
 			em.persist(new User("lena", "lena", Rolle.KUNDE, warenkorb3));
-			user = new ListDataModel<User>();
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			System.out.println(em.createNamedQuery("SelectUser").getResultList().size() + " Länge der NamedQuery User Admin Kunde Lena");
 			
 			/*
@@ -111,8 +106,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 //			em.persist(new User("edsger", "geheim", Rolle.KUNDE, new Warenkorb(), Anrede.HERR, "Edsger W.", "Dijkstra",
 //					new GregorianCalendar(1930, Calendar.MAY, 11).getTime(), new Kreditkarte(), new Adresse()));
 
-			kunden = new ListDataModel<User>();
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			user = new ListDataModel<User>();
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			System.out.println(em.createNamedQuery("SelectUser").getResultList().size() + " Länge der NamedQuery User");
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
@@ -122,7 +117,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String newUser() {
-		merkeKunde = new User();
+		merkeUser = new User();
 		return "neuerKunde?faces-redirect=true";
 	}
 
@@ -137,8 +132,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String editAdresse() {
-		merkeKunde = getKunden().getRowData();
-		merkeAdresse = kunden.getRowData().getAdresse();
+		merkeUser = getKunden().getRowData();
+		merkeAdresse = user.getRowData().getAdresse();
 		if (merkeAdresse == null) {
 			merkeAdresse = new Adresse();
 		}
@@ -146,14 +141,14 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String adresseSpeichern() {
-		merkeKunde.setKreditkarte(merkeKreditkarte);
+		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
+			merkeUser = em.merge(merkeUser);
 			merkeAdresse = em.merge(merkeAdresse);
-			em.persist(merkeKunde);
+			em.persist(merkeUser);
 			em.persist(merkeAdresse);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
 				| HeuristicMixedException | HeuristicRollbackException e) {
@@ -171,9 +166,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String neuerKundeSpeichern() {
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -185,9 +180,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String speichernReg() {
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -200,9 +195,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String kreditkarteSpeichern() {
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -214,9 +209,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String kreditkarteSpeichernWk() {
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -226,13 +221,13 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String editUser() {
-		merkeKunde = kunden.getRowData();
+		merkeUser = user.getRowData();
 		return "neuerKunde?faces-redirect=true";
 	}
 
 	public String editKreditkarte() {
-		merkeKunde = getKunden().getRowData();
-		merkeKreditkarte = kunden.getRowData().getKreditkarte();
+		merkeUser = getKunden().getRowData();
+		merkeKreditkarte = user.getRowData().getKreditkarte();
 		if (merkeKreditkarte == null) {
 			merkeKreditkarte = new Kreditkarte();
 		}
@@ -240,14 +235,14 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String kreditkarteSpeichernAd() {
-		merkeKunde.setKreditkarte(merkeKreditkarte);
+		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
+			merkeUser = em.merge(merkeUser);
 			merkeKreditkarte = em.merge(merkeKreditkarte);
-			em.persist(merkeKunde);
+			em.persist(merkeUser);
 			em.persist(merkeKreditkarte);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
 				| HeuristicMixedException | HeuristicRollbackException e) {
@@ -259,9 +254,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String kundendatenSpeichern() {
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -275,12 +270,12 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String deleteUser() {
-		merkeKunde = kunden.getRowData();
+		merkeUser = user.getRowData();
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.remove(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.remove(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -292,7 +287,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	/* Getter und Setter */
 
 	public DataModel<User> getKunden() {
-		return kunden;
+		return user;
 	}
 
 	public Anrede[] getAnredeValues() {
@@ -300,15 +295,15 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public void setKunden(DataModel<User> kunden) {
-		this.kunden = kunden;
+		this.user = kunden;
 	}
 
-	public User getMerkeKunde() {
-		return merkeKunde;
+	public User getmerkeUser() {
+		return merkeUser;
 	}
 
-	public void setMerkeKunde(User merkeKunde) {
-		this.merkeKunde = merkeKunde;
+	public void setmerkeUser(User merkeUser) {
+		this.merkeUser = merkeUser;
 	}
 
 	public Kreditkarte getMerkeKreditkarte() {
@@ -445,7 +440,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 */
 	public String benutzerRegistrieren() {
 		for (User u : user) {
-			if (u.getUsername().equals(merkeBenutzer.getUsername())) {
+			if (u.getUsername().equals(merkeUser.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -456,10 +451,10 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
-			merkeBenutzer.setRolle(Rolle.KUNDE);
+			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
-			merkeBenutzer = em.merge(merkeBenutzer);
-			em.persist(merkeBenutzer);
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -532,22 +527,22 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	/*
 	 * 
-	 * public String toRegistrieren() { merkeBenutzer = new Benutzer(); return
+	 * public String toRegistrieren() { merkeUser = new Benutzer(); return
 	 * "registrieren?faces-redirect=true"; }
 	 * 
 	 * 
 	 * 
-	 * public String toKaufBestatigt() { merkeBenutzer = new Benutzer(); return
+	 * public String toKaufBestatigt() { merkeUser = new Benutzer(); return
 	 * "kaufBestatigt?faces-redirect=true"; }
 	 * 
 	 * // public String benutzerRegistrieren() { // for (Benutzer b : user) { // if
-	 * (b.getUsername().equals(merkeBenutzer.getUsername())) { //
+	 * (b.getUsername().equals(merkeUser.getUsername())) { //
 	 * FacesContext.getCurrentInstance().addMessage(null, // new
 	 * FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername " // +
 	 * "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien."
 	 * , // null)); // ; // // return null; // } // } // try { //
-	 * merkeBenutzer.setRolle(Rolle.KUNDE); // utx.begin(); // merkeBenutzer =
-	 * em.merge(merkeBenutzer); // em.persist(merkeBenutzer); //
+	 * merkeUser.setRolle(Rolle.KUNDE); // utx.begin(); // merkeUser =
+	 * em.merge(merkeUser); // em.persist(merkeUser); //
 	 * user.setWrappedData(em.createNamedQuery("SelectUser").getResultList()); //
 	 * utx.commit(); // FacesContext.getCurrentInstance().addMessage(null, new
 	 * FacesMessage(FacesMessage.SEVERITY_INFO, //
@@ -561,9 +556,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String speichernWk() {
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -574,7 +569,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	public String registrierenWk() {
 		for (User u : user) {
-			if (u.getUsername().equals(merkeBenutzer.getUsername())) {
+			if (u.getUsername().equals(merkeUser.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -584,10 +579,10 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
-			merkeBenutzer.setRolle(Rolle.KUNDE);
+			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
-			merkeBenutzer = em.merge(merkeBenutzer);
-			em.persist(merkeBenutzer);
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -598,9 +593,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		try {
 			utx.begin();
-			merkeKunde = em.merge(merkeKunde);
-			em.persist(merkeKunde);
-			kunden.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
@@ -612,7 +607,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	// brauchen wir nicht
 	public String benutzerAnlegen(Warenkorb warenkorb) {
 		for (User u : user) {
-			if (u.getUsername().equals(merkeBenutzer.getUsername())) {
+			if (u.getUsername().equals(merkeUser.getUsername())) {
 
 				FacesContext.getCurrentInstance()
 						.addMessage(null,
@@ -626,9 +621,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		try {
 			utx.begin();
 			warenkorb = em.merge(warenkorb);
-			merkeBenutzer.setWarenkorb(warenkorb);
-			merkeBenutzer = em.merge(merkeBenutzer);
-			em.persist(merkeBenutzer);
+			merkeUser.setWarenkorb(warenkorb);
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
@@ -639,11 +634,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 //	public String deleteUser() {
-//		merkeBenutzer = user.getRowData();
+//		merkeUser = user.getRowData();
 //		try {
 //			utx.begin();
-//			merkeBenutzer = em.merge(merkeBenutzer);
-//			em.remove(merkeBenutzer);
+//			merkeUser = em.merge(merkeUser);
+//			em.remove(merkeUser);
 //			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 //			utx.commit();
 //		} catch (Exception e) {
@@ -660,12 +655,12 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		this.user = user;
 	}
 
-	public User getMerkeBenutzer() {
-		return merkeBenutzer;
+	public User getMerkeUser() {
+		return merkeUser;
 	}
 
-	public void setMerkeBenutzer(User merkeBenutzer) {
-		this.merkeBenutzer = merkeBenutzer;
+	public void setMerkeUser(User merkeUser) {
+		this.merkeUser = merkeUser;
 	}
 
 }
