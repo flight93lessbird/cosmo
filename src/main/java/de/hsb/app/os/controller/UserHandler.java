@@ -122,6 +122,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 	}
 
+	/*
 	public String neuAdresse() {
 		merkeAdresse = new Adresse();
 		return "neueAnschrift?faces-redirect=true";
@@ -131,6 +132,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		merkeKreditkarte = new Kreditkarte();
 		return "kreditkarte?faces-redirect=true";
 	}
+	 */
 
 	public String formatDateDDMMYYYY(Date date) {
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
@@ -233,6 +235,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			em.persist(merkeUser);
+			em.persist(merkeKreditkarte);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
