@@ -389,7 +389,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 // login für den Warenkorb
 	public String WkLogin() {
 		Query query = em
-				.createQuery("Select u from Benutzer u " + "where u.username = :username and u.passwort = :passwort ");
+				.createQuery("Select u from User u " + "where u.username = :username and u.passwort = :passwort ");
 		query.setParameter("username", username);
 		query.setParameter("passwort", passwort);
 
