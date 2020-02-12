@@ -130,7 +130,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	 */
 	public String pddelete(Produkt produkt) {
 		merkeProdukt = produkt;
-//		merkeProdukt = pdList.getRowData();
 		try {
 			utx.begin();
 			merkeProdukt = em.merge(merkeProdukt);
