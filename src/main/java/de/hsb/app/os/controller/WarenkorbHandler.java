@@ -139,7 +139,6 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 						break;
 					}
 				}
-
 				if (isNewItem) {
 					produkt = this.em.merge(produkt);
 					WarenkorbItem warenkorbItem = this.em.merge(new WarenkorbItem(stkZahl, produkt));
@@ -220,6 +219,11 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 			return "kundendaten?faces-redirect=true";
 		}
 	}
+
+	public String toStartseite() {
+		warenkorb = new Warenkorb();
+		return "startseite?faces-redirect=true";
+		}
 
 	public void setWarenkorb(Warenkorb warenkorb) {
 		this.warenkorb = warenkorb;
