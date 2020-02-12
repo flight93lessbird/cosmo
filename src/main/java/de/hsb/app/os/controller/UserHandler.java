@@ -61,7 +61,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	/** Erstellung des Objektes der Klasse Benutzer */
 	private User merkeUser = new User();
 
-
 	private Kreditkarte merkeKreditkarte = new Kreditkarte();
 
 	private Adresse merkeAdresse = new Adresse();
@@ -100,11 +99,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			em.persist(new User("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 			em.persist(new User("admin", "admin", Rolle.ADMIN, warenkorb2));
 			em.persist(new User("lena", "lena", Rolle.KUNDE, warenkorb3));
-			
+
 			/*
 			 * init aus KundenHAndler
 			 */
-			em.persist(new User("lena", "Geheim0!", Rolle.ADMIN, warenkorb4,Anrede.FRAU, "Lena", "Eichhorst",
+			em.persist(new User("lena", "Geheim0!", Rolle.ADMIN, warenkorb4, Anrede.FRAU, "Lena", "Eichhorst",
 					new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime(), new Kreditkarte(), new Adresse()));
 			em.persist(new User("pascal", "Pascal0!", Rolle.ADMIN, warenkorb5, Anrede.HERR, "Pascal", "Zacheja",
 					new GregorianCalendar(1960, Calendar.FEBRUARY, 2).getTime(), new Kreditkarte(), new Adresse()));
@@ -201,7 +200,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return "startseite?faces-redirect=true";
 	}
-
 
 	public String kreditkarteSpeichern() {
 		try {
@@ -341,7 +339,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		if (benutzer == null)
 			return " ";
 		else
-			return "Hallo " + benutzer.getUsername();
+			return "Hallo, " + benutzer.getVorname() + " ";
 	}
 
 	public String pwspeichern() {
@@ -451,7 +449,16 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 */
 	public String benutzerRegistrieren() {
 		for (User u : user) {
-			if (u.getUsername().equals(merkeUser.getUsername())) {
+			if(merkeUser == null){
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+
+				return null;
+
+			}else if (u.getUsername().equals(merkeUser.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -460,6 +467,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 				return null;
 			}
+			
 		}
 		try {
 			merkeUser.setRolle(Rolle.KUNDE);
@@ -673,5 +681,5 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public void setMerkeUser(User merkeUser) {
 		this.merkeUser = merkeUser;
 	}
-	
+
 }
