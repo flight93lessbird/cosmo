@@ -8,19 +8,19 @@
 		<h:form>
 			<h1>#{msg.meinkonto}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
-			<h:panelGrid var="kunde" value="#{userHandler.merkeKunde}"
+			<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
 				columns="2" headerClass="header" footerClass="footer">
 				<h:outputLabel for="username" value="#{msg.username}" />
 				<h:panelGroup>
 					<h:inputText id="username"
-						value="#{userHandler.merkeBenutzer.username}"
+						value="#{userHandler.merkeUser.username}"
 								 required="true" requiredMessage="#{msg.eingabefehlt}."/>
 					<h:message for="username" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="passwort1" value="#{msg.passwort}" />
 				<h:panelGroup>
 					<p:password id="passwort1"
-						value="#{userHandler.merkeBenutzer.passwort}" match="passwort2"
+						value="#{userHandler.merkeUser.passwort}" match="passwort2"
 						label="Password 1" required="true" requiredMessage="#{msg.eingabefehlt}.">
 					</p:password>
 					<h:message for="passwort1" styleClass="message" />
@@ -28,7 +28,7 @@
 				<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
 				<h:panelGroup>
 					<p:password id="passwort2"
-						value="#{userHandler.merkeBenutzer.passwort}" label="Password 2"
+						value="#{userHandler.merkeUser.passwort}" label="Password 2"
 								required="true" requiredMessage="#{msg.eingabefehlt}.">
 						<f:validator validatorId="PasswordValidation" />
 					</p:password>
@@ -37,21 +37,21 @@
 				<h:outputLabel value="#{msg.anrede}:" for="anrede" />
 				<h:panelGroup>
 					<h:selectOneMenu id="anrede"
-						value="#{userHandler.merkeKunde.anrede}">
+						value="#{userHandler.merkeUser.anrede}">
 						<f:selectItems var="form" value="#{userHandler.anredeValues}"
 							itemValue="#{form}" itemLabel="#{form.label}" />
 					</h:selectOneMenu>
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.vorname}:" for="vorname" />
 				<h:panelGroup>
-					<h:inputText id="vorname" value="#{userHandler.merkeKunde.vorname}"
+					<h:inputText id="vorname" value="#{userHandler.merkeUser.vorname}"
 						required="true" requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="vorname" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 				<h:panelGroup>
 					<h:inputText id="nachname"
-						value="#{userHandler.merkeKunde.nachname}" required="true"
+						value="#{userHandler.merkeUser.nachname}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="nachname" styleClass="message" />
 				</h:panelGroup>
@@ -80,7 +80,7 @@
 				<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
 				<h:panelGroup>
 					<p:calendar id="geburtsdatum"
-						value="#{userHandler.merkeKunde.geburtsdatum}" mode="popup"
+						value="#{userHandler.merkeUser.geburtsdatum}" mode="popup"
 						navigator="true" showOn="button" pattern="dd.MM.yyyy"
 						yearRange="c-70:c+50"
 								required="true" requiredMessage="#{msg.eingabefehlt}." />
