@@ -126,7 +126,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	public String newUser() {
 		merkeUser = new User();
-		return "neuerKunde?faces-redirect=true";
+		return "startseite?faces-redirect=true";
 	}
 
 	public String formatDateDDMMYYYY(Date date) {
@@ -606,16 +606,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		try {
-			utx.begin();
-			merkeUser = em.merge(merkeUser);
-			em.persist(merkeUser);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
