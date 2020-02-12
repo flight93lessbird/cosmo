@@ -52,13 +52,18 @@ public class User {
 	private Warenkorb warenkorb = new Warenkorb();
 	
 	public User(){	}
-	
+	/*
+	 * @Konstruktor für den Admin
+	 */
 	public User(String username, String passwort, Rolle rolle, Warenkorb warenkorb){
 		this.username = username;
 		this.passwort = passwort;
 		this.rolle = rolle;
 		this.warenkorb = warenkorb;
 	}
+	/*
+	 *  @Konstruktor für den Benutzer
+	 */
 	public User(String username, String passwort, Rolle rolle, Warenkorb warenkorb, Anrede anrede, String vorname, String nachname, Date geburtsdatum, Kreditkarte kreditkarte, Adresse adresse)
 	{
 		super();

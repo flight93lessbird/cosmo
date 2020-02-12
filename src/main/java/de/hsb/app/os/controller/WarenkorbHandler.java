@@ -160,8 +160,8 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(User loggedBenutzer) {
 		if (loggedBenutzer != null) {
 			Query query = this.em
-					.createQuery("select b.warenkorb.warenkorbItems from Benutzer b where b.id = :benutzerId");
-			query.setParameter("benutzerId", loggedBenutzer.getID());
+					.createQuery("select u.warenkorb.warenkorbItems from User u where u.ID = :userID");
+			query.setParameter("userID", loggedBenutzer.getID());
 			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
 			if (warenkorbItems != null) {
 				return warenkorbItems;
