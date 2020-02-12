@@ -30,14 +30,9 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.artklanzl}</f:facet>
-					<p:spinner id="basic" min="1" max="99" size="1"
-						value="#{warenkorbItem.stkZahl}">
-						<p:ajax
-							listener="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.merkeUser, warenkorbItem.p, this.val())}"
-							update="ajaxSpinnerValue" process="@this" />
-					</p:spinner>
-					<h:outputText id="ajaxSpinnerValue"
-						value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
+					<h:outputText value="#{warenkorbItem.stkZahl} Stk. " />
+					<h:commandButton action="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.merkeUser, produktHandler.merkeProdukt, warenkorbhd.incrementStkZahl(warenkorbItem))}" value="+" />
+					<h:commandButton action="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.merkeUser, produktHandler.merkeProdukt, warenkorbhd.decrementStkZahl(warenkorbItem))}" value="-" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.artgesamt}</f:facet>

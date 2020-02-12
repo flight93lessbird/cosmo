@@ -125,6 +125,16 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 		return "warenkorb?faces-redirect=true";
 	}
+	public int incrementStkZahl(WarenkorbItem item) {
+		item.setStkZahl(item.getStkZahl() + 1);
+		System.out.println(item.getStkZahl());
+		return item.getStkZahl();
+	}
+	public int decrementStkZahl(WarenkorbItem item) {
+		item.setStkZahl(item.getStkZahl() - 1);
+		System.out.println(item.getStkZahl());
+		return item.getStkZahl();
+	}
 
 	private String addWarenkorbItemToWarenkorb(Warenkorb warenkorb, Produkt produkt, int stkZahl) {
 		if (stkZahl > 0) {

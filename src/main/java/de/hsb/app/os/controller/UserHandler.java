@@ -179,10 +179,12 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String speichernReg() {
+		merkeUser.setAdresse(merkeAdresse);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			em.persist(merkeUser);
+			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
