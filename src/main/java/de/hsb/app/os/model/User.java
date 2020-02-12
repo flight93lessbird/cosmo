@@ -1,6 +1,8 @@
 package de.hsb.app.os.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,6 +45,7 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Kreditkarte kreditkarte;
 	
+	
 	@Past
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;
@@ -60,6 +63,13 @@ public class User {
 		this.passwort = passwort;
 		this.rolle = rolle;
 		this.warenkorb = warenkorb;
+		Calendar cal = new GregorianCalendar(1987, Calendar.JULY, 05);
+		this.geburtsdatum = cal.getTime();
+		this.anrede = Anrede.FIRMA;
+		this.vorname = "Max";
+		this.nachname = "Mustermann";
+		this.kreditkarte = null;
+		this.adresse = null;
 	}
 	/*
 	 *  @Konstruktor für den Benutzer

@@ -84,27 +84,36 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			Warenkorb warenkorb1 = new Warenkorb();
 			Warenkorb warenkorb2 = new Warenkorb();
 			Warenkorb warenkorb3 = new Warenkorb();
+			Warenkorb warenkorb4 = new Warenkorb();
+			Warenkorb warenkorb5 = new Warenkorb();
+			Warenkorb warenkorb6 = new Warenkorb();
+			Warenkorb warenkorb7 = new Warenkorb();
+			Warenkorb warenkorb8 = new Warenkorb();
 			em.persist(warenkorb1);
 			em.persist(warenkorb2);
 			em.persist(warenkorb3);
+			em.persist(warenkorb4);
+			em.persist(warenkorb5);
+			em.persist(warenkorb6);
+			em.persist(warenkorb7);
+			em.persist(warenkorb8);
 			em.persist(new User("kunde", "kunde", Rolle.KUNDE, warenkorb1));
 			em.persist(new User("admin", "admin", Rolle.ADMIN, warenkorb2));
 			em.persist(new User("lena", "lena", Rolle.KUNDE, warenkorb3));
-			System.out.println(em.createNamedQuery("SelectUser").getResultList().size() + " Länge der NamedQuery User Admin Kunde Lena");
 			
 			/*
 			 * init aus KundenHAndler
 			 */
-//			em.persist(new User("lena", "Geheim0!", Rolle.ADMIN, new Warenkorb(),Anrede.FRAU, "Lena", "Eichhorst",
-//					new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime(), new Kreditkarte(), new Adresse()));
-//			em.persist(new User("pascal", "Pascal0!", Rolle.ADMIN, new Warenkorb(), Anrede.HERR, "Pascal", "Zacheja",
-//					new GregorianCalendar(1960, Calendar.FEBRUARY, 2).getTime(), new Kreditkarte(), new Adresse()));
-//			em.persist(new User("emma", "Emma0!", Rolle.ADMIN, new Warenkorb(), Anrede.FRAU, "Emmanuelle", "Zielke",
-//					new GregorianCalendar(1912, Calendar.JUNE, 23).getTime(), new Kreditkarte(), new Adresse()));
-//			em.persist(new User("donald", "geheim", Rolle.KUNDE, new Warenkorb(), Anrede.HERR, "Donald", "Knuth",
-//					new GregorianCalendar(1938, Calendar.JANUARY, 10).getTime(), new Kreditkarte(), new Adresse()));
-//			em.persist(new User("edsger", "geheim", Rolle.KUNDE, new Warenkorb(), Anrede.HERR, "Edsger W.", "Dijkstra",
-//					new GregorianCalendar(1930, Calendar.MAY, 11).getTime(), new Kreditkarte(), new Adresse()));
+			em.persist(new User("lena", "Geheim0!", Rolle.ADMIN, warenkorb4,Anrede.FRAU, "Lena", "Eichhorst",
+					new GregorianCalendar(1970, Calendar.JANUARY, 1).getTime(), new Kreditkarte(), new Adresse()));
+			em.persist(new User("pascal", "Pascal0!", Rolle.ADMIN, warenkorb5, Anrede.HERR, "Pascal", "Zacheja",
+					new GregorianCalendar(1960, Calendar.FEBRUARY, 2).getTime(), new Kreditkarte(), new Adresse()));
+			em.persist(new User("emma", "Emma0!", Rolle.ADMIN, warenkorb6, Anrede.FRAU, "Emmanuelle", "Zielke",
+					new GregorianCalendar(1912, Calendar.JUNE, 23).getTime(), new Kreditkarte(), new Adresse()));
+			em.persist(new User("donald", "geheim", Rolle.KUNDE, warenkorb7, Anrede.HERR, "Donald", "Knuth",
+					new GregorianCalendar(1938, Calendar.JANUARY, 10).getTime(), new Kreditkarte(), new Adresse()));
+			em.persist(new User("edsger", "geheim", Rolle.KUNDE, warenkorb8, Anrede.HERR, "Edsger W.", "Dijkstra",
+					new GregorianCalendar(1930, Calendar.MAY, 11).getTime(), new Kreditkarte(), new Adresse()));
 
 			user = new ListDataModel<User>();
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
@@ -167,6 +176,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			Warenkorb warenkorb = merkeUser.getWarenkorb();
+			em.persist(warenkorb);
 			em.persist(merkeUser);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
@@ -662,5 +673,5 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public void setMerkeUser(User merkeUser) {
 		this.merkeUser = merkeUser;
 	}
-
+	
 }

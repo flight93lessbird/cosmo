@@ -28,9 +28,17 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="kunde" value="#{userHandler.kunden}"
+				<h:dataTable var="kunde" value="#{userHandler.user}"
 					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.kunden}</f:facet>
+					<h:column>
+						<f:facet name="header">#{msg.username}</f:facet>
+						<h:outputText value="#{kunde.username}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.admrolle}</f:facet>
+						<h:outputText value="#{kunde.rolle}" />
+					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.anrede}</f:facet>
 						<h:outputText value="#{kunde.anrede.label}" />
