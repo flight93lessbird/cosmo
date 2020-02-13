@@ -144,11 +144,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String adresseSpeichern() {
-		merkeUser.setAdresse(merkeAdresse);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			merkeAdresse = em.merge(merkeAdresse);
+			merkeUser.setAdresse(merkeAdresse);
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
@@ -177,11 +177,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String speichernKundendaten() {
-		merkeUser.setAdresse(merkeAdresse);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			merkeAdresse = em.merge(merkeAdresse);
+			merkeUser.setAdresse(merkeAdresse);
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
@@ -212,11 +212,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String kreditkarteSpeichern() {
-		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			merkeKreditkarte = em.merge(merkeKreditkarte);
+			merkeUser.setKreditkarte(merkeKreditkarte);
 			em.persist(merkeUser);
 			em.persist(merkeKreditkarte);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
@@ -229,11 +229,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String kreditkarteSpeichernAd() {
-		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			merkeKreditkarte = em.merge(merkeKreditkarte);
+			merkeUser.setKreditkarte(merkeKreditkarte);
 			em.persist(merkeUser);
 			em.persist(merkeKreditkarte);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
@@ -246,10 +246,10 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String kreditkarteSpeichernWk() {
-		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			merkeUser.setKreditkarte(merkeKreditkarte);
 			em.persist(merkeUser);
 			em.persist(merkeKreditkarte);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
