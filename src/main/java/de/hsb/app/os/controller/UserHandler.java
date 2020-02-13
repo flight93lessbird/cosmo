@@ -391,7 +391,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		merkeUser = null;
 		merkeAdresse = new Adresse();
 		merkeKreditkarte = new Kreditkarte();
-		return "/startseite.xhtml?faces -redirect=true";
+		return "/startseite.xhtml?faces-redirect=true";
 	}
 
 	public String toRegistrieren() {
@@ -434,7 +434,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
 			utx.commit();
