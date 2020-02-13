@@ -33,10 +33,10 @@ public class User {
 	
 	private Anrede anrede;
 	
-	@Size(min = 3, max = 30)
+	@Size(min = 1, max = 30)
 	private String vorname;
 	
-	@Size(min = 3, max= 30)
+	@Size(min = 1, max= 30)
 	private String nachname;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -45,14 +45,15 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Kreditkarte kreditkarte;
 	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Warenkorb warenkorb;
 	
 	@Past
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;
 	
 
-	@OneToOne(cascade = {CascadeType.ALL})
-	private Warenkorb warenkorb;
+	
 	
 	public User(){	}
 	/*

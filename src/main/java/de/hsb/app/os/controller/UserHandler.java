@@ -432,6 +432,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 			Warenkorb warenkorb = new Warenkorb();
 			merkeUser.setWarenkorb(warenkorb);
+			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
