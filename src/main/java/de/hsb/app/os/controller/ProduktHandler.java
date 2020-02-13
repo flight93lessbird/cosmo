@@ -83,12 +83,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	/** Hier legen wir neue Artikel an */
 	public String ProduktAnlegen() {
-//		try {
-//			pdList.setRowIndex(0);
 		merkeProdukt = new Produkt();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 		return "neuProdukt?faces-redirect=true";
 	}
 

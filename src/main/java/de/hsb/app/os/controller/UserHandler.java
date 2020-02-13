@@ -281,47 +281,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "kunden?faces-redirect=true";
 	}
 
-	/* Getter und Setter */
-	public Kreditkartentyp[] getKreditkartentypValues() {
-		return Kreditkartentyp.values();
-	}
-
-	public DataModel<User> getKunden() {
-		return user;
-	}
-
-	public Anrede[] getAnredeValues() {
-		return Anrede.values();
-	}
-
-	public void setKunden(DataModel<User> kunden) {
-		this.user = kunden;
-	}
-
-	public User getmerkeUser() {
-		return merkeUser;
-	}
-
-	public void setmerkeUser(User merkeUser) {
-		this.merkeUser = merkeUser;
-	}
-
-	public Kreditkarte getMerkeKreditkarte() {
-		return merkeKreditkarte;
-	}
-
-	public void setMerkeKreditkarte(Kreditkarte merkeKreditkarte) {
-		this.merkeKreditkarte = merkeKreditkarte;
-	}
-
-	public Adresse getMerkeAdresse() {
-		return merkeAdresse;
-	}
-
-	public void setMerkeAdresse(Adresse merkeAdresse) {
-		this.merkeAdresse = merkeAdresse;
-	}
-
 	/*
 	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\ LOGIN HANDLER ////////////////////////////
 	 */
@@ -435,6 +394,13 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "/startseite.xhtml?faces -redirect=true";
 	}
 
+	public String toRegistrieren() {
+		merkeUser = new User();
+		merkeAdresse = new Adresse();
+		merkeKreditkarte = new Kreditkarte();
+		return "registrieren?faces-redirect=true";
+	}
+
 	/**
 	 * Da wir keine gleichen Benutzer haben wollen, brauchen wir eine Methode, die
 	 * uns nicht erlaubt einen neuen Benutzer anzulegen wenn der schon vorhanden.
@@ -459,7 +425,36 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				;
 				return null;
 			}
-			
+		}
+		try {
+			merkeUser.setRolle(Rolle.KUNDE);
+			utx.begin();
+			merkeUser = em.merge(merkeUser);
+			merkeAdresse = em.merge(merkeAdresse);
+			em.persist(merkeUser);
+			em.persist(merkeAdresse);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+			utx.commit();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "startseite?faces-redirect=true";
+	}
+
+	public String registrierenWk() {
+		for (User u : user) {
+			if (u.getUsername().equals(merkeUser.getUsername())) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+				return null;
+			}
 		}
 		try {
 			merkeUser.setRolle(Rolle.KUNDE);
@@ -470,13 +465,88 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
+				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+			e.printStackTrace();
+		}
+		return "kundendatenUeberpruefung?faces-redirect=true";
+	}
 
+	@Override
+	protected List<User> uncheckedSolver(Object var) {
+		final List<User> result = new ArrayList<>();
+		if (var instanceof List) {
+			for (int i = 0; i < ((List<?>) var).size(); i++) {
+				final Object item = ((List<?>) var).get(i);
+				if (item instanceof User) {
+					result.add((User) item);
+				}
+			}
+		}
+		return result;
+	}
+
+	/*
+	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\ OS Handler /////////////////////////////
+	 */
+
+	public String speichernWk() {
+		try {
+			utx.begin();
+			merkeUser = em.merge(merkeUser);
+			em.persist(merkeUser);
+			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
-		return "startseite?faces-redirect=true";
+		return "zahlungsart?faces-redirect=true";
+	}
+
+	public DataModel<User> getUser() {
+		return user;
+	}
+
+	/* Getter und Setter */
+	public Kreditkartentyp[] getKreditkartentypValues() {
+		return Kreditkartentyp.values();
+	}
+
+	public DataModel<User> getKunden() {
+		return user;
+	}
+
+	public Anrede[] getAnredeValues() {
+		return Anrede.values();
+	}
+
+	public void setKunden(DataModel<User> kunden) {
+		this.user = kunden;
+	}
+
+	public User getmerkeUser() {
+		return merkeUser;
+	}
+
+	public void setmerkeUser(User merkeUser) {
+		this.merkeUser = merkeUser;
+	}
+
+	public Kreditkarte getMerkeKreditkarte() {
+		return merkeKreditkarte;
+	}
+
+	public void setMerkeKreditkarte(Kreditkarte merkeKreditkarte) {
+		this.merkeKreditkarte = merkeKreditkarte;
+	}
+
+	public Adresse getMerkeAdresse() {
+		return merkeAdresse;
+	}
+
+	public void setMerkeAdresse(Adresse merkeAdresse) {
+		this.merkeAdresse = merkeAdresse;
 	}
 
 	// Getter + Setter
@@ -509,68 +579,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	@Override
 	protected String getSelect() {
 		return "SelectBenutzer";
-	}
-
-	@Override
-	protected List<User> uncheckedSolver(Object var) {
-		final List<User> result = new ArrayList<>();
-		if (var instanceof List) {
-			for (int i = 0; i < ((List<?>) var).size(); i++) {
-				final Object item = ((List<?>) var).get(i);
-				if (item instanceof User) {
-					result.add((User) item);
-				}
-			}
-		}
-		return result;
-	}
-	/*
-	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\ OS Handler /////////////////////////////
-	 */
-
-	public String speichernWk() {
-		try {
-			utx.begin();
-			merkeUser = em.merge(merkeUser);
-			em.persist(merkeUser);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "zahlungsart?faces-redirect=true";
-	}
-
-	public String registrierenWk() {
-		for (User u : user) {
-			if (u.getUsername().equals(merkeUser.getUsername())) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
-								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
-								null));
-				;
-				return null;
-			}
-		}
-		try {
-			merkeUser.setRolle(Rolle.KUNDE);
-			utx.begin();
-			merkeUser = em.merge(merkeUser);
-			em.persist(merkeUser);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "kundendatenUeberpruefung?faces-redirect=true";
-	}
-
-	public DataModel<User> getUser() {
-		return user;
 	}
 
 	public void setUser(DataModel<User> user) {
