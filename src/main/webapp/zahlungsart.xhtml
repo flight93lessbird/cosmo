@@ -35,14 +35,14 @@
 							<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
 							<h:panelGroup>
 								<h:inputText id="inhaber"
-											 value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
+											 value="#{userHandler.merkeUser.kreditkarte.inhaber}" required="true"
 											 requiredMessage="#{msg.eingabefehlt}." />
 								<h:message for="inhaber" styleClass="message" />
 							</h:panelGroup>
 							<h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
 							<h:panelGroup>
 								<h:selectOneMenu id="kreditkarten"
-												 value="#{userHandler.merkeKreditkarte.typ}">
+												 value="#{userHandler.merkeUser.kreditkarte.typ}">
 									<f:selectItems var="form"
 												   value="#{userHandler.kreditkartentypValues}" itemValue="#{form}"
 												   itemLabel="#{form.label}" />
@@ -52,7 +52,7 @@
 							</h:outputLabel>
 							<h:panelGroup>
 								<h:inputText id="nummer"
-											 value="#{userHandler.merkeKreditkarte.nummer}" required="true"
+											 value="#{userHandler.merkeUser.kreditkarte.nummer}" required="true"
 											 requiredMessage="#{msg.eingabefehlt}.">
 									<f:converter converterId="kreditkartenConverter" />
 									<f:validator validatorId="kreditkartenValidator" />
@@ -63,7 +63,7 @@
 										   for="gueltigBis" />
 							<h:panelGroup>
 								<p:calendar id="gueltigBis"
-											value="#{userHandler.merkeKreditkarte.gueltigBis}" mode="popup"
+											value="#{userHandler.merkeUser.kreditkarte.gueltigBis}" mode="popup"
 											navigator="true" showOn="button" pattern="MM.yy" required="true"
 											requiredMessage="#{msg.gueltigkdatumfehlt}." />
 								<h:message for="gueltigBis" styleClass="message" />

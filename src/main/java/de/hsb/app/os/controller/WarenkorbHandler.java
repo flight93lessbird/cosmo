@@ -83,13 +83,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 	}
 
-	// brauchen wir nicht
-	public void changeStkZahl(int zahl) {
-
-		System.out.println(zahl);
-	}
-
-	public void changeStkZahl(Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
+	public void changeStkZahl(User user, Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
 		if (stkZahl > 0) {
 			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());
 			try {
@@ -100,8 +94,9 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 						break;
 					}
 				}
-				warenkorb = this.em.merge(this.warenkorb);
-				this.em.persist(warenkorb);
+				this.warenkorb = this.em.merge(warenkorb);
+				user.setWarenkorb(this.warenkorb);
+				this.em.persist(this.warenkorb);
 				this.utx.commit();
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
 					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
