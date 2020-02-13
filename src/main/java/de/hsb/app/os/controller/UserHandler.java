@@ -395,7 +395,8 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String toRegistrieren() {
-		merkeUser = new User();
+		merkeUser = new User(); // hierdurch ist man wenn man bei der seite registrieren schon angemeldet obwohl man noch nicht mal seine daten eigegegeben hat
+		//wenn man dies nicht angiebt erstellt er keinen neuen user und man bekommt eine Fehlermeldung.
 		merkeAdresse = new Adresse();
 		merkeKreditkarte = new Kreditkarte();
 		return "registrieren?faces-redirect=true";
@@ -409,6 +410,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 * dazu wird eine Fehlermeldung ausgegeben.
 	 */
 	public String benutzerRegistrieren() {
+//		merkeUser = new User();
 		for (User u : user) {
 			if(merkeUser == null){
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -427,6 +429,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
+			merkeUser = new User();
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
