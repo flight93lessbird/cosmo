@@ -429,11 +429,14 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
-			merkeUser = new User();
+
+			Warenkorb warenkorb = new Warenkorb();
+			merkeUser.setWarenkorb(warenkorb);
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			merkeAdresse = em.merge(merkeAdresse);
+			em.persist(warenkorb);
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());

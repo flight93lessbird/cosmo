@@ -74,7 +74,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 
 	public String checkWarenkorb(User benutzer) {
 		System.out.println("Checked WK");
-		if (benutzer != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()) {
+		if (benutzer != null && benutzer.getWarenkorb() != null) {
 			return "/os/warenkorb.xhtml";
 		} else if (!warenkorb.getWarenkorbItems().isEmpty()) {
 			return "/os/warenkorb.xhtml";

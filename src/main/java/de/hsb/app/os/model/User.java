@@ -51,8 +51,8 @@ public class User {
 	private Date geburtsdatum;
 	
 
-	@OneToOne
-	private Warenkorb warenkorb = new Warenkorb();
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Warenkorb warenkorb;
 	
 	public User(){	}
 	/*
