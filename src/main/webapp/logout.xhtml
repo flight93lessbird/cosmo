@@ -12,7 +12,7 @@
 					value="#{msg.logout}" />
 				<br></br>
 				<h2>#{msg.kdbearbeiten}</h2>
-				<h:commandButton action="#{pageHandler.toMeinKonto}"
+				<h:commandButton action="#{userHandler.toMeinKonto(userHandler.merkeUser)}"
 					value="#{msg.bearbeiten}" immediate="true" />
 				<br></br>
 				<h2>#{msg.kdpwbearbeiten}</h2>

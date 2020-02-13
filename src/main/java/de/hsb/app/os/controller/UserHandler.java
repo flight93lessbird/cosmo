@@ -147,6 +147,15 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "anschrift?faces-redirect=true";
 	}
 
+	public String toMeinKonto(User user) {
+		merkeUser = user;
+		merkeAdresse = user.getAdresse();
+		if (merkeAdresse == null) {
+			merkeAdresse = new Adresse();
+		}
+		return "meinKonto?faces-redirect=true";
+	}
+
 	public String adresseSpeichern() {
 		merkeUser.setAdresse(merkeAdresse);
 		try {
@@ -180,17 +189,18 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "kunden?faces-redirect=true";
 	}
 
-	public String speichernReg() {
+	public String speichernKundendaten() {
 		merkeUser.setAdresse(merkeAdresse);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			merkeAdresse = em.merge(merkeAdresse);
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
 			e.printStackTrace();
 		}
 		return "logout?faces-redirect=true";
@@ -435,7 +445,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	/**
 	 * Lougout = der Benutzer wird von der Webanwendung abgemeldet und wird auf das
-	 * konto.xhtml Seite weitergeleitet.
+	 * startseite.xhtml Seite weitergeleitet.
 	 **/
 	public String logout() {
 		merkeUser = null;
