@@ -72,7 +72,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	@PostConstruct
 	@javax.inject.Singleton
 	public void init() {
-
 		try {
 			utx.begin();
 			em.clear();
@@ -121,18 +120,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			e.printStackTrace();
 		}
 	}
-
-	/*
-	public String neuAdresse() {
-		merkeAdresse = new Adresse();
-		return "neueAnschrift?faces-redirect=true";
-	}
-
-	public String neuKreditkarte() {
-		merkeKreditkarte = new Kreditkarte();
-		return "kreditkarte?faces-redirect=true";
-	}
-	 */
 
 	public String formatDateDDMMYYYY(Date date) {
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
@@ -206,17 +193,36 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "logout?faces-redirect=true";
 	}
 
+	public String editKreditkarte() {
+		merkeUser = getKunden().getRowData();
+		merkeKreditkarte = user.getRowData().getKreditkarte();
+		if (merkeKreditkarte == null) {
+			merkeKreditkarte = new Kreditkarte();
+		}
+		return "kreditkarte?faces-redirect=true";
+	}
+
+	public String toKreditkartendatenAendern(User user) {
+		merkeUser = user;
+		merkeKreditkarte = user.getKreditkarte();
+		if (merkeKreditkarte == null) {
+			merkeKreditkarte = new Kreditkarte();
+		}
+		return "kreditkartendatenAendern?faces-redirect=true";
+	}
+
 	public String kreditkarteSpeichern() {
 		merkeUser.setKreditkarte(merkeKreditkarte);
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			merkeKreditkarte = em.merge(merkeKreditkarte);
 			em.persist(merkeUser);
 			em.persist(merkeKreditkarte);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
+		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
 			e.printStackTrace();
 		}
 		return "logout?faces-redirect=true";
@@ -236,7 +242,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				| HeuristicMixedException | HeuristicRollbackException e) {
 			e.printStackTrace();
 		}
-		return "kunde?faces-redirect=true";
+		return "kunden?faces-redirect=true";
 	}
 
 	public String kreditkarteSpeichernWk() {
@@ -258,31 +264,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String editUser() {
 		merkeUser = user.getRowData();
 		return "kundendatenBearbeitenAdmin?faces-redirect=true";
-	}
-
-	public String editKreditkarte() {
-		merkeUser = getKunden().getRowData();
-		merkeKreditkarte = user.getRowData().getKreditkarte();
-		if (merkeKreditkarte == null) {
-			merkeKreditkarte = new Kreditkarte();
-		}
-		return "kreditkarte?faces-redirect=true";
-	}
-
-	public String kundendatenSpeichern() {
-		merkeUser.setAdresse(merkeAdresse);
-		try {
-			utx.begin();
-			merkeUser = em.merge(merkeUser);
-			em.persist(merkeUser);
-			em.persist(merkeAdresse);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
-				| HeuristicRollbackException | SystemException | NotSupportedException e) {
-			e.printStackTrace();
-		}
-		return "logout?faces-redirect=true";
 	}
 
 	public String deleteUser() {
@@ -603,5 +584,4 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public void setMerkeUser(User merkeUser) {
 		this.merkeUser = merkeUser;
 	}
-
 }
