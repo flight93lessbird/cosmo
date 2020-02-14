@@ -249,6 +249,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			merkeKreditkarte = em.merge(merkeKreditkarte);
 			merkeUser.setKreditkarte(merkeKreditkarte);
 			em.persist(merkeUser);
 			em.persist(merkeKreditkarte);
