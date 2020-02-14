@@ -49,7 +49,7 @@
 			</h:dataTable>
 		</h:form>
 		<h:form>
-			<h3>#{msg.artzwschsum}: #{warenkorbhd.getFullPrice(userHandler.merkeUser)}</h3>
+			<h3>#{msg.artzwschsum}: #{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}</h3>
 			<h:commandButton action="#{pageHandler.toWarenkorb}"
 				value="#{msg.aktualisieren}" />
 			<h:commandButton

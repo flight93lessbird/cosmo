@@ -43,34 +43,45 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 			// Create Duefte
 			produkte.add(new Produkt("Valentino", "Valentina", "Das Valentina Parfüm vereint moderne mit klassischem.",
-					"49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(), "resources/images/Valentina.PNG"));
+					"49,99", Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(),
+					"resources/images/Valentina.PNG"));
 			produkte.add(new Produkt("Guess", "1981", "In der Kopfnote wird Veilchen und Abrette verbunden.", "27,99",
-					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(), "resources/images/1981.PNG"));
+					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(),
+					"resources/images/1981.PNG"));
 			produkte.add(new Produkt("Boss", "Ma Vie", "In der Kopfnote befindet sich Kaktusblüten.", "35,99",
-					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(), "resources/images/Ma Vie.PNG"));
+					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(),
+					"resources/images/Ma Vie.PNG"));
 			produkte.add(new Produkt("Michael Kors", "Wonderlust",
 					"In der Kopfnote wird Bergamotte, rosa Pfeffer und feiner Mandelmilch verbunden.", "49,99",
-					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(), "resources/images/Wonderlust.PNG"));
+					Waehrungtyp.EURO, "30", Mengentyp.MILLILITER, Kategorie.DUEFTE, new ArrayList<>(),
+					"resources/images/Wonderlust.PNG"));
 			// Create Pflege
 			produkte.add(new Produkt("Treaclemoon", "Körpermilch Pretty Rose Hearts",
 					"Schütz vor austrocknen. Leicht verteilbar und schnelleinziehend.", "5,99", Waehrungtyp.EURO, "350",
-					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(), "resources/images/Koerpermilch Pretty Rose Hearts.PNG"));
+					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(),
+					"resources/images/Koerpermilch Pretty Rose Hearts.PNG"));
 			produkte.add(new Produkt("i+m", "Hytro Perform Reinigungsmilch", "Für normale bis trockene Haut.", "9,99",
-					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(), "resources/images/Hytro Perform Reinigungsmilch.PNG"));
+					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(),
+					"resources/images/Hytro Perform Reinigungsmilch.PNG"));
 			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO, "200",
 					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
 			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasser", "Reinigt empfindliche Haut.", "4,99",
-					Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(), "resources/images/Mizelle Reinigungswasser.PNG"));
+					Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(),
+					"resources/images/Mizellen Reinigungswasser.PNG"));
 			// Create Make-Up
 			produkte.add(new Produkt("L'oreal", "Blush Sculpt 201", "Natürliche Akt-Shades.", "5,99", Waehrungtyp.EURO,
-					"30", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>(), "resources/images/Blush Sculpt 201.PNG"));
+					"30", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>(),
+					"resources/images/Blush Sculpt 201.PNG"));
 			produkte.add(new Produkt("Maybelline", "The Graffiti Nudes",
 					"Enthält 12 wunderschöne Liedschatten, die perfekt aufeinander abgestimmt sind.", "11,99",
-					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>(), "resources/images/The Graffiti Nudes.PNG"));
+					Waehrungtyp.EURO, "50", Mengentyp.GRAMM, Kategorie.MAKEUP, new ArrayList<>(),
+					"resources/images/The Graffiti Nudes.PNG"));
 			produkte.add(new Produkt("Maybelline", "Vivid Matte Liquid", "Mittlere Deckkraft. Schimmernd/Glänzend.",
-					"6,99", Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>(), "resources/images/Vivid Matte Liquid.PNG"));
+					"6,99", Waehrungtyp.EURO, "7,7", Mengentyp.MILLILITER, Kategorie.MAKEUP, new ArrayList<>(),
+					"resources/images/Vivid Matte Liquid.PNG"));
 			produkte.add(new Produkt("Essence", "Künstliche Wimpern", "Lassen sich einfach und schnell aufkleben.",
-					"2,99", Waehrungtyp.EURO, "1", Mengentyp.STUECK, Kategorie.MAKEUP, new ArrayList<>(), "resources/images/Kuenstliche Wimpern.PNG"));
+					"2,99", Waehrungtyp.EURO, "1", Mengentyp.STUECK, Kategorie.MAKEUP, new ArrayList<>(),
+					"resources/images/Kuenstliche Wimpern.PNG"));
 
 			for (Produkt produkt : produkte) {
 				this.save(produkt);
@@ -110,6 +121,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		try {
 			utx.begin();
 			merkeProdukt = em.merge(merkeProdukt);
+//			pdList = em.merge(pdList);
 			em.persist(merkeProdukt);
 			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
 			utx.commit();
@@ -118,6 +130,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			e.printStackTrace();
 		}
 		return "produkte?faces-redirect=true";
+
 	}
 
 	/**

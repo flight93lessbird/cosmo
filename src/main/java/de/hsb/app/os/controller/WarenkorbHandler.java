@@ -102,7 +102,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 
 	public void changeStkZahl(User user, WarenkorbItem item, int stkZahl) {
 		boolean isUser = user != null ? true : false;
-		Warenkorb wk = isUser? user.getWarenkorb() : this.warenkorb;
+		Warenkorb wk = isUser ? user.getWarenkorb() : this.warenkorb;
 		if (stkZahl > 0) {
 			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());
 			try {
@@ -221,15 +221,12 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return String.valueOf(f.format(preis * stkueckZahl)).replace(".", ",");
 	}
 
-	public String getFullPrice(User user) {
+	public String getFullPrice(List<WarenkorbItem> list) {
 		DecimalFormat f = new DecimalFormat("#0.00");
 		double price = 0;
-		if (user != null) {
-			List<WarenkorbItem> list = user.getWarenkorb().getWarenkorbItems();
-			for (int idx = 0; idx < list.size(); ++idx) {
-				price = price + (list.get(idx).getStkZahl()
-						* Double.parseDouble(list.get(idx).getP().getPreis().replace(",", ".")));
-			}
+		for (int idx = 0; idx < list.size(); ++idx) {
+			price = price + (list.get(idx).getStkZahl()
+					* Double.parseDouble(list.get(idx).getP().getPreis().replace(",", ".")));
 		}
 		String fullPrice = String.valueOf(f.format(price)).replace(".", ",") + Waehrungtyp.EURO.getLabel();
 		return fullPrice;
