@@ -9,7 +9,7 @@
 			<h1>#{produktHandler.merkeProdukt.marke}</h1>
 			<h2>#{produktHandler.merkeProdukt.titel}</h2>
 			<h:graphicImage
-				value="#{produktHandler.merkeProdukt.picturePath}"
+				value="#{produktHandler.getProductPath(produktHandler.merkeProdukt)}"
 				style="height:200px; width:200px;" />
 			<h3>Menge:</h3>
 			<h4>#{produktHandler.merkeProdukt.menge}

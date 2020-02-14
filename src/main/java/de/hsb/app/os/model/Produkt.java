@@ -56,7 +56,6 @@ public class Produkt {
 		this.mengentyp = mengentyp;
 		this.kategorie = kategorie;
 		this.warenkorbItemList = warenkorbItemList;
-		picturePath = "resources/images/COS'MO.PNG";
 	}
 
 	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge,

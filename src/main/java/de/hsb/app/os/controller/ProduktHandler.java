@@ -64,7 +64,8 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 					Waehrungtyp.EURO, "350", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(),
 					"resources/images/Hytro Perform Reinigungsmilch.PNG"));
 			produkte.add(new Produkt("i+m", "Volumen Haarspülung", "Für alle Haar", "9,99", Waehrungtyp.EURO, "200",
-					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>()));
+					Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(),
+					"resources/images/Volumen Haarspuelung.PNG"));
 			produkte.add(new Produkt("Garnier", "Mizellen Reinigungswasser", "Reinigt empfindliche Haut.", "4,99",
 					Waehrungtyp.EURO, "400", Mengentyp.MILLILITER, Kategorie.PFLEGE, new ArrayList<>(),
 					"resources/images/Mizellen Reinigungswasser.PNG"));
@@ -131,6 +132,13 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return "produkte?faces-redirect=true";
 
+	}
+
+	public String getProductPath(Produkt p) {
+		if (p.getPicturePath() == null)
+			return "resources/images/COS'MO.PNG";
+		else
+			return p.getPicturePath();
 	}
 
 	/**
