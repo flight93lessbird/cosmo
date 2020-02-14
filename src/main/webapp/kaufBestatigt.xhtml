@@ -19,13 +19,13 @@
 			<br />
 			<h2>#{msg.lieferanschrft}</h2>
 			<h:outputLabel value="#{msg.strasse}:	" />
-			<h:outputLabel value="#{userHandler.merkeAdresse.strasse}" />
+			<h:outputLabel value="#{userHandler.merkeUser.adresse.strasse}" />
 			<br />
 			<h:outputLabel value="#{msg.plz}:	" />
-			<h:outputLabel value="#{userHandler.merkeAdresse.plz}" />
+			<h:outputLabel value="#{userHandler.merkeUser.adresse.plz}" />
 			<br />
 			<h:outputLabel value="#{msg.ort}:	" />
-			<h:outputLabel value="#{userHandler.merkeAdresse.ort}" />
+			<h:outputLabel value="#{userHandler.merkeUser.adresse.ort}" />
 			<br />
 			<br></br> <br></br>
 
@@ -70,7 +70,7 @@
 			<br /> <br />
 			<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
 			<h:outputLabel value="#{msg.preisinkmws}: " />
-			<h:outputText id="a" value="#{warenkorbItem.p.verkaufspreis} €"
+			<h:outputText id="a" value="#{warenkorbhd.getFullPrice(userHandler.merkeUser)}"
 				required="true" />
 
 			<br></br> <br></br>

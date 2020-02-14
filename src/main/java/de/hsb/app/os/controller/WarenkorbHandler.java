@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import javax.transaction.*;
 
 import de.hsb.app.os.enumuration.Rolle;
+import de.hsb.app.os.enumuration.Waehrungtyp;
 import de.hsb.app.os.model.Produkt;
 import de.hsb.app.os.model.User;
 import de.hsb.app.os.model.Warenkorb;
@@ -120,11 +121,13 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 		return "warenkorb?faces-redirect=true";
 	}
+
 	public int incrementStkZahl(WarenkorbItem item) {
 		item.setStkZahl(item.getStkZahl() + 1);
 		System.out.println(item.getStkZahl());
 		return item.getStkZahl();
 	}
+
 	public int decrementStkZahl(WarenkorbItem item) {
 		item.setStkZahl(item.getStkZahl() - 1);
 		System.out.println(item.getStkZahl());
@@ -138,7 +141,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				boolean isNewItem = true;
 				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
 					if (warenkorbItem.getP().getId().equals(produkt.getId())) {
-						//stkZahl = warenkorbItem.getStkZahl();
+						// stkZahl = warenkorbItem.getStkZahl();
 						warenkorbItem.setStkZahl(stkZahl);
 						isNewItem = false;
 						break;
@@ -164,8 +167,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 
 	public List<WarenkorbItem> findWarenkorbItemsByBenutzer(User loggedBenutzer) {
 		if (loggedBenutzer != null) {
-			Query query = this.em
-					.createQuery("select u.warenkorb.warenkorbItems from User u where u.ID = :userID");
+			Query query = this.em.createQuery("select u.warenkorb.warenkorbItems from User u where u.ID = :userID");
 			query.setParameter("userID", loggedBenutzer.getID());
 			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
 			if (warenkorbItems != null) {
@@ -184,29 +186,46 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		return String.valueOf(f.format(preis * stkueckZahl)).replace(".", ",");
 	}
 
-	public String deleteWarenkorbItem(User loggedBenutzer, WarenkorbItem warenkorbItem) {
-		if (warenkorbItem != null) {
-			if (loggedBenutzer != null) {
-				this.warenkorb = loggedBenutzer.getWarenkorb();
+	public String getFullPrice(User user) {
+		DecimalFormat f = new DecimalFormat("#0.00");
+		double price = 0;
+		if (user != null) {
+			List<WarenkorbItem> list = user.getWarenkorb().getWarenkorbItems();
+			for (int idx = 0; idx < list.size(); ++idx) {
+				price = price + (list.get(idx).getStkZahl()
+						* Double.parseDouble(list.get(idx).getP().getPreis().replace(",", ".")));
 			}
+		}
+		String fullPrice = String.valueOf(f.format(price)).replace(".", ",") + Waehrungtyp.EURO.getLabel();
+		return fullPrice;
+	}
+
+	public String deleteWarenkorbItem(User loggedBenutzer, WarenkorbItem warenkorbItem) {
+		boolean isWarenkorbItem = warenkorbItem != null ? true: false;
+		boolean isUser = loggedBenutzer != null ? true : false;
+		if (isUser) {
+			this.warenkorb = loggedBenutzer.getWarenkorb();
+		}
+		if (isWarenkorbItem) {	
 			try {
 				this.utx.begin();
 				Produkt produkt = this.em.merge(warenkorbItem.getP());
 				warenkorbItem = this.em.merge(warenkorbItem);
-				warenkorb = this.em.merge(this.warenkorb);
+				this.warenkorb = this.em.merge(warenkorb);
 				produkt.getWarenkorbItemList().remove(warenkorbItem);
 				warenkorb.getWarenkorbItems().remove(warenkorbItem);
 				warenkorbItem.setP(null);
 				warenkorbItem.setWarenkorb(null);
-//				this.em.persist(produkt);
-//				this.em.persist(warenkorb);
-				this.em.remove(warenkorbItem);
-				this.em.flush();
-				this.utx.commit();
-				if (loggedBenutzer != null) {
+				if (isUser) {
 					loggedBenutzer.setWarenkorb(this.warenkorb);
 					System.out.println("WK zugeordnet: " + loggedBenutzer.getUsername());
 				}
+				this.em.persist(produkt);
+				this.em.persist(warenkorb);
+				this.em.remove(warenkorbItem);
+				this.em.flush();
+				this.utx.commit();
+
 				return "warenkorb?faces-redirect=true";
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
 					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
@@ -228,10 +247,14 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	public String toStartseite() {
 		warenkorb = new Warenkorb();
 		return "startseite?faces-redirect=true";
-		}
+	}
 
 	public void setWarenkorb(Warenkorb warenkorb) {
 		this.warenkorb = warenkorb;
+	}
+
+	public Warenkorb getWarenkorb() {
+		return warenkorb;
 	}
 
 	public int getStkZahl() {

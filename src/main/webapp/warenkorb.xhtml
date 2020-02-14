@@ -42,16 +42,14 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.loeschen}</f:facet>
-					<h:commandButton
-						action="#{warenkorbhd.deleteWarenkorbItem(userHandler.merkeUser, warenkorbItem)}"
+					<h:commandButton action="#{warenkorbhd.deleteWarenkorbItem(userHandler.merkeUser, warenkorbItem)}"
 						value="#{msg.loeschen}">
-						<p:ajax event="click" update="warenkorbTabelle" />
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>
 		<h:form>
-			<h3>#{msg.artzwschsum}:</h3>
+			<h3>#{msg.artzwschsum}: #{warenkorbhd.getFullPrice(userHandler.merkeUser)}</h3>
 			<h:commandButton action="#{pageHandler.toWarenkorb}"
 				value="#{msg.aktualisieren}" />
 			<h:commandButton
