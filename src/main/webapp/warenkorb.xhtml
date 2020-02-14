@@ -31,8 +31,8 @@
 				<h:column>
 					<f:facet name="header">#{msg.artklanzl}</f:facet>
 					<h:outputText value="#{warenkorbItem.stkZahl} Stk. " />
-					<h:commandButton action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser,userHandler.merkeUser.warenkorb, warenkorbItem, warenkorbhd.incrementStkZahl(warenkorbItem))}" value="+" />
-					<h:commandButton action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser,userHandler.merkeUser.warenkorb, warenkorbItem, warenkorbhd.decrementStkZahl(warenkorbItem))}" value="-" />
+					<h:commandButton action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser, warenkorbItem, warenkorbhd.incrementStkZahl(warenkorbItem))}" value="+" />
+					<h:commandButton action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser, warenkorbItem, warenkorbhd.decrementStkZahl(warenkorbItem))}" value="-" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.artgesamt}</f:facet>

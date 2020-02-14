@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModelListener;
@@ -23,7 +24,7 @@ import de.hsb.app.os.model.WarenkorbItem;
 import de.hsb.app.os.repository.AbstractCrudRepository;
 
 @ManagedBean(name = "warenkorbhd")
-@SessionScoped
+@ApplicationScoped
 /*
  * Die Bean wird für die gesamte Session erhalten bleiben bzw. wird einem User
  * zugeordnet, somit bleibt der Warenkorb für die gesamte Browsersession
@@ -37,7 +38,8 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	private Warenkorb warenkorb = new Warenkorb();
 
 	private int stkZahl = 1;
-	
+	private int tmpID;
+
 	@PostConstruct
 	@javax.inject.Singleton
 	public void init() {
@@ -98,20 +100,23 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 	}
 
-	public void changeStkZahl(User user, Warenkorb warenkorb, WarenkorbItem item, int stkZahl) {
+	public void changeStkZahl(User user, WarenkorbItem item, int stkZahl) {
+		boolean isUser = user != null ? true : false;
+		Warenkorb wk = isUser? user.getWarenkorb() : this.warenkorb;
 		if (stkZahl > 0) {
 			System.out.println("Doit! Stückzahl = " + stkZahl + "Warenkorbitem = " + item.getP().getTitel());
 			try {
 				this.utx.begin();
-				for (WarenkorbItem warenkorbItem : warenkorb.getWarenkorbItems()) {
+				for (WarenkorbItem warenkorbItem : wk.getWarenkorbItems()) {
 					if (warenkorbItem.getP().getId().equals(item.getP().getId())) {
 						warenkorbItem.setStkZahl(stkZahl);
 						break;
 					}
 				}
-				this.warenkorb = this.em.merge(warenkorb);
-				user.setWarenkorb(this.warenkorb);
-				this.em.persist(this.warenkorb);
+				wk = this.em.merge(wk);
+				if (isUser)
+					user.setWarenkorb(wk);
+				this.em.persist(wk);
 				this.utx.commit();
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
 					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
@@ -172,6 +177,8 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				this.warenkorb = this.em.merge(warenkorb);
 				System.out.println("Länge von Warenkorb: " + this.warenkorb.getWarenkorbItems().size());
 				System.out.println("Länge von TmpWarenkorb: " + warenkorb.getWarenkorbItems().size());
+				this.tmpID = this.warenkorb.getId();
+				System.out.println("ID des WK: " + tmpID);
 				this.em.persist(this.warenkorb);
 				this.utx.commit();
 				setWarenkorb(warenkorb);
@@ -193,12 +200,12 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 			} else {
 				return new ArrayList<>();
 			}
-		}else {
-			String wkID = Integer.toString(warenkorb.getId());
-			Query query = this.em.createQuery("Select w.warenkorbItems from Warenkorb b  where b.Id = :wkID");
-			query.setParameter("userID", loggedBenutzer.getID());
+		} else {
+			Query query = this.em.createQuery("Select b.warenkorbItems from Warenkorb b  where b.Id = :wkID");
+			query.setParameter("wkID", this.tmpID);
 			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
 			System.out.println("Länge von Warenkorb: " + warenkorbItems.size());
+			System.out.println("ID des WK: " + tmpID);
 			if (warenkorbItems != null) {
 				return warenkorbItems;
 			} else {
@@ -229,12 +236,12 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	}
 
 	public String deleteWarenkorbItem(User loggedBenutzer, WarenkorbItem warenkorbItem) {
-		boolean isWarenkorbItem = warenkorbItem != null ? true: false;
+		boolean isWarenkorbItem = warenkorbItem != null ? true : false;
 		boolean isUser = loggedBenutzer != null ? true : false;
 		if (isUser) {
 			this.warenkorb = loggedBenutzer.getWarenkorb();
 		}
-		if (isWarenkorbItem) {	
+		if (isWarenkorbItem) {
 			try {
 				this.utx.begin();
 				Produkt produkt = this.em.merge(warenkorbItem.getP());
