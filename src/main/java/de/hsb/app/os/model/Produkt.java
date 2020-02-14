@@ -1,6 +1,5 @@
 package de.hsb.app.os.model;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -11,7 +10,6 @@ import de.hsb.app.os.enumuration.Waehrungtyp;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @NamedQuery(name = "SelectProdukt", query = "Select p from Produkt p")
 @Entity
 
@@ -20,35 +18,34 @@ public class Produkt {
 	@Id
 	@GeneratedValue
 	private Integer Id;
-	
+
 	@Size(min = 3, max = 30)
 	private String marke;
-		
+
 	private String titel;
-	
+
 	private String beschreibung;
-	
+
 	private String menge;
-	
+
 	private Mengentyp mengentyp;
-	
+
 	private String preis;
-	
+
 	private Waehrungtyp waehrungtyp;
-	
+
 	private Kategorie kategorie;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-			mappedBy = "warenkorb", orphanRemoval = true)
+	private String picturePath;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "warenkorb", orphanRemoval = true)
 	private List<WarenkorbItem> warenkorbItemList = new ArrayList<>();
 
-
-
-	public Produkt () {}
+	public Produkt() {
+	}
 
 	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge,
-				   Mengentyp mengentyp, Kategorie kategorie, List<WarenkorbItem> warenkorbItemList)
-	{
+			Mengentyp mengentyp, Kategorie kategorie, List<WarenkorbItem> warenkorbItemList) {
 		super();
 		this.marke = marke;
 		this.titel = titel;
@@ -59,7 +56,22 @@ public class Produkt {
 		this.mengentyp = mengentyp;
 		this.kategorie = kategorie;
 		this.warenkorbItemList = warenkorbItemList;
-	
+		picturePath = "resources/images/COS'MO.PNG";
+	}
+
+	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge,
+			Mengentyp mengentyp, Kategorie kategorie, List<WarenkorbItem> warenkorbItemList, String picPath) {
+		super();
+		this.marke = marke;
+		this.titel = titel;
+		this.beschreibung = beschreibung;
+		this.preis = preis;
+		this.waehrungtyp = waehrungtyp;
+		this.menge = menge;
+		this.mengentyp = mengentyp;
+		this.kategorie = kategorie;
+		this.warenkorbItemList = warenkorbItemList;
+		this.picturePath = picPath;
 	}
 
 	public Integer getId() {
@@ -93,7 +105,7 @@ public class Produkt {
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
 	}
-	
+
 	public String getMenge() {
 		return menge;
 	}
@@ -140,5 +152,14 @@ public class Produkt {
 
 	public void setWarenkorbItemList(List<WarenkorbItem> warenkorbItemList) {
 		this.warenkorbItemList = warenkorbItemList;
+	}
+
+	public String getPicturePath() {
+		System.out.println(picturePath);
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
 	}
 }
