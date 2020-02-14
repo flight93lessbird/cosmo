@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -36,6 +37,19 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	private Warenkorb warenkorb = new Warenkorb();
 
 	private int stkZahl = 1;
+	
+	@PostConstruct
+	@javax.inject.Singleton
+	public void init() {
+		try {
+			this.utx.begin();
+			this.warenkorb = this.em.merge(warenkorb);
+			this.em.persist(this.warenkorb);
+			this.utx.commit();
+		} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
+				| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+		}
+	}
 
 	public WarenkorbHandler() {
 
@@ -155,9 +169,12 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 					warenkorbItem.setWarenkorb(warenkorb);
 //					this.em.persist(produkt);
 				}
-				warenkorb = this.em.merge(this.warenkorb);
-				this.em.persist(warenkorb);
+				this.warenkorb = this.em.merge(warenkorb);
+				System.out.println("Länge von Warenkorb: " + this.warenkorb.getWarenkorbItems().size());
+				System.out.println("Länge von TmpWarenkorb: " + warenkorb.getWarenkorbItems().size());
+				this.em.persist(this.warenkorb);
 				this.utx.commit();
+				setWarenkorb(warenkorb);
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
 					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 			}
@@ -170,13 +187,24 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 			Query query = this.em.createQuery("select u.warenkorb.warenkorbItems from User u where u.ID = :userID");
 			query.setParameter("userID", loggedBenutzer.getID());
 			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
+			System.out.println("Länge von Warenkorb: " + warenkorbItems.size());
+			if (warenkorbItems != null) {
+				return warenkorbItems;
+			} else {
+				return new ArrayList<>();
+			}
+		}else {
+			String wkID = Integer.toString(warenkorb.getId());
+			Query query = this.em.createQuery("Select w.warenkorbItems from Warenkorb b  where b.Id = :wkID");
+			query.setParameter("userID", loggedBenutzer.getID());
+			List<WarenkorbItem> warenkorbItems = this.uncheckedSolverForWarenkorbItems(query.getResultList());
+			System.out.println("Länge von Warenkorb: " + warenkorbItems.size());
 			if (warenkorbItems != null) {
 				return warenkorbItems;
 			} else {
 				return new ArrayList<>();
 			}
 		}
-		return warenkorb.getWarenkorbItems();
 	}
 
 	public String computeTotalPrice(String preisString, Integer stkZahl) {
