@@ -47,13 +47,13 @@
 				<h:outputLabel for="strasse" value="#{msg.strasse}:" />
 				<h:panelGroup>
 					<h:inputText id="strasse"
-						value="#{userHandler.merkeUser.adresse.strasse}" required="true"
+						value="#{userHandler.merkeAdresse.strasse}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="strasse" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="plz" value="#{msg.plz}:" />
 				<h:panelGroup>
-					<h:inputText id="plz" value="#{userHandler.merkeUser.adresse.plz}"
+					<h:inputText id="plz" value="#{userHandler.merkeAdresse.plz}"
 						required="true" requiredMessage="#{msg.eingabefehlt}.">
 						<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
 					</h:inputText>
@@ -61,7 +61,7 @@
 				</h:panelGroup>
 				<h:outputLabel for="ort" value="#{msg.ort}:" />
 				<h:panelGroup>
-					<h:inputText id="ort" value="#{userHandler.merkeUser.adresse.ort}"
+					<h:inputText id="ort" value="#{userHandler.merkeAdresse.ort}"
 						required="true" requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="ort" styleClass="message" />
 				</h:panelGroup>

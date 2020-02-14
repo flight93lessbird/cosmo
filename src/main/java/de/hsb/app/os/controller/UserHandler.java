@@ -339,12 +339,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 // login für den Warenkorb
-	public String WkLogin() {
+	public String WkLogin(Warenkorb wk) {
 		Query query = em
 				.createQuery("Select u from User u " + "where u.username = :username and u.passwort = :passwort ");
 		query.setParameter("username", username);
 		query.setParameter("passwort", passwort);
-
 		@SuppressWarnings("unchecked")
 		List<User> user = query.getResultList();
 		System.out.println("Größe von userList: " + user.size());
@@ -353,6 +352,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			if (merkeUser.getRolle() == Rolle.ADMIN) {
 				return "/admin?faces-redirect=true";
 			} else {
+				merkeUser.setWarenkorb(wk);
 				return "/kundendatenUeberpruefung?faces-redirect=true";
 			}
 		} else {
@@ -500,8 +500,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	public String speichernWk() {
 		try {
 			utx.begin();
+			merkeUser.setAdresse(merkeAdresse);
 			merkeUser = em.merge(merkeUser);
+			merkeAdresse = em.merge(merkeAdresse);
 			em.persist(merkeUser);
+			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException

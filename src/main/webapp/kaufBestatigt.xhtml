@@ -70,13 +70,13 @@
 			<br /> <br />
 			<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
 			<h:outputLabel value="#{msg.preisinkmws}: " />
-			<h:outputText id="a" value="#{warenkorbhd.getFullPrice(userHandler.merkeUser)}"
+			<h:outputText id="a" value="#{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}"
 				required="true" />
 
 			<br></br> <br></br>
 			<h:commandButton id="auswählen" value="#{msg.quitdruck}"
 				onclick="javascript:window.print()" icon="ui-icon-search" />
-			<h:commandButton action="#{warenkorbhd.toStartseite}"
+			<h:commandButton action="#{warenkorbhd.toStartseite(userHandler.merkeUser)}"
 							 value="#{msg.weitershoppen}" immediate="true" />
 			</h:form>
 		</div>

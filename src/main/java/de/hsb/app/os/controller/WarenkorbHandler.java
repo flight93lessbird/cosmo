@@ -17,6 +17,7 @@ import javax.transaction.*;
 
 import de.hsb.app.os.enumuration.Rolle;
 import de.hsb.app.os.enumuration.Waehrungtyp;
+import de.hsb.app.os.model.Adresse;
 import de.hsb.app.os.model.Produkt;
 import de.hsb.app.os.model.User;
 import de.hsb.app.os.model.Warenkorb;
@@ -267,17 +268,53 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 		}
 		return "startseite?faces-redirect=true";
 	}
+	public void deleteAllItems(User loggedBenutzer) {
+		boolean isUser = loggedBenutzer != null ? true : false;
+		if (isUser) {
+			this.warenkorb = loggedBenutzer.getWarenkorb();
+		}
+		List<WarenkorbItem> list = warenkorb.getWarenkorbItems();
+		for(int idx = 0; idx < list.size(); ++idx) {
+			boolean isWarenkorbItem = list.get(idx) != null ? true : false;
+			if (isWarenkorbItem) {
+				WarenkorbItem warenkorbItem = list.get(idx);
+				try {
+					this.utx.begin();
+					Produkt produkt = this.em.merge(warenkorbItem.getP());
+					warenkorbItem = this.em.merge(warenkorbItem);
+					this.warenkorb = this.em.merge(warenkorb);
+					produkt.getWarenkorbItemList().remove(warenkorbItem);
+					warenkorb.getWarenkorbItems().remove(warenkorbItem);
+					warenkorbItem.setP(null);
+					warenkorbItem.setWarenkorb(null);
+					if (isUser) {
+						loggedBenutzer.setWarenkorb(this.warenkorb);
+						System.out.println("WK zugeordnet: " + loggedBenutzer.getUsername());
+					}
+					this.em.persist(produkt);
+					this.em.persist(warenkorb);
+					this.em.remove(warenkorbItem);
+					this.em.flush();
+					this.utx.commit();
+				} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
+						| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
+					return;
+				}
+			}
+		}
+	}
 
-	public String toKundendaten(User benutzer) {
+	public String toKundendaten(User benutzer, Adresse adresse) {
 		if (benutzer != null) {
+			adresse = benutzer.getAdresse();
 			return "kundendatenUeberpruefung?faces-redirect=true";
 		} else {
 			return "kundendaten?faces-redirect=true";
 		}
 	}
 
-	public String toStartseite() {
-		warenkorb = new Warenkorb();
+	public String toStartseite(User benutzer) {
+		deleteAllItems(benutzer);
 		return "startseite?faces-redirect=true";
 	}
 

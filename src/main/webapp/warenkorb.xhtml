@@ -53,7 +53,7 @@
 			<h:commandButton action="#{pageHandler.toWarenkorb}"
 				value="#{msg.aktualisieren}" />
 			<h:commandButton
-				action="#{warenkorbhd.toKundendaten(userHandler.merkeUser)}"
+				action="#{warenkorbhd.toKundendaten(userHandler.merkeUser, userHandler.merkeAdresse)}"
 				value="#{msg.bestellaschl}" />
 		</h:form>
 	</ui:define>
