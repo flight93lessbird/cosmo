@@ -209,50 +209,17 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 /*
  * --------------> Anfang Random startseite.xhtml
  */
-	public String toKategorieMRP1() {
+	public String makeToRdmProdukt1() {
 		merkeRdmProdukt1 = getRandomProdukt();
-		System.out.println("Kategorie von p1: " + merkeRdmProdukt1.getKategorie().getLabel());
-		if(merkeRdmProdukt1.getKategorie().getLabel().equals(Kategorie.DUEFTE.getLabel())){
-			return "/os/duefte.xhtml";
-		}else if(merkeRdmProdukt1.getKategorie().getLabel().equals(Kategorie.MAKEUP.getLabel())) {
-			return "/os/makeup.xhtml";
-		}else if(merkeRdmProdukt1.getKategorie().getLabel().equals(Kategorie.PFLEGE.getLabel())) {
-			return "/os/pflege.xhtml";
-		}else {
-			return "/os/startseite.xhtml";
-		}
+		return "/os/ersteEmpfehlung.xhtml";
 	}
-	public String toKategorieMRP2() {
+	public String makeToRdmProdukt2() {
 		merkeRdmProdukt2 = getRandomProdukt();
-		while(merkeRdmProdukt2.getId() == merkeRdmProdukt1.getId()) {
-			merkeRdmProdukt2 = getRandomProdukt();
-		}
-		System.out.println("Kategorie von p2: " + merkeRdmProdukt2.getKategorie().getLabel());
-		if(merkeRdmProdukt2.getKategorie().getLabel().equals(Kategorie.DUEFTE.getLabel())){
-			return "/os/duefte.xhtml";
-		}else if(merkeRdmProdukt2.getKategorie().getLabel().equals(Kategorie.MAKEUP.getLabel())) {
-			return "/os/makeup.xhtml";
-		}else if(merkeRdmProdukt2.getKategorie().getLabel().equals(Kategorie.PFLEGE.getLabel())) {
-			return "/os/pflege.xhtml";
-		}else {
-			return "/os/startseite.xhtml";
-		}
+		return "/os/zweiteEmpfehlung.xhtml";
 	}
-	public String toKategorieMRP3() {
+	public String makeToRdmProdukt3() {
 		merkeRdmProdukt3 = getRandomProdukt();
-		while(merkeRdmProdukt3.getId() == merkeRdmProdukt1.getId() || merkeRdmProdukt3.getId() == merkeRdmProdukt2.getId()) {
-			merkeRdmProdukt3 = getRandomProdukt();
-		}
-		System.out.println("Kategorie von p3: " + merkeRdmProdukt3.getKategorie().getLabel());
-		if(merkeRdmProdukt3.getKategorie().getLabel().equals(Kategorie.DUEFTE.getLabel())){
-			return "/os/duefte.xhtml";
-		}else if(merkeRdmProdukt3.getKategorie().getLabel().equals(Kategorie.MAKEUP.getLabel())) {
-			return "/os/makeup.xhtml";
-		}else if(merkeRdmProdukt3.getKategorie().getLabel().equals(Kategorie.PFLEGE.getLabel())) {
-			return "/os/pflege.xhtml";
-		}else {
-			return "/os/startseite.xhtml";
-		}
+		return "/os/dritteEmpfehlung.xhtml";
 	}
 	
 	private Produkt getRandomProdukt() {
