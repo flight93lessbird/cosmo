@@ -7,15 +7,19 @@
 	<ui:define name="content">
 		<center>
 			<h1>#{msg.unsempffuersie}</h1>
-			<a class="bild" href="/os/duefte.xhtml"> <h:graphicImage
-					value="resources/images/1981.PNG"
-					style="height:200px; width:200px;" /></a> <a class="bild"
-				href="/os/makeup.xhtml"> <h:graphicImage
-					value="resources/images/Vivid Matte Liquid.PNG"
-					style="height:200px; width:200px;" /></a> <a class="bild"
-				href="/os/pflege.xhtml"> <h:graphicImage
-					value="resources/images/Hytro Perform Reinigungsmilch.PNG"
-					style="height:200px; width:200px;" /></a>
+			<a class="bild"
+				href="#{produktHandler.ansichtStart(produktHandler.rdmProd)}"> <h:graphicImage
+					value="#{produktHandler.rdmProdPic}"
+					style="height:200px; width:200px;" />
+			</a> <a class="bild"
+				href="#{produktHandler.ansichtStart(produktHandler.rdmProd)}"> <h:graphicImage
+					value="#{produktHandler.rdmProdPic}"
+					style="height:200px; width:200px;" />
+			</a> <a class="bild"
+				href="#{produktHandler.ansichtStart(produktHandler.rdmProd)}"> <h:graphicImage
+					value="#{produktHandler.rdmProdPic}"
+					style="height:200px; width:200px;" />
+			</a>
 			<h1>#{msg.unsneuheiten}</h1>
 			<a class="bild" href="/os/duefte.xhtml"> <h:graphicImage
 					value="resources/images/Valentina.PNG"

@@ -204,12 +204,45 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return result;
 	}
 
+	public String getRdmProdPic() {
+		Produkt pd = getRandomProdukt();
+		System.out.println("Random Produktname Bild: " + pd.getTitel());
+		return getProductPath(pd);
+	}
+
+	public Produkt getRdmProd() {
+		Produkt pd = getRandomProdukt();
+		System.out.println("Random Produktname Link: " + pd.getTitel());
+		return pd;
+	}
+
+	private Produkt getRandomProdukt() {
+		Query query = this.em.createQuery("select pr from Produkt pr");
+		List<Produkt> pds = this.uncheckedSolver(query.getResultList());
+		Produkt rdmProdukt = new Produkt();
+		if (!pds.isEmpty()) {
+			int tag = (int) (Math.random() * pds.size());
+			rdmProdukt = pds.get((tag) % pds.size());
+			System.out.println("Tag: " + tag + " Value: " + rdmProdukt);
+		}
+		return rdmProdukt;
+
+	}
+
 	public String ansicht(Produkt produkt) {
 		if (produkt != null) {
 			merkeProdukt = produkt;
 			return "produkt?faces-redirect=true";
 		}
 		return "startseite?faces-redirect=true";
+	}
+
+	public String ansichtStart(Produkt produkt) {
+		if (produkt != null) {
+			merkeProdukt = produkt;
+			return "/os/produkt.xhtml";
+		}
+		return "/os/startseite.xhtml";
 	}
 
 	public Produkt getMerkeProdukt() {
