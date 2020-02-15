@@ -28,6 +28,9 @@ import de.hsb.app.os.repository.AbstractCrudRepository;
 public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	private Produkt merkeProdukt = new Produkt();
+	private Produkt merkeRdmProdukt1 = new Produkt();
+	private Produkt merkeRdmProdukt2 = new Produkt();
+	private Produkt merkeRdmProdukt3 = new Produkt();
 
 	private List<Produkt> produkte;
 
@@ -203,19 +206,55 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return result;
 	}
-
-	public String getRdmProdPic() {
-		Produkt pd = getRandomProdukt();
-		System.out.println("Random Produktname Bild: " + pd.getTitel());
-		return getProductPath(pd);
+/*
+ * --------------> Anfang Random startseite.xhtml
+ */
+	public String toKategorieMRP1() {
+		merkeRdmProdukt1 = getRandomProdukt();
+		System.out.println("Kategorie von p1: " + merkeRdmProdukt1.getKategorie().getLabel());
+		if(merkeRdmProdukt1.getKategorie().getLabel().equals(Kategorie.DUEFTE.getLabel())){
+			return "/os/duefte.xhtml";
+		}else if(merkeRdmProdukt1.getKategorie().getLabel().equals(Kategorie.MAKEUP.getLabel())) {
+			return "/os/makeup.xhtml";
+		}else if(merkeRdmProdukt1.getKategorie().getLabel().equals(Kategorie.PFLEGE.getLabel())) {
+			return "/os/pflege.xhtml";
+		}else {
+			return "/os/startseite.xhtml";
+		}
 	}
-
-	public Produkt getRdmProd() {
-		Produkt pd = getRandomProdukt();
-		System.out.println("Random Produktname Link: " + pd.getTitel());
-		return pd;
+	public String toKategorieMRP2() {
+		merkeRdmProdukt2 = getRandomProdukt();
+		while(merkeRdmProdukt2.getId() == merkeRdmProdukt1.getId()) {
+			merkeRdmProdukt2 = getRandomProdukt();
+		}
+		System.out.println("Kategorie von p2: " + merkeRdmProdukt2.getKategorie().getLabel());
+		if(merkeRdmProdukt2.getKategorie().getLabel().equals(Kategorie.DUEFTE.getLabel())){
+			return "/os/duefte.xhtml";
+		}else if(merkeRdmProdukt2.getKategorie().getLabel().equals(Kategorie.MAKEUP.getLabel())) {
+			return "/os/makeup.xhtml";
+		}else if(merkeRdmProdukt2.getKategorie().getLabel().equals(Kategorie.PFLEGE.getLabel())) {
+			return "/os/pflege.xhtml";
+		}else {
+			return "/os/startseite.xhtml";
+		}
 	}
-
+	public String toKategorieMRP3() {
+		merkeRdmProdukt3 = getRandomProdukt();
+		while(merkeRdmProdukt3.getId() == merkeRdmProdukt1.getId() || merkeRdmProdukt3.getId() == merkeRdmProdukt2.getId()) {
+			merkeRdmProdukt3 = getRandomProdukt();
+		}
+		System.out.println("Kategorie von p3: " + merkeRdmProdukt3.getKategorie().getLabel());
+		if(merkeRdmProdukt3.getKategorie().getLabel().equals(Kategorie.DUEFTE.getLabel())){
+			return "/os/duefte.xhtml";
+		}else if(merkeRdmProdukt3.getKategorie().getLabel().equals(Kategorie.MAKEUP.getLabel())) {
+			return "/os/makeup.xhtml";
+		}else if(merkeRdmProdukt3.getKategorie().getLabel().equals(Kategorie.PFLEGE.getLabel())) {
+			return "/os/pflege.xhtml";
+		}else {
+			return "/os/startseite.xhtml";
+		}
+	}
+	
 	private Produkt getRandomProdukt() {
 		Query query = this.em.createQuery("select pr from Produkt pr");
 		List<Produkt> pds = this.uncheckedSolver(query.getResultList());
@@ -228,6 +267,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return rdmProdukt;
 
 	}
+/*
+ * --------------> Ende Random startseite.xhtml
+ */
 
 	public String ansicht(Produkt produkt) {
 		if (produkt != null) {
@@ -237,13 +279,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		return "startseite?faces-redirect=true";
 	}
 
-	public String ansichtStart(Produkt produkt) {
-		if (produkt != null) {
-			merkeProdukt = produkt;
-			return "/os/produkt.xhtml";
-		}
-		return "/os/startseite.xhtml";
-	}
+	
 
 	public Produkt getMerkeProdukt() {
 		return merkeProdukt;
@@ -264,4 +300,29 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public void setMerkeProdukt(Produkt merkeProdukt) {
 		this.merkeProdukt = merkeProdukt;
 	}
+
+	public Produkt getMerkeRdmProdukt1() {
+		return merkeRdmProdukt1;
+	}
+
+	public void setMerkeRdmProdukt1(Produkt merkeRdmProdukt1) {
+		this.merkeRdmProdukt1 = merkeRdmProdukt1;
+	}
+
+	public Produkt getMerkeRdmProdukt2() {
+		return merkeRdmProdukt2;
+	}
+
+	public void setMerkeRdmProdukt2(Produkt merkeRdmProdukt2) {
+		this.merkeRdmProdukt2 = merkeRdmProdukt2;
+	}
+
+	public Produkt getMerkeRdmProdukt3() {
+		return merkeRdmProdukt3;
+	}
+
+	public void setMerkeRdmProdukt3(Produkt merkeRdmProdukt3) {
+		this.merkeRdmProdukt3 = merkeRdmProdukt3;
+	}
+	
 }
