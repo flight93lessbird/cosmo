@@ -211,14 +211,23 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
  */
 	public String makeToRdmProdukt1() {
 		merkeRdmProdukt1 = getRandomProdukt();
+		while (merkeRdmProdukt1.getTitel() == null || merkeRdmProdukt1.getTitel().equals(merkeRdmProdukt2.getTitel()) || merkeRdmProdukt1.getTitel().equals(merkeRdmProdukt3.getTitel())) {
+			merkeRdmProdukt1 = getRandomProdukt();
+		}
 		return "/os/ersteEmpfehlung.xhtml";
 	}
 	public String makeToRdmProdukt2() {
 		merkeRdmProdukt2 = getRandomProdukt();
+		while (merkeRdmProdukt2.getTitel() == null || merkeRdmProdukt2.getTitel().equals(merkeRdmProdukt1.getTitel()) || merkeRdmProdukt2.getTitel().equals(merkeRdmProdukt3.getTitel())) {
+			merkeRdmProdukt2 = getRandomProdukt();
+		}
 		return "/os/zweiteEmpfehlung.xhtml";
 	}
 	public String makeToRdmProdukt3() {
 		merkeRdmProdukt3 = getRandomProdukt();
+		while (merkeRdmProdukt3.getTitel() == null || merkeRdmProdukt3.getTitel().equals(merkeRdmProdukt1.getTitel()) || merkeRdmProdukt3.getTitel().equals(merkeRdmProdukt2.getTitel())) {
+			merkeRdmProdukt3 = getRandomProdukt();
+		}
 		return "/os/dritteEmpfehlung.xhtml";
 	}
 	
