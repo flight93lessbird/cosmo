@@ -514,6 +514,12 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "zahlungsart?faces-redirect=true";
 	}
 
+	public List<User> findAllByRolle(Rolle rolle) {
+		Query query = this.em.createQuery("Select u from User u where u.rolle = :rolle");
+		query.setParameter("rolle", rolle);
+		return this.uncheckedSolver(query.getResultList());
+	}
+
 	public DataModel<User> getUser() {
 		return user;
 	}

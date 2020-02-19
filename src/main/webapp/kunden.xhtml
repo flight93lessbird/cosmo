@@ -28,8 +28,9 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="kunde" value="#{userHandler.user}"
-					rowClasses="odd,even" headerClass="header">
+				<h:dataTable var="rolle"
+							 value="#{userHandler.findAllByRolle(enumController.getKunde())}"
+							 rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.kunden}</f:facet>
 					<h:column>
 						<f:facet name="header">#{msg.username}</f:facet>
