@@ -125,6 +125,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN).format(date);
 	}
 
+	/* für admin
 	public String editAdresse() {
 		merkeUser = getKunden().getRowData();
 		merkeAdresse = user.getRowData().getAdresse();
@@ -133,7 +134,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return "anschrift?faces-redirect=true";
 	}
-
+*/
 	public String toMeinKonto(User user) {
 		merkeUser = user;
 		merkeAdresse = user.getAdresse();
@@ -192,7 +193,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return "logout?faces-redirect=true";
 	}
-
+/* Admin kredtikarte ändern
 	public String editKreditkarte() {
 		merkeUser = getKunden().getRowData();
 		merkeKreditkarte = user.getRowData().getKreditkarte();
@@ -201,7 +202,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return "kreditkarte?faces-redirect=true";
 	}
-
+*/
 	public String toKreditkartendatenAendern(User user) {
 		merkeUser = user;
 		merkeKreditkarte = user.getKreditkarte();

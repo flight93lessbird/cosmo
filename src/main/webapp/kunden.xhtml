@@ -28,46 +28,36 @@
 
 		<div id="content">
 			<ui:insert name="content">
-				<h:dataTable var="rolle"
+				<h:dataTable var="user"
 							 value="#{userHandler.findAllByRolle(enumController.getKunde())}"
 							 rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.kunden}</f:facet>
 					<h:column>
 						<f:facet name="header">#{msg.username}</f:facet>
-						<h:outputText value="#{kunde.username}" />
+						<h:outputText value="#{user.username}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.admrolle}</f:facet>
-						<h:outputText value="#{kunde.rolle}" />
+						<h:outputText value="#{user.rolle}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.anrede}</f:facet>
-						<h:outputText value="#{kunde.anrede.label}" />
+						<h:outputText value="#{user.anrede.label}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.vorname}</f:facet>
-						<h:outputText value="#{kunde.vorname}" />
+						<h:outputText value="#{user.vorname}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.nachname}</f:facet>
-						<h:outputText value="#{kunde.nachname}" />
+						<h:outputText value="#{user.nachname}" />
 					</h:column>
 					<h:column>
 						<div align="center">
 							<f:facet name="header">#{msg.geburtsdatum}</f:facet>
 							<h:outputText
-								value="#{userHandler.formatDateDDMMYYYY(kunde.geburtsdatum)}" />
+								value="#{userHandler.formatDateDDMMYYYY(user.geburtsdatum)}" />
 						</div>
-					</h:column>
-					<h:column>
-						<f:facet name="header">#{msg.anschrift}</f:facet>
-						<h:commandButton action="#{userHandler.editAdresse}"
-							value="#{msg.anschrift}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">#{msg.kreditkarte}</f:facet>
-						<h:commandButton action="#{userHandler.editKreditkarte}"
-							value="#{msg.kreditkarte}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
@@ -79,6 +69,51 @@
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
 						<h:commandButton action="#{userHandler.editUser}"
 							value="#{msg.bearbeiten}" />
+					</h:column>
+				</h:dataTable>
+				<br /><br />
+
+				<h:dataTable var="user"
+							 value="#{userHandler.findAllByRolle(enumController.getAdmin())}"
+							 rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">#{msg.admin}</f:facet>
+					<h:column>
+						<f:facet name="header">#{msg.username}</f:facet>
+						<h:outputText value="#{user.username}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.admrolle}</f:facet>
+						<h:outputText value="#{user.rolle}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.anrede}</f:facet>
+						<h:outputText value="#{user.anrede.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.vorname}</f:facet>
+						<h:outputText value="#{user.vorname}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.nachname}</f:facet>
+						<h:outputText value="#{user.nachname}" />
+					</h:column>
+					<h:column>
+						<div align="center">
+							<f:facet name="header">#{msg.geburtsdatum}</f:facet>
+							<h:outputText
+									value="#{userHandler.formatDateDDMMYYYY(user.geburtsdatum)}" />
+						</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{userHandler.deleteUser}"
+										 value="#{msg.loeschen}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton action="#{userHandler.editUser}"
+										 value="#{msg.bearbeiten}" />
 					</h:column>
 				</h:dataTable>
 			</ui:insert>
