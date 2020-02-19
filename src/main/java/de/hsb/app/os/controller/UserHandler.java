@@ -287,7 +287,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 */
 
 	public String userLoginText() {
-		if (merkeUser == null)
+		if (merkeUser == null || merkeUser.getVorname() == null)
 			return " ";
 		else
 			return "Hallo, " + merkeUser.getVorname() + " ";
@@ -377,7 +377,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
  */
 
 	public String checkLoggedUser(User benutzer) {
-		if (benutzer != null) {
+		if (benutzer != null && benutzer.getVorname() != null) {
 			return "/os/logout.xhtml";
 		} else {
 			return "/os/login.xhtml";
