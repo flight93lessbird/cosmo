@@ -31,6 +31,11 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	private Produkt merkeRdmProdukt1 = new Produkt();
 	private Produkt merkeRdmProdukt2 = new Produkt();
 	private Produkt merkeRdmProdukt3 = new Produkt();
+	
+	private Produkt merkeNeuheit1 = new Produkt();
+	private Produkt merkeNeuheit2 = new Produkt();
+	private Produkt merkeNeuheit3 = new Produkt();
+	
 
 	private List<Produkt> produkte;
 
@@ -241,11 +246,37 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			System.out.println("Tag: " + tag + " Value: " + rdmProdukt);
 		}
 		return rdmProdukt;
-
 	}
 /*
  * --------------> Ende Random startseite.xhtml
+ * 
+ * --------------> Anfang Neuheit startseite.xhtml
  */
+	
+	public String makeToNeuheit1() {
+		merkeNeuheit1 = getLatestProdukt(1);
+		return "/os/letzteNeuheit.xhtml";
+	}
+	public String makeToNeuheit2() {
+		merkeNeuheit2 = getLatestProdukt(2);
+		return "/os/zweitletzteNeuheit.xhtml";
+	}
+	public String makeToNeuheit3() {
+		merkeNeuheit3 = getLatestProdukt(3);
+		return "/os/drittletzteNeuheit.xhtml";
+	}
+	
+	private Produkt getLatestProdukt(int idx) {
+		Query query = this.em.createQuery("select pr from Produkt pr");
+		List<Produkt> pds = this.uncheckedSolver(query.getResultList());
+		Produkt rdmProdukt = new Produkt();
+		if (!pds.isEmpty()) {
+			int tag = pds.size() - idx;
+			rdmProdukt = pds.get((tag) % pds.size());
+			System.out.println("Tag: " + tag + " Value: " + rdmProdukt);
+		}
+		return rdmProdukt;
+	}
 
 	public String ansicht(Produkt produkt) {
 		if (produkt != null) {
@@ -299,6 +330,30 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 
 	public void setMerkeRdmProdukt3(Produkt merkeRdmProdukt3) {
 		this.merkeRdmProdukt3 = merkeRdmProdukt3;
+	}
+
+	public Produkt getMerkeNeuheit1() {
+		return merkeNeuheit1;
+	}
+
+	public void setMerkeNeuheit1(Produkt merkeNeuheit1) {
+		this.merkeNeuheit1 = merkeNeuheit1;
+	}
+
+	public Produkt getMerkeNeuheit2() {
+		return merkeNeuheit2;
+	}
+
+	public void setMerkeNeuheit2(Produkt merkeNeuheit2) {
+		this.merkeNeuheit2 = merkeNeuheit2;
+	}
+
+	public Produkt getMerkeNeuheit3() {
+		return merkeNeuheit3;
+	}
+
+	public void setMerkeNeuheit3(Produkt merkeNeuheit3) {
+		this.merkeNeuheit3 = merkeNeuheit3;
 	}
 	
 }
