@@ -6,6 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<h:form>
+			<h1>#{warenkorbhd.checkWarenkorbIsEmptyText()}</h1>
 			<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
 				value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser)}"
 				rowClasses="odd,even" headerClass="header">
@@ -31,8 +32,12 @@
 				<h:column>
 					<f:facet name="header">#{msg.artklanzl}</f:facet>
 					<h:outputText value="#{warenkorbItem.stkZahl} Stk. " />
-					<h:commandButton action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser, warenkorbItem, warenkorbhd.incrementStkZahl(warenkorbItem))}" value="+" />
-					<h:commandButton action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser, warenkorbItem, warenkorbhd.decrementStkZahl(warenkorbItem))}" value="-" />
+					<h:commandButton
+						action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser, warenkorbItem, warenkorbhd.incrementStkZahl(warenkorbItem))}"
+						value="+" />
+					<h:commandButton
+						action="#{warenkorbhd.changeStkZahl(userHandler.merkeUser, warenkorbItem, warenkorbhd.decrementStkZahl(warenkorbItem))}"
+						value="-" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.artgesamt}</f:facet>
@@ -42,19 +47,24 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.loeschen}</f:facet>
-					<h:commandButton action="#{warenkorbhd.deleteWarenkorbItem(userHandler.merkeUser, warenkorbItem)}"
+					<h:commandButton
+						action="#{warenkorbhd.deleteWarenkorbItem(userHandler.merkeUser, warenkorbItem)}"
 						value="#{msg.loeschen}">
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>
 		<h:form>
-			<h3>#{msg.artzwschsum}: #{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}</h3>
+			<h3>#{msg.artzwschsum}:
+				#{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}</h3>
+			<h:commandButton action="#{pageHandler.toStartseite}"
+				value="#{msg.weitershoppen}" />
 			<h:commandButton action="#{pageHandler.toWarenkorb}"
 				value="#{msg.aktualisieren}" />
+			<div class="divider" />
 			<h:commandButton
 				action="#{warenkorbhd.toKundendaten(userHandler.merkeUser, userHandler.merkeAdresse)}"
-				value="#{msg.bestellaschl}" />
+				value="#{msg.bestellaschl}" style="position: absolute; right: 0;" />
 		</h:form>
 	</ui:define>
 </ui:composition>
