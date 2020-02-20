@@ -8,7 +8,7 @@
 		<h:form>
 			<h1>#{msg.meinkonto}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
-			<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
+			<h:panelGrid var="kunde" value="#{userHandler.makeUser()}"
 				columns="2" headerClass="header" footerClass="footer">
 				<h:outputLabel for="username" value="#{msg.username}" />
 				<h:panelGroup>
@@ -88,7 +88,7 @@
 				</h:panelGroup>
 				<h:commandButton action="#{pageHandler.toKundendaten}"
 					value="#{msg.abbrechen}" immediate="true" />
-				<h:commandButton action="#{userHandler.registrierenWk}"
+				<h:commandButton action="#{userHandler.registrierenWk(warenkorbhd.warenkorb)}"
 					value="#{msg.speichern}" update="messages" />
 			</h:panelGrid>
 		</h:form>

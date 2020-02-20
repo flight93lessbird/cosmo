@@ -452,10 +452,20 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return "startseite?faces-redirect=true";
 	}
-
-	public String registrierenWk() {
+	public User makeUser() {
+		merkeUser = new User();
+		return merkeUser;
+	}
+	public String registrierenWk(Warenkorb wK) {
 		for (User u : user) {
-			if (u.getUsername().equals(merkeUser.getUsername())) {
+			if(merkeUser == null){
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+				return null;
+			}else if (u.getUsername().equals(merkeUser.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -465,14 +475,19 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
+			merkeUser.setWarenkorb(wK);
+			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			merkeAdresse = em.merge(merkeAdresse);
+			em.persist(wK);
 			em.persist(merkeUser);
+			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
