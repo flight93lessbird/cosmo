@@ -37,10 +37,9 @@
 
 				<div class="search-container">
 					<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" value="#{produktHandler.merkeSuchTag}" />
-					<h:commandButton action="#{pageHandler.toSuche}" update="grid" value="#{resources/images/search.png}"
-									 height="15px" width="15px" />
-				</div>
-
+					<h:commandButton styleClass="search-blid" action="#{produktHandler.toSuche}" update="grid" image="resources/images/search.png"
+					style="float: right; padding: 6px; height: 35px; width: 35px; cursor: pointer"/>
+					</div>
 			</div>
 		</h:form>
 	</div>

@@ -107,10 +107,14 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		Query query = this.em.createQuery("Select pr from Produkt pr" + " where pr.titel = :titel or pr.marke = :marke");
 		query.setParameter("titel", merkeSuchTag);
 		query.setParameter("marke", merkeSuchTag);
-		if(query.getResultList().isEmpty())
+		if(query.getResultList().isEmpty()) {
 			return new ArrayList<Produkt>();
-		else
+		}else
 			return uncheckedSolver(query.getResultList());
+	}
+
+	public String toSuche(){
+			return "suche?faces-redirect=true";
 	}
 
 	/** Hier legen wir neue Artikel an */

@@ -60,21 +60,16 @@ nav.logo {
 	border: none;
 }
 
-.topnav .search-container button {
+.topnav .search-container .search-blid{
 	float: right;
 	padding: 6px 10px;
 	margin-top: 8px;
 	margin-right: 16px;
-	background: #ea8998;
-	font-size: 17px;
-	border: none;
+	height: 35px;
+	width: 35px;
+	margin-top: 7px;
 	cursor: pointer;
 }
-
-.topnav .search-container button:hover {
-	background: #ccc;
-}
-
 
 @media screen and (max-width: 600px) {
 	.topnav .search-container {
