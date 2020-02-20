@@ -102,14 +102,11 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 	}
 
-	public String toSuche(){
-		return "suche?faces-redirect=true";
-	}
-
 	public List<Produkt> findBySuche(){
 		System.out.println(merkeSuchTag);
-		Query query = this.em.createQuery("select pr from Produkt pr where pr.titel = :titel");
+		Query query = this.em.createQuery("Select pr from Produkt pr" + " where pr.titel = :titel or pr.marke = :marke");
 		query.setParameter("titel", merkeSuchTag);
+		query.setParameter("marke", merkeSuchTag);
 		if(query.getResultList().isEmpty())
 			return new ArrayList<Produkt>();
 		else
@@ -378,5 +375,5 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public void setMerkeNeuheit3(Produkt merkeNeuheit3) {
 		this.merkeNeuheit3 = merkeNeuheit3;
 	}
-	
+
 }
