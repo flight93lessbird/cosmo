@@ -31,15 +31,13 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	private Produkt merkeRdmProdukt1 = new Produkt();
 	private Produkt merkeRdmProdukt2 = new Produkt();
 	private Produkt merkeRdmProdukt3 = new Produkt();
-<<<<<<< HEAD
+
 	private String merkeSuchTag = "";
-=======
 	
 	private Produkt merkeNeuheit1 = new Produkt();
 	private Produkt merkeNeuheit2 = new Produkt();
 	private Produkt merkeNeuheit3 = new Produkt();
-	
->>>>>>> 3b0e11191b8c9a98ae2033f4302d38ffaa10e949
+
 
 	private List<Produkt> produkte;
 	private ListDataModel<Produkt> pdList;
@@ -103,6 +101,7 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
 		}
 	}
+
 	public String toSuche(){
 		return "suche?faces-redirect=true";
 	}
@@ -348,7 +347,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		this.merkeRdmProdukt3 = merkeRdmProdukt3;
 	}
 
-<<<<<<< HEAD
 	public String getMerkeSuchTag() {
 		return merkeSuchTag;
 	}
@@ -357,7 +355,6 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		this.merkeSuchTag = merkeSuchTag;
 	}
 
-=======
 	public Produkt getMerkeNeuheit1() {
 		return merkeNeuheit1;
 	}
@@ -382,5 +379,4 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		this.merkeNeuheit3 = merkeNeuheit3;
 	}
 	
->>>>>>> 3b0e11191b8c9a98ae2033f4302d38ffaa10e949
 }
