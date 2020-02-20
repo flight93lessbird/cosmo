@@ -91,13 +91,14 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 //	}
 
 	public String checkWarenkorb(User benutzer) {
-		System.out.println("Checked WK");
-		if (benutzer != null && benutzer.getWarenkorb() != null && !benutzer.getWarenkorb().getWarenkorbItems().isEmpty()) {
-			return "/os/warenkorb.xhtml";
-		} else if (!warenkorb.getWarenkorbItems().isEmpty()) {
-			return "/os/warenkorb.xhtml";
-		} else {
-			return "/os/warenkorbLeer.xhtml";
+//		System.out.println("Checked WK");
+		return "/os/warenkorb.xhtml";
+	}
+	public String checkWarenkorbIsEmptyText() {
+		if(warenkorb.getWarenkorbItems().isEmpty()) {
+			return "Es befindet sich noch nichts in Ihrem Warenkorb! / Your shopping cart is empty!";
+		}else {
+			return "";
 		}
 	}
 
@@ -305,6 +306,9 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	}
 
 	public String toKundendaten(User benutzer, Adresse adresse) {
+		if(warenkorb.getWarenkorbItems().isEmpty()) {
+			return "warenkorb?faces-redirect=true";
+		}
 		if (benutzer != null) {
 			adresse = benutzer.getAdresse();
 			return "kundendatenUeberpruefung?faces-redirect=true";

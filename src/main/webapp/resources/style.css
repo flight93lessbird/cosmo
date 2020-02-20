@@ -159,4 +159,9 @@ tr.even {
 fieldset {
 	border: none;
 }
+.divider{
+    width:100px;
+    height:auto;
+    display:inline-block;
+}
 
