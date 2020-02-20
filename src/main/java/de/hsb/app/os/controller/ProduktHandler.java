@@ -31,9 +31,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	private Produkt merkeRdmProdukt1 = new Produkt();
 	private Produkt merkeRdmProdukt2 = new Produkt();
 	private Produkt merkeRdmProdukt3 = new Produkt();
+	private String merkeSuchTag = "";
 
 	private List<Produkt> produkte;
-
 	private ListDataModel<Produkt> pdList;
 
 	/** Erstellung eines Datamodels aus der Klasse Produkt */
@@ -94,6 +94,19 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 			pdList = new ListDataModel<Produkt>();
 			pdList.setWrappedData(em.createNamedQuery("SelectProdukt").getResultList());
 		}
+	}
+	public String toSuche(){
+		return "suche?faces-redirect=true";
+	}
+
+	public List<Produkt> findBySuche(){
+		System.out.println(merkeSuchTag);
+		Query query = this.em.createQuery("select pr from Produkt pr where pr.titel = :titel");
+		query.setParameter("titel", merkeSuchTag);
+		if(query.getResultList().isEmpty())
+			return new ArrayList<Produkt>();
+		else
+			return uncheckedSolver(query.getResultList());
 	}
 
 	/** Hier legen wir neue Artikel an */
@@ -300,5 +313,13 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	public void setMerkeRdmProdukt3(Produkt merkeRdmProdukt3) {
 		this.merkeRdmProdukt3 = merkeRdmProdukt3;
 	}
-	
+
+	public String getMerkeSuchTag() {
+		return merkeSuchTag;
+	}
+
+	public void setMerkeSuchTag(String merkeSuchTag) {
+		this.merkeSuchTag = merkeSuchTag;
+	}
+
 }

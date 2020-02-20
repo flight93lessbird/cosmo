@@ -36,7 +36,9 @@
 				<a href="pflege.xhtml">#{msg.Pf}</a>
 
 				<div class="search-container">
-					<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" /> 
+					<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" value="#{produktHandler.merkeSuchTag}" />
+					<h:commandButton action="#{produktHandler.toSuche}" value=""
+									 update="grid" />
 				</div>
 
 			</div>
