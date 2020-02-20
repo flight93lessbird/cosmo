@@ -69,8 +69,4 @@ public class PageHandler {
 	public String toKaufBestatigt() {
 		return "kaufBestatigt?faces-redirect=true";
 	}
-
-	public String toSuche(){
-		return "suche?faces-redirect=true";
-	}
 }
