@@ -9,7 +9,7 @@
             <h:dataTable var="produkt"
                          value="#{produktHandler.findBySuche()}"
                          rowClasses="odd,even" headerClass="header">
-                <f:facet name="header">#{msg.Pf}</f:facet>
+                <f:facet name="header">#{msg.gesprodukt}</f:facet>
                 <h:column>
                     <f:facet name="header">#{msg.artkllabel}</f:facet>
                     <h:outputText value="#{produkt.marke}" />
