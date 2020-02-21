@@ -48,11 +48,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	private String username;
 	private String passwort;
 
-	@PersistenceContext
-	private EntityManager em;
-
-	@Resource
-	private UserTransaction utx;
 
 	/** Erstellung eines Datamodels aus der Klasse Benutzer */
 	private DataModel<User> user = new ListDataModel<User>();
@@ -268,13 +263,12 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "passwortzuruecksetzenAdmin?faces-redirect=true";
 	}
 
-	public String deleteUser() {
-		merkeUser = user.getRowData();
+	public String deleteUser(User user) {
+		merkeUser = user;
 		try {
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			em.remove(merkeUser);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
