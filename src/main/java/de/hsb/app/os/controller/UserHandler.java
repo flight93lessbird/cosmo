@@ -263,9 +263,9 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "kaufBestatigt?faces-redirect=true";
 	}
 
-	public String editUser() {
-		merkeUser = user.getRowData();
-		return "kundendatenBearbeitenAdmin?faces-redirect=true";
+	public String editUser(User user) {
+		merkeUser = user;
+		return "passwortzuruecksetzenAdmin?faces-redirect=true";
 	}
 
 	public String deleteUser() {

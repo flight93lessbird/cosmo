@@ -13,10 +13,12 @@
 				<p:outputLabel value="#{msg.passwort}:" for="password" />
 				<p:password id="password" value="#{userHandler.merkeUser.passwort}"
 					required="true" label="Password">
+					<f:validator validatorId="PasswordValidation" />
 				</p:password>
 				<p:outputLabel value="#{msg.neupw}:" for="password" />
 				<p:password id="neupassword" value="#{userHandler.merkeUser.passwort}"
 					required="true" label="Password">
+					<f:validator validatorId="PasswordValidation" />
 				</p:password>
 				<h:commandButton action="#{pageHandler.toLogout}"
 					value="#{msg.abbrechen}" immediate="true" />

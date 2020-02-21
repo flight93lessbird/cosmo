@@ -60,15 +60,14 @@
 						</div>
 					</h:column>
 					<h:column>
-						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton action="#{userHandler.deleteUser}"
-							value="#{msg.loeschen}" />
-					</h:column>
-
-					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton action="#{userHandler.editUser}"
+						<h:commandButton action="#{userHandler.editUser(user)}"
 							value="#{msg.bearbeiten}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{userHandler.deleteUser()}"
+										 value="#{msg.loeschen}" />
 					</h:column>
 				</h:dataTable>
 				<br /><br />
@@ -105,15 +104,14 @@
 						</div>
 					</h:column>
 					<h:column>
-						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton action="#{userHandler.deleteUser}"
-										 value="#{msg.loeschen}" />
-					</h:column>
-
-					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton action="#{userHandler.editUser}"
+						<h:commandButton action="#{userHandler.editUser(user)}"
 										 value="#{msg.bearbeiten}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton action="#{userHandler.deleteUser()}"
+										 value="#{msg.loeschen}" />
 					</h:column>
 				</h:dataTable>
 			</ui:insert>
