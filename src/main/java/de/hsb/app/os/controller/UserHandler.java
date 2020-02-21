@@ -409,7 +409,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		merkeKreditkarte = new Kreditkarte();
 		return "registrierenWarenkorb?faces-redirect=true";
 	}
-	
+
 	/**
 	 * Da wir keine gleichen Benutzer haben wollen, brauchen wir eine Methode, die
 	 * uns nicht erlaubt einen neuen Benutzer anzulegen wenn der schon vorhanden.
