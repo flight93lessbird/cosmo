@@ -397,12 +397,19 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	}
 
 	public String toRegistrieren() {
-		merkeUser = new User(); // hierdurch ist man wenn man bei der seite registrieren schon angemeldet obwohl man noch nicht mal seine daten eigegegeben hat
-		//wenn man dies nicht angiebt erstellt er keinen neuen user und man bekommt eine Fehlermeldung.
+		merkeUser = new User();
 		merkeAdresse = new Adresse();
 		merkeKreditkarte = new Kreditkarte();
 		return "registrieren?faces-redirect=true";
 	}
+
+	public String toRegistrierenWarenkorb() {
+		merkeUser = new User();
+		merkeAdresse = new Adresse();
+		merkeKreditkarte = new Kreditkarte();
+		return "registrierenWarenkorb?faces-redirect=true";
+	}
+
 
 	/**
 	 * Da wir keine gleichen Benutzer haben wollen, brauchen wir eine Methode, die
@@ -412,7 +419,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 * dazu wird eine Fehlermeldung ausgegeben.
 	 */
 	public String benutzerRegistrieren() {
-//		merkeUser = new User();
 		for (User u : user) {
 			if(merkeUser == null){
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -431,7 +437,6 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
-
 			Warenkorb warenkorb = new Warenkorb();
 			merkeUser.setWarenkorb(warenkorb);
 			merkeUser.setAdresse(merkeAdresse);
@@ -455,7 +460,14 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 
 	public String registrierenWk() {
 		for (User u : user) {
-			if (u.getUsername().equals(merkeUser.getUsername())) {
+			if(merkeUser == null){
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
+								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
+								null));
+				;
+				return null;
+			}else if (u.getUsername().equals(merkeUser.getUsername())) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Dieser Benutzername "
 								+ "ist bereits vergeben oder erfüllt nicht die vom Administrator festgelegten Richtlinien.",
@@ -465,14 +477,17 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
+			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
+			merkeAdresse = em.merge(merkeAdresse);
 			em.persist(merkeUser);
+			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Herzlich Willkommen und vielen Dank für Ihre Registrierung.", null));
+			utx.commit();
 		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicMixedException
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
