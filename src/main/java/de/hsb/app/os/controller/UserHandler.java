@@ -409,8 +409,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		merkeKreditkarte = new Kreditkarte();
 		return "registrierenWarenkorb?faces-redirect=true";
 	}
-
-
+	
 	/**
 	 * Da wir keine gleichen Benutzer haben wollen, brauchen wir eine Methode, die
 	 * uns nicht erlaubt einen neuen Benutzer anzulegen wenn der schon vorhanden.
@@ -477,11 +476,14 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
+			Warenkorb warenkorb = new Warenkorb();
+			merkeUser.setWarenkorb(warenkorb);
 			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
 			merkeUser = em.merge(merkeUser);
 			merkeAdresse = em.merge(merkeAdresse);
+			em.persist(warenkorb);
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
