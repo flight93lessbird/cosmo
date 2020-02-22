@@ -31,6 +31,9 @@
 			<ui:insert name="content">
 				<h:form>
 					<h1>#{msg.produkte}</h1>
+					<h:commandButton action="#{produktHandler.ProduktAnlegen}"
+									 value="#{msg.admprodanl}" />
+					<br /> <br />
 					<h:dataTable var="produkt"
 						value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
 						rowClasses="odd,even" headerClass="header">
@@ -68,8 +71,6 @@
 								value="#{msg.loeschen}" />
 						</h:column>
 					</h:dataTable>
-					<h:commandButton action="#{produktHandler.ProduktAnlegen}"
-						value="#{msg.admprodanl}" />
 					<br />
 					<br />
 					<h:dataTable var="produkt"
@@ -109,8 +110,6 @@
 								value="#{msg.loeschen}" />
 						</h:column>
 					</h:dataTable>
-					<h:commandButton action="#{produktHandler.ProduktAnlegen}"
-						value="#{msg.admprodanl}" />
 					<br />
 					<br />
 					<h:dataTable var="produkt"
@@ -150,8 +149,6 @@
 								value="#{msg.loeschen}" />
 						</h:column>
 					</h:dataTable>
-					<h:commandButton action="#{produktHandler.ProduktAnlegen}"
-						value="#{msg.admprodanl}" />
 				</h:form>
 			</ui:insert>
 		</div>

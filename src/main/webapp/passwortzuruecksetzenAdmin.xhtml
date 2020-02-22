@@ -33,36 +33,24 @@
 					<p:growl id="growl" showDetail="true" sticky="true" />
 					<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
 						columns="2" headerClass="header" footerClass="footer">
-						<h:outputLabel value="#{msg.anrede}:" for="anrede" />
+						<h:outputLabel value="#{msg.username}:" />
 						<h:panelGroup>
-							<h:selectOneMenu id="anrede"
-								value="#{userHandler.merkeUser.anrede}">
-								<f:selectItems var="form" value="#{userHandler.anredeValues}"
-									itemValue="#{form}" itemLabel="#{form.label}" />
-							</h:selectOneMenu>
+							<h:outputLabel value="#{userHandler.merkeUser.username}"/>
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.vorname}:" for="vorname" />
 						<h:panelGroup>
-							<h:inputText id="vorname"
-								value="#{userHandler.merkeUser.vorname}" required="true"
-								requiredMessage="#{msg.eingabefehlt}." />
-							<h:message for="vorname" styleClass="message" />
+							<h:outputLabel id="vorname"
+								value="#{userHandler.merkeUser.vorname}"/>
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 						<h:panelGroup>
-							<h:inputText id="nachname"
-								value="#{userHandler.merkeUser.nachname}" required="true"
-								requiredMessage="#{msg.eingabefehlt}." />
+							<h:outputLabel id="nachname" value="#{userHandler.merkeUser.nachname}" />
 							<h:message for="nachname" styleClass="message" />
 						</h:panelGroup>
-						<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
+						<h:outputLabel for="passwort" value="#{msg.passwort}" />
 						<h:panelGroup>
-							<p:calendar id="geburtsdatum"
-								value="#{userHandler.merkeUser.geburtsdatum}" mode="popup"
-								navigator="true" showOn="button" pattern="dd.MM.yyyy"
-								yearRange="c-70:c+50" required="true"
-								requiredMessage="#{msg.gueltigkdatumfehlt}." />
-							<h:message styleClass="message" for="geburtsdatum" />
+							<p:password id="passwort" value="#{userHandler.merkeUser.passwort}"
+										required="true" label="Password" />
 						</h:panelGroup>
 						<h:commandButton action="#{pageHandler.toKunden}"
 							value="#{msg.abbrechen}" immediate="true" />

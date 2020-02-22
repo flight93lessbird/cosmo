@@ -12,6 +12,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModelListener;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 import javax.persistence.Query;
 import javax.transaction.*;
 
@@ -36,6 +38,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	private static final long serialVersionUID = 1332117572442977016L;
 
 	// Warenkorb
+	@OneToOne(cascade = CascadeType.ALL)
 	private Warenkorb warenkorb = new Warenkorb();
 
 	private int stkZahl = 1;

@@ -10,29 +10,28 @@
 			<p:growl id="growl" showDetail="true" sticky="true" />
 			<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
 						 columns="2" headerClass="header" footerClass="footer">
-				<h:outputLabel for="username" value="#{msg.username}" />
+				<h:outputLabel for="username" value="#{msg.username}:" />
 				<h:panelGroup>
 					<h:inputText id="username"
 								 value="#{userHandler.merkeUser.username}"
 								 required="true" requiredMessage="#{msg.eingabefehlt}."/>
 					<h:message for="username" styleClass="message" />
 				</h:panelGroup>
-				<h:outputLabel for="passwort1" value="#{msg.passwort}" />
+				<h:outputLabel for="passwort1" value="#{msg.passwort}:" />
 				<h:panelGroup>
 					<p:password id="passwort1"
 								value="#{userHandler.merkeUser.passwort}" match="passwort2"
 								label="Password 1" required="true" requiredMessage="#{msg.eingabefehlt}.">
+						<f:validator validatorId="PasswordValidation" />
 					</p:password>
-					<h:message for="passwort1" styleClass="message" />
 				</h:panelGroup>
-				<h:outputLabel for="passwort2" value="#{msg.passwortwdh}" />
+				<h:outputLabel for="passwort2" value="#{msg.passwortwdh}:" />
 				<h:panelGroup>
 					<p:password id="passwort2"
 								value="#{userHandler.merkeUser.passwort}" label="Password 2"
 								required="true" requiredMessage="#{msg.eingabefehlt}.">
 						<f:validator validatorId="PasswordValidation" />
 					</p:password>
-					<h:message for="passwort2" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.anrede}:" for="anrede" />
 				<h:panelGroup>
