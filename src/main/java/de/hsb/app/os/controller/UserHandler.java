@@ -457,7 +457,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		return "startseite?faces-redirect=true";
 	}
 
-	public String registrierenWk() {
+	public String registrierenWk(Warenkorb wk) {
 		for (User u : user) {
 			if(merkeUser == null){
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -476,7 +476,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
-			Warenkorb warenkorb = new Warenkorb();
+			Warenkorb warenkorb = wk;
 			merkeUser.setWarenkorb(warenkorb);
 			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);

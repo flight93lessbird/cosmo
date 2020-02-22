@@ -87,7 +87,7 @@
 				</h:panelGroup>
 				<h:commandButton action="#{pageHandler.toKundendaten}"
 					value="#{msg.abbrechen}" immediate="true" />
-				<h:commandButton action="#{userHandler.registrierenWk}"
+				<h:commandButton action="#{userHandler.registrierenWk(warenkorbhd.warenkorb)}"
 					value="#{msg.speichern}" update="messages" />
 			</h:panelGrid>
 		</h:form>
