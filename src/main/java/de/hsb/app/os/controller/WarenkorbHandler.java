@@ -187,6 +187,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				this.em.persist(this.warenkorb);
 				this.utx.commit();
 				setWarenkorb(warenkorb);
+				setStkZahl(1);
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
 					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 			}
