@@ -114,6 +114,10 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	}
 
 	public String toSuche(){
+		List<Produkt> list = findBySuche();
+		if(list.isEmpty())
+			return "startseite?faces-redirect=true";
+		else
 			return "suche?faces-redirect=true";
 	}
 
@@ -293,7 +297,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 		}
 		return rdmProdukt;
 	}
-
+	/* 
+	 * --------------> Ende Neuheit startseite.xhtml
+	 */
 	public String ansicht(Produkt produkt) {
 		if (produkt != null) {
 			merkeProdukt = produkt;
