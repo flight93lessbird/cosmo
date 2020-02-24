@@ -5,15 +5,36 @@ package de.hsb.app.os.controller;
  * auf andere xhtml Seiten verweisen
  */
 
+import java.util.Locale;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "pageHandler")
 @SessionScoped
 public class PageHandler {
+	
+	private Locale language;
 	public PageHandler() {
 	}
-
+	
+	public String checkLanguage() {
+		if (FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("de").getLanguage()))
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
+		else
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en"));
+		return "DE | EN";
+	}
+	
+	public String changeLanguage() {
+		language  = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
+		if(language.getLanguage().equals(new Locale("en").getLanguage()))
+			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("de"));
+		else 
+			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("en"));
+		return null;
+	}
 	public String toStartseite() {
 		return "startseite?faces-redirect=true";
 	}

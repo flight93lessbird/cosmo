@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -99,7 +100,10 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	}
 	public String checkWarenkorbIsEmptyText() {
 		if(warenkorb.getWarenkorbItems().isEmpty()) {
-			return "Es befindet sich noch nichts in Ihrem Warenkorb! / Your shopping cart is empty!";
+			if(FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("de").getLanguage()))
+				return "Es befindet sich noch nichts in Ihrem Warenkorb!";
+			else
+				return  "Your shopping cart is empty!";
 		}else {
 			return "";
 		}
