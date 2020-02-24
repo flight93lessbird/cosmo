@@ -13,12 +13,16 @@
 <h:body>
 	<div id="header">
 		<h:form>
+			<h:commandButton action="#{pageHandler.changeLanguage()}"
+				value="#{pageHandler.checkLanguage()}"
+				style="position: absolute; right: 0;" />
+		</h:form>
+		<h:form>
 			<div class="logo">
 				<a class="logo" href="/os/startseite.xhtml"> <h:graphicImage
 						value="resources/images/COS'MO.PNG"
 						style="height:150px; width:150px;" />
-				</a><h:commandButton action="#{pageHandler.changeLanguage()}" value="#{pageHandler.checkLanguage()}" style="position: absolute; right: 0;" />
-				<a class="account"
+				</a><a class="account"
 					href="#{userHandler.checkLoggedUser(userHandler.merkeUser)}"><h:graphicImage
 						value="resources/images/user.png" height="50px" width="50px" /> </a>
 				<a class="account"
