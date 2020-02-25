@@ -13,19 +13,22 @@
 <h:body>
 	<div id="header">
 		<h:form>
+			<h:commandButton styleClass="sprach-button" action="#{pageHandler.changeLanguage()}"
+							 value="#{pageHandler.checkLanguage()}" />
+		</h:form>
+		<h:form>
 			<div class="logo">
-				<a class="logo" href="/os/startseite.xhtml">
-				<h:graphicImage value="resources/images/COS'MO.PNG"
-								style="height:150px; width:150px;" />
+				<a class="logo" href="/os/startseite.xhtml"> <h:graphicImage styleClass="logo-bild"
+						value="resources/images/COS'MO.PNG" />
 				</a>
 				<a class="account"
-					href="#{userHandler.checkLoggedUser(userHandler.merkeUser)}"><h:graphicImage
-						value="resources/images/user.png" height="50px" width="50px" />
+					href="#{userHandler.checkLoggedUser(userHandler.merkeUser)}">
+					<h:graphicImage styleClass="account-bild" value="resources/images/user.png" />
 				</a>
 				<a class="account"
-					href="#{warenkorbhd.checkWarenkorb(userHandler.merkeUser)}"><h:graphicImage
-						value="resources/images/shopping-cart-of-checkered-design.png"
-						height="50px" width="50px" /></a>
+					href="#{warenkorbhd.checkWarenkorb(userHandler.merkeUser)}">
+					<h:graphicImage styleClass="account-bild"
+						value="resources/images/shopping-cart-of-checkered-design.png"/></a>
 			</div>
 			<div class="usertext">
 				<a>#{userHandler.userLoginText()}</a>
@@ -36,9 +39,12 @@
 				<a href="pflege.xhtml">#{msg.Pf}</a>
 
 				<div class="search-container">
-					<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" value="#{produktHandler.merkeSuchTag}" />
-					<h:commandButton styleClass="search-bild" action="#{produktHandler.toSuche}" update="grid" image="resources/images/search.png"/>
-					</div>
+					<p:inputText type="text" placeholder="#{msg.suche}" name="#{msg.suche}"
+								 value="#{produktHandler.merkeSuchTag}" />
+					<h:commandButton styleClass="search-bild"
+									 action="#{produktHandler.toSuche}" update="grid"
+									 image="resources/images/search.png" />
+				</div>
 			</div>
 		</h:form>
 	</div>

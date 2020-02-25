@@ -90,6 +90,12 @@
 									itemLabel="#{form.label}" />
 							</h:selectOneMenu>
 						</h:panelGroup>
+						<p:outputLabel for="bildpfad" value="#{msg.bildpfad}:" />
+						<h:panelGroup>
+							<p:inputTextarea id="bildpfad"
+											 value="#{produktHandler.merkeProdukt.picturePath}"
+											 required="true" requiredMessage="#{msg.beschreibangeben}." />
+						</h:panelGroup>
 						<h:commandButton action="#{pageHandler.toProdukte}"
 							value="#{msg.abbrechen}" immediate="true" />
 						<h:commandButton action="#{produktHandler.pdspeichern}"

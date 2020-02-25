@@ -7,10 +7,13 @@ package de.hsb.app.os.controller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import java.util.Locale;
 
 @ManagedBean(name = "pageHandler")
 @SessionScoped
 public class PageHandler {
+	private Locale language;
 	public PageHandler() {
 	}
 
@@ -68,5 +71,22 @@ public class PageHandler {
 
 	public String toKaufBestatigt() {
 		return "kaufBestatigt?faces-redirect=true";
+	}
+
+	public String checkLanguage() {
+		if (FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("de").getLanguage()))
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
+		else
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en"));
+		return "DE | EN";
+	}
+
+	public String changeLanguage() {
+		language  = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
+		if(language.getLanguage().equals(new Locale("en").getLanguage()))
+			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("de"));
+		else
+			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("en"));
+		return null;
 	}
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -12,6 +13,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModelListener;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
 import javax.persistence.Query;
 import javax.transaction.*;
 
@@ -36,6 +39,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	private static final long serialVersionUID = 1332117572442977016L;
 
 	// Warenkorb
+	@OneToOne(cascade = CascadeType.ALL)
 	private Warenkorb warenkorb = new Warenkorb();
 
 	private int stkZahl = 1;
@@ -96,7 +100,10 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 	}
 	public String checkWarenkorbIsEmptyText() {
 		if(warenkorb.getWarenkorbItems().isEmpty()) {
-			return "Es befindet sich noch nichts in Ihrem Warenkorb! / Your shopping cart is empty!";
+			if(FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("de").getLanguage()))
+				return "Es befindet sich noch nichts in Ihrem Warenkorb!";
+			else
+				return  "Your shopping cart is empty!";
 		}else {
 			return "";
 		}
@@ -184,6 +191,7 @@ public class WarenkorbHandler extends AbstractCrudRepository<Warenkorb> implemen
 				this.em.persist(this.warenkorb);
 				this.utx.commit();
 				setWarenkorb(warenkorb);
+				setStkZahl(1);
 			} catch (final NotSupportedException | SystemException | SecurityException | IllegalStateException
 					| RollbackException | HeuristicMixedException | HeuristicRollbackException e) {
 			}

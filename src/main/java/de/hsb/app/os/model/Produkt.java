@@ -42,6 +42,7 @@ public class Produkt {
 	private List<WarenkorbItem> warenkorbItemList = new ArrayList<>();
 
 	public Produkt() {
+		picturePath = "resources/images/COS'MO.PNG";
 	}
 
 	public Produkt(String marke, String titel, String beschreibung, String preis, Waehrungtyp waehrungtyp, String menge,

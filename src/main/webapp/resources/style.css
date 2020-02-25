@@ -14,17 +14,31 @@ body {
 	background-color: #f8d8dd;
 }
 
+.sprach-button {
+	position: absolute;
+	right: 0;
+}
+
+.logo-bild{
+	height: 150px;
+	width: 150px;
+}
 .account {
-	padding: 22px 20px;
+	padding: 35px 20px;
 	height: 80px;
 	float: right;
 	font-size: 24px;
 	transition: .3s;
 }
 
+.account-bild{
+	height: 50px;
+	width: 50px;
+}
+
 .usertext{
 	float: right;
-	margin-top: -75px;
+	margin-top: -58px;
 	padding-right: 5px;
 }
 
