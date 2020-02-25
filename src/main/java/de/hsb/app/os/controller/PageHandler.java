@@ -5,6 +5,8 @@ package de.hsb.app.os.controller;
  * auf andere xhtml Seiten verweisen
  */
 
+import java.util.Locale;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -13,6 +15,7 @@ import java.util.Locale;
 @ManagedBean(name = "pageHandler")
 @SessionScoped
 public class PageHandler {
+
 	private Locale language;
 	public PageHandler() {
 	}

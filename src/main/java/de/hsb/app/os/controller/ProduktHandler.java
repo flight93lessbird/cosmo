@@ -302,6 +302,9 @@ public class ProduktHandler extends AbstractCrudRepository<Produkt> {
 	 * --------------> Ende Neuheit startseite.xhtml
 	 */
 
+	/* 
+	 * --------------> Ende Neuheit startseite.xhtml
+	 */
 	public String ansicht(Produkt produkt) {
 		if (produkt != null) {
 			merkeProdukt = produkt;

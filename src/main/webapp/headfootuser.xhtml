@@ -18,13 +18,13 @@
 		</h:form>
 		<h:form>
 			<div class="logo">
-				<a class="logo" href="/os/startseite.xhtml"> <h:graphicImage styleClass="logo-bild"
+				<a class="logo" href="/os/startseite.xhtml">
+					<h:graphicImage styleClass="logo-bild"
 						value="resources/images/COS'MO.PNG" />
-				</a>
-				<a class="account"
+				</a><a class="account"
 					href="#{userHandler.checkLoggedUser(userHandler.merkeUser)}">
-					<h:graphicImage styleClass="account-bild" value="resources/images/user.png" />
-				</a>
+				<h:graphicImage styleClass="account-bild"
+						value="resources/images/user.png" /> </a>
 				<a class="account"
 					href="#{warenkorbhd.checkWarenkorb(userHandler.merkeUser)}">
 					<h:graphicImage styleClass="account-bild"
