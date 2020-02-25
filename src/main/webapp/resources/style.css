@@ -9,10 +9,6 @@ body {
 }
 
 /* Header: Anfang */
-.topnav {
-	overflow: hidden;
-	background-color: #f8d8dd;
-}
 
 .sprach-button {
 	position: absolute;
@@ -42,6 +38,11 @@ body {
 	padding-right: 5px;
 }
 
+.topnav {
+	overflow: hidden;
+	background-color: #f8d8dd;
+}
+
 .topnav a {
 	float: left;
 	display: block;
@@ -50,11 +51,6 @@ body {
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 17px;
-}
-
-.topnav a:hover {
-	background-color: #ea8998;
-	color: white;
 }
 
 .topnav a:hover {
@@ -98,3 +94,32 @@ body {
 	}
 }
 /* Header: Ende */
+
+
+
+
+/* Footer: Anfang */
+.footermenu {
+	overflow: hidden;
+	background-color: #f8d8dd;
+	list-style: none;
+}
+
+.footermenu a {
+	float: left;
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.footermenu a:hover {
+	background-color: #ea8998;
+	color: white;
+}
+
+
+
+/* Footer: Ende */
