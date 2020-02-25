@@ -8,6 +8,12 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Header: Anfang */
+.topnav {
+	overflow: hidden;
+	background-color: #f8d8dd;
+}
+
 .account {
 	padding: 22px 20px;
 	height: 80px;
@@ -16,17 +22,10 @@ body {
 	transition: .3s;
 }
 
-nav.logo {
-	padding: 22px 20px;
-	height: 80px;
-	float: left;
-	font-size: 24px;
-	transition: .3s;
-}
-
-.topnav {
-	overflow: hidden;
-	background-color: #f8d8dd;
+.usertext{
+	float: right;
+	margin-top: -75px;
+	padding-right: 5px;
 }
 
 .topnav a {
@@ -44,13 +43,9 @@ nav.logo {
 	color: white;
 }
 
-.topnav a.active {
+.topnav a:hover {
 	background-color: #ea8998;
 	color: white;
-}
-
-.topnav .search-container {
-	float: right;
 }
 
 .topnav input[type=text] {
@@ -60,14 +55,15 @@ nav.logo {
 	border: none;
 }
 
-.topnav .search-container .search-blid{
+.topnav .search-container {
 	float: right;
-	padding: 6px 10px;
-	margin-top: 8px;
-	margin-right: 16px;
+}
+
+.topnav .search-container .search-bild {
+	float: right;
+	padding: 5px;
 	height: 35px;
 	width: 35px;
-	margin-top: 7px;
 	cursor: pointer;
 }
 
@@ -75,7 +71,7 @@ nav.logo {
 	.topnav .search-container {
 		float: none;
 	}
-	.topnav a, .topnav input[type=text], .topnav .search-container button {
+	.topnav a, .topnav input[type=text], .topnav .search-container button .search-bild {
 		float: none;
 		display: block;
 		text-align: left;
@@ -87,76 +83,4 @@ nav.logo {
 		border: 1px solid #ea8998;
 	}
 }
-
-.footermenu {
-	overflow: hidden;
-	background-color: #f8d8dd;
-	list-style: none;
-}
-
-.footermenu a {
-	float: left;
-	display: block;
-	color: black;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-}
-
-.footermenu a:hover {
-	background-color: #ea8998;
-	color: white;
-}
-
-.footermenu a.active {
-	background-color: #ea8998;
-	color: white;
-}
-
-table {
-	width: 100%;
-}
-
-.message {
-	color: red;
-	font-size: 14px;
-}
-
-th {
-	backgorund-color: #ccd2d3;
-	padding: 5px 5px 5px 5px;
-	border: 1px solid;
-}
-
-td {
-	padding: 0px 5px 0px 5px;
-}
-
-td.footer {
-	backgorund-color: #ccd2d3;
-	border: 1px solid;
-	padding: 5px;
-}
-
-tr.odd {
-	background-color: #fae8e7;
-}
-
-tr.even {
-	background-color: #f5d0d0;
-}
-
-.ui-grid td {
-	white-space: nowrap;
-}
-
-fieldset {
-	border: none;
-}
-.divider{
-    width:100px;
-    height:auto;
-    display:inline-block;
-}
-
+/* Header: Ende */

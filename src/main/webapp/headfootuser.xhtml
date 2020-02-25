@@ -27,8 +27,8 @@
 						value="resources/images/shopping-cart-of-checkered-design.png"
 						height="50px" width="50px" /></a>
 			</div>
-			<div align="right">
-				<a class="usertext">#{userHandler.userLoginText()}</a>
+			<div class="usertext">
+				<a>#{userHandler.userLoginText()}</a>
 			</div>
 
 			<div class="topnav">
@@ -37,8 +37,7 @@
 
 				<div class="search-container">
 					<p:inputText type="text" placeholder="Suche" name="#{msg.suche}" value="#{produktHandler.merkeSuchTag}" />
-					<h:commandButton styleClass="search-blid" action="#{produktHandler.toSuche}" update="grid" image="resources/images/search.png"
-					style="float: right; padding: 1px; height: 35px; width: 35px; cursor: pointer"/>
+					<h:commandButton styleClass="search-bild" action="#{produktHandler.toSuche}" update="grid" image="resources/images/search.png"/>
 					</div>
 			</div>
 		</h:form>
