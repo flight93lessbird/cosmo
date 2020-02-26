@@ -179,6 +179,14 @@ body {
 	color: white;
 }
 
+.sprach-button {
+	margin: 3px 3px;
+}
+
+.sprach-button:hover {
+	background-color: #ea8998;
+	color: white;
+}
 
 /* Tabellen */
 table {
