@@ -15,10 +15,12 @@
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="logo" href="/os/admin.xhtml"> <h:graphicImage
-							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a> <a class="account" href="adminLogout.xhtml"><h:graphicImage
-							value="resources/images/user.png" height="50px" width="50px" /></a>
+					<a class="logo" href="/os/admin.xhtml">
+						<h:graphicImage styleClass="logo-bild"
+							value="resources/images/COS'MO.PNG" />
+					</a> <a class="account" href="adminLogout.xhtml">
+					<h:graphicImage styleClass="account-bild"
+							value="resources/images/user.png"  /></a>
 				</div>
 				<div class="topnav">
 					<a> </a>
@@ -26,7 +28,7 @@
 			</ui:insert>
 		</div>
 
-		<div id="content">
+		<div id="content" class="content">
 			<ui:insert name="content">
 				<h:form>
 					<h1>#{msg.admseite}</h1>
@@ -35,12 +37,12 @@
 						headerClass="header" footerClass="footer">
 						<h:outputLabel value="#{msg.admkdnbear}:" />
 						<h:panelGroup>
-							<h:commandButton action="#{pageHandler.toKunden}"
+							<h:commandButton styleClass="button" action="#{pageHandler.toKunden}"
 								value="#{msg.kunden}" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.admpdkbear}:" />
 						<h:panelGroup>
-							<h:commandButton action="#{pageHandler.toProdukte}"
+							<h:commandButton styleClass="button" action="#{pageHandler.toProdukte}"
 								value="#{msg.produkte}" />
 						</h:panelGroup>
 					</h:panelGrid>

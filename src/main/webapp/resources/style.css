@@ -95,7 +95,70 @@ body {
 }
 /* Header: Ende */
 
+/*Produkt Ansicht*/
+.produkt-ansicht{
+	float: left;
+}
 
+
+/* Bilder */
+.startseite-bild {
+	height: 200px;
+	width: 200px;
+}
+
+.produkt-bild {
+	height: 180px;
+	width: 180px;
+	padding: 10px 0 0 0;
+	font-size: 24px;
+	transition: .3s;
+	margin-left: 75px;
+}
+
+
+.content{
+	padding-left: 20px;
+}
+
+/* Buttons */
+.button {
+	border: 1px solid #999999;
+	color: black;
+	width: 125px;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.button:hover {
+	background-color: #ea8998;
+	color: white;
+}
+
+.button-groß {
+	border: 1px solid #999999;
+	color: black;
+	width: 175px;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.button-groß:hover {
+	background-color: #ea8998;
+	color: white;
+}
 
 
 /* Footer: Anfang */
@@ -119,7 +182,5 @@ body {
 	background-color: #ea8998;
 	color: white;
 }
-
-
 
 /* Footer: Ende */

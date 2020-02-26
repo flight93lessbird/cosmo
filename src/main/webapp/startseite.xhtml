@@ -7,33 +7,35 @@
 	<ui:define name="content">
 		<center>
 			<h1>#{msg.unsempffuersie}</h1>
-			<a class="bild" href="#{produktHandler.makeToRdmProdukt1()}"> <h:graphicImage
-					value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt1)}"
-					style="height:200px; width:200px;" /></a> <a class="bild" href="#{produktHandler.makeToRdmProdukt2()}"> <h:graphicImage
-					value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt2)}"
-					style="height:200px; width:200px;" /></a> <a class="bild" href="#{produktHandler.makeToRdmProdukt3()}"> <h:graphicImage
-					value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt3)}"
-					style="height:200px; width:200px;" /></a>
+			<a class="bild" href="#{produktHandler.makeToRdmProdukt1()}">
+				<h:graphicImage styleClass="startseite-bild"
+					value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt1)}"/></a>
+			<a class="bild" href="#{produktHandler.makeToRdmProdukt2()}">
+				<h:graphicImage styleClass="startseite-bild"
+					value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt2)}" /></a>
+			<a class="bild" href="#{produktHandler.makeToRdmProdukt3()}">
+				<h:graphicImage styleClass="startseite-bild"
+					value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt3)}" /></a>
 			<h1>#{msg.unsneuheiten}</h1>
-			<a class="bild" href="#{produktHandler.makeToNeuheit1()}"> <h:graphicImage
-					value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit1)}"
-					style="height:200px; width:200px;" /></a> <a class="bild"
-				href="#{produktHandler.makeToNeuheit2()}"> <h:graphicImage
-					value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit2)}"
-					style="height:200px; width:200px;" /></a> <a class="bild"
-				href="#{produktHandler.makeToNeuheit3()}"> <h:graphicImage
-					value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit3)}"
-					style="height:200px; width:200px;" /></a>
+			<a class="bild" href="#{produktHandler.makeToNeuheit1()}">
+				<h:graphicImage styleClass="startseite-bild"
+					value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit1)}" /></a>
+			<a class="bild" href="#{produktHandler.makeToNeuheit2()}">
+				<h:graphicImage styleClass="startseite-bild"
+					value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit2)}" /></a>
+			<a class="bild" href="#{produktHandler.makeToNeuheit3()}">
+				<h:graphicImage styleClass="startseite-bild"
+					value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit3)}" /></a>
 			<h1>Kategorien:</h1>
-			<a class="bild" href="/os/duefte.xhtml"> <h:graphicImage
-					value="resources/images/KategorieDuefte.PNG"
-					style="height:200px; width:200px;" /></a> <a class="bild"
-				href="/os/makeup.xhtml"> <h:graphicImage
-					value="resources/images/KategorieMakeUp.PNG"
-					style="height:200px; width:200px;" /></a> <a class="bild"
-				href="/os/pflege.xhtml"> <h:graphicImage
-					value="resources/images/KategoriePflege.PNG"
-					style="height:200px; width:200px;" /></a>
+			<a class="bild" href="/os/duefte.xhtml">
+				<h:graphicImage styleClass="startseite-bild"
+					value="resources/images/KategorieDuefte.PNG" /></a>
+			<a class="bild" href="/os/makeup.xhtml">
+			<h:graphicImage styleClass="startseite-bild"
+					value="resources/images/KategorieMakeUp.PNG" /></a>
+			<a class="bild" href="/os/pflege.xhtml">
+				<h:graphicImage styleClass="startseite-bild"
+					value="resources/images/KategoriePflege.PNG" /></a>
 		</center>
 	</ui:define>
 </ui:composition>
