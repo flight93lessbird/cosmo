@@ -16,7 +16,7 @@ import java.util.Locale;
 @SessionScoped
 public class PageHandler {
 
-	private Locale language;
+	private boolean isDeutsch;
 	public PageHandler() {
 	}
 
@@ -77,7 +77,7 @@ public class PageHandler {
 	}
 
 	public String checkLanguage() {
-		if (FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("de").getLanguage()))
+		if (isDeutsch)
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
 		else
 			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en"));
@@ -85,11 +85,7 @@ public class PageHandler {
 	}
 
 	public String changeLanguage() {
-		language  = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
-		if(language.getLanguage().equals(new Locale("en").getLanguage()))
-			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("de"));
-		else
-			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("en"));
+		isDeutsch = isDeutsch? false: true;
 		return null;
 	}
 }
