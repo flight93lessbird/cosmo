@@ -1,38 +1,38 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
-	<title><ui:insert name="title">   #{msg.titelduefte}      </ui:insert></title>
+	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
 </h:head>
-
 <h:body>
 	<h:form>
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="startseite" href="/os/admin.xhtml"> <h:graphicImage
-							value="resources/images/COS'MO.PNG" height="150px" width="150px" />
-					</a> <a class="account" href="adminLogout.xhtml"><h:graphicImage
-							value="resources/images/user.png" height="50px" width="50px" /></a>
+					<a class="logo" href="/os/admin.xhtml">
+						<h:graphicImage styleClass="logo-bild"
+										value="resources/images/COS'MO.PNG" />
+					</a> <a class="account" href="adminLogout.xhtml">
+					<h:graphicImage styleClass="account-bild"
+									value="resources/images/user.png"  /></a>
 				</div>
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
 				</div>
 			</ui:insert>
 		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-				<h:form>
+		<h:form>
+		<ui:insert name="content">
+			<div id="content" class="content">
 					<h1>#{msg.produkte}</h1>
-					<h:commandButton action="#{produktHandler.ProduktAnlegen}"
+					<h:commandButton styleClass="button" action="#{produktHandler.ProduktAnlegen}"
 									 value="#{msg.admprodanl}" />
+			</div>
 					<br /> <br />
 					<h:dataTable var="produkt"
 						value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
@@ -62,12 +62,12 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">#{msg.bearbeiten}</f:facet>
-							<h:commandButton action="#{produktHandler.pdedit(produkt)}"
+							<h:commandButton styleClass="button" action="#{produktHandler.pdedit(produkt)}"
 								value="#{msg.bearbeiten}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">#{msg.loeschen}</f:facet>
-							<h:commandButton action="#{produktHandler.pddelete(produkt)}"
+							<h:commandButton styleClass="button" action="#{produktHandler.pddelete(produkt)}"
 								value="#{msg.loeschen}" />
 						</h:column>
 					</h:dataTable>
@@ -101,12 +101,12 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">#{msg.bearbeiten}</f:facet>
-							<h:commandButton action="#{produktHandler.pdedit(produkt)}"
+							<h:commandButton styleClass="button" action="#{produktHandler.pdedit(produkt)}"
 								value="#{msg.bearbeiten}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">#{msg.loeschen}</f:facet>
-							<h:commandButton action="#{produktHandler.pddelete(produkt)}"
+							<h:commandButton styleClass="button" action="#{produktHandler.pddelete(produkt)}"
 								value="#{msg.loeschen}" />
 						</h:column>
 					</h:dataTable>
@@ -140,19 +140,16 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">#{msg.bearbeiten}</f:facet>
-							<h:commandButton action="#{produktHandler.pdedit(produkt)}"
+							<h:commandButton styleClass="button" action="#{produktHandler.pdedit(produkt)}"
 								value="#{msg.bearbeiten}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">#{msg.loeschen}</f:facet>
-							<h:commandButton action="#{produktHandler.pddelete(produkt)}"
+							<h:commandButton styleClass="button" action="#{produktHandler.pddelete(produkt)}"
 								value="#{msg.loeschen}" />
 						</h:column>
 					</h:dataTable>
-				</h:form>
 			</ui:insert>
-		</div>
-
 		<div class="footer">
 			<ul class="footermenu">
 				<li><a></a></li>
@@ -171,6 +168,7 @@
 				</div>
 			</center>
 		</div>
+	</h:form>
 	</h:form>
 </h:body>
 </html>

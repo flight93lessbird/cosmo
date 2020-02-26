@@ -1,32 +1,40 @@
 <ui:composition template="/headfootuser.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-	<ui:define name="content">
+				xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui">
+<ui:define name="content">
+	<div id="content" class="content">
 		<h:form>
-			<h1>#{produktHandler.merkeNeuheit2.marke}</h1>
-			<h2>#{produktHandler.merkeNeuheit2.titel}</h2>
-			<h:graphicImage
-				value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit2)}"
-				style="height:200px; width:200px;" />
-			<h3>Menge:</h3>
-			<h4>#{produktHandler.merkeNeuheit2.menge}
-				#{produktHandler.merkeNeuheit2.mengentyp.label}</h4>
+			<div class="produkt-ansicht" id="produkt-ansicht">
+				<h1>#{produktHandler.merkeNeuheit2.marke}</h1>
+				<h2>#{produktHandler.merkeNeuheit2.titel}</h2>
+				<br />
+				<h3>Menge:</h3>
+				<a>#{produktHandler.merkeNeuheit2.menge}
+					#{produktHandler.merkeNeuheit2.mengentyp.label}</a>
+			</div>
+			<div class="ansicht-bild">
+				<h:graphicImage styleClass="produkt-bild"
+								value="#{produktHandler.getProductPath(produktHandler.merkeNeuheit2)}" />
+			</div>
+			<br /> <br />
 			<h3>Preis:</h3>
-			<h4>#{produktHandler.merkeNeuheit2.preis}
-				#{produktHandler.merkeNeuheit2.waehrungtyp.label}</h4>
+			<a>#{produktHandler.merkeNeuheit2.preis}
+				#{produktHandler.merkeNeuheit2.waehrungtyp.label}</a>
+			<br /> <br />
 			<f:facet name="header">#{msg.kaufen}</f:facet>
 			<p:spinner id="basic" value="#{warenkorbhd.stkZahl}" min="1" max="99">
 				<p:ajax process="@this" />
 			</p:spinner>
-			<p:commandButton
-				action="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.merkeUser, produktHandler.merkeNeuheit2, warenkorbhd.stkZahl)}"
-				value="#{msg.indenwarnkorb}">
+			<p:commandButton styleClass="button-groß"
+							 action="#{warenkorbhd.addWarenkorbItemToWarekorb(userHandler.merkeUser, produktHandler.merkeNeuheit2, warenkorbhd.stkZahl)}"
+							 value="#{msg.indenwarnkorb}">
 			</p:commandButton>
 			<h3>Produktbeschreibung:</h3>
 			<a>#{produktHandler.merkeNeuheit2.beschreibung}</a>
 		</h:form>
-	</ui:define>
+	</div>
+</ui:define>
 </ui:composition>

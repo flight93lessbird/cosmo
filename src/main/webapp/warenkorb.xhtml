@@ -47,7 +47,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.loeschen}</f:facet>
-					<h:commandButton
+					<h:commandButton styleClass="button"
 						action="#{warenkorbhd.deleteWarenkorbItem(userHandler.merkeUser, warenkorbItem)}"
 						value="#{msg.loeschen}">
 					</h:commandButton>
@@ -55,16 +55,14 @@
 			</h:dataTable>
 		</h:form>
 		<h:form>
+			<div id="content" class="content">
 			<h3>#{msg.artzwschsum}:
 				#{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}</h3>
-			<h:commandButton action="#{pageHandler.toStartseite}"
+			<h:commandButton styleClass="button" action="#{pageHandler.toStartseite}"
 				value="#{msg.weitershoppen}" />
-			<h:commandButton action="#{pageHandler.toWarenkorb}"
-				value="#{msg.aktualisieren}" />
-			<div class="divider" />
-			<h:commandButton
-				action="#{warenkorbhd.toKundendaten(userHandler.merkeUser, userHandler.merkeAdresse)}"
-				value="#{msg.bestellaschl}" style="position: absolute; right: 0;" />
+			<h:commandButton styleClass="button-groß" action="#{warenkorbhd.toKundendaten(userHandler.merkeUser, userHandler.merkeAdresse)}"
+					value="#{msg.bestellaschl}" />
+		</div>
 		</h:form>
 	</ui:define>
 </ui:composition>
