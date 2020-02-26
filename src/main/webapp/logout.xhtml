@@ -5,24 +5,26 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<div id="content" class="content">
 		<h:form>
 			<h1>#{msg.logout}</h1>
 			<h:form id="form">
-				<h:commandButton action="#{userHandler.logout}"
+				<h:commandButton styleClass="button" action="#{userHandler.logout}"
 					value="#{msg.logout}" />
 				<br></br>
 				<h2>#{msg.kdbearbeiten}</h2>
-				<h:commandButton action="#{userHandler.toMeinKonto(userHandler.merkeUser)}"
+				<h:commandButton styleClass="button" action="#{userHandler.toMeinKonto(userHandler.merkeUser)}"
 					value="#{msg.bearbeiten}" immediate="true" />
 				<br></br>
 				<h2>#{msg.kdpwbearbeiten}</h2>
-				<h:commandButton action="#{pageHandler.toPasswortAendern}"
+				<h:commandButton styleClass="button" action="#{pageHandler.toPasswortAendern}"
 					value="#{msg.bearbeiten}" immediate="true" />
 				<br></br>
 				<h2>#{msg.kreditbearbeiten}</h2>
-				<h:commandButton action="#{userHandler.toKreditkartendatenAendern(userHandler.merkeUser)}"
+				<h:commandButton styleClass="button" action="#{userHandler.toKreditkartendatenAendern(userHandler.merkeUser)}"
 					value="#{msg.bearbeiten}" immediate="true" />
 			</h:form>
 		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>

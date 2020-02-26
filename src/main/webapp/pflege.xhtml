@@ -1,15 +1,15 @@
 <ui:composition template="/headfootuser.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+				xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
 		<h:form>
-			<h:dataTable var="produkt"
-				value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
-				rowClasses="odd,even" headerClass="header">
-				<f:facet name="header">#{msg.Pf}</f:facet>
+			<h:dataTable var="produkt" styleClass="table"
+						 value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+						 rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">#{msg.duefte}</f:facet>
 				<h:column>
 					<f:facet name="header">#{msg.artkllabel}</f:facet>
 					<h:outputText value="#{produkt.marke}" />
@@ -34,8 +34,8 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.ansicht}</f:facet>
-					<h:commandButton action="#{produktHandler.ansicht(produkt)}"
-						value="#{msg.ansicht}">
+					<h:commandButton styleClass="button-liste" action="#{produktHandler.ansicht(produkt)}"
+									 value="#{msg.ansicht}">
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>

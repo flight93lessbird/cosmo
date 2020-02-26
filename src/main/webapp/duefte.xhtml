@@ -5,7 +5,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<div id="content" class="content">
 		<h:form>
 			<h:dataTable var="produkt" styleClass="table" 
 				value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
@@ -41,6 +40,5 @@
 				</h:column>
 			</h:dataTable>
 		</h:form>
-		</div>
 	</ui:define>
 </ui:composition>

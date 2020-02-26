@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<div id="content" class="content">
 		<h:form>
 			<h1>#{msg.meinkonto}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
@@ -12,42 +13,42 @@
 				columns="2" headerClass="header" footerClass="footer">
 				<h:outputLabel value="#{msg.anrede}:" for="anrede" />
 				<h:panelGroup>
-					<h:selectOneMenu id="anrede"
+					<p:selectOneMenu id="anrede"
 						value="#{userHandler.merkeUser.anrede}">
 						<f:selectItems var="form" value="#{userHandler.anredeValues}"
 							itemValue="#{form}" itemLabel="#{form.label}" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.vorname}:" for="vorname" />
 				<h:panelGroup>
-					<h:inputText id="vorname" value="#{userHandler.merkeUser.vorname}"
+					<p:inputText id="vorname" value="#{userHandler.merkeUser.vorname}"
 						required="true" requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="vorname" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 				<h:panelGroup>
-					<h:inputText id="nachname"
+					<p:inputText id="nachname"
 						value="#{userHandler.merkeUser.nachname}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="nachname" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.strasse}:" for="strasse" />
 				<h:panelGroup>
-					<h:inputText id="strasse"
+					<p:inputText id="strasse"
 						value="#{userHandler.merkeAdresse.strasse}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="strasse" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="plz" value="#{msg.plz}:" />
 				<h:panelGroup>
-					<h:inputText id="plz" required="true"
+					<p:inputText id="plz" required="true"
 						value="#{userHandler.merkeAdresse.plz}">
 						<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
-					</h:inputText>
+					</p:inputText>
 				</h:panelGroup>
 				<h:outputLabel for="ort" value="#{msg.ort}:" />
 				<h:panelGroup>
-					<h:inputText id="ort" required="true"
+					<p:inputText id="ort" required="true"
 						value="#{userHandler.merkeAdresse.ort}" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.geburtsdatum}:" for="geburtsdatum" />
@@ -59,11 +60,12 @@
 						requiredMessage="#{msg.gueltigkdatumfehlt}." />
 					<h:message styleClass="message" for="geburtsdatum" />
 				</h:panelGroup>
-				<h:commandButton action="#{pageHandler.toLogout}"
+				<h:commandButton styleClass="button" action="#{pageHandler.toLogout}"
 					value="#{msg.abbrechen}" immediate="true" />
-				<h:commandButton action="#{userHandler.speichernKundendaten}"
+				<h:commandButton styleClass="button" action="#{userHandler.speichernKundendaten}"
 					value="#{msg.speichern}" update="messages" />
 			</h:panelGrid>
 		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
