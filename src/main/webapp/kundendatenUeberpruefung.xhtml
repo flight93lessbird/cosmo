@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<div id="content" class="content">
 		<h:form>
 			<h1>#{msg.kdbt}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
@@ -20,13 +21,13 @@
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.vorname}:" for="vorname" />
 				<h:panelGroup>
-					<h:inputText id="vorname" value="#{userHandler.merkeUser.vorname}"
+					<p:inputText id="vorname" value="#{userHandler.merkeUser.vorname}"
 						required="true" requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="vorname" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 				<h:panelGroup>
-					<h:inputText id="nachname"
+					<p:inputText id="nachname"
 						value="#{userHandler.merkeUser.nachname}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="nachname" styleClass="message" />
@@ -40,36 +41,35 @@
 						requiredMessage="#{msg.gueltigkdatumfehlt}." />
 					<h:message styleClass="message" for="geburtsdatum" />
 				</h:panelGroup>
-			</h:panelGrid>
-			<h1>#{msg.lieferanschrft}</h1>
-			<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
-				columns="2" headerClass="header" footerClass="footer">
+			<h:outputLabel><h1>#{msg.lieferanschrft}</h1></h:outputLabel>
+			<h:panelGroup/>
 				<h:outputLabel for="strasse" value="#{msg.strasse}:" />
 				<h:panelGroup>
-					<h:inputText id="strasse"
+					<p:inputText id="strasse"
 						value="#{userHandler.merkeAdresse.strasse}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="strasse" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="plz" value="#{msg.plz}:" />
 				<h:panelGroup>
-					<h:inputText id="plz" value="#{userHandler.merkeAdresse.plz}"
+					<p:inputText id="plz" value="#{userHandler.merkeAdresse.plz}"
 						required="true" requiredMessage="#{msg.eingabefehlt}.">
 						<f:validateRegex pattern="^([A-Z]-)?[0-9]{5}$" />
-					</h:inputText>
+					</p:inputText>
 					<h:message for="plz" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel for="ort" value="#{msg.ort}:" />
 				<h:panelGroup>
-					<h:inputText id="ort" value="#{userHandler.merkeAdresse.ort}"
+					<p:inputText id="ort" value="#{userHandler.merkeAdresse.ort}"
 						required="true" requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="ort" styleClass="message" />
 				</h:panelGroup>
-				<h:commandButton action="#{pageHandler.toWarenkorb}"
+				<h:commandButton styleClass="button" action="#{pageHandler.toWarenkorb}"
 					value="#{msg.abbrechen}" immediate="true" />
-				<h:commandButton action="#{userHandler.speichernWk}"
+				<h:commandButton styleClass="button" action="#{userHandler.speichernWk}"
 					value="#{msg.weiter}" update="messages" />
 			</h:panelGrid>
 		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>

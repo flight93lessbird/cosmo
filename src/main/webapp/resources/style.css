@@ -125,7 +125,7 @@ body {
 .button {
 	border: 1px solid #999999;
 	color: black;
-	width: 125px;
+	width: 130px;
 	padding: 3px;
 	text-align: center;
 	text-decoration: none;
@@ -158,6 +158,57 @@ body {
 .button-groß:hover {
 	background-color: #ea8998;
 	color: white;
+}
+
+.button-liste {
+	border: 1px solid #999999;
+	color: black;
+	width: 100px;
+	padding: 3px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.button-liste:hover {
+	background-color: #ea8998;
+	color: white;
+}
+
+
+/* Tabellen */
+table {
+	width: 100%;
+}
+
+th {
+	backgorund-color: #ccd2d3;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid;
+}
+
+td {
+	padding: 0px 5px 0px 5px;
+}
+
+tr.odd {
+	background-color: #fae8e7;
+}
+
+tr.even {
+	background-color: #f5d0d0;
+}
+
+.table{
+	padding-top: 15px;
+}
+
+.ui-grid td {
+	white-space: nowrap;
 }
 
 

@@ -11,15 +11,15 @@
 			<h1>#{produktHandler.merkeRdmProdukt3.marke}</h1>
 			<h2>#{produktHandler.merkeRdmProdukt3.titel}</h2>
 			<br />
+			<h3>Menge:</h3>
+			<a>#{produktHandler.merkeRdmProdukt3.menge}
+					#{produktHandler.merkeRdmProdukt3.mengentyp.label}</a>
 			</div>
 			<div class="ansicht-bild">
 				<h:graphicImage styleClass="produkt-bild"
 								value="#{produktHandler.getProductPath(produktHandler.merkeRdmProdukt3)}" />
 			</div>
-			<h3>Menge:</h3>
-			<a>#{produktHandler.merkeRdmProdukt3.menge}
-				#{produktHandler.merkeRdmProdukt3.mengentyp.label}</a>
-			<br />
+			<br /> <br />
 			<h3>Preis:</h3>
 			<a>#{produktHandler.merkeRdmProdukt3.preis}
 				#{produktHandler.merkeRdmProdukt3.waehrungtyp.label}</a>

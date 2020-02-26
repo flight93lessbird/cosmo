@@ -5,36 +5,37 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
+		<div id="content" class="content">
 		<h:form>
 			<h1>#{msg.kdbearbeiten}</h1>
 			<p:growl id="growl" showDetail="true" sticky="true" />
 			<h:panelGrid var="kunde" value="#{userHandler.merkeUser}"
 				columns="2" headerClass="header" footerClass="footer">
-				<h:outputLabel value="#{msg.inhaber}" for="inhaber" />
+				<h:outputLabel value="#{msg.inhaber}:" for="inhaber" />
 				<h:panelGroup>
-					<h:inputText id="inhaber"
+					<p:inputText id="inhaber"
 						value="#{userHandler.merkeKreditkarte.inhaber}" required="true"
 						requiredMessage="#{msg.eingabefehlt}." />
 					<h:message for="inhaber" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.kktyp}:" for="kreditkarten" />
 				<h:panelGroup>
-					<h:selectOneMenu id="kreditkarten"
+					<p:selectOneMenu id="kreditkarten"
 						value="#{userHandler.merkeKreditkarte.typ}">
 						<f:selectItems var="form"
 							value="#{userHandler.kreditkartentypValues}" itemValue="#{form}"
 							itemLabel="#{form.label}" />
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 				</h:panelGroup>
-				<h:outputLabel value="#{msg.kknummer}" for="nummer">
+				<h:outputLabel value="#{msg.kknummer}:" for="nummer">
 				</h:outputLabel>
 				<h:panelGroup>
-					<h:inputText id="nummer"
+					<p:inputText id="nummer"
 						value="#{userHandler.merkeKreditkarte.nummer}" required="true"
 						requiredMessage="#{msg.eingabefehlt}.">
 						<f:converter converterId="kreditkartenConverter" />
 						<f:validator validatorId="kreditkartenValidator" />
-					</h:inputText>
+					</p:inputText>
 					<h:message for="nummer" styleClass="message" />
 				</h:panelGroup>
 				<h:outputLabel value="#{msg.gueltigBis}: (z.B. 01.22)"
@@ -46,11 +47,12 @@
 						requiredMessage="#{msg.gueltigkdatumfehlt}." />
 					<h:message for="gueltigBis" styleClass="message" />
 				</h:panelGroup>
-				<h:commandButton action="#{pageHandler.toLogout}"
+				<h:commandButton styleClass="button" action="#{pageHandler.toLogout}"
 					value="#{msg.abbrechen}" immediate="true" />
-				<h:commandButton action="#{userHandler.kreditkarteSpeichern}"
+				<h:commandButton styleClass="button" action="#{userHandler.kreditkarteSpeichern}"
 					value="#{msg.speichern}" update="messages" />
 			</h:panelGrid>
 		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>

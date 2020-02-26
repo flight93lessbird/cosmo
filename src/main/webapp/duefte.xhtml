@@ -4,10 +4,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
 	<ui:define name="content">
+		<div id="content" class="content">
 		<h:form>
-			<h:dataTable var="produkt"
+			<h:dataTable var="produkt" styleClass="table" 
 				value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
 				rowClasses="odd,even" headerClass="header">
 				<f:facet name="header">#{msg.duefte}</f:facet>
@@ -35,11 +35,12 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">#{msg.ansicht}</f:facet>
-					<h:commandButton action="#{produktHandler.ansicht(produkt)}"
+					<h:commandButton styleClass="button-liste" action="#{produktHandler.ansicht(produkt)}"
 						value="#{msg.ansicht}">
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>
 		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
