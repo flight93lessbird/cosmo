@@ -125,7 +125,7 @@ body {
 .button {
 	border: 1px solid #999999;
 	color: black;
-	width: 130px;
+	width: 140px;
 	padding: 3px;
 	text-align: center;
 	text-decoration: none;
@@ -144,7 +144,7 @@ body {
 .button-groß {
 	border: 1px solid #999999;
 	color: black;
-	width: 175px;
+	width: 185px;
 	padding: 3px;
 	text-align: center;
 	text-decoration: none;
@@ -163,7 +163,7 @@ body {
 .button-liste {
 	border: 1px solid #999999;
 	color: black;
-	width: 100px;
+	width: 110px;
 	padding: 3px;
 	text-align: center;
 	text-decoration: none;

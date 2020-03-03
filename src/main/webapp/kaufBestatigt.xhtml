@@ -1,85 +1,92 @@
-<ui:composition template="/headfootuser.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-	<ui:define name="content">
-		<div class="content">
-			<h1>
-				#{msg.kaufdank} <br />
-			</h1>
-			<h3>#{msg.kaufbestaetig}</h3>
-			<br />
-			<h:outputLabel value="#{msg.vorname}:	" />
-			<h:outputLabel value="#{userHandler.merkeUser.vorname}" />
-			<br />
-			<h:outputLabel value="#{msg.nachname}:	" />
-			<h:outputLabel value="#{userHandler.merkeUser.nachname}" />
-			<br /> <br />
-			<h2>#{msg.lieferanschrft}</h2>
-			<h:outputLabel value="#{msg.strasse}:	" />
-			<h:outputLabel value="#{userHandler.merkeUser.adresse.strasse}" />
-			<br />
-			<h:outputLabel value="#{msg.plz}:	" />
-			<h:outputLabel value="#{userHandler.merkeUser.adresse.plz}" />
-			<br />
-			<h:outputLabel value="#{msg.ort}:	" />
-			<h:outputLabel value="#{userHandler.merkeUser.adresse.ort}" />
-		</div>
-			<br />
-			<br></br> <br></br>
-
-			<h:form>
-			<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
-						 value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser)}"
-						 rowClasses="odd,even" headerClass="header">
-			<f:facet name="header">#{msg.produktk}</f:facet>
-			<h:column>
-				<f:facet name="header">#{msg.artkllabel}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.marke}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artklname}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.titel}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artklpreis}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.preis}" />
-				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artmenge}</f:facet>
-				<h:outputText value="#{warenkorbItem.p.menge}" />
-				<h:outputText value="#{warenkorbItem.p.mengentyp.label}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artklanzl}</f:facet>
-				<h:outputLabel for="@next" />
-				<h:outputText id="ajaxSpinnerValue"
-							  value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">#{msg.artgesamt}</f:facet>
-				<h:outputText
-						value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}" />
-				<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
-			</h:column>
-			</h:dataTable>
-
-				<div class="content">
-			<br /> <br />
-			<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
-			<h:outputLabel value="#{msg.preisinkmws}: " />
-			<h:outputText id="a" value="#{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}"
-				required="true" />
-
-			<br></br> <br></br>
-			<h:commandButton styleClass="button" id="auswählen" value="#{msg.quitdruck}"
-				onclick="javascript:window.print()" icon="ui-icon-search" />
-			<h:commandButton styleClass="button" action="#{warenkorbhd.toStartseite(userHandler.merkeUser)}"
-							 value="#{msg.weitershoppen}" immediate="true" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet" href="resources/style.css" type="text/css" />
+	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
+</h:head>
+<h:body>
+	<h:form>
+		<div id="content" class="content">
+					<h1>
+						#{msg.kaufdank} <br />
+					</h1>
+					<h3>#{msg.kaufbestaetig}</h3>
+					<br />
+					<h:outputLabel value="#{msg.vorname}:	" />
+					<h:outputLabel value="#{userHandler.merkeUser.vorname}" />
+					<br />
+					<h:outputLabel value="#{msg.nachname}:	" />
+					<h:outputLabel value="#{userHandler.merkeUser.nachname}" />
+					<br /> <br />
+					<h2>#{msg.lieferanschrft}</h2>
+					<h:outputLabel value="#{msg.strasse}:	" />
+					<h:outputLabel value="#{userHandler.merkeUser.adresse.strasse}" />
+					<br />
+					<h:outputLabel value="#{msg.plz}:	" />
+					<h:outputLabel value="#{userHandler.merkeUser.adresse.plz}" />
+					<br />
+					<h:outputLabel value="#{msg.ort}:	" />
+					<h:outputLabel value="#{userHandler.merkeUser.adresse.ort}" />
 				</div>
-			</h:form>
-	</ui:define>
-</ui:composition>
+				<br />
+				<br></br> <br></br>
+
+				<h:form>
+					<h:dataTable id="warenkorbTabelle" var="warenkorbItem"
+								 value="#{warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser)}"
+								 rowClasses="odd,even" headerClass="header">
+						<f:facet name="header">#{msg.produktk}</f:facet>
+						<h:column>
+							<f:facet name="header">#{msg.artkllabel}</f:facet>
+							<h:outputText value="#{warenkorbItem.p.marke}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg.artklname}</f:facet>
+							<h:outputText value="#{warenkorbItem.p.titel}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg.artklpreis}</f:facet>
+							<h:outputText value="#{warenkorbItem.p.preis}" />
+							<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg.artmenge}</f:facet>
+							<h:outputText value="#{warenkorbItem.p.menge}" />
+							<h:outputText value="#{warenkorbItem.p.mengentyp.label}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg.artklanzl}</f:facet>
+							<h:outputLabel for="@next" />
+							<h:outputText id="ajaxSpinnerValue"
+										  value="#{warenkorbItem.stkZahl}" style="padding-left: 10px" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">#{msg.artgesamt}</f:facet>
+							<h:outputText
+									value="#{warenkorbhd.computeTotalPrice(warenkorbItem.p.preis, warenkorbItem.stkZahl)}" />
+							<h:outputText value="#{warenkorbItem.p.waehrungtyp.label}" />
+						</h:column>
+					</h:dataTable>
+
+					<div class="content">
+						<br /> <br />
+						<h:outputLabel value="#{warenkorbItem.p.bestellmenge}" />
+						<h:outputLabel value="#{msg.preisinkmws}: " />
+						<h:outputText id="a" value="#{warenkorbhd.getFullPrice(warenkorbhd.findWarenkorbItemsByBenutzer(userHandler.merkeUser))}"
+									  required="true" />
+
+						<br></br> <br></br>
+						<h:commandButton styleClass="button" id="auswählen" value="#{msg.quitdruck}"
+										 onclick="javascript:window.print()" icon="ui-icon-search" />
+						<h:commandButton styleClass="button" action="#{warenkorbhd.toStartseite(userHandler.merkeUser)}"
+										 value="#{msg.weitershoppen}" immediate="true" />
+					</div>
+				</h:form>
+	</h:form>
+</h:body>
+</html>

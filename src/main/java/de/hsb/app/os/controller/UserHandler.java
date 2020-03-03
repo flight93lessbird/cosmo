@@ -522,8 +522,12 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				| HeuristicRollbackException | SystemException | NotSupportedException e) {
 			e.printStackTrace();
 		}
+		if (merkeKreditkarte == null) {
+			merkeKreditkarte = new Kreditkarte();
+		}
 		return "zahlungsart?faces-redirect=true";
 	}
+
 
 	public List<User> findAllByRolle(Rolle rolle) {
 		Query query = this.em.createQuery("Select u from User u where u.rolle = :rolle");
