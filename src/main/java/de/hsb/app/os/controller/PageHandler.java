@@ -19,7 +19,23 @@ public class PageHandler {
 	private boolean isDeutsch;
 	public PageHandler() {
 	}
-
+	
+	public String checkLanguage() {
+		if (FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("de").getLanguage()))
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("de"));
+		else if (FacesContext.getCurrentInstance().getApplication().getDefaultLocale().getLanguage().equals(new Locale("en").getLanguage()))
+			FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("en"));
+		return "DE | EN";
+	}
+	
+	public String changeLanguage() {
+		language  = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
+		if(language.getLanguage().equals(new Locale("en").getLanguage()))
+			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("de"));
+		else if(language.getLanguage().equals(new Locale("de").getLanguage()))
+			FacesContext.getCurrentInstance().getApplication().setDefaultLocale(new Locale("en"));
+		return null;
+	}
 	public String toStartseite() {
 		return "startseite?faces-redirect=true";
 	}
