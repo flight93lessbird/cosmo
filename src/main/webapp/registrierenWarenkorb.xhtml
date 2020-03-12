@@ -22,8 +22,7 @@
 				<h:panelGroup>
 					<p:password id="passwort1"
 								value="#{userHandler.merkeUser.passwort}" match="passwort2"
-								label="Password 1" required="true" requiredMessage="#{msg.eingabefehlt}.">
-						<f:validator validatorId="PasswordValidation" />
+								label="Password 1" required="true" requiredMessage="#{msg.eingabefehlt}." />
 					</p:password>
 				</h:panelGroup>
 				<h:outputLabel for="passwort2" value="#{msg.passwortwdh}:" />
