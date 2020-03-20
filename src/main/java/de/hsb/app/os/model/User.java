@@ -53,9 +53,22 @@ public class User {
 	private Date geburtsdatum;
 	
 
+	/*
+	 * Empty Constructor with Var initialisation
+	 */
 	
-	
-	public User(){	}
+	public User(){
+		username = "";
+		passwort = "";
+		rolle = Rolle.KUNDE;
+		warenkorb = new Warenkorb();
+		
+		vorname = "";
+		nachname = "";
+		
+		kreditkarte = new Kreditkarte();
+		adresse = new Adresse();
+	}
 	/*
 	 * @Konstruktor für den Admin
 	 */

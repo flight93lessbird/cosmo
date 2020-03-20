@@ -19,7 +19,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
+import javax.persistence.OneToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
@@ -53,10 +55,14 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	private DataModel<User> user = new ListDataModel<User>();
 
 	/** Erstellung des Objektes der Klasse Benutzer */
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private User merkeUser = null;
 
+	@OneToOne(cascade = CascadeType.ALL)
 	private Kreditkarte merkeKreditkarte = new Kreditkarte();
 
+	@OneToOne(cascade = CascadeType.ALL)
 	private Adresse merkeAdresse = new Adresse();
 
 	/*
@@ -470,13 +476,15 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 			}
 		}
 		try {
-			utx.begin();
-			merkeUser.setWarenkorb(wk);
+			Warenkorb warenkorb = new Warenkorb();
+			merkeUser.setWarenkorb(warenkorb);
 			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);
+			utx.begin();
 			merkeUser = em.merge(merkeUser);
-			merkeUser.setWarenkorb(wk);
 			merkeAdresse = em.merge(merkeAdresse);
+			warenkorb = em.merge(wk);
+			em.persist(warenkorb);
 			em.persist(merkeUser);
 			em.persist(merkeAdresse);
 			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
