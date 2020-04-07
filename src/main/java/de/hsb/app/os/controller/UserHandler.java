@@ -354,6 +354,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 				return "/admin?faces-redirect=true";
 			} else {
 				merkeUser.setWarenkorb(wk);
+				merkeAdresse = merkeUser.getAdresse();
 				return "/kundendatenUeberpruefung?faces-redirect=true";
 			}
 		} else {
