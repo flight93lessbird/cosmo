@@ -288,7 +288,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 */
 
 	public String userLoginText() {
-		if (merkeUser == null || merkeUser.getVorname() == null)
+		if (merkeUser == null || merkeUser.getVorname() == null || !merkeUser.getVorname().equals(""))
 			return " ";
 		else
 			return "Hallo, " + merkeUser.getVorname() + " ";
