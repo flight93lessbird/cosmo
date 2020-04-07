@@ -365,7 +365,10 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		return null;
 	}
-
+	public String toKundendatenUeberpruefung() {
+		merkeUser = new User();
+		return "kundendatenUeberpruefung?faces-redirect=true";
+	}
 /*
 	// brauchen wir glaub ich nicht
 	public void checkLoggedIn(ComponentSystemEvent cse) {
