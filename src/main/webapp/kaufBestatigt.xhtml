@@ -11,6 +11,10 @@
 </h:head>
 <h:body>
 	<h:form>
+		<h:commandButton styleClass="sprach-button" action="#{pageHandler.changeLanguage()}"
+						value="#{pageHandler.checkLanguage()}" />
+		</h:form>
+	<h:form>
 		<div id="content" class="content">
 					<h1>
 						#{msg.kaufdank} <br />
