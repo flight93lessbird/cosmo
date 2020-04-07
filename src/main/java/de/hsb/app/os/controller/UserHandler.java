@@ -480,7 +480,7 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 		}
 		try {
 			Warenkorb warenkorb = new Warenkorb();
-			merkeUser.setWarenkorb(warenkorb);
+			merkeUser.setWarenkorb(wk);
 			merkeUser.setAdresse(merkeAdresse);
 			merkeUser.setRolle(Rolle.KUNDE);
 			utx.begin();
@@ -519,10 +519,11 @@ public class UserHandler extends AbstractCrudRepository<User> implements Seriali
 	 * \\\\\\\\\\\\\\\\\\\\\\\\\\\\ OS Handler /////////////////////////////
 	 */
 
-	public String speichernWk() {
+	public String speichernWk(Warenkorb wk) {
 		try {
 			utx.begin();
 			merkeUser.setAdresse(merkeAdresse);
+			merkeUser.setWarenkorb(wk);
 			merkeUser = em.merge(merkeUser);
 			merkeAdresse = em.merge(merkeAdresse);
 			em.persist(merkeUser);

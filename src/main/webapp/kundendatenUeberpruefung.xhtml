@@ -66,7 +66,7 @@
 				</h:panelGroup>
 				<h:commandButton styleClass="button" action="#{pageHandler.toWarenkorb}"
 					value="#{msg.abbrechen}" immediate="true" />
-				<h:commandButton styleClass="button" action="#{userHandler.speichernWk()}"
+				<h:commandButton styleClass="button" action="#{userHandler.speichernWk(warenkorbhd.warenkorb)}"
 					value="#{msg.weiter}" update="messages" />
 			</h:panelGrid>
 		</h:form>
