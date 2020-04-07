@@ -60,6 +60,7 @@ public class User {
 	public User(){
 		username = "";
 		passwort = "";
+		anrede = Anrede.FIRMA;
 		rolle = Rolle.KUNDE;
 		warenkorb = new Warenkorb();
 		
