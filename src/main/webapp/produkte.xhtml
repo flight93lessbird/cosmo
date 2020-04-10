@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
 	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
@@ -13,13 +13,16 @@
 	<h:form>
 		<div id="header">
 			<ui:insert name="header">
+				<div>
+					<h:commandButton styleClass="sprach-button"
+						action="#{pageHandler.changeLanguage()}"
+						value="#{pageHandler.checkLanguage()}" />
+				</div>
 				<div class="logo">
-					<a class="logo" href="/os/admin.xhtml">
-						<h:graphicImage styleClass="logo-bild"
-										value="resources/images/COS'MO.PNG" />
-					</a> <a class="account" href="adminLogout.xhtml">
-					<h:graphicImage styleClass="account-bild"
-									value="resources/images/user.png"  /></a>
+					<a class="logo" href="/os/admin.xhtml"> <h:graphicImage
+							styleClass="logo-bild" value="resources/images/COS'MO.PNG" />
+					</a> <a class="account" href="adminLogout.xhtml"> <h:graphicImage
+							styleClass="account-bild" value="resources/images/user.png" /></a>
 				</div>
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
@@ -27,148 +30,156 @@
 			</ui:insert>
 		</div>
 		<h:form>
-		<ui:insert name="content">
-			<div id="content" class="content">
+			<ui:insert name="content">
+				<div id="content" class="content">
 					<h1>#{msg.produkte}</h1>
-					<h:commandButton styleClass="button" action="#{produktHandler.ProduktAnlegen}"
-									 value="#{msg.admprodanl}" />
-			</div>
-					<br /> <br />
-					<h:dataTable var="produkt"
-						value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
-						rowClasses="odd,even" headerClass="header">
-						<f:facet name="header">#{msg.duefte}</f:facet>
-						<h:column>
-							<f:facet name="header">#{msg.artkllabel}</f:facet>
-							<h:outputText value="#{produkt.marke}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklname}</f:facet>
-							<h:outputText value="#{produkt.titel}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklbesch}</f:facet>
-							<h:outputText value="#{produkt.beschreibung}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklpreis}</f:facet>
-							<h:outputText value="#{produkt.preis}" />
-							<h:outputText value="#{produkt.waehrungtyp.label}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artmenge}</f:facet>
-							<h:outputText value="#{produkt.menge}" />
-							<h:outputText value="#{produkt.mengentyp.label}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.bearbeiten}</f:facet>
-							<h:commandButton styleClass="button" action="#{produktHandler.pdedit(produkt)}"
-								value="#{msg.bearbeiten}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.loeschen}</f:facet>
-							<h:commandButton styleClass="button" action="#{produktHandler.pddelete(produkt)}"
-								value="#{msg.loeschen}" />
-						</h:column>
-					</h:dataTable>
-					<br />
-					<br />
-					<h:dataTable var="produkt"
-						value="#{produktHandler.findAllByKategorie(enumController.getMakeUp())}"
-						rowClasses="odd,even" headerClass="header">
-						<f:facet name="header">#{msg.MU}</f:facet>
-						<h:column>
-							<f:facet name="header">#{msg.artkllabel}</f:facet>
-							<h:outputText value="#{produkt.marke}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklname}</f:facet>
-							<h:outputText value="#{produkt.titel}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklbesch}</f:facet>
-							<h:outputText value="#{produkt.beschreibung}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklpreis}</f:facet>
-							<h:outputText value="#{produkt.preis}" />
-							<h:outputText value="#{produkt.waehrungtyp.label}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artmenge}</f:facet>
-							<h:outputText value="#{produkt.menge}" />
-							<h:outputText value="#{produkt.mengentyp.label}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.bearbeiten}</f:facet>
-							<h:commandButton styleClass="button" action="#{produktHandler.pdedit(produkt)}"
-								value="#{msg.bearbeiten}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.loeschen}</f:facet>
-							<h:commandButton styleClass="button" action="#{produktHandler.pddelete(produkt)}"
-								value="#{msg.loeschen}" />
-						</h:column>
-					</h:dataTable>
-					<br />
-					<br />
-					<h:dataTable var="produkt"
-						value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
-						rowClasses="odd,even" headerClass="header">
-						<f:facet name="header">#{msg.Pf}</f:facet>
-						<h:column>
-							<f:facet name="header">#{msg.artkllabel}</f:facet>
-							<h:outputText value="#{produkt.marke}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklname}</f:facet>
-							<h:outputText value="#{produkt.titel}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklbesch}</f:facet>
-							<h:outputText value="#{produkt.beschreibung}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artklpreis}</f:facet>
-							<h:outputText value="#{produkt.preis}" />
-							<h:outputText value="#{produkt.waehrungtyp.label}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.artmenge}</f:facet>
-							<h:outputText value="#{produkt.menge}" />
-							<h:outputText value="#{produkt.mengentyp.label}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.bearbeiten}</f:facet>
-							<h:commandButton styleClass="button" action="#{produktHandler.pdedit(produkt)}"
-								value="#{msg.bearbeiten}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{msg.loeschen}</f:facet>
-							<h:commandButton styleClass="button" action="#{produktHandler.pddelete(produkt)}"
-								value="#{msg.loeschen}" />
-						</h:column>
-					</h:dataTable>
+					<h:commandButton styleClass="button"
+						action="#{produktHandler.ProduktAnlegen}"
+						value="#{msg.admprodanl}" />
+				</div>
+				<br />
+				<br />
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getDuefte())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">#{msg.duefte}</f:facet>
+					<h:column>
+						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<h:outputText value="#{produkt.marke}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklname}</f:facet>
+						<h:outputText value="#{produkt.titel}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklbesch}</f:facet>
+						<h:outputText value="#{produkt.beschreibung}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklpreis}</f:facet>
+						<h:outputText value="#{produkt.preis}" />
+						<h:outputText value="#{produkt.waehrungtyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artmenge}</f:facet>
+						<h:outputText value="#{produkt.menge}" />
+						<h:outputText value="#{produkt.mengentyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton styleClass="button"
+							action="#{produktHandler.pdedit(produkt)}"
+							value="#{msg.bearbeiten}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton styleClass="button"
+							action="#{produktHandler.pddelete(produkt)}"
+							value="#{msg.loeschen}" />
+					</h:column>
+				</h:dataTable>
+				<br />
+				<br />
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getMakeUp())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">#{msg.MU}</f:facet>
+					<h:column>
+						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<h:outputText value="#{produkt.marke}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklname}</f:facet>
+						<h:outputText value="#{produkt.titel}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklbesch}</f:facet>
+						<h:outputText value="#{produkt.beschreibung}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklpreis}</f:facet>
+						<h:outputText value="#{produkt.preis}" />
+						<h:outputText value="#{produkt.waehrungtyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artmenge}</f:facet>
+						<h:outputText value="#{produkt.menge}" />
+						<h:outputText value="#{produkt.mengentyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton styleClass="button"
+							action="#{produktHandler.pdedit(produkt)}"
+							value="#{msg.bearbeiten}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton styleClass="button"
+							action="#{produktHandler.pddelete(produkt)}"
+							value="#{msg.loeschen}" />
+					</h:column>
+				</h:dataTable>
+				<br />
+				<br />
+				<h:dataTable var="produkt"
+					value="#{produktHandler.findAllByKategorie(enumController.getPflege())}"
+					rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">#{msg.Pf}</f:facet>
+					<h:column>
+						<f:facet name="header">#{msg.artkllabel}</f:facet>
+						<h:outputText value="#{produkt.marke}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklname}</f:facet>
+						<h:outputText value="#{produkt.titel}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklbesch}</f:facet>
+						<h:outputText value="#{produkt.beschreibung}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artklpreis}</f:facet>
+						<h:outputText value="#{produkt.preis}" />
+						<h:outputText value="#{produkt.waehrungtyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.artmenge}</f:facet>
+						<h:outputText value="#{produkt.menge}" />
+						<h:outputText value="#{produkt.mengentyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.bearbeiten}</f:facet>
+						<h:commandButton styleClass="button"
+							action="#{produktHandler.pdedit(produkt)}"
+							value="#{msg.bearbeiten}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">#{msg.loeschen}</f:facet>
+						<h:commandButton styleClass="button"
+							action="#{produktHandler.pddelete(produkt)}"
+							value="#{msg.loeschen}" />
+					</h:column>
+				</h:dataTable>
 			</ui:insert>
-		<div class="footer">
-			<ul class="footermenu">
-				<li><a></a></li>
-			</ul>
-			<center>
-				<div class="contact">
-					<div class="custom">
-						Cosmostrasse 10<br /> 27472 Cosmostadt
+			<div class="footer">
+				<ul class="footermenu">
+					<li><a></a></li>
+				</ul>
+				<center>
+					<div class="contact">
+						<div class="custom">
+							Cosmostrasse 10<br /> 27472 Cosmostadt
+						</div>
 					</div>
-				</div>
-				<div class="row copyright">
-					<div class="col-lg-12">
-						Copyright &#169; 2019 | <a href="admin.xhtml">www.Cosmo.de</a> |
-						#{msg.title}
+					<div class="row copyright">
+						<div class="col-lg-12">
+							Copyright &#169; 2019 | <a href="admin.xhtml">www.Cosmo.de</a> |
+							#{msg.title}
+						</div>
 					</div>
-				</div>
-			</center>
-		</div>
-	</h:form>
+				</center>
+			</div>
+		</h:form>
 	</h:form>
 </h:body>
 </html>

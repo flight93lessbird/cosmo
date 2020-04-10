@@ -13,13 +13,16 @@
 	<h:form>
 		<div id="header">
 			<ui:insert name="header">
+				<div>
+					<h:commandButton styleClass="sprach-button"
+						action="#{pageHandler.changeLanguage()}"
+						value="#{pageHandler.checkLanguage()}" />
+				</div>
 				<div class="logo">
-					<a class="logo" href="/os/admin.xhtml">
-						<h:graphicImage styleClass="logo-bild"
-										value="resources/images/COS'MO.PNG" />
-					</a> <a class="account" href="adminLogout.xhtml">
-					<h:graphicImage styleClass="account-bild"
-									value="resources/images/user.png"  /></a>
+					<a class="logo" href="/os/admin.xhtml"> <h:graphicImage
+							styleClass="logo-bild" value="resources/images/COS'MO.PNG" />
+					</a> <a class="account" href="adminLogout.xhtml"> <h:graphicImage
+							styleClass="account-bild" value="resources/images/user.png" /></a>
 				</div>
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
@@ -29,8 +32,8 @@
 		<div id="content">
 			<ui:insert name="content">
 				<h:dataTable styleClass="table" var="user"
-							 value="#{userHandler.findAllByRolle(enumController.getKunde())}"
-							 rowClasses="odd,even" headerClass="header">
+					value="#{userHandler.findAllByRolle(enumController.getKunde())}"
+					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.kunden}</f:facet>
 					<h:column>
 						<f:facet name="header">#{msg.username}</f:facet>
@@ -61,20 +64,21 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton styleClass="button-groß" action="#{userHandler.editUser(user)}"
-							value="#{msg.passzurueck}" />
+						<h:commandButton styleClass="button-groß"
+							action="#{userHandler.editUser(user)}" value="#{msg.passzurueck}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton styleClass="button" action="#{userHandler.deleteUser(user)}"
-										 value="#{msg.loeschen}" />
+						<h:commandButton styleClass="button"
+							action="#{userHandler.deleteUser(user)}" value="#{msg.loeschen}" />
 					</h:column>
 				</h:dataTable>
-				<br /><br />
+				<br />
+				<br />
 
 				<h:dataTable var="user"
-							 value="#{userHandler.findAllByRolle(enumController.getAdmin())}"
-							 rowClasses="odd,even" headerClass="header">
+					value="#{userHandler.findAllByRolle(enumController.getAdmin())}"
+					rowClasses="odd,even" headerClass="header">
 					<f:facet name="header">#{msg.admin}</f:facet>
 					<h:column>
 						<f:facet name="header">#{msg.username}</f:facet>
@@ -100,18 +104,18 @@
 						<div align="center">
 							<f:facet name="header">#{msg.geburtsdatum}</f:facet>
 							<h:outputText
-									value="#{userHandler.formatDateDDMMYYYY(user.geburtsdatum)}" />
+								value="#{userHandler.formatDateDDMMYYYY(user.geburtsdatum)}" />
 						</div>
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.bearbeiten}</f:facet>
-						<h:commandButton styleClass="button-groß" action="#{userHandler.editUser(user)}"
-										 value="#{msg.passzurueck}" />
+						<h:commandButton styleClass="button-groß"
+							action="#{userHandler.editUser(user)}" value="#{msg.passzurueck}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">#{msg.loeschen}</f:facet>
-						<h:commandButton styleClass="button" action="#{userHandler.deleteUser(user)}"
-										 value="#{msg.loeschen}" />
+						<h:commandButton styleClass="button"
+							action="#{userHandler.deleteUser(user)}" value="#{msg.loeschen}" />
 					</h:column>
 				</h:dataTable>
 			</ui:insert>

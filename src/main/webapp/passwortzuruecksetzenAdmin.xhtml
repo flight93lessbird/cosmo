@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="resources/style.css" type="text/css" />
 	<title><ui:insert name="title">   #{msg.title}       </ui:insert></title>
@@ -14,12 +14,10 @@
 		<div id="header">
 			<ui:insert name="header">
 				<div class="logo">
-					<a class="logo" href="/os/admin.xhtml">
-						<h:graphicImage styleClass="logo-bild"
-										value="resources/images/COS'MO.PNG" />
-					</a> <a class="account" href="adminLogout.xhtml">
-					<h:graphicImage styleClass="account-bild"
-									value="resources/images/user.png"  /></a>
+					<a class="logo" href="/os/admin.xhtml"> <h:graphicImage
+							styleClass="logo-bild" value="resources/images/COS'MO.PNG" />
+					</a> <a class="account" href="adminLogout.xhtml"> <h:graphicImage
+							styleClass="account-bild" value="resources/images/user.png" /></a>
 				</div>
 				<div class="topnav">
 					<a href="admin.xhtml">#{msg.admseite}</a>
@@ -35,26 +33,30 @@
 						columns="2" headerClass="header" footerClass="footer">
 						<h:outputLabel value="#{msg.username}:" />
 						<h:panelGroup>
-							<h:outputLabel value="#{userHandler.merkeUser.username}"/>
+							<h:outputLabel value="#{userHandler.merkeUser.username}" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.vorname}:" for="vorname" />
 						<h:panelGroup>
 							<h:outputLabel id="vorname"
-								value="#{userHandler.merkeUser.vorname}"/>
+								value="#{userHandler.merkeUser.vorname}" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.nachname}:" for="nachname" />
 						<h:panelGroup>
-							<h:outputLabel id="nachname" value="#{userHandler.merkeUser.nachname}" />
+							<h:outputLabel id="nachname"
+								value="#{userHandler.merkeUser.nachname}" />
 							<h:message for="nachname" styleClass="message" />
 						</h:panelGroup>
 						<h:outputLabel for="passwort" value="#{msg.passwort}: *" />
 						<h:panelGroup>
-							<p:password id="passwort" value="#{userHandler.merkeUser.passwort}"
-										required="true" label="Password" />
+							<p:password id="passwort"
+								value="#{userHandler.merkeUser.passwort}" required="true"
+								label="Password" />
 						</h:panelGroup>
-						<h:commandButton styleClass="button" action="#{pageHandler.toKunden}"
-							value="#{msg.abbrechen}" immediate="true" />
-						<h:commandButton styleClass="button" action="#{userHandler.kundendatenBearbeiten}"
+						<h:commandButton styleClass="button"
+							action="#{pageHandler.toKunden}" value="#{msg.abbrechen}"
+							immediate="true" />
+						<h:commandButton styleClass="button"
+							action="#{userHandler.kundendatenBearbeiten}"
 							value="#{msg.speichern}" update="messages" />
 					</h:panelGrid>
 				</h:form>

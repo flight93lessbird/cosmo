@@ -14,13 +14,16 @@
 	<h:form>
 		<div id="header">
 			<ui:insert name="header">
+				<div>
+					<h:commandButton styleClass="sprach-button"
+						action="#{pageHandler.changeLanguage()}"
+						value="#{pageHandler.checkLanguage()}" />
+				</div>
 				<div class="logo">
-					<a class="logo" href="/os/admin.xhtml">
-						<h:graphicImage styleClass="logo-bild"
-							value="resources/images/COS'MO.PNG" />
-					</a> <a class="account" href="adminLogout.xhtml">
-					<h:graphicImage styleClass="account-bild"
-							value="resources/images/user.png"  /></a>
+					<a class="logo" href="/os/admin.xhtml"> <h:graphicImage
+							styleClass="logo-bild" value="resources/images/COS'MO.PNG" />
+					</a> <a class="account" href="adminLogout.xhtml"> <h:graphicImage
+							styleClass="account-bild" value="resources/images/user.png" /></a>
 				</div>
 				<div class="topnav">
 					<a> </a>
@@ -37,13 +40,13 @@
 						headerClass="header" footerClass="footer">
 						<h:outputLabel value="#{msg.admkdnbear}:" />
 						<h:panelGroup>
-							<h:commandButton styleClass="button" action="#{pageHandler.toKunden}"
-								value="#{msg.kunden}" />
+							<h:commandButton styleClass="button"
+								action="#{pageHandler.toKunden}" value="#{msg.kunden}" />
 						</h:panelGroup>
 						<h:outputLabel value="#{msg.admpdkbear}:" />
 						<h:panelGroup>
-							<h:commandButton styleClass="button" action="#{pageHandler.toProdukte}"
-								value="#{msg.produkte}" />
+							<h:commandButton styleClass="button"
+								action="#{pageHandler.toProdukte}" value="#{msg.produkte}" />
 						</h:panelGroup>
 					</h:panelGrid>
 				</h:form>
